@@ -23,7 +23,8 @@
       "content/modules.json",
       "01-fundamente/02-retea-de-baza",
       "01-fundamente/04-arhitectura-esxi",
-      "01-fundamente/05-cpu-memorie"
+      "01-fundamente/05-cpu-memorie",
+      "01-fundamente/06-masini-virtuale"
     ]
   },
   {
@@ -428,7 +429,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "01-fundamente/01-ce-este-virtualizarea"
+      "01-fundamente/01-ce-este-virtualizarea",
+      "01-fundamente/06-masini-virtuale"
     ]
   },
   {
@@ -463,7 +465,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "01-fundamente/01-ce-este-virtualizarea"
+      "01-fundamente/01-ce-este-virtualizarea",
+      "01-fundamente/06-masini-virtuale"
     ]
   },
   {
@@ -534,7 +537,8 @@
       "01-fundamente/02-retea-de-baza",
       "01-fundamente/03-stocare-de-baza",
       "01-fundamente/04-arhitectura-esxi",
-      "01-fundamente/05-cpu-memorie"
+      "01-fundamente/05-cpu-memorie",
+      "01-fundamente/06-masini-virtuale"
     ]
   },
   {
@@ -1074,6 +1078,94 @@
     "read": true,
     "usedBy": [
       "01-fundamente/05-cpu-memorie"
+    ]
+  },
+  {
+    "id": "S97",
+    "title": "KB 312100: ESXi hosts and compatible virtual machine hardware versions",
+    "url": "https://knowledge.broadcom.com/external/article/312100",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/06-masini-virtuale"
+    ]
+  },
+  {
+    "id": "S98",
+    "title": "KB 321259: Choosing a network adapter for a virtual machine",
+    "url": "https://knowledge.broadcom.com/external/article/321259",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/06-masini-virtuale"
+    ]
+  },
+  {
+    "id": "S99",
+    "title": "KB 447191: E1000 and E1000e virtual network adapter support on vSphere 9.1",
+    "url": "https://knowledge.broadcom.com/external/article/447191/e1000-and-e1000e-virtual-network-adapter.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/06-masini-virtuale"
+    ]
+  },
+  {
+    "id": "S100",
+    "title": "vSphere 8 VM Administration: About Virtual Disk Provisioning Policies",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vm-administration/GUID-4C0F4D73-82F2-4B81-8AA7-1DD752A8A5AC.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/06-masini-virtuale"
+    ]
+  },
+  {
+    "id": "S101",
+    "title": "KB 315382: Overview of VMware Tools",
+    "url": "https://knowledge.broadcom.com/external/article/315382",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/06-masini-virtuale"
+    ]
+  },
+  {
+    "id": "S102",
+    "title": "KB 313456: VMware support for open-vm-tools",
+    "url": "https://knowledge.broadcom.com/external/article/313456",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/06-masini-virtuale"
+    ]
+  },
+  {
+    "id": "S103",
+    "title": "KB 316575: Consolidating/Committing snapshots in VMware ESXi",
+    "url": "https://knowledge.broadcom.com/external/article/316575",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/06-masini-virtuale"
+    ]
+  },
+  {
+    "id": "S104",
+    "title": "KB 313507: Configuring disks to use VMware Paravirtual SCSI (PVSCSI) controllers",
+    "url": "https://knowledge.broadcom.com/external/article/313507",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/06-masini-virtuale"
     ]
   }
 ]

@@ -802,5 +802,53 @@
     ],
     "ro": "Un nucleu fizic expune două fire (procesoare logice); nu dublează puterea de calcul.",
     "en": "One physical core exposes two threads (logical processors); it does not double compute power."
+  },
+  {
+    "id": "pvscsi",
+    "term": "PVSCSI",
+    "abbr": "PVSCSI",
+    "expansion": "Paravirtual SCSI",
+    "ro": "Controlerul de disc paravirtualizat VMware: mai mult throughput și mai puțin CPU decât controlerele emulate; are nevoie de driver în sistemul de operare.",
+    "en": "VMware's paravirtual disk controller: more throughput and less CPU than emulated controllers; needs a driver in the guest OS."
+  },
+  {
+    "id": "vmxnet3",
+    "term": "VMXNET3",
+    "aliases": [
+      "VMXNET 3"
+    ],
+    "ro": "Placa de rețea virtuală paravirtualizată VMware, cu performanță maximă; recomandată unde sistemul de operare are driver.",
+    "en": "VMware's paravirtual virtual NIC with the best performance; recommended wherever the guest OS has a driver."
+  },
+  {
+    "id": "vmware-tools",
+    "term": "VMware Tools",
+    "aliases": [
+      "open-vm-tools"
+    ],
+    "ro": "Setul de drivere și servicii din VM: sincronizare de timp, snapshot-uri quiesced, drivere paravirtuale. Pe Linux se folosește open-vm-tools din distribuție.",
+    "en": "The drivers and services inside a VM: time sync, quiesced snapshots, paravirtual drivers. On Linux, use the distro's open-vm-tools."
+  },
+  {
+    "id": "hardware-version",
+    "term": "hardware version",
+    "aliases": [
+      "virtual hardware version",
+      "compatibility level",
+      "VM compatibility"
+    ],
+    "ro": "Versiunea hardware-ului virtual al unui VM (ex. 22 pentru ESXi 9.0); un VM cu versiune mai nouă nu rulează pe un host mai vechi.",
+    "en": "The VM's virtual hardware version (e.g. 22 for ESXi 9.0); a VM with a newer version cannot run on an older host."
+  },
+  {
+    "id": "thin-provisioning",
+    "term": "thin provisioning",
+    "aliases": [
+      "thick provision",
+      "eager zeroed",
+      "lazy zeroed"
+    ],
+    "ro": "Discul thin ocupă spațiu doar pe măsură ce se scrie; thick alocă totul de la început (lazy zeroed sau eager zeroed).",
+    "en": "A thin disk uses space only as data is written; thick allocates everything up front (lazy zeroed or eager zeroed)."
   }
 ]
