@@ -1,0 +1,403 @@
+[
+  {
+    "id": "S01",
+    "title": "VMware Certification (overview, Legacy group)",
+    "url": "https://www.broadcom.com/support/education/vmware/certification",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S02",
+    "title": "Exam Guide: VMware vSphere Foundation 9.0 Administrator (2V0-16.25)",
+    "url": "https://docs.broadcom.com/doc/vmware-vsphere-foundation-administrator-exam-guide",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S03",
+    "title": "Exam Guide: VMware Cloud Foundation 9.0 Administrator (2V0-17.25)",
+    "url": "https://docs.broadcom.com/doc/vmware-cloud-foundation-administrator-exam-guide",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S04",
+    "title": "VCP-VVF Administrator certification page",
+    "url": "https://www.broadcom.com/support/education/vmware/certification/vcp-vvf-administrator",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S05",
+    "title": "VCP-DCV certification page (2V0-21.23)",
+    "url": "https://www.broadcom.com/support/education/vmware/certification/vcp-dcv",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S06",
+    "title": "VCP-NV certification page (2V0-41.24)",
+    "url": "https://www.broadcom.com/support/education/vmware/certification/vcp-nv-nsxt",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S07",
+    "title": "Retired Exams and Certifications (last updated July 2025)",
+    "url": "https://docs.broadcom.com/doc/vmware-retired-exams-certifications-and-badges",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S08",
+    "title": "r/vmware: VCP-DCV 2V0-21.23 retiring Dec 15, 2025 (snapshot)",
+    "url": "https://reddit.sentinel-team.org/posts/1pllxlp/snapshots/2025-12-15T13%3A20%3A19.102955Z",
+    "type": "community",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S09",
+    "title": "Trainingcamp: VMware Certification After Broadcom",
+    "url": "https://trainingcamp.com/articles/vmware-certification-after-broadcom-what-changed-and-which-exam-to-take-now/",
+    "type": "blog",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S10",
+    "title": "CertCrush: VMware Certification Path 2026",
+    "url": "https://www.certcrush.app/blog/vmware-certification-path-2026-vcf-vvf-vcp-dcv",
+    "type": "blog",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S11",
+    "title": "KB 314608: Correlating VCF version with constituent products",
+    "url": "https://knowledge.broadcom.com/external/article/314608/correlating-vmware-cloud-foundation-vers.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S12",
+    "title": "VMware certification paths (2026)",
+    "url": "https://docs.broadcom.com/doc/vmw-certification-paths",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S13",
+    "title": "KB 410467: Hosts configured with N-VDS switches warning",
+    "url": "https://knowledge.broadcom.com/external/article/410467/hosts-configured-with-nvds-switches-warn.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S14",
+    "title": "VMware Fusion and Workstation are Now Free for All Users",
+    "url": "https://blogs.vmware.com/cloud-foundation/vmware-fusion-and-workstation-are-now-free-for-all-users/",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART",
+      "01-fundamente/01-ce-este-virtualizarea"
+    ]
+  },
+  {
+    "id": "S15",
+    "title": "KB 399823: ESXi 8.0 Update 3e now available as a Free Hypervisor",
+    "url": "https://knowledge.broadcom.com/external/article/399823/vmware-esxi-80-update-3e-now-available-a.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART",
+      "01-fundamente/01-ce-este-virtualizarea"
+    ]
+  },
+  {
+    "id": "S16",
+    "title": "NAKIVO: Free ESXi Restrictions and Limitations",
+    "url": "https://www.nakivo.com/blog/free-vmware-esxi-restrictions-limitations/",
+    "type": "blog",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART",
+      "01-fundamente/01-ce-este-virtualizarea"
+    ]
+  },
+  {
+    "id": "S17",
+    "title": "VMUG Advantage EvalExperience update FAQ",
+    "url": "https://vmug.com/wp-content/uploads/2024/11/EvalExperience-Update-VMUG-Advantage-FAQ-11_5_2025.pdf",
+    "type": "community",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S18",
+    "title": "KB 313547: Support for running ESXi as a nested virtualization solution",
+    "url": "https://knowledge.broadcom.com/external/article/313547/support-for-running-esxi-as-a-nested-vir.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART",
+      "01-fundamente/01-ce-este-virtualizarea"
+    ]
+  },
+  {
+    "id": "S19",
+    "title": "vCenter Server Appliance 8.0 Hardware Requirements",
+    "url": "https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vcenter-installation-and-setup/deploying-the-vcenter-server-appliance/vcenter-server-appliance-requirements/vcenter-server-appliance-hardware-requirements.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S20",
+    "title": "KB 435110: Minimum memory for vCenter Server Appliance 8.0",
+    "url": "https://knowledge.broadcom.com/external/article/435110/",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S21",
+    "title": "NEC: ESXi 9 hardware requirements (secondary)",
+    "url": "https://jpn.nec.com/soft/vmware/vs9/esxi_req.html",
+    "type": "vendor",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S22",
+    "title": "William Lam: Minimal resources for deploying VCF 9.0 in a lab",
+    "url": "https://williamlam.com/2025/06/minimal-resources-for-deploying-vcf-9-0-in-a-lab.html",
+    "type": "blog",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S23",
+    "title": "William Lam: Enabling vSAN 8 ESA using Nested ESXi",
+    "url": "https://williamlam.com/2022/10/enabling-vsan-8-express-storage-architecture-esa-using-nested-esxi.html",
+    "type": "blog",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S24",
+    "title": "VMware blog: Lower hardware requirements for vSAN",
+    "url": "https://blogs.vmware.com/cloud-foundation/2025/11/14/driving-down-storage-costs-with-lower-hardware-requirements-for-vsan/",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S25",
+    "title": "William Lam: vSAN ESA disk & HCL workaround for VCF 9.0",
+    "url": "https://williamlam.com/2025/06/vsan-esa-disk-hcl-workaround-for-vcf-9-0.html",
+    "type": "blog",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S26",
+    "title": "William Lam: Updated Nested ESXi 8.x & 9.0 Virtual Appliance",
+    "url": "https://williamlam.com/2025/08/updated-nested-esxi-8-x-9-0-virtual-appliance.html",
+    "type": "blog",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S27",
+    "title": "William Lam: Refresher on Nested ESXi networking requirements",
+    "url": "https://williamlam.com/2023/05/refresher-on-nested-esxi-networking-requirements.html",
+    "type": "blog",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART",
+      "01-fundamente/01-ce-este-virtualizarea"
+    ]
+  },
+  {
+    "id": "S28",
+    "title": "William Lam: NVMe Tiering with Nested Virtualization in VCF 9.0",
+    "url": "https://williamlam.com/2025/06/nvme-tiering-with-nested-virtualization-in-vcf-9-0.html",
+    "type": "blog",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S29",
+    "title": "William Lam: VCF 9.1 automated VCF/VVF nested lab deployment",
+    "url": "https://williamlam.com/2026/05/vcf-9-1-automated-vmware-cloud-foundation-vcf-vmware-vsphere-foundation-vvf-nested-lab-deployment.html",
+    "type": "blog",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S30",
+    "title": "William Lam: VCF 9.1 comprehensive ESX configuration workarounds for lab",
+    "url": "https://williamlam.com/2026/05/vcf-9-1-comprehensive-esx-configuration-workarounds-for-lab-deployments.html",
+    "type": "blog",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S31",
+    "title": "William Lam: NVMe Tiering with AMD Ryzen workaround for VCF 9.0",
+    "url": "https://williamlam.com/2025/06/nvme-tiering-with-amd-ryzen-cpu-workaround-for-vcf-9-0.html",
+    "type": "blog",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S32",
+    "title": "William Lam: Deploying VCF 9.0 on a single ESXi host",
+    "url": "https://williamlam.com/2025/06/deploying-vcf-9-0-on-a-single-esxi-host.html",
+    "type": "blog",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S33",
+    "title": "GitHub lamw/vcf-fleet-automated-lab-deployment (linked from S29, not opened directly)",
+    "url": "https://github.com/lamw/vcf-fleet-automated-lab-deployment",
+    "type": "community",
+    "accessed": "2026-11-10",
+    "read": false,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S34",
+    "title": "KB 443586: Verifying hardware compatibility for upgrade 8.0U3 to VCF 9.x",
+    "url": "https://knowledge.broadcom.com/external/article/443586/verifying-hardware-compatibility-for-an.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S35",
+    "title": "William Lam: VCF homelab hardware options",
+    "url": "https://williamlam.com/2024/12/vmware-cloud-foundation-vcf-homelab-hardware-options.html",
+    "type": "blog",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S36",
+    "title": "William Lam: Minimal VCF 9.0 lab setup",
+    "url": "https://williamlam.com/2025/07/minimal-vmware-cloud-foundation-vcf-9-0-lab-setup.html",
+    "type": "blog",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "docs/STATE_OF_THE_ART"
+    ]
+  }
+]

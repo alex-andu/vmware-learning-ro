@@ -1,0 +1,18 @@
+# Decizii
+
+Decizii luate fără a întreba (reversibile). Cea mai nouă sus.
+
+## 2026-11-10 — Etapa 1
+
+1. **Ținta principală de examen: VCP-VVF Administrator (2V0-16.25).** VCP-DCV (2V0-21.23) e încă listat, dar în grupa „Legacy”; îl folosim doar ca hartă de conținut. VCP-VCF Administrator (2V0-17.25) e a doua țintă. Motiv: `STATE_OF_THE_ART.md` §1.
+2. **Versiunea predată: 9.0**, cu note pentru 9.1. Examenele acoperă 9.0, deși VCF 9.1.1 e ultima versiune.
+3. **Kubernetes (VKS / vSphere Supervisor) și VCF Operations intră în Modulul 2.** Ambele exam guide-uri 9.0 le cer; promptul nu le menționa.
+4. **Networking-ul din Modulul 4 folosește terminologia VCF 9** („VCF Networking”, „VCF Network Gateway”), cu NSX ca tehnologie de bază, pentru că exam guide-ul 2V0-17.25 nu numește NSX direct.
+5. **Secțiunile lecției sunt blocuri `:::` (remark-directive)** în Markdown, nu componente. Ordinea e verificată la build. Cele 6 părți cerute devin 8 blocuri vizuale (partea 3 = Exam Alert + Din tranșee; partea 6 = Quiz + Referințe), ca să corespundă celor 8 secțiuni colorate cerute.
+6. **Rezumatul și glosarul în engleză** stau în frontmatter (`examSummaryEn`, `glossaryTerms`) și se afișează la finalul lecției, după cele 6 părți, ca să nu strice ordinea strictă.
+7. **Validarea Mermaid la build** se face cu `mermaid.parse()` sub jsdom (`scripts/validate-content.mjs`), fără browser headless. Testul în browser (`npm run test:e2e`) verifică randarea efectivă.
+8. **Căutare: MiniSearch**, index construit în browser la prima căutare, per limbă, cu diacriticele ignorate.
+9. **Versiuni de pachete:** Vite 8, React 18, Tailwind 4, ESLint 9 (ESLint 10 nu e încă compatibil cu pluginurile folosite).
+10. **Playwright nu e în `devDependencies`**: e instalat global în mediul de dezvoltare cloud. Local se instalează separat (vezi `CLAUDE.md`).
+11. **Lecția de test** („Ce este virtualizarea”) are `status: test` și doar 7 surse; validatorul o scutește de pragul de 10. Va fi rescrisă complet în Etapa 3 sau înlocuită de capitolul-pilot.
+12. **Modulele 2–5 și Home Lab nu apar încă în `modules.json`**; se adaugă în Etapa 2, odată cu curriculumul complet.
