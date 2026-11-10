@@ -1063,5 +1063,58 @@
     "term": "vpxd",
     "ro": "Serviciul principal vCenter Server din appliance; dacă se oprește, vSphere Client nu mai poate administra inventarul.",
     "en": "The main vCenter Server service in the appliance; if it stops, the vSphere Client can no longer manage the inventory."
+  },
+  {
+    "id": "ldap",
+    "term": "LDAP",
+    "abbr": "LDAP",
+    "expansion": "Lightweight Directory Access Protocol",
+    "ro": "Protocolul prin care o aplicație interoghează un director de utilizatori, de exemplu Active Directory sau OpenLDAP.",
+    "en": "The protocol an application uses to query a user directory, for example Active Directory or OpenLDAP."
+  },
+  {
+    "id": "ldaps",
+    "term": "LDAPS",
+    "abbr": "LDAPS",
+    "expansion": "LDAP over SSL",
+    "ro": "LDAP criptat; pentru Active Directory se folosesc porturile 636 sau 3269 (Global Catalog).",
+    "en": "Encrypted LDAP; for Active Directory it uses ports 636 or 3269 (Global Catalog)."
+  },
+  {
+    "id": "ad",
+    "term": "Active Directory",
+    "abbr": "AD",
+    "expansion": "Active Directory",
+    "aliases": [
+      "Active Directory"
+    ],
+    "ro": "Serviciul de director Microsoft care ține utilizatorii, grupurile și calculatoarele unei organizații.",
+    "en": "The Microsoft directory service holding an organization's users, groups and computers."
+  },
+  {
+    "id": "iwa",
+    "term": "IWA",
+    "abbr": "IWA",
+    "expansion": "Integrated Windows Authentication",
+    "ro": "Metoda veche prin care vCenter intra în domeniul Active Directory; depreciată în vSphere 7.0 și eliminată în vSphere 9.0.",
+    "en": "The old method by which vCenter joined the Active Directory domain; deprecated in vSphere 7.0 and removed in vSphere 9.0."
+  },
+  {
+    "id": "idp",
+    "term": "IdP",
+    "abbr": "IdP",
+    "expansion": "Identity Provider",
+    "ro": "Serviciul care autentifică utilizatorii și emite dovada identității lor (de exemplu Okta, Microsoft Entra ID, AD FS).",
+    "en": "The service that authenticates users and issues proof of their identity (for example Okta, Microsoft Entra ID, AD FS)."
+  },
+  {
+    "id": "global-permissions",
+    "term": "global permissions",
+    "aliases": [
+      "global permission",
+      "permisiuni globale"
+    ],
+    "ro": "Permisiuni puse pe obiectul rădăcină global, peste toate ierarhiile, plus obiectele globale precum tag-urile și content library.",
+    "en": "Permissions on the global root object, spanning all hierarchies, plus global objects such as tags and content libraries."
   }
 ]

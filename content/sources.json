@@ -27,7 +27,8 @@
       "01-fundamente/06-masini-virtuale",
       "01-fundamente/07-retea-esxi",
       "01-fundamente/08-stocare-esxi",
-      "02-vsphere/01-vcenter"
+      "02-vsphere/01-vcenter",
+      "02-vsphere/02-identitate-rbac"
     ]
   },
   {
@@ -546,7 +547,8 @@
       "01-fundamente/06-masini-virtuale",
       "01-fundamente/07-retea-esxi",
       "01-fundamente/08-stocare-esxi",
-      "02-vsphere/01-vcenter"
+      "02-vsphere/01-vcenter",
+      "02-vsphere/02-identitate-rbac"
     ]
   },
   {
@@ -1534,7 +1536,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "02-vsphere/01-vcenter"
+      "02-vsphere/01-vcenter",
+      "02-vsphere/02-identitate-rbac"
     ]
   },
   {
@@ -1611,7 +1614,129 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "02-vsphere/01-vcenter"
+      "02-vsphere/01-vcenter",
+      "02-vsphere/02-identitate-rbac"
+    ]
+  },
+  {
+    "id": "S144",
+    "title": "vSphere 8 Security: Hierarchical inheritance of permissions",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-security/GUID-74F53189-EF41-4AC1-A78E-D25621855800.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/02-identitate-rbac"
+    ]
+  },
+  {
+    "id": "S145",
+    "title": "vSphere 8 Security: Multiple permission settings",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-security/GUID-72EE3449-79FD-4E7A-B164-26904958540F.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/02-identitate-rbac"
+    ]
+  },
+  {
+    "id": "S146",
+    "title": "vSphere 8 Security: System roles and sample roles",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-security/GUID-18071E9A-EED1-4968-8D51-E0B4F526FDA3.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/02-identitate-rbac"
+    ]
+  },
+  {
+    "id": "S147",
+    "title": "vSphere 8 Security: Global permissions",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-security/GUID-C7702E31-1623-4189-89CB-E1136AA27972.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/02-identitate-rbac"
+    ]
+  },
+  {
+    "id": "S148",
+    "title": "vSphere 8 Security: Best practices for roles and permissions",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-security/GUID-FAA074CC-E8C9-4F13-ABCF-6CF7F15F04EE.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/02-identitate-rbac"
+    ]
+  },
+  {
+    "id": "S149",
+    "title": "vSphere 8 Security: Managing permissions for vCenter components",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-security/GUID-3B78EEB3-23E2-4CEB-9FBD-E432B606011A.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/02-identitate-rbac"
+    ]
+  },
+  {
+    "id": "S150",
+    "title": "KB 380445: vCenter hierarchical inheritance of permissions",
+    "url": "https://knowledge.broadcom.com/external/article/380445",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/02-identitate-rbac"
+    ]
+  },
+  {
+    "id": "S151",
+    "title": "KB 314324: Removal of Integrated Windows Authentication (IWA)",
+    "url": "https://knowledge.broadcom.com/external/article/314324/deprecation-of-integrated-windows-authen.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/02-identitate-rbac"
+    ]
+  },
+  {
+    "id": "S152",
+    "title": "vSphere 8 Authentication: How vCenter Single Sign-On authenticates (identity sources and federation)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-authentication/GUID-575991A7-7FF3-4F79-B962-CC5540A9CE18.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/02-identitate-rbac"
+    ]
+  },
+  {
+    "id": "S153",
+    "title": "KB 436518: How to manage SSO identity service providers for VMware vSphere Foundation 9 (VVF)",
+    "url": "https://knowledge.broadcom.com/external/article/436518/how-to-manage-sso-identity-service-provi.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/02-identitate-rbac"
+    ]
+  },
+  {
+    "id": "S154",
+    "title": "DISA STIG vSphere 8.0 vCenter V-258951: restrict roles with cryptographic permissions",
+    "url": "https://www.stigviewer.com/stigs/vmware_vsphere_80_vcenter/2025-06-09/finding/V-258951",
+    "type": "standard",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/02-identitate-rbac"
     ]
   }
 ]
