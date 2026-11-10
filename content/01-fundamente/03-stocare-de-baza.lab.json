@@ -1,0 +1,118 @@
+{
+  "steps": [
+    {
+      "id": "adapters",
+      "title": {
+        "ro": "Inventariază adaptoarele de stocare",
+        "en": "List the storage adapters"
+      },
+      "path": {
+        "ro": "Host Client → Storage → Adapters ⚠ de verificat",
+        "en": "Host Client → Storage → Adapters ⚠ to verify"
+      },
+      "action": {
+        "ro": "Notează fiecare vmhba: tipul (SATA, SAS, NVMe, iSCSI software etc.) și driverul. Dacă nu ai iSCSI configurat, adaptorul iSCSI software probabil nu apare încă.",
+        "en": "Write down each vmhba: its type (SATA, SAS, NVMe, software iSCSI, etc.) and driver. If iSCSI is not configured, the software iSCSI adapter probably does not appear yet."
+      },
+      "why": {
+        "ro": "HBA-ul este drumul hostului către stocare. Când un disc „nu se vede”, prima întrebare e: prin ce adaptor ar trebui să vină?",
+        "en": "The HBA is the host's path to storage. When a disk \"is not visible\", the first question is: through which adapter should it arrive?"
+      }
+    },
+    {
+      "id": "devices",
+      "title": {
+        "ro": "Identifică discurile (dispozitivele) hostului",
+        "en": "Identify the host's disks (devices)"
+      },
+      "path": {
+        "ro": "Host Client → Storage → Devices",
+        "en": "Host Client → Storage → Devices"
+      },
+      "action": {
+        "ro": "Pentru fiecare dispozitiv notează capacitatea, tipul (SSD/HDD, dacă e afișat), adaptorul prin care e văzut și identificatorul (începe de obicei cu naa., t10. sau mpx.).",
+        "en": "For each device write down capacity, type (SSD/HDD if shown), the adapter it is seen through, and its identifier (usually starting with naa., t10. or mpx.)."
+      },
+      "why": {
+        "ro": "Un dispozitiv e „discul” pe care hostul îl vede, fie local, fie LUN de pe un array. Identificatorul e cel care rămâne același pe toate hosturile; numele afișat se poate schimba (KB 344351).",
+        "en": "A device is the \"disk\" the host sees, local or a LUN from an array. The identifier stays the same across hosts; the display name may change (KB 344351)."
+      }
+    },
+    {
+      "id": "datastores",
+      "title": {
+        "ro": "Analizează datastore-ul local",
+        "en": "Inspect the local datastore"
+      },
+      "path": {
+        "ro": "Host Client → Storage → Datastores → datastore1",
+        "en": "Host Client → Storage → Datastores → datastore1"
+      },
+      "action": {
+        "ro": "Notează tipul (VMFS și versiunea), capacitatea, spațiul liber și dispozitivul pe care stă. Deschide Datastore browser și uită-te la folderele VM-urilor.",
+        "en": "Write down the type (VMFS and version), capacity, free space and the device it lives on. Open the Datastore browser and look at the VM folders."
+      },
+      "why": {
+        "ro": "Vezi legătura completă: disc fizic → dispozitiv → VMFS → datastore → fișierele VM-ului. Un datastore local nu poate fi partajat cu alte hosturi, deci nu suportă vMotion fără mutarea discului, HA sau DRS (docs vSphere).",
+        "en": "You see the full chain: physical disk → device → VMFS → datastore → VM files. A local datastore cannot be shared with other hosts, so it cannot support HA, DRS or vMotion without moving the disk (vSphere docs)."
+      }
+    },
+    {
+      "id": "nfs-export",
+      "title": {
+        "ro": "Pregătește un export NFS 3 (fără acces root, intenționat)",
+        "en": "Prepare an NFS 3 export (without root access, on purpose)"
+      },
+      "path": {
+        "ro": "Serverul NFS din laborator (VM Linux sau NAS)",
+        "en": "Your lab NFS server (Linux VM or NAS)"
+      },
+      "action": {
+        "ro": "Creează un director, de exemplu `/srv/nfs/vmstore`, și exportă-l citire-scriere către subrețeaua de management a hostului, **fără** opțiunea `no_root_squash`. Pe Linux, `root_squash` e de obicei valoarea implicită (⚠ de verificat în documentația serverului tău NFS).",
+        "en": "Create a directory, for example `/srv/nfs/vmstore`, and export it read-write to the host's management subnet **without** the `no_root_squash` option. On Linux `root_squash` is usually the default (⚠ check your NFS server's documentation)."
+      },
+      "why": {
+        "ro": "Pregătești testul de avarie: documentația vSphere spune că NFS 3 cere acces root pentru host; fără el datastore-ul se montează, dar nu poți crea VM-uri.",
+        "en": "You are setting up the failure test: vSphere docs say NFS 3 needs root access for the host; without it the datastore mounts but you cannot create VMs."
+      }
+    },
+    {
+      "id": "nfs-mount",
+      "title": {
+        "ro": "Montează exportul ca datastore NFS 3 și încearcă să scrii (test de avarie)",
+        "en": "Mount the export as an NFS 3 datastore and try to write (failure test)"
+      },
+      "path": {
+        "ro": "Host Client → Storage → Datastores → New datastore → Mount NFS datastore",
+        "en": "Host Client → Storage → Datastores → New datastore → Mount NFS datastore"
+      },
+      "action": {
+        "ro": "Dă un nume datastore-ului, introdu IP-ul sau FQDN-ul serverului, calea exportului și alege NFS 3. După montare, în Datastore browser încearcă să creezi un director. Rezultatul așteptat: eroare de permisiuni.",
+        "en": "Name the datastore, enter the server IP or FQDN, the export path, and choose NFS 3. After mounting, try to create a directory in the Datastore browser. Expected result: a permission error."
+      },
+      "why": {
+        "ro": "Montarea reușită nu înseamnă că datastore-ul e utilizabil. Așa recunoști în producție simptomul „se vede, dar nu pot crea VM-uri”.",
+        "en": "A successful mount does not mean the datastore is usable. This is how you recognize the \"visible but cannot create VMs\" symptom in production."
+      }
+    },
+    {
+      "id": "nfs-fix",
+      "title": {
+        "ro": "Repară exportul și verifică din linia de comandă",
+        "en": "Fix the export and verify from the command line"
+      },
+      "path": {
+        "ro": "Serverul NFS; apoi SSH pe host (Manage → Services → TSM-SSH)",
+        "en": "NFS server; then SSH to the host (Manage → Services → TSM-SSH)"
+      },
+      "action": {
+        "ro": "Adaugă `no_root_squash` la export și reîncarcă exporturile (pe Linux, de obicei `exportfs -ra`, ⚠ de verificat). Reîncearcă să creezi directorul: acum trebuie să meargă. Pe host rulează `esxcli storage filesystem list` și verifică faptul că apar ambele datastore-uri, VMFS și NFS. Oprește SSH-ul la final.",
+        "en": "Add `no_root_squash` to the export and reload exports (on Linux usually `exportfs -ra`, ⚠ to verify). Retry creating the directory: it must work now. On the host run `esxcli storage filesystem list` and check both datastores, VMFS and NFS, are listed. Stop SSH when done."
+      },
+      "why": {
+        "ro": "Confirmi cauza: aceeași montare, doar permisiunile schimbate. Dacă vei monta exportul și pe alte hosturi, folosești tot NFS 3: același export nu se montează niciodată cu două versiuni diferite (docs vSphere).",
+        "en": "You confirm the cause: same mount, only permissions changed. If you mount the export on other hosts, use NFS 3 there too: the same export is never mounted with two different versions (vSphere docs)."
+      }
+    }
+  ]
+}

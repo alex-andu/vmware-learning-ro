@@ -527,7 +527,8 @@
     "usedBy": [
       "01-fundamente/01-ce-este-virtualizarea",
       "content/modules.json",
-      "01-fundamente/02-retea-de-baza"
+      "01-fundamente/02-retea-de-baza",
+      "01-fundamente/03-stocare-de-baza"
     ]
   },
   {
@@ -726,6 +727,138 @@
     "read": true,
     "usedBy": [
       "01-fundamente/02-retea-de-baza"
+    ]
+  },
+  {
+    "id": "S66",
+    "title": "vSphere 8 Storage: Types of Physical Storage and supported vSphere features",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-storage/GUID-6B901871-0F4D-44C5-ACB6-0DC7451DF16D.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/03-stocare-de-baza"
+    ]
+  },
+  {
+    "id": "S67",
+    "title": "vSphere 8 Storage: Working with Datastores (datastore types)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-storage/GUID-3CC7078E-9C30-402C-B2E1-2542BEE67E8F.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/03-stocare-de-baza"
+    ]
+  },
+  {
+    "id": "S68",
+    "title": "vSphere 8 Storage: NFS Protocols and ESXi (NFS 3 vs 4.1)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-storage/GUID-011DCC67-9876-4071-AED9-710D1E712E74.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/03-stocare-de-baza"
+    ]
+  },
+  {
+    "id": "S69",
+    "title": "vSphere 8 Storage: Working with NFS Datastores",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-storage/GUID-9282A8E0-2A93-4F9E-AEFB-952C8DCB243C.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/03-stocare-de-baza"
+    ]
+  },
+  {
+    "id": "S70",
+    "title": "Red Hat Enterprise Linux 7 Storage Administration Guide: RAID Levels and Linear Support",
+    "url": "https://docs.redhat.com/en/documentation/Red_Hat_Enterprise_Linux/7/html/storage_administration_guide/s1-raid-levels",
+    "type": "vendor",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/03-stocare-de-baza"
+    ]
+  },
+  {
+    "id": "S71",
+    "title": "SNIA Online Dictionary: logical unit number",
+    "url": "https://snia.org/education/online-dictionary/term/logical-unit-number",
+    "type": "standard",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/03-stocare-de-baza"
+    ]
+  },
+  {
+    "id": "S72",
+    "title": "KB 326234: Troubleshooting poor local storage controller performance for ESXi",
+    "url": "https://knowledge.broadcom.com/external/article/326234/troubleshooting-poor-local-storage-contr.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/03-stocare-de-baza"
+    ]
+  },
+  {
+    "id": "S73",
+    "title": "KB 428223: VMFS datastores visible but Not Consumed (inconsistent LUN presentation)",
+    "url": "https://knowledge.broadcom.com/external/article/428223/vmfs-datastores-visible-but-not-consumed.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/03-stocare-de-baza"
+    ]
+  },
+  {
+    "id": "S74",
+    "title": "KB 344351: Cannot see some or all storage devices in vCenter Server",
+    "url": "https://knowledge.broadcom.com/external/article/344351/",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/03-stocare-de-baza"
+    ]
+  },
+  {
+    "id": "S75",
+    "title": "KB 317694: Storage configuration should be consistent throughout cluster",
+    "url": "https://knowledge.broadcom.com/external/article/317694",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/03-stocare-de-baza"
+    ]
+  },
+  {
+    "id": "S76",
+    "title": "KB 415355: Storage vMotion performance degradation due to RAID configuration on local NVMe datastores",
+    "url": "https://knowledge.broadcom.com/external/article/415355/storage-vmotion-performance-degradation.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/03-stocare-de-baza"
+    ]
+  },
+  {
+    "id": "S77",
+    "title": "KB 416270: Supporting all principal storage options in VCF 9",
+    "url": "https://knowledge.broadcom.com/external/article/416270",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/03-stocare-de-baza"
     ]
   }
 ]

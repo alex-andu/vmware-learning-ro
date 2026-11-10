@@ -649,5 +649,55 @@
     "term": "jumbo frames",
     "ro": "Cadre Ethernet mai mari decât standardul de 1500 de octeți, de obicei MTU 9000; trebuie configurate pe tot drumul.",
     "en": "Ethernet frames larger than the standard 1500 bytes, usually MTU 9000; must be configured end to end."
+  },
+  {
+    "id": "hba",
+    "term": "HBA",
+    "abbr": "HBA",
+    "expansion": "Host Bus Adapter",
+    "ro": "Adaptorul prin care hostul ajunge la stocare (ex. placă Fibre Channel). În ESXi apare ca vmhba0, vmhba1…",
+    "en": "The adapter a host uses to reach storage (e.g. a Fibre Channel card). In ESXi it appears as vmhba0, vmhba1…"
+  },
+  {
+    "id": "nvme",
+    "term": "NVMe",
+    "abbr": "NVMe",
+    "expansion": "Non-Volatile Memory Express",
+    "ro": "Protocol modern pentru discuri flash, mult mai rapid decât SATA/SAS; există și în variantă de rețea (NVMe over Fabrics).",
+    "en": "Modern protocol for flash drives, much faster than SATA/SAS; also exists over the network (NVMe over Fabrics)."
+  },
+  {
+    "id": "ssd",
+    "term": "SSD",
+    "abbr": "SSD",
+    "expansion": "Solid-State Drive",
+    "ro": "Disc pe memorie flash, fără piese în mișcare.",
+    "en": "A flash-memory drive with no moving parts."
+  },
+  {
+    "id": "hdd",
+    "term": "HDD",
+    "abbr": "HDD",
+    "expansion": "Hard Disk Drive",
+    "ro": "Disc clasic, cu platane care se rotesc; mare și ieftin, dar lent la acces aleator.",
+    "en": "Classic spinning-platter disk; large and cheap but slow at random access."
+  },
+  {
+    "id": "rdm",
+    "term": "RDM",
+    "abbr": "RDM",
+    "expansion": "Raw Device Mapping",
+    "ro": "Un VM primește acces direct la un LUN întreg, fără VMFS la mijloc; nu e posibil pe NFS.",
+    "en": "A VM gets direct access to a whole LUN without VMFS in between; not possible on NFS."
+  },
+  {
+    "id": "vvols",
+    "term": "vVols",
+    "aliases": [
+      "vVol",
+      "Virtual Volumes"
+    ],
+    "ro": "Virtual Volumes: tip de datastore în care array-ul de stocare gestionează direct discurile fiecărui VM.",
+    "en": "Virtual Volumes: a datastore type where the storage array manages each VM's disks directly."
   }
 ]
