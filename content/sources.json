@@ -18,7 +18,9 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "docs/STATE_OF_THE_ART"
+      "docs/STATE_OF_THE_ART",
+      "01-fundamente/01-ce-este-virtualizarea",
+      "content/modules.json"
     ]
   },
   {
@@ -29,7 +31,9 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "docs/STATE_OF_THE_ART"
+      "docs/STATE_OF_THE_ART",
+      "01-fundamente/01-ce-este-virtualizarea",
+      "content/modules.json"
     ]
   },
   {
@@ -209,7 +213,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "docs/STATE_OF_THE_ART"
+      "docs/STATE_OF_THE_ART",
+      "01-fundamente/01-ce-este-virtualizarea"
     ]
   },
   {
@@ -398,6 +403,150 @@
     "read": true,
     "usedBy": [
       "docs/STATE_OF_THE_ART"
+    ]
+  },
+  {
+    "id": "S37",
+    "title": "phoenixNAP: What is a Hypervisor? Types 1 & 2",
+    "url": "https://phoenixnap.com/kb/what-is-hypervisor-type-1-2",
+    "type": "blog",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/01-ce-este-virtualizarea"
+    ]
+  },
+  {
+    "id": "S38",
+    "title": "vSphere 8 Virtual Machine Administration: Virtual Machine Files",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vm-administration/GUID-CEFF6D89-8C19-4143-8C26-4B6D6734D2CB.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/01-ce-este-virtualizarea"
+    ]
+  },
+  {
+    "id": "S39",
+    "title": "vSphere Virtual Machine Administration: Virtual CPU limitations",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.vm_admin.doc/GUID-13AD347E-3B77-4A67-B3F4-4AC2230E4509.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/01-ce-este-virtualizarea"
+    ]
+  },
+  {
+    "id": "S40",
+    "title": "Performance Best Practices for vSphere/ESX and vCenter Server 9.0",
+    "url": "https://www.vmware.com/docs/vsphere-esxi-vcenter-server-90-performance-best-practices",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/01-ce-este-virtualizarea"
+    ]
+  },
+  {
+    "id": "S41",
+    "title": "KB 318825: Best practices for using VMware snapshots in the vSphere environment",
+    "url": "https://knowledge.broadcom.com/external/article/318825/best-practices-for-using-vmware-snapshots.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/01-ce-este-virtualizarea"
+    ]
+  },
+  {
+    "id": "S42",
+    "title": "Broadcom Community: Datastores filled up causing virtual machine crashes",
+    "url": "https://community.broadcom.com/vmware-cloud-foundation/discussion/data-stores-filled-up-causing-virtual-machine-crashes",
+    "type": "community",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/01-ce-este-virtualizarea"
+    ]
+  },
+  {
+    "id": "S43",
+    "title": "r/vmware: Not enough space for snapshot, now VM cannot boot",
+    "url": "https://reddit.birdcat.cafe/r/vmware/comments/1kfpnzy/not_enough_space_for_snapshot_now_vm_cannot_boot",
+    "type": "community",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/01-ce-este-virtualizarea"
+    ]
+  },
+  {
+    "id": "S44",
+    "title": "KB 389469: Virtualized Intel VT-x/EPT not supported on this platform",
+    "url": "https://knowledge.broadcom.com/external/article/389469/virtualized-intel-vtxept-not-supported-o.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/01-ce-este-virtualizarea"
+    ]
+  },
+  {
+    "id": "S45",
+    "title": "VMware Host Client: Create a Virtual Machine",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.html.hostclient.doc/GUID-58A5CA93-A01D-44AB-BEF1-2EA94F92BCE8.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/01-ce-este-virtualizarea"
+    ]
+  },
+  {
+    "id": "S46",
+    "title": "vSphere 8 ESXi Host Client: Configure virtual machine CPU resources",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-esxi-host-client/GUID-3CDA4DEF-3DE0-4A64-89C7-F31BB77222CB.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/01-ce-este-virtualizarea"
+    ]
+  },
+  {
+    "id": "S47",
+    "title": "Exam Guide: VMware vSphere 8.x Professional (2V0-21.23)",
+    "url": "https://docs.broadcom.com/doc/vmw-vcp-dcv-8-exam-guide",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/01-ce-este-virtualizarea",
+      "content/modules.json"
+    ]
+  },
+  {
+    "id": "S48",
+    "title": "Exam Guide: VMware NSX 4.x Professional V2 (2V0-41.24)",
+    "url": "https://docs.broadcom.com/doc/vmware-vcp-nv-exam-guide",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "content/modules.json"
+    ]
+  },
+  {
+    "id": "S49",
+    "title": "Exam Preparation Guide: VMware NSX 4.x Professional (2V0-41.23)",
+    "url": "https://docs.broadcom.com/doc/vmw-vcp-nv-4-exam-preparation-guide",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "content/modules.json"
     ]
   }
 ]

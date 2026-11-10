@@ -1,43 +1,46 @@
 {
   "steps": [
     {
-      "id": "bios",
-      "title": { "ro": "Activează virtualizarea hardware în BIOS/UEFI", "en": "Enable hardware virtualization in BIOS/UEFI" },
-      "path": { "ro": "BIOS/UEFI → setări CPU → Intel VT-x sau AMD-V (SVM) ⚠ de verificat: numele exact diferă de la producător la producător", "en": "BIOS/UEFI → CPU settings → Intel VT-x or AMD-V (SVM) ⚠ to verify: exact name varies by vendor" },
-      "action": { "ro": "Repornește PC-ul, intră în BIOS/UEFI și activează opțiunea de virtualizare a procesorului. Salvează și repornește.", "en": "Reboot, enter BIOS/UEFI and enable CPU virtualization. Save and reboot." },
-      "why": { "ro": "Fără extensiile hardware de virtualizare, Workstation nu poate expune virtualizarea către VM, iar ESXi nested nu poate rula propriile VM-uri.", "en": "Without hardware virtualization extensions, Workstation cannot expose virtualization to the VM and nested ESXi cannot run its own VMs." }
+      "id": "login",
+      "title": { "ro": "Autentifică-te în VMware Host Client", "en": "Log in to VMware Host Client" },
+      "path": { "ro": "Browser → https://<IP-ul hostului ESXi>", "en": "Browser → https://<ESXi host IP>" },
+      "action": { "ro": "Deschide adresa IP a hostului în browser și autentifică-te cu utilizatorul `root`. Acceptă avertismentul de certificat doar dacă e hostul tău din laborator.", "en": "Open the host's IP in a browser and log in as `root`. Accept the certificate warning only if it is your own lab host." },
+      "why": { "ro": "Host Client administrează un singur host, fără vCenter. Avertismentul de certificat apare pentru că hostul folosește implicit un certificat auto-semnat; în producție certificatele se înlocuiesc (vezi modulul 2).", "en": "Host Client manages a single host without vCenter. The certificate warning appears because the host uses a self-signed certificate by default; in production certificates are replaced (see module 2)." }
     },
     {
-      "id": "install-ws",
-      "title": { "ro": "Instalează VMware Workstation Pro", "en": "Install VMware Workstation Pro" },
-      "action": { "ro": "Descarcă Workstation Pro din Broadcom Support Portal (cont gratuit) și instalează-l. Nu ai nevoie de cheie de licență.", "en": "Download Workstation Pro from the Broadcom Support Portal (free account) and install it. No license key is needed." },
-      "why": { "ro": "Workstation Pro este gratuit pentru toți din 11.11.2024 și este hypervisorul Type 2 pe care rulăm laboratorul pe un PC obișnuit.", "en": "Workstation Pro has been free for everyone since 2024-11-11 and is the Type 2 hypervisor we use to run the lab on a regular PC." }
-    },
-    {
-      "id": "iso",
-      "title": { "ro": "Descarcă ISO-ul ESXi potrivit", "en": "Download the right ESXi ISO" },
-      "action": { "ro": "Pentru acest lab, oricare ISO ESXi 8.0U3e merge. Pentru laboratoarele viitoare cu vCenter alege ISO-ul standard (evaluare 60 de zile), nu ISO-ul Free (build 24677879).", "en": "For this lab any ESXi 8.0U3e ISO works. For future vCenter labs choose the standard ISO (60-day evaluation), not the Free ISO (build 24677879)." },
-      "why": { "ro": "Un host instalat din ISO-ul Free nu poate fi adăugat în vCenter și nu poate intra în trial. Alegerea greșită te obligă să reinstalezi.", "en": "A host installed from the Free ISO cannot be added to vCenter and cannot enter trial mode. The wrong choice forces a reinstall." }
+      "id": "inspect-host",
+      "title": { "ro": "Notează resursele hostului: nuclee fizice, nuclee logice, memorie", "en": "Write down the host's resources: physical cores, logical cores, memory" },
+      "path": { "ro": "Host → pagina principală / Hardware ⚠ de verificat", "en": "Host → summary page / Hardware ⚠ to verify" },
+      "action": { "ro": "Caută numărul de procesoare (nuclee) și de procesoare logice, plus memoria totală. Scrie-le în notițele lecției.", "en": "Find the number of processors (cores) and logical processors, plus total memory. Write them in the lesson notes." },
+      "why": { "ro": "Numărul de nuclee logice este plafonul de vCPU pentru o singură VM. Dacă hyperthreading e activ, el e dublu față de nucleele fizice. Îl folosești la pasul 5.", "en": "The logical core count is the vCPU ceiling for a single VM. With hyperthreading on, it is double the physical cores. You use it in step 5." }
     },
     {
       "id": "create-vm",
-      "title": { "ro": "Creează VM-ul pentru ESXi", "en": "Create the ESXi VM" },
-      "path": { "ro": "File → New Virtual Machine → Typical → Installer disc image (ISO) ⚠ de verificat pe versiunea ta de Workstation", "en": "File → New Virtual Machine → Typical → Installer disc image (ISO) ⚠ verify on your Workstation version" },
-      "action": { "ro": "Alege ISO-ul ESXi. Dă VM-ului 2 vCPU, minim 8 GB RAM ⚠ de verificat cerința exactă pentru 8.0 și un disc de 40 GB, thin.", "en": "Pick the ESXi ISO. Give the VM 2 vCPU, at least 8 GB RAM ⚠ verify the exact 8.0 requirement and a 40 GB thin disk." },
-      "why": { "ro": "Sub minimul de RAM instalarea ESXi se oprește. Discul thin ocupă pe SSD doar cât scrie efectiv ESXi, deci economisești spațiu pentru hosturile următoare.", "en": "Below the RAM minimum the ESXi installer stops. A thin disk only uses the SSD space ESXi actually writes, saving room for future hosts." }
+      "title": { "ro": "Creează o VM goală", "en": "Create an empty VM" },
+      "path": { "ro": "Click dreapta pe Host → Create/Register VM → wizard-ul New Virtual Machine", "en": "Right-click Host → Create/Register VM → New Virtual Machine wizard" },
+      "action": { "ro": "Alege crearea unei VM noi ⚠ de verificat numele opțiunii, dă-i numele `lab-vm01`, un sistem de operare oaspete Linux, 1 vCPU, 2 GB RAM și un disc thin de 8 GB. Verifică pagina **Ready to complete** și apasă **Finish**.", "en": "Choose to create a new VM ⚠ verify the option name, name it `lab-vm01`, pick a Linux guest OS, 1 vCPU, 2 GB RAM and an 8 GB thin disk. Check the **Ready to complete** page and click **Finish**." },
+      "why": { "ro": "Wizard-ul nu salvează nimic până la Finish: dacă îl închizi la jumătate, o iei de la capăt. Discul thin ocupă pe datastore doar cât se scrie efectiv, deci un lab poate găzdui mai multe VM-uri.", "en": "The wizard saves nothing until Finish: close it midway and you start over. A thin disk only uses the datastore space actually written, so a lab can hold more VMs." }
     },
     {
-      "id": "vhv",
-      "title": { "ro": "Expune virtualizarea către VM", "en": "Expose virtualization to the VM" },
-      "path": { "ro": "VM → Settings → Processors → Virtualize Intel VT-x/EPT or AMD-V/RVI", "en": "VM → Settings → Processors → Virtualize Intel VT-x/EPT or AMD-V/RVI" },
-      "action": { "ro": "Bifează opțiunea înainte de prima pornire a VM-ului.", "en": "Tick the option before the VM's first power-on." },
-      "why": { "ro": "ESXi verifică la instalare dacă procesorul are extensii de virtualizare. Fără această bifă, ESXi nested nu poate porni VM-uri pe 64 de biți.", "en": "ESXi checks for virtualization extensions at install. Without this, nested ESXi cannot power on 64-bit VMs." }
+      "id": "browse-files",
+      "title": { "ro": "Uită-te la fișierele VM-ului pe datastore", "en": "Look at the VM's files on the datastore" },
+      "path": { "ro": "Storage → datastore-ul tău → Datastore browser → folderul lab-vm01 ⚠ de verificat", "en": "Storage → your datastore → Datastore browser → lab-vm01 folder ⚠ to verify" },
+      "action": { "ro": "Identifică `.vmx`, `.vmdk` și `.nvram`. Pornește VM-ul (Power on) și reîmprospătează folderul: trebuie să apară `.vswp` și fișiere `.log`. Oprește apoi VM-ul.", "en": "Find `.vmx`, `.vmdk` and `.nvram`. Power on the VM and refresh the folder: `.vswp` and `.log` files should appear. Then power the VM off." },
+      "why": { "ro": "Vezi concret că o VM este un set de fișiere. Fișierul `.vswp` există doar cât VM-ul rulează: e spațiul în care hypervisorul poate muta memoria VM-ului dacă hostul rămâne fără RAM.", "en": "You see that a VM is a set of files. The `.vswp` file exists only while the VM runs: it is where the hypervisor can move the VM's memory if the host runs out of RAM." }
     },
     {
-      "id": "install-esxi",
-      "title": { "ro": "Instalează ESXi și verifică Host Client", "en": "Install ESXi and check Host Client" },
-      "action": { "ro": "Pornește VM-ul, urmează instalatorul, setează parola de root. După repornire, deschide în browser adresa IP afișată pe consola ESXi (DCUI) și autentifică-te în Host Client.", "en": "Power on the VM, follow the installer, set the root password. After reboot, open the IP shown on the ESXi console (DCUI) in a browser and log in to Host Client." },
-      "why": { "ro": "Host Client confirmă că rețeaua de management funcționează. Fără el nu poți administra hostul de pe laptop.", "en": "Host Client confirms the management network works. Without it you can't manage the host from your laptop." }
+      "id": "vcpu-limit",
+      "title": { "ro": "Test de avarie: încearcă să depășești limita de vCPU", "en": "Failure test: try to exceed the vCPU limit" },
+      "path": { "ro": "Virtual Machines → click dreapta pe lab-vm01 → Edit settings → Virtual Hardware → CPU", "en": "Virtual Machines → right-click lab-vm01 → Edit settings → Virtual Hardware → CPU" },
+      "action": { "ro": "Cu VM-ul oprit, încearcă să setezi un număr de vCPU mai mare decât nucleele logice notate la pasul 2. Observă ce îți permite interfața. Revino la 1 vCPU și salvează.", "en": "With the VM off, try to set more vCPUs than the logical cores noted in step 2. See what the UI allows. Return to 1 vCPU and save." },
+      "why": { "ro": "Documentația spune că o VM nu poate avea mai multe vCPU decât nuclee logice are hostul. Testul confirmă regula și îți arată unde se configurează CPU-ul unei VM (inclusiv Reservation, Limit și Shares, pe care le folosim în capitolul 1.5).", "en": "The docs say a VM cannot have more vCPUs than the host's logical cores. The test confirms the rule and shows where VM CPU is configured (including Reservation, Limit and Shares, used in chapter 1.5)." }
+    },
+    {
+      "id": "snapshot",
+      "title": { "ro": "Fă un snapshot și găsește fișierul delta", "en": "Take a snapshot and find the delta file" },
+      "path": { "ro": "Click dreapta pe lab-vm01 → Snapshots → Take snapshot ⚠ de verificat; apoi Datastore browser", "en": "Right-click lab-vm01 → Snapshots → Take snapshot ⚠ to verify; then Datastore browser" },
+      "action": { "ro": "Fă un snapshot, apoi caută în folderul VM-ului un disc nou de forma `lab-vm01-000001.vmdk` și fișierul `.vmsd`. La final șterge snapshot-ul din Snapshot Manager.", "en": "Take a snapshot, then look in the VM folder for a new disk like `lab-vm01-000001.vmdk` and the `.vmsd` file. Finally delete the snapshot from Snapshot Manager." },
+      "why": { "ro": "Discul `-000001` este fișierul delta în care merg toate scrierile de după snapshot. Ștergerea snapshot-ului din interfață îl contopește înapoi în discul de bază; ștergerea manuală a fișierelor delta poate strica VM-ul.", "en": "The `-000001` disk is the delta file receiving all writes after the snapshot. Deleting the snapshot in the UI merges it back into the base disk; deleting delta files by hand can break the VM." }
     }
   ]
 }

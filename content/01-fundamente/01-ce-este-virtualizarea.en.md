@@ -1,123 +1,198 @@
 ---
-title: "What is virtualization (test lesson)"
-summary: "From one physical server to many virtual machines: Type 1 vs Type 2 hypervisors and your first nested ESXi."
+title: "What virtualization is: hypervisor, VM, Type 1 vs Type 2"
+summary: "Why virtualization exists, what a hypervisor does, what a virtual machine is made of, and why a snapshot is not a backup."
 order: 1
 level: "Level 0"
-examTargets: ["VCP-VVF Admin 2V0-16.25 · 2.1"]
-status: test
+examTargets: ["VVF 2.1.1–2.1.3", "VCF 2.1", "DCV 1.1"]
 updated: "2026-11-10"
-sources: ["S02", "S14", "S15", "S16", "S18", "S19", "S27"]
-examSummaryEn: "A hypervisor shares one physical server among isolated virtual machines. Type 1 (bare-metal, e.g. ESXi) runs directly on hardware; Type 2 (hosted, e.g. Workstation Pro) runs on top of an OS. Nested ESXi is fine for labs but not supported in production (only the vSAN Witness Appliance is supported nested, on physical ESXi). Free ESXi 8.0U3e cannot join vCenter and caps VMs at 8 vCPU. Nested ESXi networking needs Promiscuous mode + Forged Transmits on a VSS, or MAC Learning on a VDS."
-glossaryTerms: ["hypervisor", "type-1-hypervisor", "type-2-hypervisor", "nested-virtualization", "promiscuous-mode", "mac-learning", "vcenter"]
+sources: ["S02", "S03", "S47", "S37", "S40", "S38", "S39", "S41", "S42", "S43", "S18", "S15", "S16", "S14", "S44", "S27", "S45", "S46", "S19"]
+glossaryTerms: ["hypervisor", "type-1-hypervisor", "type-2-hypervisor", "vm", "vcpu", "vmkernel", "datastore", "snapshot", "overcommit", "nested-virtualization"]
 ---
 
-> This is the **LMS skeleton test lesson** (Stage 1). It has all 6 sections so we can check rendering, but it does not yet reach the 10-source threshold. The full version comes in Stage 3.
-
 :::analogy
-**The data center pain.** Before virtualization the rule was "one application, one server". Each physical server used power, rack space and licenses, yet sat mostly idle. A new application meant ordering hardware and waiting.
+**The data center pain.** Until the early 2000s the rule in companies was "one application, one server". Email had its own machine, the database its own, accounting its own. The reason was simple: if two applications shared one operating system and one broke, it could drag the other down. The result was rooms full of servers that sat mostly idle yet consumed power, cooling, rack space and licenses. A new application meant ordering hardware and waiting weeks.
 
-**Analogy: the apartment building.** A physical server is a building. Without virtualization one family lives in the whole building. With virtualization the building is split into isolated apartments: each family (a **virtual machine**, VM) has its own door, key and meter, but all share the same foundation, water and power. The **building manager** is the **hypervisor**: it decides how much power each apartment gets and keeps families from walking into each other's homes.
+Virtualization solves exactly that. One physical server runs several "simulated" computers, isolated from each other. Today's exam guides still start here: objectives 2.1.1–2.1.3 of VVF (VMware vSphere Foundation, exam 2V0-16.25) ask you to describe the principles, use cases and value of virtualization. [S02] [S03]
+
+**Analogy: the apartment building.** Think of a physical server as a building.
+
+- **Without virtualization**, one family lives in the whole building. It uses two rooms out of twenty but pays upkeep for all of them.
+- **With virtualization**, the building is split into apartments. Each family has its own door, key and meter. If one family floods its bathroom, the neighbors are fine. Each apartment is a **VM** (Virtual Machine).
+- **The building manager** is the **hypervisor**. It shares water, power and heat among apartments, decides who gets how much, and keeps everyone out of each other's homes.
+
+Keep this in mind: everything you learn from now on (clusters, migration, virtual networking, distributed storage) is really about the building manager getting smarter.
 :::
 
 :::architecture
-### What a hypervisor does
+### 1. What a hypervisor does
 
-A **hypervisor** sits between the hardware and the virtual machines. Each VM believes it has its own processor (**vCPU**), memory, disk and network card. In reality the hypervisor shares the physical resources and schedules them in turn.
+A **hypervisor** is the software layer between the hardware and the virtual machines. Each VM "believes" it has its own computer:
+
+- its own processor: a **vCPU** (virtual CPU), scheduled by the hypervisor onto the cores of the physical **CPU** (Central Processing Unit);
+- its own memory: **RAM** (Random Access Memory) allocated from the host's memory;
+- its own disk: a file on a **datastore** (the storage container holding VM files);
+- its own network card: a virtual **NIC** (Network Interface Card) connected to a virtual switch.
+
+In ESXi, the kernel that does this sharing is the **VMkernel**. It schedules CPU, memory, storage and network for every VM on the host.
 
 ```mermaid
 flowchart TB
-  subgraph HW["Physical server"]
-    CPU["CPU"]
-    RAM["RAM"]
-    DISK["Storage"]
-    NIC["Network card"]
+  subgraph VMS["Virtual machines (each with its own operating system)"]
+    VM1["VM 1: Windows Server"]
+    VM2["VM 2: Linux + database"]
+    VM3["VM 3: web app"]
   end
-  HV["Hypervisor (e.g. ESXi)"]
-  VM1["VM 1: Windows"]
-  VM2["VM 2: Linux"]
-  VM3["VM 3: web app"]
-  HW --> HV
-  HV --> VM1
-  HV --> VM2
-  HV --> VM3
+  HV["Type 1 hypervisor: ESXi, with the VMkernel"]
+  subgraph HW["Physical server (host)"]
+    CPU["CPU: physical cores"]
+    RAM["RAM"]
+    DISK["Disks or network storage"]
+    NIC["Physical network cards"]
+  end
+  VM1 --> HV
+  VM2 --> HV
+  VM3 --> HV
+  HV --> CPU
+  HV --> RAM
+  HV --> DISK
+  HV --> NIC
 ```
 
-### Type 1 vs Type 2
+### 2. Why it is fast: hardware-assisted virtualization
+
+Modern processors have extensions dedicated to virtualization. The official vSphere 9.0 performance guide describes two levels: [S40]
+
+| Feature | Intel / AMD name | What it does |
+|---|---|---|
+| Hardware-assisted CPU virtualization | VT-x / AMD-V | The CPU traps a VM's sensitive instructions and hands them to the hypervisor cheaply. |
+| Hardware-assisted MMU virtualization | EPT / RVI | The CPU keeps a second level of page tables (guest → host), so the hypervisor no longer maintains shadow page tables. Memory use drops, but TLB misses cost more; 2 MB large pages offset that. |
+
+That is why VT-x or AMD-V must be enabled in the BIOS (Basic Input/Output System, the boot firmware) of any server used for virtualization.
+
+### 3. Type 1 vs Type 2
 
 | | Type 1 (bare-metal) | Type 2 (hosted) |
 |---|---|---|
-| Runs on | Directly on hardware | As an app on Windows/Linux |
-| VMware example | ESXi | VMware Workstation Pro |
-| Used for | Production, data center | Laptop, study, lab |
-| Cost (verified 2026-11-10) | ESXi 8.0U3e has a free edition with limits | Free for everyone since 2024-11-11 |
+| Runs on | Directly on hardware | As an app on a host OS (Operating System) |
+| Examples | ESXi, KVM, Hyper-V | VMware Workstation Pro, VirtualBox |
+| Strengths | Performance and stability, small attack surface, moving VMs between servers | Easy to install on a laptop, good for testing |
+| Weaknesses | Needs another machine to manage it | Extra overhead from the host OS, inherits its security risks |
+| Where you find it | Data center, production | Workstation, study lab |
 
-### Choosing a lab platform
+Comparison source: [S37]. Workstation Pro has been free for all users since November 11, 2024. [S14]
 
 ```mermaid
 flowchart TD
-  A{"Do you have a dedicated lab server?"} -->|Yes| B["Install ESXi directly on the server (Type 1)"]
-  A -->|No, just a PC/laptop| C["Install Workstation Pro (Type 2)"]
-  B --> D["Run nested ESXi as VMs"]
-  C --> D
-  D --> E{"Need vCenter, HA, DRS?"}
-  E -->|Yes| F["60-day evaluation or VMUG Advantage"]
-  E -->|No, one host| G["Free ESXi 8.0U3e is enough"]
+  Q1{"Where will it run?"} -->|"Dedicated server, production"| T1["Type 1: ESXi directly on hardware"]
+  Q1 -->|"Laptop or personal PC"| T2["Type 2: Workstation Pro on Windows or Linux"]
+  T1 --> Q2{"Want several hosts in one lab?"}
+  T2 --> Q2
+  Q2 -->|"Yes"| N["Nested ESXi: ESXi running as a VM. Lab only, unsupported in production"]
+  Q2 -->|"No"| S["One host is enough"]
 ```
 
-**Nested virtualization** means running ESXi as a VM. It is the standard home lab method, but Broadcom **does not support it in production**: the only supported case is the vSAN Witness Appliance on physical ESXi.
+### 4. What a virtual machine is made of
 
-`[IMAGE SEARCH / PROMPT]` Screenshot of VMware Host Client "Host → Manage → Licensing" on a free ESXi 8.0U3e. Screenshot of Workstation Pro "Processors" settings for an ESXi VM with hardware virtualization enabled.
+A VM isn't magic: it is a set of files on a datastore. The vSphere 8 documentation lists them: [S38]
+
+| File | Role |
+|---|---|
+| `.vmx` | The VM configuration (how many vCPUs, how much RAM, which disks) |
+| `.vmdk` | Virtual disk descriptor |
+| `-flat.vmdk` | The actual disk data |
+| `.nvram` | The VM's BIOS or EFI settings |
+| `.vswp` | The VM's swap file |
+| `.vmsd` / `.vmsn` | Snapshot metadata and memory state |
+| `.vmss` | State of a suspended VM |
+| `.log` | VM logs |
+
+A rule to remember: **a VM cannot have more vCPUs than the host has logical cores.** With hyperthreading on, the logical core count is double the physical core count. [S39]
+
+### 5. Snapshots: useful, but dangerous
+
+A **snapshot** saves a VM's state at a point in time. Afterwards the original disk becomes read-only and all new writes go to a delta file that **keeps growing**. The snapshot depends on the original disk, so it **is not a backup**. [S41]
+
+```mermaid
+flowchart LR
+  B["Base disk (-flat.vmdk), read-only after the snapshot"] --> D1["Delta 1 (-000001.vmdk): every write after the snapshot"]
+  D1 --> D2["Delta 2: if you take another snapshot"]
+  D2 --> R["The VM runs on the latest delta"]
+```
+
+### 6. Overcommit
+
+The hypervisor lets you give VMs more vCPUs and RAM than the host physically has, because VMs rarely use everything at once. This is called **overcommit**. ESX has several memory reclamation techniques (page sharing, ballooning, compression, swap), but the performance guide recommends not pushing so far that the host swaps out active pages. [S40]
+
+`[IMAGE SEARCH / PROMPT]` VMware Host Client screenshot: host page showing the logical processor count. Datastore Browser screenshot with a VM's files (`.vmx`, `.vmdk`, `.nvram`). Snapshot Manager screenshot with a two-snapshot chain.
 :::
 
 :::exam-alert
 ### Memorize
 
-| What | Value | Source |
+| What | Value / rule | Source |
 |---|---|---|
-| Free ESXi 8.0U3e: max vCPU per VM | 8 | KB 399823 [S15] |
-| Free ESXi 8.0U3e: physical CPUs per host | 2 | KB 399823 [S15] |
-| Free ESXi: add to vCenter | Not possible | KB 399823 [S15] |
-| vCenter 8.0 "Tiny" | 2 vCPU, 14 GB RAM, up to 10 hosts / 100 VMs | TechDocs [S19] |
-| Workstation Pro free | Since 2024-11-11, including commercial use | VMware blog [S14] |
+| vCPU limit per VM | At most the host's logical core count | vSphere docs [S39] |
+| VM configuration file | `.vmx` | vSphere 8 docs [S38] |
+| Disk data | `-flat.vmdk` (the descriptor is `.vmdk`) | vSphere 8 docs [S38] |
+| Snapshots: supported maximum in a chain | 32 | KB (Knowledge Base article) 318825 [S41] |
+| Snapshots: recommended | 2–3 per chain, no longer than 72 hours | KB 318825 [S41] |
+| Snapshot = backup? | **No** | KB 318825 [S41] |
+| Nested ESXi in production | Unsupported; only exception is the vSAN Witness Appliance on physical ESXi | KB 313547 [S18] |
+| Free ESXi 8.0U3e | Max 8 vCPU per VM, 2 physical CPUs, cannot be added to vCenter | KB 399823 [S15] |
 
 ### 3 exam traps
 
-1. **"ESXi is an operating system with a hypervisor installed on top."** False: ESXi *is* the hypervisor (Type 1), installed directly on hardware.
-2. **"Nested ESXi is supported if it runs on Compatibility Guide hardware."** False: nested is unsupported in production regardless of hardware; the only exception is the vSAN Witness Appliance.
-3. **"A free-licensed host can join an HA cluster so I can test failover."** False: a free host cannot be managed by vCenter, so no cluster and no HA.
+1. **"ESXi is an operating system you install a hypervisor on."** False. ESXi *is* the hypervisor (Type 1) and runs directly on hardware. The VMkernel is its core.
+2. **"A snapshot is a quick backup."** False. A snapshot depends on the base disk; lose the base disk and the snapshot alone cannot rebuild the VM. [S41]
+3. **"I can give a VM 32 vCPUs on a host with 16 logical cores, since overcommit exists."** False. Overcommit happens *across* VMs; a single VM can't exceed the host's logical cores. [S39]
 :::
 
 :::trenches
-**Mistake 1: VMs inside nested ESXi have no network.** The nested host boots and has an IP, but VMs created inside it get no traffic. Cause: the physical host's virtual switch drops frames with MAC addresses it does not know. **Fix:** on a **VSS** enable Promiscuous mode and Forged Transmits on the lab port group; on a **VDS** use **MAC Learning**, which performs better. [S27]
+**Mistake 1: a forgotten snapshot stops every VM on a datastore.**
+On the Broadcom community forum, an admin describes a 2 TB datastore with four thick-provisioned VMs. A backup job created snapshots, the delta file grew until it filled the datastore, and **all four** VMs froze, not just the one with the snapshot. Thick disks don't help: they reserve space for the disk, not for snapshot deltas. [S42] A recent r/vmware case shows the worse outcome: a snapshot started with too little free space left the VM unable to boot. [S43]
+**Fix:** follow KB 318825 (2–3 snapshots, 72 hours max, a snapshot is not a backup), monitor datastore free space, and check which tools (backup, updates) create snapshots automatically. [S41]
 
-**Mistake 2: "License not available" when adding the host to vCenter.** Someone installs ESXi from the Free ISO (build 24677879), then tries to add it to vCenter. It fails because the free license does not allow vCenter management. **Fix:** for vCenter labs use the standard ISO, which starts with a 60-day evaluation. A host installed from the Free ISO cannot enter trial mode. [S15] [S16]
+**Mistake 2: oversized VMs that get slower, not faster.**
+A beginner's reflex is to give a slow VM more vCPUs. The vSphere 9.0 performance guide says vCPUs beyond real need add overhead and can hurt performance on a busy host; even idle vCPUs consume resources, and a single-threaded app loses cache locality. [S40]
+**Fix:** size the VM to its real load, measure before adding resources, and watch host load (the guide treats 80% CPU use as a reasonable ceiling and 90% as a warning sign). [S40]
 :::
 
 :::interview
-**Junior/Mid: "What is the difference between a Type 1 and a Type 2 hypervisor? Give a VMware example of each."**
+**Junior/Mid question: "Explain the difference between a Type 1 and a Type 2 hypervisor. Where would you use each?"**
 
-*Ideal answer:* Type 1 runs directly on hardware and controls physical resources, so overhead is low and it is used in production (ESXi). Type 2 runs as an application on a host OS and depends on it; it suits workstations and labs (Workstation Pro). A strong candidate adds that you can combine them, nested ESXi in Workstation for study, noting it is not supported in production.
+*Ideal answer:* Type 1 runs directly on hardware, like ESXi, so it controls CPU, memory and I/O directly, with low overhead and a small attack surface. It is used in the data center. Type 2 runs as an app on a host OS, like Workstation Pro, so it depends on that OS and loses some performance, but it is ideal on a workstation. A strong candidate adds that you can combine them for a lab (nested ESXi in Workstation) and notes that this is unsupported in production. [S37] [S18]
 
-**Troubleshooting scenario: "You built a lab with 3 nested ESXi hosts. The hosts answer ping, but VMs inside them can't reach the network. What do you check?"**
+**Troubleshooting scenario: "Monday morning, every VM on one datastore is frozen. Other datastores are fine. What do you do?"**
 
-*Answer a Team Lead expects:* (1) Confirm only the inner VMs are affected, not the hosts. (2) Check the physical host's port group security: on a VSS, Promiscuous mode and Forged Transmits set to "Accept"; on a VDS, MAC Learning enabled. (3) Check VLAN consistency between the physical and nested layers. (4) Explain *why*: the nested host sends frames with the inner VMs' MACs, which the outer switch doesn't know and drops by default.
+*Answer a Team Lead expects:*
+1. **Scope the problem.** Only VMs on that datastore are affected, so I suspect the datastore, not the hosts.
+2. **Check free space.** A full datastore blocks writes for every VM on it.
+3. **Look for snapshots.** I check Snapshot Manager and the VM folders for large delta files, and whether a backup job left snapshots behind. [S42]
+4. **Free space safely.** Move a VM to another datastore or grow the datastore. I do **not** delete delta files by hand, which can leave the VM unable to boot. [S43]
+5. **Prevent it.** Alarms on datastore free space and a team rule: snapshots live no longer than 72 hours. [S41]
 :::
 
 :::lab
-**Scenario:** build a single nested ESXi host on your laptop as the base for all future labs.
+**Scenario.** Your lab is already running and you can reach an ESXi host through VMware Host Client (the host's web UI). You create your first VM, look at its files on the datastore, and check two rules from this lesson: the vCPU limit and how a snapshot behaves.
 
-**You need:** a PC with hardware virtualization enabled in BIOS, VMware Workstation Pro and the ESXi ISO. Steps below are checkable; progress is saved in your browser.
+**What we skip:** installing an operating system in the VM. An empty VM is enough for what we observe and saves time.
 
-**Failure/validation test:** after install, disconnect the ESXi VM's network adapter in Workstation. Host Client stops responding. Reconnect it: ESXi comes back without a reboot. This shows management traffic flows through the VM's vNIC, i.e. through Workstation's virtual network.
+The steps below are checkable and progress is saved in your browser. Where it says `⚠ to verify`, the exact button name may differ between Host Client 8 and 9.
+
+**Failure / validation test.** In step 5 you deliberately try to give the VM more vCPUs than the host's logical cores. Host Client should not accept the value. If it does, write down the ESXi version and logical core count: you probably misread the logical cores in step 2.
 :::
 
 :::quiz
-Five original VCP-style questions. You get the explanation for every option right after answering.
+Five original questions in the style of VCP (VMware Certified Professional) exams. You get the explanation for every option right after answering.
 :::
 
 :::references
-- VCP-VVF Administrator 2V0-16.25 exam guide, section 2.1 "Virtualization Fundamentals" [S02]
-- KB 399823: free ESXi 8.0 Update 3e [S15]
-- KB 313547: support for nested ESXi [S18]
-- William Lam: nested ESXi networking requirements [S27]
+- VCP-VVF Administrator 2V0-16.25 exam guide, objectives 2.1.1–2.1.3 [S02]
+- VCP-VCF Administrator 2V0-17.25 exam guide (VCF = VMware Cloud Foundation), objective 2.1 [S03]
+- VCP-DCV 2V0-21.23 exam guide (DCV = Data Center Virtualization, Legacy certification), objective 1.1 [S47]
+- Performance Best Practices for vSphere 9.0: hardware-assisted virtualization, overcommit, VM sizing [S40]
+- vSphere docs: VM files [S38] and the vCPU limit [S39]
+- KB 318825: snapshot best practices [S41]
+- KB 313547: nested ESXi support [S18]
+- Community cases: datastore filled by snapshots [S42], [S43]
 :::
