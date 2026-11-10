@@ -62,7 +62,7 @@ Documentația vSphere împarte stocarea în rețea astfel: [S66]
 | Fibre Channel | FC/SCSI, FC/NVMe | Blocuri (LUN) | **HBA** (Host Bus Adapter) Fibre Channel |
 | Fibre Channel over Ethernet | FCoE/SCSI | Blocuri (LUN) | Adaptor de rețea convergent |
 | **iSCSI** (Internet Small Computer Systems Interface) | SCSI peste IP (Internet Protocol) | Blocuri (LUN) | Adaptor hardware sau adaptorul iSCSI software al ESXi, peste o placă de rețea obișnuită |
-| NVMe over Fabrics | NVMe peste RDMA, FC sau TCP | Blocuri | Adaptor NVMe |
+| NVMe over Fabrics | NVMe peste RDMA (Remote Direct Memory Access), FC sau TCP (Transmission Control Protocol) | Blocuri | Adaptor NVMe |
 | NAS | **NFS** peste IP | Fișiere, fără acces direct la LUN | Placă de rețea |
 
 ```mermaid

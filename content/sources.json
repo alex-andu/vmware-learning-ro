@@ -24,7 +24,8 @@
       "01-fundamente/02-retea-de-baza",
       "01-fundamente/04-arhitectura-esxi",
       "01-fundamente/05-cpu-memorie",
-      "01-fundamente/06-masini-virtuale"
+      "01-fundamente/06-masini-virtuale",
+      "01-fundamente/07-retea-esxi"
     ]
   },
   {
@@ -308,7 +309,8 @@
     "read": true,
     "usedBy": [
       "docs/STATE_OF_THE_ART",
-      "01-fundamente/01-ce-este-virtualizarea"
+      "01-fundamente/01-ce-este-virtualizarea",
+      "01-fundamente/07-retea-esxi"
     ]
   },
   {
@@ -538,7 +540,8 @@
       "01-fundamente/03-stocare-de-baza",
       "01-fundamente/04-arhitectura-esxi",
       "01-fundamente/05-cpu-memorie",
-      "01-fundamente/06-masini-virtuale"
+      "01-fundamente/06-masini-virtuale",
+      "01-fundamente/07-retea-esxi"
     ]
   },
   {
@@ -571,7 +574,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "01-fundamente/02-retea-de-baza"
+      "01-fundamente/02-retea-de-baza",
+      "01-fundamente/07-retea-esxi"
     ]
   },
   {
@@ -582,7 +586,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "01-fundamente/02-retea-de-baza"
+      "01-fundamente/02-retea-de-baza",
+      "01-fundamente/07-retea-esxi"
     ]
   },
   {
@@ -1166,6 +1171,182 @@
     "read": true,
     "usedBy": [
       "01-fundamente/06-masini-virtuale"
+    ]
+  },
+  {
+    "id": "S105",
+    "title": "vSphere 8 Networking: Security policy (promiscuous mode, MAC address changes, forged transmits)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-networking/GUID-62914CF2-A6A8-4DCC-90A9-8CD4BBF50017.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/07-retea-esxi"
+    ]
+  },
+  {
+    "id": "S106",
+    "title": "KB 446719: Security implications of enabling Promiscuous Mode, MAC Changes and Forged Transmits",
+    "url": "https://knowledge.broadcom.com/external/article/446719",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/07-retea-esxi"
+    ]
+  },
+  {
+    "id": "S107",
+    "title": "KB 427110: Forged transmits and MAC address changes on a port group",
+    "url": "https://knowledge.broadcom.com/external/article/427110/forged-transmits-and-mac-address-changes.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/07-retea-esxi"
+    ]
+  },
+  {
+    "id": "S108",
+    "title": "KB 319651: Pre-check with security policy fails when upgrading to vSphere 7.0 or newer",
+    "url": "https://knowledge.broadcom.com/external/article/319651/precheck-with-security-policy-fails-when.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/07-retea-esxi"
+    ]
+  },
+  {
+    "id": "S109",
+    "title": "vSphere 8 Networking: Configure NIC teaming, failover and load balancing on a standard switch",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-networking/GUID-D34B1ADD-B8A7-43CD-AA7E-2832A0F7EE76.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/07-retea-esxi"
+    ]
+  },
+  {
+    "id": "S110",
+    "title": "KB 321396: Understanding IP Hash load balancing",
+    "url": "https://knowledge.broadcom.com/external/article/321396",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/07-retea-esxi"
+    ]
+  },
+  {
+    "id": "S111",
+    "title": "vSphere 8 Networking: VMkernel networking layer (TCP/IP stacks, traffic types)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-networking/GUID-D4191320-209E-4CB5-A709-C8741E713348.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/07-retea-esxi"
+    ]
+  },
+  {
+    "id": "S112",
+    "title": "vSphere 8 Networking: Create a VMkernel adapter on a vSphere Distributed Switch",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-networking/GUID-7BC73116-C4A6-411D-8A32-AD5B7A3D5493.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/07-retea-esxi"
+    ]
+  },
+  {
+    "id": "S113",
+    "title": "vSphere 8 Networking: Edit a VMkernel adapter configuration",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-networking/GUID-AA3656B0-005A-40A0-A293-4309C5ACF682.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/07-retea-esxi"
+    ]
+  },
+  {
+    "id": "S114",
+    "title": "vSphere 8 Networking: vSphere Standard Switches",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-networking/GUID-E198C88A-F82C-4FF3-96C9-E3DF0056AD0C.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/07-retea-esxi"
+    ]
+  },
+  {
+    "id": "S115",
+    "title": "vSphere 8 Networking: Traffic shaping policy",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-networking/GUID-D3A091C0-0D0D-480D-ACE3-62524E2E0D0A.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/07-retea-esxi"
+    ]
+  },
+  {
+    "id": "S116",
+    "title": "KB 326175: Configuring vSS or vDS from the command line in ESXi",
+    "url": "https://knowledge.broadcom.com/external/article/326175",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/07-retea-esxi"
+    ]
+  },
+  {
+    "id": "S117",
+    "title": "KB 311145: Understanding network rollback and recovery in vSphere 7.0 and later",
+    "url": "https://knowledge.broadcom.com/external/article/311145",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/07-retea-esxi"
+    ]
+  },
+  {
+    "id": "S118",
+    "title": "KB 317612: Network redundancy message when configuring vSphere HA",
+    "url": "https://knowledge.broadcom.com/external/article/317612",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/07-retea-esxi"
+    ]
+  },
+  {
+    "id": "S119",
+    "title": "KB 311057: Configuring VLAN on a vSwitch standard portgroup",
+    "url": "https://knowledge.broadcom.com/external/article/311057/configuring-vlan-on-a-vswitch-standard.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/07-retea-esxi"
+    ]
+  },
+  {
+    "id": "S120",
+    "title": "vSphere 8 Security: Securing vSphere Standard Switches",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-security/GUID-3507432E-AFEA-4B6B-B404-17A020575358.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/07-retea-esxi"
     ]
   }
 ]

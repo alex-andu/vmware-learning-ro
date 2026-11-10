@@ -850,5 +850,82 @@
     ],
     "ro": "Discul thin ocupă spațiu doar pe măsură ce se scrie; thick alocă totul de la început (lazy zeroed sau eager zeroed).",
     "en": "A thin disk uses space only as data is written; thick allocates everything up front (lazy zeroed or eager zeroed)."
+  },
+  {
+    "id": "port-group",
+    "term": "port group",
+    "aliases": [
+      "port groups",
+      "grup de porturi"
+    ],
+    "ro": "Grup de porturi pe un switch virtual care împart aceleași setări (VLAN, securitate, teaming). VM-urile și adaptoarele VMkernel se conectează la un port group.",
+    "en": "A group of ports on a virtual switch sharing the same settings (VLAN, security, teaming). VMs and VMkernel adapters connect to a port group."
+  },
+  {
+    "id": "vmnic",
+    "term": "vmnic",
+    "aliases": [
+      "uplink",
+      "uplinks",
+      "vmnic0"
+    ],
+    "ro": "Placa de rețea fizică a hostului ESXi, văzută de ESXi ca vmnic0, vmnic1…; legată la un switch virtual devine uplink.",
+    "en": "A physical network adapter of the ESXi host, seen as vmnic0, vmnic1…; attached to a virtual switch it becomes an uplink."
+  },
+  {
+    "id": "nic-teaming",
+    "term": "NIC teaming",
+    "aliases": [
+      "teaming"
+    ],
+    "ro": "Gruparea mai multor plăci fizice pe același switch virtual, pentru redundanță și distribuirea traficului.",
+    "en": "Grouping several physical adapters on one virtual switch for redundancy and traffic distribution."
+  },
+  {
+    "id": "lacp",
+    "term": "LACP",
+    "abbr": "LACP",
+    "expansion": "Link Aggregation Control Protocol",
+    "ro": "Protocol care negociază dinamic agregarea mai multor legături fizice într-una logică. În vSphere e disponibil doar pe Distributed Switch.",
+    "en": "Protocol that dynamically negotiates bundling several physical links into one logical link. In vSphere it is available only on the Distributed Switch."
+  },
+  {
+    "id": "tcp",
+    "term": "TCP",
+    "abbr": "TCP",
+    "expansion": "Transmission Control Protocol",
+    "ro": "Protocol de transport orientat pe conexiune, cu confirmarea livrării. „TCP/IP stack” înseamnă setul complet de protocoale de rețea al unui sistem.",
+    "en": "Connection-oriented transport protocol with delivery acknowledgement. A \"TCP/IP stack\" is a system's complete set of network protocols."
+  },
+  {
+    "id": "arp",
+    "term": "ARP",
+    "abbr": "ARP",
+    "expansion": "Address Resolution Protocol",
+    "ro": "Protocolul care află adresa MAC corespunzătoare unei adrese IP în aceeași rețea locală.",
+    "en": "The protocol that finds the MAC address matching an IP address on the same local network."
+  },
+  {
+    "id": "nlb",
+    "term": "NLB",
+    "abbr": "NLB",
+    "expansion": "Network Load Balancing",
+    "ro": "Funcția Microsoft Windows Server care împarte traficul între mai multe servere folosind o adresă comună.",
+    "en": "The Microsoft Windows Server feature that spreads traffic across several servers using a shared address."
+  },
+  {
+    "id": "traffic-shaping",
+    "term": "traffic shaping",
+    "ro": "Limitarea lățimii de bandă a unui port group: medie, vârf și dimensiunea rafalei. Pe Standard Switch se aplică doar traficului care iese.",
+    "en": "Bandwidth limiting on a port group: average, peak and burst size. On a Standard Switch it applies to outbound traffic only."
+  },
+  {
+    "id": "network-rollback",
+    "term": "network rollback",
+    "aliases": [
+      "rollback de rețea"
+    ],
+    "ro": "Mecanismul vSphere care anulează automat o schimbare de rețea care deconectează hostul de vCenter.",
+    "en": "The vSphere mechanism that automatically reverts a network change that disconnects the host from vCenter."
   }
 ]

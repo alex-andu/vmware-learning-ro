@@ -61,7 +61,7 @@ The vSphere documentation splits networked storage like this: [S66]
 | Fibre Channel | FC/SCSI, FC/NVMe | Blocks (LUN) | Fibre Channel **HBA** (Host Bus Adapter) |
 | Fibre Channel over Ethernet | FCoE/SCSI | Blocks (LUN) | Converged network adapter |
 | **iSCSI** (Internet Small Computer Systems Interface) | SCSI over IP (Internet Protocol) | Blocks (LUN) | Hardware adapter, or the ESXi software iSCSI adapter over a normal NIC (Network Interface Card) |
-| NVMe over Fabrics | NVMe over RDMA, FC or TCP | Blocks | NVMe adapter |
+| NVMe over Fabrics | NVMe over RDMA (Remote Direct Memory Access), FC or TCP (Transmission Control Protocol) | Blocks | NVMe adapter |
 | NAS | **NFS** over IP | Files, no direct LUN access | Network adapter |
 
 ```mermaid

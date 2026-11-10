@@ -188,7 +188,7 @@ In KB 405215 the upgrade pre-check reports a successful forward lookup but a fai
 
 *The answer a Team Lead expects:*
 1. **Separate basic problems from MTU.** Run `vmkping -I vmk1 -d -s 1472 <host B IP>`. If it fails, the problem is IP or VLAN, not MTU. [S51]
-2. **Test the large MTU.** `vmkping -I vmk1 -d -s 8972 <host B IP>`. If vMotion uses its dedicated TCP/IP stack, add `-S vmotion`. [S51]
+2. **Test the large MTU.** `vmkping -I vmk1 -d -s 8972 <host B IP>`. If vMotion uses its dedicated TCP/IP (Transmission Control Protocol / Internet Protocol) stack, add `-S vmotion`. [S51]
 3. **Read the result.** "Message too long" means the local MTU (vSwitch or vmk) is too small. 100% loss means a physical device on the path does not support 9000. [S52]
 4. **Fix in the right order.** Physical switches first, then the virtual switch, then the vmks, on **all** hosts in the cluster. [S52] [S53]
 5. **Retest** from every host to every other host in the cluster, because the problem may sit on a single physical port. [S51]

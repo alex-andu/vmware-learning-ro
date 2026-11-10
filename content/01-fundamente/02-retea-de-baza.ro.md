@@ -189,7 +189,7 @@ KB 449208 descrie hosturi ESXi 8 care se deconectează și se reconectează la v
 
 *Răspunsul pe care îl așteaptă un Team Lead:*
 1. **Separ problemele de bază de MTU.** Rulez `vmkping -I vmk1 -d -s 1472 <IP host B>`. Dacă nu merge, problema e de IP sau VLAN, nu de MTU. [S51]
-2. **Testez MTU-ul mare.** `vmkping -I vmk1 -d -s 8972 <IP host B>`. Dacă vMotion folosește stiva TCP/IP dedicată, adaug `-S vmotion`. [S51]
+2. **Testez MTU-ul mare.** `vmkping -I vmk1 -d -s 8972 <IP host B>`. Dacă vMotion folosește stiva TCP/IP (Transmission Control Protocol / Internet Protocol) dedicată, adaug `-S vmotion`. [S51]
 3. **Citesc rezultatul.** „Message too long” înseamnă că MTU-ul local (vSwitch sau vmk) e prea mic. Pierderile de 100% înseamnă că un echipament fizic de pe drum nu suportă 9000. [S52]
 4. **Repar în ordinea corectă.** Întâi switch-urile fizice, apoi switch-ul virtual, apoi vmk-urile, pe **toate** hosturile din cluster. [S52] [S53]
 5. **Retestez** de la fiecare host către fiecare alt host din cluster, pentru că problema poate fi doar pe un singur port fizic. [S51]
