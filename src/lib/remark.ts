@@ -51,6 +51,7 @@ export function remarkGlossaryLinks(entries: GlossaryEntry[]) {
     .sort((a, b) => b.t.length - a.t.length);
   if (terms.length === 0) return () => () => undefined;
   const byLower = new Map(terms.map((x) => [x.t.toLowerCase(), x.id]));
+  const titleById = new Map(entries.map((e) => [e.id, e.expansion ? `${e.expansion}: ${e.en}` : e.en]));
   const re = new RegExp(`(?<![\\p{L}\\p{N}_-])(${terms.map((x) => escapeRe(x.t)).join('|')})(?![\\p{L}\\p{N}_-])`, 'giu');
 
   return () => (tree: MdNode) => {
@@ -72,7 +73,7 @@ export function remarkGlossaryLinks(entries: GlossaryEntry[]) {
           type: 'link',
           url: `/glossary#${id}`,
           children: [{ type: 'text', value: m[1] }],
-          data: { hProperties: { className: 'glossary-link', title: id } },
+          data: { hProperties: { className: 'glossary-link', title: titleById.get(id) } },
         });
         last = m.index + m[1].length;
       }

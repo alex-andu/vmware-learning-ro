@@ -6,6 +6,7 @@ import { useStore } from '../lib/storage';
 import { useT } from '../lib/i18n';
 import { LessonMarkdown } from '../components/LessonMarkdown';
 import { NotFound } from './NotFound';
+import { AbbrLegend, AbbrText, findAbbreviations } from '../components/Abbr';
 
 export function LessonPage() {
   const { moduleId, lessonId } = useParams();
@@ -53,8 +54,12 @@ export function LessonPage() {
       <nav className="mb-2 text-sm text-[var(--muted)]" aria-label="Breadcrumb">
         {mod && <Link to={`/module/${mod.id}`} className="hover:underline">{loc(mod.title, state.lang)}</Link>}
       </nav>
-      <h1 className="mb-1 text-2xl font-semibold">{meta.title}</h1>
-      <p className="mb-3 text-[var(--muted)]">{meta.summary}</p>
+      <h1 className="mb-1 text-2xl font-semibold">
+        <AbbrText text={meta.title} />
+      </h1>
+      <p className="mb-3 text-[var(--muted)]">
+        <AbbrText text={meta.summary ?? ''} />
+      </p>
       <div className="mb-4 flex flex-wrap gap-2 text-xs">
         {meta.status === 'test' && <span className="tag border-amber-500 text-amber-600 dark:text-amber-400">{t('testLesson')}</span>}
         {(meta.examTargets ?? []).map((e) => (
@@ -88,6 +93,11 @@ export function LessonPage() {
           )}
         </section>
       )}
+
+      <AbbrLegend
+        entries={findAbbreviations([meta.title, meta.summary ?? '', doc.body.replace(/```[\s\S]*?```/g, ' ')])}
+        title={t('abbrLegendLesson')}
+      />
 
       <section className="card my-8">
         <label htmlFor="notes" className="mb-2 block font-semibold">{t('notes')}</label>

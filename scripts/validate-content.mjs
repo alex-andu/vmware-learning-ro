@@ -38,6 +38,35 @@ if (glossaryIds.size !== glossary.length) err('glossary.json', 'duplicate ids');
 for (const g of glossary) if (!g.term || !g.ro || !g.en) err('glossary.json', `${g.id} needs term, ro, en`);
 for (const m of modules) {
   for (const k of ['title', 'competency', 'labTitle']) if (!m[k]?.ro) err('modules.json', `${m.id} missing ${k}.ro`);
+  if (!Array.isArray(m.chapters) || m.chapters.length === 0) err('modules.json', `${m.id} needs chapters[]`);
+  const ids = new Set();
+  for (const c of m.chapters ?? []) {
+    if (!c.id || ids.has(c.id)) err('modules.json', `${m.id}: chapter id missing/duplicate ${c.id}`);
+    ids.add(c.id);
+    if (!c.title?.ro) err('modules.json', `${m.id}/${c.id} needs title.ro`);
+    if (!Array.isArray(c.exam)) err('modules.json', `${m.id}/${c.id} needs exam[]`);
+  }
+}
+const chapterIds = new Map(modules.map((m) => [m.id, new Set((m.chapters ?? []).map((c) => c.id))]));
+
+// Abbreviations: the first use in a lesson must be explained (expansion nearby).
+const abbrs = glossary.filter((g) => g.abbr && g.expansion);
+const escapeRe = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+function checkAbbreviations(f, body) {
+  const text = body
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/`[^`]*`/g, ' ')
+    .replace(/\]\([^)]*\)/g, ']')
+    .replace(/^:::.*$/gm, ' ');
+  for (const a of abbrs) {
+    const re = new RegExp(`(?<![\\p{L}\\p{N}_])${escapeRe(a.abbr)}(?![\\p{L}\\p{N}_])`, 'u');
+    const m = re.exec(text);
+    if (!m) continue;
+    const win = text.slice(Math.max(0, m.index - 200), m.index + a.abbr.length + 250).toLowerCase();
+    if (!win.includes(a.expansion.toLowerCase())) {
+      err(f, `abbreviation ${a.abbr} first used without its expansion "${a.expansion}" nearby: …${text.slice(Math.max(0, m.index - 40), m.index + 40).replace(/\s+/g, ' ')}…`);
+    }
+  }
 }
 
 const localized = (v) => v && typeof v.ro === 'string' && v.ro.length > 0;
@@ -63,6 +92,7 @@ for (const dir of readdirSync(CONTENT)) {
       lessonCount++;
       const [, lessonId, lang] = md;
       if (!moduleIds.has(dir)) err(f, `module "${dir}" not in modules.json`);
+      else if (!chapterIds.get(dir).has(lessonId)) err(f, `lesson "${lessonId}" is not a chapter of ${dir} in modules.json`);
       const { data, body } = splitFrontmatter(readFileSync(full, 'utf8'));
       if (!data) {
         err(f, 'missing frontmatter');
@@ -75,6 +105,8 @@ for (const dir of readdirSync(CONTENT)) {
       for (const m of body.matchAll(/\[(S\d{2,})\]/g)) if (!sourceIds.has(m[1])) err(f, `inline citation ${m[1]} not in sources.json`);
       if (data.status !== 'test' && (data.sources ?? []).length < 10) err(f, `needs >= 10 sources (has ${(data.sources ?? []).length})`);
       if (lang === 'en' && !existsSync(join(dpath, `${lessonId}.ro.md`))) err(f, 'EN lesson without RO original');
+
+      checkAbbreviations(f, body);
 
       // Section structure: exactly the 8 container directives, in order (outside code fences).
       const noCode = body.replace(/```[\s\S]*?```/g, '');

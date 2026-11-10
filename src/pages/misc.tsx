@@ -26,6 +26,7 @@ export function GlossaryPage() {
           >
             <dt className="font-semibold">
               {g.term}
+              {g.expansion && <span className="ml-2 font-normal">= {g.expansion}</span>}
               {g.aliases?.length ? <span className="ml-2 text-sm font-normal text-[var(--muted)]">({g.aliases.join(', ')})</span> : null}
             </dt>
             <dd className="mt-1 text-sm">{state.lang === 'en' ? g.en : g.ro}</dd>

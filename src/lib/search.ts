@@ -38,7 +38,7 @@ function build(lang: Lang) {
       id: `glossary:${g.id}`,
       kind: 'glossary',
       title: g.term,
-      text: `${(g.aliases ?? []).join(' ')} ${g.ro} ${g.en}`,
+      text: `${g.expansion ?? ''} ${(g.aliases ?? []).join(' ')} ${g.ro} ${g.en}`,
       href: `/glossary#${g.id}`,
     });
   }
