@@ -49,7 +49,10 @@ try {
       JSON.stringify(['analogy', 'architecture', 'exam-alert', 'trenches', 'interview', 'lab', 'quiz', 'references']),
     `8 lesson sections in order (${sections.join(', ')})`,
   );
-  check((await page.locator('[data-mermaid="ok"]').count()) === 2, '2 Mermaid diagrams rendered as SVG');
+  const nMermaid = await page.locator('[data-mermaid="ok"]').count();
+  check(nMermaid >= 2, `${nMermaid} Mermaid diagrams rendered as SVG (min 2)`);
+  check((await page.locator('abbr[title]').count()) > 0, 'abbreviations wrapped in <abbr> with expansion');
+  check(await page.locator('[data-testid="abbr-legend"]').isVisible(), 'lesson abbreviation legend shown');
   check((await page.locator('[data-mermaid="error"]').count()) === 0, 'no Mermaid fallback errors');
   check((await page.locator('a.glossary-link').count()) > 0, 'glossary terms auto-linked');
   await page.screenshot({ path: 'screenshots/02-lesson-dark.png', fullPage: true });
@@ -95,7 +98,7 @@ try {
 
   // Language toggle
   await page.getByRole('button', { name: 'Limba' }).click();
-  await page.getByRole('heading', { name: /What is virtualization/ }).waitFor();
+  await page.getByRole('heading', { name: /What virtualization is/ }).waitFor();
   check(true, 'EN lesson loaded after language toggle');
   check((await page.getByText('The English version of this lesson is not available yet').count()) === 0, 'no fallback banner when EN exists');
   await page.getByRole('button', { name: 'Theme' }).click(); // back to dark
@@ -108,12 +111,22 @@ try {
   await page.getByRole('button', { name: 'Language' }).click(); // back to RO
 
   // Search
-  await page.fill('input[placeholder^="Caută"]', 'promiscuous');
+  await page.fill('input[placeholder^="Caută"]', 'hypervisor');
   await page.keyboard.press('Enter');
   await page.getByRole('heading', { name: 'Rezultate căutare' }).waitFor();
   const hits = await page.locator('main ul li').count();
   check(hits >= 2, `search finds lesson + glossary (${hits} results)`);
   await page.screenshot({ path: 'screenshots/04-search.png' });
+
+  // Curriculum
+  await page.goto(BASE + '/curriculum');
+  await page.getByRole('heading', { name: 'Curriculum' }).first().waitFor();
+  const nMods = await page.locator('section[data-module]').count();
+  const nChaps = await page.locator('li[data-chapter]').count();
+  check(nMods === 5 && nChaps >= 30, `curriculum lists all modules and chapters (${nMods} modules, ${nChaps} chapters)`);
+  check((await page.locator('li[data-chapter="01-fundamente/01-ce-este-virtualizarea"] a').count()) === 1, 'available lesson is linked from curriculum');
+  check(await page.locator('[data-testid="abbr-legend"]').isVisible(), 'curriculum abbreviation legend shown');
+  await page.screenshot({ path: 'screenshots/06-curriculum.png', fullPage: true });
 
   // Glossary
   await page.goto(BASE + '/glossary#mac-learning');

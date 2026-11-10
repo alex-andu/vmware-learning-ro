@@ -2,6 +2,15 @@
 
 Decizii luate fără a întreba (reversibile). Cea mai nouă sus.
 
+## 2026-11-10 — Etapa 2
+
+13. **Home Lab scos din curs.** Alex se ocupă singur de cerințele de sistem și de construirea lab-ului; lecțiile presupun că lab-ul există (un host ESXi, apoi un cluster nested). Înlocuiește punctul 12 pentru partea de Home Lab.
+14. **Capitolele stau în `modules.json` (`chapters`)**, cu codurile de obiectiv din exam guide (`exam`, ex. „VVF 2.2.3”) și o notă opțională (`examNote`). Un capitol fără fișier `.ro.md` apare ca „planificat”. Validatorul refuză o lecție al cărei id nu e capitol al modulului.
+15. **Capitolul-pilot este 1.1** („Ce este virtualizarea”), rescris complet (19 surse); `status: test` a fost scos. Validarea lui Alex după pilot a fost sărită la cererea lui; capitolele următoare se scriu direct.
+16. **Regula abrevierilor e verificată automat.** Orice abreviere din glosar (câmpul `abbr`) trebuie să aibă forma completă (`expansion`) la cel mult ~200 de caractere înainte sau ~250 după prima apariție în lecție. În UI, abrevierile primesc `<abbr title>` și o legendă la final (lecție și curriculum).
+17. **Varianta EN** se scrie pentru fiecare capitol nou; dacă lipsește, aplicația afișează RO cu banner (comportamentul din Etapa 1 rămâne).
+18. **Maparea pe examene:** codurile DCV și NV sunt din ghidurile Legacy (2V0-21.23, 2V0-41.24), folosite doar ca hartă de conținut. Unde ghidul 9.0 folosește alt nume decât produsul (ex. „VCF Network Gateway” pentru NSX Edge), nota de capitol o marchează `⚠ de verificat`.
+
 ## 2026-11-10 — Etapa 1
 
 1. **Ținta principală de examen: VCP-VVF Administrator (2V0-16.25).** VCP-DCV (2V0-21.23) e încă listat, dar în grupa „Legacy”; îl folosim doar ca hartă de conținut. VCP-VCF Administrator (2V0-17.25) e a doua țintă. Motiv: `STATE_OF_THE_ART.md` §1.

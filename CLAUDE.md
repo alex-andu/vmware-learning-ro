@@ -20,8 +20,8 @@ La fiecare etapă: rulează `build`, `lint`, `test:e2e` înainte de commit.
 
 ```
 content/
-  modules.json                 # module: id, order, title, competency (CV), labTitle — RO + EN
-  glossary.json                # glosar global: id, term, aliases, ro, en
+  modules.json                 # module: id, order, title, target, competency (CV), labTitle, chapters[{id,title,exam[],examNote}] — RO + EN
+  glossary.json                # glosar global: id, term, aliases, abbr, expansion, ro, en
   sources.json                 # registrul de surse: id (S01…), title, url, type, accessed, read, usedBy
   <modul>/<lecție>.ro.md       # lecția (RO e varianta de referință, obligatorie)
   <modul>/<lecție>.en.md       # varianta EN (opțională; lipsa ei afișează RO cu banner)
@@ -57,6 +57,9 @@ Corpul are exact aceste 8 blocuri `:::`, în ordinea asta (ele formează cele 6 
 - Parafrazează. Citate sub 15 cuvinte, doar cu atribuire. Fără exam dumps; quiz-urile sunt originale, în stil VCP.
 - Marchează clar „supported” vs „home-lab only / not supported”.
 - Explicații în română; termenii tehnici în engleză, explicați la prima apariție.
+- **Orice abreviere se explică la prima apariție** (forma completă imediat lângă ea). Validatorul verifică asta pentru toate abrevierile din `glossary.json` (`abbr` + `expansion`); o abreviere nouă se adaugă întâi în glosar.
+- Id-ul lecției (numele fișierului) trebuie să fie un capitol din `modules.json`. Pagina `/curriculum` arată toate capitolele; cele fără fișier apar „planificat”.
+- Home Lab-ul nu face parte din curs: lecțiile presupun că lab-ul există.
 - Versiunea predată: VCF/VVF **9.0** (ce acoperă examenele), cu diferențele 9.1 semnalate. Vezi `docs/STATE_OF_THE_ART.md`.
 
 ## Cod
