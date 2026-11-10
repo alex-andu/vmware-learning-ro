@@ -71,6 +71,19 @@ export function getQuiz(key: string): Quiz | undefined {
   return jsonFiles[`/content/${key}.quiz.json`] as Quiz | undefined;
 }
 
+/** All chapter keys (`module/chapter`) of a module, from the curriculum, in order. */
+export function chapterKeys(moduleId?: string): string[] {
+  return modules
+    .filter((m) => !moduleId || m.id === moduleId)
+    .flatMap((m) => m.chapters.map((c) => `${m.id}/${c.id}`));
+}
+
+export function hasLesson(key: string): boolean {
+  return lessons.some((l) => l.key === key && l.lang === 'ro');
+}
+
+export const abbreviations = glossary.filter((g) => g.abbr && g.expansion);
+
 export function loc(v: Localized | undefined, lang: Lang): string {
   if (!v) return '';
   return (lang === 'en' && v.en) || v.ro;

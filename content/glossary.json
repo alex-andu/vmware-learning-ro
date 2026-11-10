@@ -1,19 +1,576 @@
 [
-  { "id": "hypervisor", "term": "hypervisor", "ro": "Stratul software care împarte resursele fizice ale unui server (CPU, RAM, stocare, rețea) între mai multe mașini virtuale izolate.", "en": "The software layer that shares a physical server's resources (CPU, RAM, storage, network) among multiple isolated virtual machines." },
-  { "id": "type-1-hypervisor", "term": "Type 1 hypervisor", "aliases": ["bare-metal hypervisor"], "ro": "Hypervisor instalat direct pe hardware, fără sistem de operare dedesubt (ex. ESXi).", "en": "A hypervisor installed directly on hardware, with no operating system underneath (e.g. ESXi)." },
-  { "id": "type-2-hypervisor", "term": "Type 2 hypervisor", "aliases": ["hosted hypervisor"], "ro": "Hypervisor care rulează ca aplicație pe un sistem de operare existent (ex. VMware Workstation Pro pe Windows/Linux).", "en": "A hypervisor that runs as an application on an existing operating system (e.g. VMware Workstation Pro on Windows/Linux)." },
-  { "id": "vm", "term": "virtual machine", "aliases": ["VM", "mașină virtuală"], "ro": "Un calculator emulat în software, cu propriul sistem de operare, care folosește resurse alocate de hypervisor.", "en": "A software-emulated computer with its own operating system, using resources allocated by the hypervisor." },
-  { "id": "vcpu", "term": "vCPU", "ro": "Procesor virtual văzut de VM; hypervisorul îl programează pe nucleele fizice ale hostului.", "en": "A virtual processor seen by the VM; the hypervisor schedules it onto the host's physical cores." },
-  { "id": "esxi", "term": "ESXi", "aliases": ["ESX"], "ro": "Hypervisorul Type 1 al VMware. În documentația VCF 9 apare din nou sub numele „ESX”.", "en": "VMware's Type 1 hypervisor. VCF 9 documentation refers to it again as \"ESX\"." },
-  { "id": "host-client", "term": "Host Client", "aliases": ["VMware Host Client"], "ro": "Interfața web pentru administrarea unui singur host ESXi, fără vCenter.", "en": "The web interface for managing a single ESXi host without vCenter." },
-  { "id": "vcenter", "term": "vCenter Server", "aliases": ["vCenter"], "ro": "Serverul de management centralizat pentru mai multe hosturi ESXi; necesar pentru clustere, vMotion, HA, DRS.", "en": "The centralized management server for multiple ESXi hosts; required for clusters, vMotion, HA, DRS." },
-  { "id": "workstation-pro", "term": "VMware Workstation Pro", "aliases": ["Workstation Pro"], "ro": "Hypervisor Type 2 pentru Windows/Linux; gratuit pentru toți utilizatorii din 11 noiembrie 2024.", "en": "Type 2 hypervisor for Windows/Linux; free for all users since November 11, 2024." },
-  { "id": "nested-virtualization", "term": "nested virtualization", "aliases": ["nested ESXi", "nested"], "ro": "Rularea unui hypervisor (ex. ESXi) în interiorul unei VM. Bun pentru laborator, nesuportat în producție.", "en": "Running a hypervisor (e.g. ESXi) inside a VM. Good for labs, not supported in production." },
-  { "id": "promiscuous-mode", "term": "Promiscuous mode", "ro": "Setare de securitate a unui port group care lasă o VM să vadă tot traficul de pe acel port group. Necesară (alături de Forged Transmits) pentru ESXi nested pe un VSS.", "en": "Port group security setting that lets a VM see all traffic on that port group. Needed (with Forged Transmits) for nested ESXi on a VSS." },
-  { "id": "forged-transmits", "term": "Forged Transmits", "ro": "Setare de securitate care permite unei VM să trimită cadre cu altă adresă MAC sursă decât cea a vNIC-ului său.", "en": "Security setting that allows a VM to send frames with a source MAC address different from its vNIC's." },
-  { "id": "mac-learning", "term": "MAC Learning", "ro": "Funcție a VDS (și a segmentelor NSX) prin care switch-ul învață adresele MAC din spatele unui port; alternativa performantă la Promiscuous mode pentru ESXi nested.", "en": "VDS (and NSX segment) feature where the switch learns the MAC addresses behind a port; the efficient alternative to Promiscuous mode for nested ESXi." },
-  { "id": "vss", "term": "vSphere Standard Switch", "aliases": ["VSS"], "ro": "Switch virtual configurat individual pe fiecare host ESXi.", "en": "A virtual switch configured individually on each ESXi host." },
-  { "id": "vds", "term": "vSphere Distributed Switch", "aliases": ["VDS"], "ro": "Switch virtual definit centralizat în vCenter și aplicat pe mai multe hosturi.", "en": "A virtual switch defined centrally in vCenter and applied across multiple hosts." },
-  { "id": "vcf", "term": "VMware Cloud Foundation", "aliases": ["VCF"], "ro": "Platforma completă de private cloud Broadcom/VMware (vSphere, vSAN, NSX, VCF Operations, VCF Automation).", "en": "Broadcom/VMware's full private cloud platform (vSphere, vSAN, NSX, VCF Operations, VCF Automation)." },
-  { "id": "vvf", "term": "VMware vSphere Foundation", "aliases": ["VVF"], "ro": "Ediția mai mică a platformei: vSphere (ESX, vCenter), vSAN, VCF Operations.", "en": "The smaller platform edition: vSphere (ESX, vCenter), vSAN, VCF Operations." }
+  {
+    "id": "hypervisor",
+    "term": "hypervisor",
+    "ro": "Stratul software care împarte resursele fizice ale unui server (CPU, RAM, stocare, rețea) între mai multe mașini virtuale izolate.",
+    "en": "The software layer that shares a physical server's resources (CPU, RAM, storage, network) among multiple isolated virtual machines."
+  },
+  {
+    "id": "type-1-hypervisor",
+    "term": "Type 1 hypervisor",
+    "aliases": [
+      "bare-metal hypervisor"
+    ],
+    "ro": "Hypervisor instalat direct pe hardware, fără sistem de operare dedesubt (ex. ESXi).",
+    "en": "A hypervisor installed directly on hardware, with no operating system underneath (e.g. ESXi)."
+  },
+  {
+    "id": "type-2-hypervisor",
+    "term": "Type 2 hypervisor",
+    "aliases": [
+      "hosted hypervisor"
+    ],
+    "ro": "Hypervisor care rulează ca aplicație pe un sistem de operare existent (ex. VMware Workstation Pro pe Windows/Linux).",
+    "en": "A hypervisor that runs as an application on an existing operating system (e.g. VMware Workstation Pro on Windows/Linux)."
+  },
+  {
+    "id": "vm",
+    "term": "virtual machine",
+    "aliases": [
+      "VM",
+      "mașină virtuală"
+    ],
+    "ro": "Un calculator emulat în software, cu propriul sistem de operare, care folosește resurse alocate de hypervisor.",
+    "en": "A software-emulated computer with its own operating system, using resources allocated by the hypervisor.",
+    "expansion": "Virtual Machine",
+    "abbr": "VM"
+  },
+  {
+    "id": "vcpu",
+    "term": "vCPU",
+    "ro": "Procesor virtual văzut de VM; hypervisorul îl programează pe nucleele fizice ale hostului.",
+    "en": "A virtual processor seen by the VM; the hypervisor schedules it onto the host's physical cores.",
+    "expansion": "virtual CPU",
+    "abbr": "vCPU"
+  },
+  {
+    "id": "esxi",
+    "term": "ESXi",
+    "aliases": [
+      "ESX"
+    ],
+    "ro": "Hypervisorul Type 1 al VMware. În documentația VCF 9 apare din nou sub numele „ESX”.",
+    "en": "VMware's Type 1 hypervisor. VCF 9 documentation refers to it again as \"ESX\"."
+  },
+  {
+    "id": "host-client",
+    "term": "Host Client",
+    "aliases": [
+      "VMware Host Client"
+    ],
+    "ro": "Interfața web pentru administrarea unui singur host ESXi, fără vCenter.",
+    "en": "The web interface for managing a single ESXi host without vCenter."
+  },
+  {
+    "id": "vcenter",
+    "term": "vCenter Server",
+    "aliases": [
+      "vCenter"
+    ],
+    "ro": "Serverul de management centralizat pentru mai multe hosturi ESXi; necesar pentru clustere, vMotion, HA, DRS.",
+    "en": "The centralized management server for multiple ESXi hosts; required for clusters, vMotion, HA, DRS."
+  },
+  {
+    "id": "workstation-pro",
+    "term": "VMware Workstation Pro",
+    "aliases": [
+      "Workstation Pro"
+    ],
+    "ro": "Hypervisor Type 2 pentru Windows/Linux; gratuit pentru toți utilizatorii din 11 noiembrie 2024.",
+    "en": "Type 2 hypervisor for Windows/Linux; free for all users since November 11, 2024."
+  },
+  {
+    "id": "nested-virtualization",
+    "term": "nested virtualization",
+    "aliases": [
+      "nested ESXi",
+      "nested"
+    ],
+    "ro": "Rularea unui hypervisor (ex. ESXi) în interiorul unei VM. Bun pentru laborator, nesuportat în producție.",
+    "en": "Running a hypervisor (e.g. ESXi) inside a VM. Good for labs, not supported in production."
+  },
+  {
+    "id": "promiscuous-mode",
+    "term": "Promiscuous mode",
+    "ro": "Setare de securitate a unui port group care lasă o VM să vadă tot traficul de pe acel port group. Necesară (alături de Forged Transmits) pentru ESXi nested pe un VSS.",
+    "en": "Port group security setting that lets a VM see all traffic on that port group. Needed (with Forged Transmits) for nested ESXi on a VSS."
+  },
+  {
+    "id": "forged-transmits",
+    "term": "Forged Transmits",
+    "ro": "Setare de securitate care permite unei VM să trimită cadre cu altă adresă MAC sursă decât cea a vNIC-ului său.",
+    "en": "Security setting that allows a VM to send frames with a source MAC address different from its vNIC's."
+  },
+  {
+    "id": "mac-learning",
+    "term": "MAC Learning",
+    "ro": "Funcție a VDS (și a segmentelor NSX) prin care switch-ul învață adresele MAC din spatele unui port; alternativa performantă la Promiscuous mode pentru ESXi nested.",
+    "en": "VDS (and NSX segment) feature where the switch learns the MAC addresses behind a port; the efficient alternative to Promiscuous mode for nested ESXi."
+  },
+  {
+    "id": "vss",
+    "term": "vSphere Standard Switch",
+    "aliases": [
+      "VSS"
+    ],
+    "ro": "Switch virtual configurat individual pe fiecare host ESXi.",
+    "en": "A virtual switch configured individually on each ESXi host.",
+    "expansion": "vSphere Standard Switch",
+    "abbr": "VSS"
+  },
+  {
+    "id": "vds",
+    "term": "vSphere Distributed Switch",
+    "aliases": [
+      "VDS"
+    ],
+    "ro": "Switch virtual definit centralizat în vCenter și aplicat pe mai multe hosturi.",
+    "en": "A virtual switch defined centrally in vCenter and applied across multiple hosts.",
+    "expansion": "vSphere Distributed Switch",
+    "abbr": "VDS"
+  },
+  {
+    "id": "vcf",
+    "term": "VMware Cloud Foundation",
+    "aliases": [
+      "VCF"
+    ],
+    "ro": "Platforma completă de private cloud Broadcom/VMware (vSphere, vSAN, NSX, VCF Operations, VCF Automation).",
+    "en": "Broadcom/VMware's full private cloud platform (vSphere, vSAN, NSX, VCF Operations, VCF Automation).",
+    "expansion": "VMware Cloud Foundation",
+    "abbr": "VCF"
+  },
+  {
+    "id": "vvf",
+    "term": "VMware vSphere Foundation",
+    "aliases": [
+      "VVF"
+    ],
+    "ro": "Ediția mai mică a platformei: vSphere (ESX, vCenter), vSAN, VCF Operations.",
+    "en": "The smaller platform edition: vSphere (ESX, vCenter), vSAN, VCF Operations.",
+    "expansion": "VMware vSphere Foundation",
+    "abbr": "VVF"
+  },
+  {
+    "id": "cpu",
+    "term": "CPU",
+    "ro": "Procesorul fizic al calculatorului; execută instrucțiunile.",
+    "en": "The physical processor; it executes instructions.",
+    "expansion": "Central Processing Unit",
+    "abbr": "CPU"
+  },
+  {
+    "id": "ram",
+    "term": "RAM",
+    "ro": "Memoria de lucru, rapidă și volatilă (se pierde la oprire).",
+    "en": "Fast, volatile working memory (lost on power-off).",
+    "expansion": "Random Access Memory",
+    "abbr": "RAM"
+  },
+  {
+    "id": "nic",
+    "term": "NIC",
+    "ro": "Placa de rețea. Pe un host ESXi plăcile fizice apar ca vmnic0, vmnic1…",
+    "en": "Network card. On an ESXi host physical NICs appear as vmnic0, vmnic1…",
+    "expansion": "Network Interface Card",
+    "abbr": "NIC"
+  },
+  {
+    "id": "os",
+    "term": "OS",
+    "ro": "Sistemul de operare (Windows, Linux) care rulează într-o VM sau pe un PC.",
+    "en": "The operating system (Windows, Linux) running in a VM or on a PC.",
+    "expansion": "Operating System",
+    "abbr": "OS"
+  },
+  {
+    "id": "bios",
+    "term": "BIOS",
+    "ro": "Firmware-ul vechi care pornește calculatorul; succesorul modern e UEFI.",
+    "en": "Legacy firmware that boots the computer; the modern successor is UEFI.",
+    "expansion": "Basic Input/Output System",
+    "abbr": "BIOS"
+  },
+  {
+    "id": "uefi",
+    "term": "UEFI",
+    "ro": "Firmware-ul modern de pornire; necesar pentru Secure Boot.",
+    "en": "Modern boot firmware; required for Secure Boot.",
+    "expansion": "Unified Extensible Firmware Interface",
+    "abbr": "UEFI"
+  },
+  {
+    "id": "iso",
+    "term": "ISO",
+    "ro": "Fișier-imagine al unui disc de instalare (de exemplu instalatorul ESXi).",
+    "en": "Image file of an installation disc (e.g. the ESXi installer)."
+  },
+  {
+    "id": "kb",
+    "term": "KB",
+    "ro": "Articol oficial de suport Broadcom, identificat printr-un număr (ex. KB 318825).",
+    "en": "Official Broadcom support article, identified by a number (e.g. KB 318825).",
+    "expansion": "Knowledge Base article",
+    "abbr": "KB"
+  },
+  {
+    "id": "vcp",
+    "term": "VCP",
+    "ro": "Nivelul profesional al certificărilor VMware; se obține prin promovarea unui examen.",
+    "en": "VMware's professional certification level, earned by passing an exam.",
+    "expansion": "VMware Certified Professional",
+    "abbr": "VCP"
+  },
+  {
+    "id": "dcv",
+    "term": "DCV",
+    "ro": "Vechea certificare VCP-DCV (examen 2V0-21.23, vSphere 8), acum în grupa Legacy.",
+    "en": "The former VCP-DCV certification (exam 2V0-21.23, vSphere 8), now in the Legacy group.",
+    "expansion": "Data Center Virtualization",
+    "abbr": "DCV"
+  },
+  {
+    "id": "nv",
+    "term": "NV",
+    "ro": "Vechea certificare VCP-NV (examen 2V0-41.24, NSX 4.x), acum în grupa Legacy.",
+    "en": "The former VCP-NV certification (exam 2V0-41.24, NSX 4.x), now in the Legacy group.",
+    "expansion": "Network Virtualization",
+    "abbr": "NV"
+  },
+  {
+    "id": "ha",
+    "term": "HA",
+    "ro": "vSphere HA repornește automat VM-urile pe alt host dacă hostul lor cade.",
+    "en": "vSphere HA automatically restarts VMs on another host if their host fails.",
+    "expansion": "High Availability",
+    "abbr": "HA"
+  },
+  {
+    "id": "drs",
+    "term": "DRS",
+    "ro": "Echilibrează automat VM-urile între hosturile unui cluster, folosind vMotion.",
+    "en": "Automatically balances VMs across a cluster's hosts using vMotion.",
+    "expansion": "Distributed Resource Scheduler",
+    "abbr": "DRS"
+  },
+  {
+    "id": "ft",
+    "term": "FT",
+    "ro": "Ține o copie „în oglindă” a unei VM pe alt host, ca să nu existe întrerupere la căderea hostului.",
+    "en": "Keeps a live mirror copy of a VM on another host so a host failure causes no downtime.",
+    "expansion": "Fault Tolerance",
+    "abbr": "FT"
+  },
+  {
+    "id": "evc",
+    "term": "EVC",
+    "ro": "Maschează diferențele dintre generațiile de procesoare dintr-un cluster ca vMotion să funcționeze.",
+    "en": "Masks CPU generation differences in a cluster so vMotion works.",
+    "expansion": "Enhanced vMotion Compatibility",
+    "abbr": "EVC"
+  },
+  {
+    "id": "nioc",
+    "term": "NIOC",
+    "ro": "Împarte lățimea de bandă a unui VDS între tipuri de trafic (vMotion, VM, stocare).",
+    "en": "Shares a VDS's bandwidth among traffic types (vMotion, VM, storage).",
+    "expansion": "Network I/O Control",
+    "abbr": "NIOC"
+  },
+  {
+    "id": "sso",
+    "term": "SSO",
+    "ro": "Serviciul de autentificare al vCenter (domeniul implicit vsphere.local).",
+    "en": "vCenter's authentication service (default domain vsphere.local).",
+    "expansion": "Single Sign-On",
+    "abbr": "SSO"
+  },
+  {
+    "id": "rbac",
+    "term": "RBAC",
+    "ro": "Controlul accesului pe bază de roluri: drepturile se dau prin roluri, nu individual.",
+    "en": "Access control where rights are granted through roles, not individually.",
+    "expansion": "Role-Based Access Control",
+    "abbr": "RBAC"
+  },
+  {
+    "id": "vmfs",
+    "term": "VMFS",
+    "ro": "Sistemul de fișiere VMware pentru datastore-uri pe disc bloc (local, iSCSI, Fibre Channel).",
+    "en": "VMware's file system for block-storage datastores (local, iSCSI, Fibre Channel).",
+    "expansion": "Virtual Machine File System",
+    "abbr": "VMFS"
+  },
+  {
+    "id": "nfs",
+    "term": "NFS",
+    "ro": "Protocol de stocare la nivel de fișier, prin rețea; un share NFS poate fi datastore.",
+    "en": "File-level network storage protocol; an NFS share can be a datastore.",
+    "expansion": "Network File System",
+    "abbr": "NFS"
+  },
+  {
+    "id": "iscsi",
+    "term": "iSCSI",
+    "ro": "Protocol care transportă comenzi de disc (SCSI) prin rețeaua IP; stocare bloc prin Ethernet.",
+    "en": "Carries disk (SCSI) commands over IP networks; block storage over Ethernet.",
+    "expansion": "Internet Small Computer Systems Interface",
+    "abbr": "iSCSI"
+  },
+  {
+    "id": "lun",
+    "term": "LUN",
+    "ro": "Un „disc” logic oferit de o matrice de stocare; pe un LUN se creează un datastore VMFS.",
+    "en": "A logical disk presented by a storage array; a VMFS datastore is created on a LUN.",
+    "expansion": "Logical Unit Number",
+    "abbr": "LUN"
+  },
+  {
+    "id": "san",
+    "term": "SAN",
+    "ro": "Rețea dedicată pentru stocare la nivel de bloc (Fibre Channel sau iSCSI).",
+    "en": "Dedicated network for block-level storage (Fibre Channel or iSCSI).",
+    "expansion": "Storage Area Network",
+    "abbr": "SAN"
+  },
+  {
+    "id": "nas",
+    "term": "NAS",
+    "ro": "Stocare la nivel de fișier, partajată prin rețea (NFS, SMB).",
+    "en": "File-level storage shared over the network (NFS, SMB).",
+    "expansion": "Network Attached Storage",
+    "abbr": "NAS"
+  },
+  {
+    "id": "raid",
+    "term": "RAID",
+    "ro": "Combinarea mai multor discuri pentru redundanță și/sau performanță (RAID-1 oglindă, RAID-5/6 cu paritate).",
+    "en": "Combining disks for redundancy and/or performance (RAID-1 mirror, RAID-5/6 with parity).",
+    "expansion": "Redundant Array of Independent Disks",
+    "abbr": "RAID"
+  },
+  {
+    "id": "ip",
+    "term": "IP",
+    "ro": "Protocolul de adresare din rețea; fiecare interfață are o adresă IP.",
+    "en": "The network addressing protocol; each interface has an IP address.",
+    "expansion": "Internet Protocol",
+    "abbr": "IP"
+  },
+  {
+    "id": "vlan",
+    "term": "VLAN",
+    "ro": "Împarte un switch fizic în mai multe rețele logice izolate, identificate prin VLAN ID.",
+    "en": "Splits a physical switch into isolated logical networks identified by a VLAN ID.",
+    "expansion": "Virtual Local Area Network",
+    "abbr": "VLAN"
+  },
+  {
+    "id": "mtu",
+    "term": "MTU",
+    "ro": "Dimensiunea maximă a unui pachet; implicit 1500 de octeți, „jumbo frames” ≈ 9000.",
+    "en": "Maximum packet size; 1500 bytes by default, jumbo frames ≈ 9000.",
+    "expansion": "Maximum Transmission Unit",
+    "abbr": "MTU"
+  },
+  {
+    "id": "dns",
+    "term": "DNS",
+    "ro": "Traduce nume (vcenter.lab.local) în adrese IP; vCenter și VCF depind critic de DNS corect.",
+    "en": "Translates names (vcenter.lab.local) to IP addresses; vCenter and VCF depend critically on correct DNS.",
+    "expansion": "Domain Name System",
+    "abbr": "DNS"
+  },
+  {
+    "id": "ntp",
+    "term": "NTP",
+    "ro": "Sincronizează ceasul; ceasurile desincronizate strică autentificarea și certificatele.",
+    "en": "Synchronizes clocks; out-of-sync clocks break authentication and certificates.",
+    "expansion": "Network Time Protocol",
+    "abbr": "NTP"
+  },
+  {
+    "id": "mac",
+    "term": "MAC",
+    "ro": "Adresa fizică (hardware) a unei plăci de rețea, folosită de switch-uri.",
+    "en": "The hardware address of a network card, used by switches.",
+    "expansion": "Media Access Control",
+    "abbr": "MAC"
+  },
+  {
+    "id": "dcui",
+    "term": "DCUI",
+    "ro": "Ecranul text galben-gri al ESXi de pe consolă, pentru configurarea de bază (IP, parolă, restart rețea).",
+    "en": "ESXi's yellow-grey text console for basic setup (IP, password, network restart).",
+    "expansion": "Direct Console User Interface",
+    "abbr": "DCUI"
+  },
+  {
+    "id": "vhv",
+    "term": "VHV",
+    "ro": "Opțiunea care expune extensiile de virtualizare ale CPU către o VM; necesară pentru ESXi nested.",
+    "en": "Option that exposes the CPU's virtualization extensions to a VM; required for nested ESXi.",
+    "expansion": "Virtual Hardware-assisted Virtualization",
+    "abbr": "VHV"
+  },
+  {
+    "id": "vlcm",
+    "term": "vLCM",
+    "ro": "Gestionează update-urile și imaginea de software/firmware a hosturilor dintr-un cluster.",
+    "en": "Manages updates and the software/firmware image of a cluster's hosts.",
+    "expansion": "vSphere Lifecycle Manager",
+    "abbr": "vLCM"
+  },
+  {
+    "id": "vtpm",
+    "term": "vTPM",
+    "ro": "Cip de securitate virtual pentru o VM (necesar de exemplu pentru Windows 11).",
+    "en": "Virtual security chip for a VM (needed e.g. by Windows 11).",
+    "expansion": "virtual Trusted Platform Module",
+    "abbr": "vTPM"
+  },
+  {
+    "id": "spbm",
+    "term": "SPBM",
+    "ro": "Stocare administrată prin politici atașate VM-urilor (de ex. câte cópii ale datelor păstrează vSAN).",
+    "en": "Storage managed through policies attached to VMs (e.g. how many data copies vSAN keeps).",
+    "expansion": "Storage Policy-Based Management",
+    "abbr": "SPBM"
+  },
+  {
+    "id": "ftt",
+    "term": "FTT",
+    "ro": "Câte căderi (de host/disc) suportă un obiect vSAN fără pierdere de date.",
+    "en": "How many host/disk failures a vSAN object survives without data loss.",
+    "expansion": "Failures To Tolerate",
+    "abbr": "FTT"
+  },
+  {
+    "id": "osa",
+    "term": "OSA",
+    "ro": "Arhitectura clasică vSAN, cu disk groups (un disc de cache + discuri de capacitate).",
+    "en": "Classic vSAN architecture with disk groups (one cache disk + capacity disks).",
+    "expansion": "Original Storage Architecture",
+    "abbr": "OSA"
+  },
+  {
+    "id": "esa",
+    "term": "ESA",
+    "ro": "Arhitectura vSAN modernă, doar NVMe, cu un singur storage pool per host.",
+    "en": "Modern NVMe-only vSAN architecture with a single storage pool per host.",
+    "expansion": "Express Storage Architecture",
+    "abbr": "ESA"
+  },
+  {
+    "id": "sdn",
+    "term": "SDN",
+    "ro": "Rețea definită în software: switching, rutare și firewall create din NSX, nu din echipamente fizice.",
+    "en": "Networking defined in software: switching, routing and firewall built in NSX, not in physical devices.",
+    "expansion": "Software-Defined Networking",
+    "abbr": "SDN"
+  },
+  {
+    "id": "tep",
+    "term": "TEP",
+    "ro": "Interfața prin care un host NSX trimite și primește trafic încapsulat GENEVE.",
+    "en": "The interface through which an NSX host sends and receives GENEVE-encapsulated traffic.",
+    "expansion": "Tunnel Endpoint",
+    "abbr": "TEP"
+  },
+  {
+    "id": "geneve",
+    "term": "GENEVE",
+    "ro": "Protocolul de tunelare folosit de NSX pentru a transporta segmentele logice peste rețeaua fizică.",
+    "en": "The tunneling protocol NSX uses to carry logical segments over the physical network.",
+    "expansion": "Generic Network Virtualization Encapsulation",
+    "abbr": "GENEVE"
+  },
+  {
+    "id": "bgp",
+    "term": "BGP",
+    "ro": "Protocol de rutare dinamică între rețele; NSX Tier-0 îl folosește spre routerele fizice.",
+    "en": "Dynamic routing protocol between networks; NSX Tier-0 uses it toward physical routers.",
+    "expansion": "Border Gateway Protocol",
+    "abbr": "BGP"
+  },
+  {
+    "id": "ospf",
+    "term": "OSPF",
+    "ro": "Protocol de rutare dinamică în interiorul unei rețele.",
+    "en": "Dynamic routing protocol inside a network.",
+    "expansion": "Open Shortest Path First",
+    "abbr": "OSPF"
+  },
+  {
+    "id": "nat",
+    "term": "NAT",
+    "ro": "Traduce adrese IP private în publice (sau invers) la trecerea printr-un gateway.",
+    "en": "Translates private IP addresses to public ones (or back) at a gateway.",
+    "expansion": "Network Address Translation",
+    "abbr": "NAT"
+  },
+  {
+    "id": "dhcp",
+    "term": "DHCP",
+    "ro": "Atribuie automat adrese IP dispozitivelor din rețea.",
+    "en": "Automatically assigns IP addresses to network devices.",
+    "expansion": "Dynamic Host Configuration Protocol",
+    "abbr": "DHCP"
+  },
+  {
+    "id": "vpn",
+    "term": "VPN",
+    "ro": "Tunel criptat între două rețele sau între un utilizator și o rețea.",
+    "en": "Encrypted tunnel between two networks or a user and a network.",
+    "expansion": "Virtual Private Network",
+    "abbr": "VPN"
+  },
+  {
+    "id": "dfw",
+    "term": "DFW",
+    "ro": "Firewall-ul NSX aplicat direct la placa de rețea a fiecărei VM, în kernelul hostului.",
+    "en": "NSX firewall applied at each VM's network card, in the host kernel.",
+    "expansion": "Distributed Firewall",
+    "abbr": "DFW"
+  },
+  {
+    "id": "vks",
+    "term": "VKS",
+    "ro": "Serviciul care creează și administrează clustere Kubernetes peste vSphere Supervisor.",
+    "en": "Service that creates and manages Kubernetes clusters on top of vSphere Supervisor.",
+    "expansion": "vSphere Kubernetes Service",
+    "abbr": "VKS"
+  },
+  {
+    "id": "vcsa",
+    "term": "VCSA",
+    "ro": "vCenter livrat ca mașină virtuală Linux gata configurată.",
+    "en": "vCenter delivered as a preconfigured Linux virtual machine.",
+    "expansion": "vCenter Server Appliance",
+    "abbr": "VCSA"
+  },
+  {
+    "id": "vmkernel",
+    "term": "VMkernel",
+    "ro": "Nucleul (kernelul) ESXi: programează CPU-ul, memoria, stocarea și rețeaua pentru toate VM-urile.",
+    "en": "The ESXi kernel: schedules CPU, memory, storage and network for all VMs."
+  },
+  {
+    "id": "snapshot",
+    "term": "snapshot",
+    "ro": "Starea salvată a unei VM la un moment dat; după snapshot, scrierile merg într-un fișier delta care crește. Nu este backup.",
+    "en": "A VM's saved state at a point in time; afterwards, writes go to a growing delta file. Not a backup."
+  },
+  {
+    "id": "datastore",
+    "term": "datastore",
+    "ro": "Spațiul de stocare (VMFS, NFS, vSAN) unde stau fișierele VM-urilor.",
+    "en": "The storage container (VMFS, NFS, vSAN) holding VM files."
+  },
+  {
+    "id": "overcommit",
+    "term": "overcommit",
+    "ro": "Alocarea către VM-uri a mai multor resurse virtuale (vCPU, RAM) decât are hostul fizic, bazându-se pe faptul că nu toate sunt folosite simultan.",
+    "en": "Allocating more virtual resources (vCPU, RAM) to VMs than the host physically has, relying on them not all being used at once."
+  }
 ]

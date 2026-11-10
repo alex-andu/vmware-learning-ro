@@ -2,12 +2,21 @@ export type Lang = 'ro' | 'en';
 export type Theme = 'dark' | 'light';
 export type Localized = { ro: string; en?: string };
 
+export interface Chapter {
+  id: string;
+  title: Localized;
+  exam: string[];
+  examNote?: Localized;
+}
+
 export interface ModuleMeta {
   id: string;
   order: number;
   title: Localized;
+  target?: Localized;
   competency: Localized;
   labTitle: Localized;
+  chapters: Chapter[];
 }
 
 export interface LessonFrontmatter {
@@ -64,6 +73,8 @@ export interface GlossaryEntry {
   id: string;
   term: string;
   aliases?: string[];
+  abbr?: string;
+  expansion?: string;
   ro: string;
   en: string;
 }

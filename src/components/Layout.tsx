@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { BookA, LayoutDashboard, Menu, Moon, Search, Server, Settings, Sun, X } from 'lucide-react';
-import { lessonKeys, loc, modules } from '../lib/content';
+import { BookA, ListTree, LayoutDashboard, Menu, Moon, Search, Server, Settings, Sun, X } from 'lucide-react';
+import { chapterKeys, loc, modules } from '../lib/content';
 import { useStore } from '../lib/storage';
 import { useT } from '../lib/i18n';
 import { ProgressBar } from './ProgressBar';
@@ -75,9 +75,12 @@ export function Layout() {
           <NavLink to="/" end className={linkCls}>
             <LayoutDashboard size={16} aria-hidden="true" /> {t('dashboard')}
           </NavLink>
+          <NavLink to="/curriculum" className={linkCls}>
+            <ListTree size={16} aria-hidden="true" /> {t('curriculum')}
+          </NavLink>
           <p className="mt-4 mb-1 px-3 text-xs font-semibold uppercase tracking-wide text-[var(--muted)]">{t('modules')}</p>
           {modules.map((m) => {
-            const keys = lessonKeys(m.id).map((l) => l.key);
+            const keys = chapterKeys(m.id);
             const done = keys.filter((k) => state.completed[k]).length;
             return (
               <NavLink key={m.id} to={`/module/${m.id}`} className={linkCls}>

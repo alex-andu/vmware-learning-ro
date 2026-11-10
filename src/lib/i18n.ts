@@ -70,6 +70,21 @@ const dict = {
   mermaidError: { ro: 'Diagrama are o eroare de sintaxă. Cod brut:', en: 'Diagram has a syntax error. Raw code:' },
   notFound: { ro: 'Pagina nu există.', en: 'Page not found.' },
   sourcesTitle: { ro: 'Surse folosite (din registru)', en: 'Sources used (from registry)' },
+  curriculum: { ro: 'Curriculum', en: 'Curriculum' },
+  curriculumIntro: {
+    ro: 'Toate modulele cursului, cu competența de CV pe care o obții, laboratorul fiecărui modul și obiectivele de examen acoperite de fiecare capitol.',
+    en: 'All course modules, with the CV competency you gain, each module lab and the exam objectives each chapter covers.',
+  },
+  examLegend: { ro: 'Ce înseamnă etichetele de examen', en: 'What the exam tags mean' },
+  examLegendHint: {
+    ro: 'Numărul de după prefix este obiectivul din ghidul oficial al examenului (de ex. „VVF 2.2.2” = obiectivul 2.2.2 din ghidul 2V0-16.25).',
+    en: 'The number after the prefix is the objective in the official exam guide (e.g. "VVF 2.2.2" = objective 2.2.2 of the 2V0-16.25 guide).',
+  },
+  exam: { ro: 'examenul', en: 'exam' },
+  planned: { ro: 'planificat', en: 'planned' },
+  chapters: { ro: 'capitole', en: 'chapters' },
+  abbrLegendLesson: { ro: 'Abrevieri folosite în lecție', en: 'Abbreviations used in this lesson' },
+  abbrLegend: { ro: 'Abrevieri folosite pe această pagină', en: 'Abbreviations used on this page' },
   testLesson: { ro: 'Lecție de test pentru schelet', en: 'Skeleton test lesson' },
 } satisfies Record<string, Record<Lang, string>>;
 
