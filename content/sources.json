@@ -28,7 +28,8 @@
       "01-fundamente/07-retea-esxi",
       "01-fundamente/08-stocare-esxi",
       "02-vsphere/01-vcenter",
-      "02-vsphere/02-identitate-rbac"
+      "02-vsphere/02-identitate-rbac",
+      "02-vsphere/03-licente-certificate"
     ]
   },
   {
@@ -548,7 +549,8 @@
       "01-fundamente/07-retea-esxi",
       "01-fundamente/08-stocare-esxi",
       "02-vsphere/01-vcenter",
-      "02-vsphere/02-identitate-rbac"
+      "02-vsphere/02-identitate-rbac",
+      "02-vsphere/03-licente-certificate"
     ]
   },
   {
@@ -1537,7 +1539,8 @@
     "read": true,
     "usedBy": [
       "02-vsphere/01-vcenter",
-      "02-vsphere/02-identitate-rbac"
+      "02-vsphere/02-identitate-rbac",
+      "02-vsphere/03-licente-certificate"
     ]
   },
   {
@@ -1737,6 +1740,116 @@
     "read": true,
     "usedBy": [
       "02-vsphere/02-identitate-rbac"
+    ]
+  },
+  {
+    "id": "S155",
+    "title": "VCF 9.0 docs: Licensing model",
+    "url": "https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-0/licensing/licensing-overview/licensing-model.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/03-licente-certificate"
+    ]
+  },
+  {
+    "id": "S156",
+    "title": "VMware blog: Licensing in VMware Cloud Foundation 9.0 (June 2025)",
+    "url": "https://blogs.vmware.com/cloud-foundation/2025/06/24/licensing-in-vmware-cloud-foundation-9-0/",
+    "type": "vendor",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/03-licente-certificate"
+    ]
+  },
+  {
+    "id": "S157",
+    "title": "KB 313548: Counting cores for VMware Cloud Foundation and vSphere Foundation and TiBs for vSAN",
+    "url": "https://knowledge.broadcom.com/external/article/313548/counting-cores-for-vmware-cloud-foundati.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/03-licente-certificate"
+    ]
+  },
+  {
+    "id": "S158",
+    "title": "vSphere 8 Authentication: Certificate replacement options (VMCA, intermediate CA, custom, hybrid)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-authentication/GUID-4469A6D3-048A-471C-9CB4-518A15EA2AC0.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/03-licente-certificate"
+    ]
+  },
+  {
+    "id": "S159",
+    "title": "vSphere 8 Security: Change the certificate mode for ESXi hosts",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-security/GUID-122A4236-9696-4E1F-B9E8-738855946A93.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/03-licente-certificate"
+    ]
+  },
+  {
+    "id": "S160",
+    "title": "KB 427937: SSL certificate auto-renew for Machine SSL and ESXi (VCF 9.0.2 and later / vCenter 8.0U3h and later)",
+    "url": "https://knowledge.broadcom.com/external/article/427937",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/03-licente-certificate"
+    ]
+  },
+  {
+    "id": "S161",
+    "title": "KB 415719: Adjust certificate status alarm thresholds and the certificate validity period using VMCA",
+    "url": "https://knowledge.broadcom.com/external/article/415719/adjust-certificate-status-alarm-threshol.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/03-licente-certificate"
+    ]
+  },
+  {
+    "id": "S162",
+    "title": "KB 344201: Verify and resolve expired vCenter Server certificates using the command line interface",
+    "url": "https://knowledge.broadcom.com/external/article/344201",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/03-licente-certificate"
+    ]
+  },
+  {
+    "id": "S163",
+    "title": "KB 374032: \"ESXi Host Certificate Status\" alert in vCenter Server",
+    "url": "https://knowledge.broadcom.com/external/article/374032/esxi-host-certificate-status-alert-for-e.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/03-licente-certificate"
+    ]
+  },
+  {
+    "id": "S164",
+    "title": "KB 437250: Upgrade path from vSphere 8.x to VVF 9 or VCF 9 (licensing)",
+    "url": "https://knowledge.broadcom.com/external/article/437250/update-path-from-vmware-cloud-foundation.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/03-licente-certificate"
     ]
   }
 ]

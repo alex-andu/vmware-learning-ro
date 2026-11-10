@@ -1116,5 +1116,28 @@
     ],
     "ro": "Permisiuni puse pe obiectul rădăcină global, peste toate ierarhiile, plus obiectele globale precum tag-urile și content library.",
     "en": "Permissions on the global root object, spanning all hierarchies, plus global objects such as tags and content libraries."
+  },
+  {
+    "id": "vecs",
+    "term": "VECS",
+    "abbr": "VECS",
+    "expansion": "VMware Endpoint Certificate Store",
+    "ro": "Depozitul local de certificate și chei din vCenter, organizat pe store-uri (de exemplu MACHINE_SSL_CERT).",
+    "en": "The local certificate and key store in vCenter, organized in stores (for example MACHINE_SSL_CERT)."
+  },
+  {
+    "id": "machine-ssl",
+    "term": "Machine SSL certificate",
+    "aliases": [
+      "Machine SSL"
+    ],
+    "ro": "Certificatul care securizează traficul SSL/TLS al vCenter (pagina vSphere Client, API-urile).",
+    "en": "The certificate securing vCenter SSL/TLS traffic (the vSphere Client page, the APIs)."
+  },
+  {
+    "id": "vcf-operations",
+    "term": "VCF Operations",
+    "ro": "Platforma de operare și monitorizare din VCF/VVF 9, prin care se administrează și licențele.",
+    "en": "The VCF/VVF 9 operations and monitoring platform, also used to manage licenses."
   }
 ]
