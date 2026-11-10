@@ -1,0 +1,118 @@
+{
+  "steps": [
+    {
+      "id": "vmk0",
+      "title": {
+        "ro": "Notează configurarea adaptorului de management vmk0",
+        "en": "Write down the management adapter vmk0 settings"
+      },
+      "path": {
+        "ro": "Host Client → Networking → VMkernel NICs → vmk0 ⚠ de verificat",
+        "en": "Host Client → Networking → VMkernel NICs → vmk0 ⚠ to verify"
+      },
+      "action": {
+        "ro": "Deschide vmk0 și notează adresa IPv4, masca (scrie-o și în notația CIDR, de ex. /24), gateway-ul implicit, MTU-ul și port group-ul de care e legat.",
+        "en": "Open vmk0 and write down the IPv4 address, subnet mask (also as a CIDR prefix, e.g. /24), default gateway, MTU and the port group it is attached to."
+      },
+      "why": {
+        "ro": "vmk0 este interfața prin care hostul vorbește cu vCenter. Toate verificările următoare (DNS, NTP, vmkping) pleacă de la ea, deci trebuie să-i știi exact adresa și MTU-ul.",
+        "en": "vmk0 is the interface the host uses to talk to vCenter. Every later check (DNS, NTP, vmkping) starts from it, so you need its exact address and MTU."
+      }
+    },
+    {
+      "id": "vswitch-mtu",
+      "title": {
+        "ro": "Verifică MTU-ul și uplink-urile lui vSwitch0",
+        "en": "Check the MTU and uplinks of vSwitch0"
+      },
+      "path": {
+        "ro": "Host Client → Networking → Virtual switches → vSwitch0",
+        "en": "Host Client → Networking → Virtual switches → vSwitch0"
+      },
+      "action": {
+        "ro": "Notează MTU-ul switch-ului și ce plăci fizice (vmnic) are ca uplink. Compară MTU-ul switch-ului cu cel al lui vmk0.",
+        "en": "Write down the switch MTU and which physical NICs (vmnic) are its uplinks. Compare the switch MTU with vmk0's MTU."
+      },
+      "why": {
+        "ro": "Un vmk nu poate folosi un MTU mai mare decât switch-ul pe care stă. Dacă switch-ul și vmk-ul diferă, știi deja unde să cauți când apar probleme cu pachetele mari (KB 324494).",
+        "en": "A vmk cannot use a larger MTU than its switch. If switch and vmk differ you already know where to look when large packets fail (KB 324494)."
+      }
+    },
+    {
+      "id": "vlan",
+      "title": {
+        "ro": "Citește VLAN ID-ul fiecărui port group",
+        "en": "Read the VLAN ID of every port group"
+      },
+      "path": {
+        "ro": "Host Client → Networking → Port groups",
+        "en": "Host Client → Networking → Port groups"
+      },
+      "action": {
+        "ro": "Pentru „Management Network” și „VM Network” notează VLAN ID-ul. Spune pentru fiecare ce mod înseamnă: 0 = EST, 1–4094 = VST, 4095 = VGT.",
+        "en": "For \"Management Network\" and \"VM Network\" write down the VLAN ID. For each, name the mode: 0 = EST, 1–4094 = VST, 4095 = VGT."
+      },
+      "why": {
+        "ro": "VLAN ID-ul greșit pe port group-ul de management e una dintre cele mai rapide căi de a pierde accesul la host. Dacă știi ce mod folosești, știi și ce trebuie să fie configurat pe switch-ul fizic (access sau trunk 802.1Q).",
+        "en": "A wrong VLAN ID on the management port group is one of the fastest ways to lose access to a host. Knowing the mode tells you what the physical switch port must be (access or 802.1Q trunk)."
+      }
+    },
+    {
+      "id": "dns",
+      "title": {
+        "ro": "Configurează și verifică DNS în ambele direcții",
+        "en": "Configure and verify DNS in both directions"
+      },
+      "path": {
+        "ro": "Host Client → Networking → TCP/IP stacks → Default TCP/IP stack ⚠ de verificat; serverul DNS din laborator",
+        "en": "Host Client → Networking → TCP/IP stacks → Default TCP/IP stack ⚠ to verify; your lab DNS server"
+      },
+      "action": {
+        "ro": "Verifică serverele DNS, numele hostului și domeniul setate pe host. Pe serverul DNS creează o înregistrare A (nume → IP) și una PTR (IP → nume) pentru host. De pe calculatorul tău rulează `nslookup <FQDN-ul hostului>` și `nslookup <IP-ul hostului>`; ambele trebuie să întoarcă perechea corectă.",
+        "en": "Check the DNS servers, host name and domain set on the host. On the DNS server create an A record (name → IP) and a PTR record (IP → name) for the host. From your computer run `nslookup <host FQDN>` and `nslookup <host IP>`; both must return the matching pair."
+      },
+      "why": {
+        "ro": "vCenter și instalatorul VCF verifică atât căutarea directă, cât și pe cea inversă; lipsa înregistrării PTR oprește instalarea și upgrade-ul (KB 305807, KB 405215). VCF 9 cere în plus nume FQDN pentru hosturi (KB 425102).",
+        "en": "vCenter and the VCF Installer check both forward and reverse lookups; a missing PTR record stops install and upgrade (KB 305807, KB 405215). VCF 9 also requires FQDN host names (KB 425102)."
+      }
+    },
+    {
+      "id": "ntp",
+      "title": {
+        "ro": "Configurează NTP și pornește serviciul ntpd",
+        "en": "Configure NTP and start the ntpd service"
+      },
+      "path": {
+        "ro": "Host Client → Manage → System → Time & date → Edit NTP settings; apoi Manage → Services → ntpd",
+        "en": "Host Client → Manage → System → Time & date → Edit NTP settings; then Manage → Services → ntpd"
+      },
+      "action": {
+        "ro": "Activează clientul NTP, introdu serverul (sau serverele) de timp, setează politica „Start and stop with host” și salvează. Apoi pornește serviciul ntpd din lista de servicii.",
+        "en": "Enable the NTP client, enter the time server(s), set the policy to \"Start and stop with host\" and save. Then start the ntpd service from the services list."
+      },
+      "why": {
+        "ro": "Ceasurile desincronizate fac ca certificatele și token-urile să pară invalide. Instalarea VVF 9 cere NTP pe fiecare host, nu doar pe vCenter (KB 425914). Politica „Start and stop with host” asigură că setarea supraviețuiește unui restart.",
+        "en": "Out-of-sync clocks make certificates and tokens look invalid. VVF 9 deployment requires NTP on every host, not only on vCenter (KB 425914). The \"Start and stop with host\" policy makes the setting survive a reboot."
+      }
+    },
+    {
+      "id": "verify-cli",
+      "title": {
+        "ro": "Verifică din linia de comandă: NTP și MTU (test de avarie)",
+        "en": "Verify from the command line: NTP and MTU (failure test)"
+      },
+      "path": {
+        "ro": "Host Client → Manage → Services → TSM-SSH → Start; apoi ssh root@<IP-ul hostului>",
+        "en": "Host Client → Manage → Services → TSM-SSH → Start; then ssh root@<host IP>"
+      },
+      "action": {
+        "ro": "Rulează `esxcli system ntp get` și `ntpq -pn` (după câteva minute, `reach` trebuie să crească spre 377). Apoi rulează `vmkping -I vmk0 -d -s 1472 <IP>` și `vmkping -I vmk0 -d -s 1473 <IP>`, unde <IP> e serverul DNS sau alt host din aceeași rețea. Pe o rețea cu MTU 1500, primul trebuie să meargă, al doilea să eșueze. La final oprește TSM-SSH.",
+        "en": "Run `esxcli system ntp get` and `ntpq -pn` (after a few minutes `reach` should climb towards 377). Then run `vmkping -I vmk0 -d -s 1472 <IP>` and `vmkping -I vmk0 -d -s 1473 <IP>`, where <IP> is the DNS server or another host on the same network. On an MTU 1500 network the first must succeed and the second must fail. Stop TSM-SSH when done."
+      },
+      "why": {
+        "ro": "`-d` interzice fragmentarea, deci pachetul trece doar dacă încape întreg. 1472 + 28 de octeți overhead = 1500 (KB 313061). Dacă și 1473 trece, ai uitat `-d` sau drumul are deja MTU mai mare. SSH-ul se oprește la final pentru că e o suprafață de atac în plus.",
+        "en": "`-d` forbids fragmentation, so the packet only passes if it fits whole. 1472 + 28 bytes overhead = 1500 (KB 313061). If 1473 also passes, you forgot `-d` or the path already has a larger MTU. SSH is stopped at the end because it is extra attack surface."
+      }
+    }
+  ]
+}

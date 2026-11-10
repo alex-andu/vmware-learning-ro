@@ -20,7 +20,8 @@
     "usedBy": [
       "docs/STATE_OF_THE_ART",
       "01-fundamente/01-ce-este-virtualizarea",
-      "content/modules.json"
+      "content/modules.json",
+      "01-fundamente/02-retea-de-baza"
     ]
   },
   {
@@ -33,7 +34,8 @@
     "usedBy": [
       "docs/STATE_OF_THE_ART",
       "01-fundamente/01-ce-este-virtualizarea",
-      "content/modules.json"
+      "content/modules.json",
+      "01-fundamente/02-retea-de-baza"
     ]
   },
   {
@@ -524,7 +526,8 @@
     "read": true,
     "usedBy": [
       "01-fundamente/01-ce-este-virtualizarea",
-      "content/modules.json"
+      "content/modules.json",
+      "01-fundamente/02-retea-de-baza"
     ]
   },
   {
@@ -547,6 +550,182 @@
     "read": true,
     "usedBy": [
       "content/modules.json"
+    ]
+  },
+  {
+    "id": "S50",
+    "title": "KB 311540: Sample configuration of virtual switch VLAN tagging (VST Mode)",
+    "url": "https://knowledge.broadcom.com/external/article/311540",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/02-retea-de-baza"
+    ]
+  },
+  {
+    "id": "S51",
+    "title": "KB 313061: Testing jumbo frame pings from ESXi over the network",
+    "url": "https://knowledge.broadcom.com/external/article/313061",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/02-retea-de-baza"
+    ]
+  },
+  {
+    "id": "S52",
+    "title": "KB 419088: Risks and potential impacts of changing the MTU on a virtual switch",
+    "url": "https://knowledge.broadcom.com/external/article/419088",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/02-retea-de-baza"
+    ]
+  },
+  {
+    "id": "S53",
+    "title": "KB 324494: Enabling Jumbo Frames on virtual switches",
+    "url": "https://knowledge.broadcom.com/external/article/324494",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/02-retea-de-baza"
+    ]
+  },
+  {
+    "id": "S54",
+    "title": "KB 449208: ESXi host disconnections and VM migration failures due to Management Network MTU mismatch",
+    "url": "https://knowledge.broadcom.com/external/article/449208/esxi-host-disconnections-and-vm-migratio.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/02-retea-de-baza"
+    ]
+  },
+  {
+    "id": "S55",
+    "title": "KB 305807: vCenter Server installation fails, FQDN of the server cannot be resolved",
+    "url": "https://knowledge.broadcom.com/external/article/305807/vcenter-server-installation-fails-with-a.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/02-retea-de-baza"
+    ]
+  },
+  {
+    "id": "S56",
+    "title": "KB 405215: vCenter Upgrade Pre-Check Fails: Reverse DNS (PTR) Record Missing",
+    "url": "https://knowledge.broadcom.com/external/article/405215",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/02-retea-de-baza"
+    ]
+  },
+  {
+    "id": "S57",
+    "title": "KB 425102: VCF 9.0.0 Deployment Validation Fails with Host name is not a FQDN",
+    "url": "https://knowledge.broadcom.com/external/article/425102/vcf-900-deployment-validation-fails-with.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/02-retea-de-baza"
+    ]
+  },
+  {
+    "id": "S58",
+    "title": "KB 460245: Guidelines for Using .local DNS Domains in VCF and VVF Deployments",
+    "url": "https://knowledge.broadcom.com/external/article/460245",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/02-retea-de-baza"
+    ]
+  },
+  {
+    "id": "S59",
+    "title": "vSphere 8 Security: Synchronizing Clocks on the vSphere Network",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-security/GUID-9FD3A5E3-6C2D-4161-9270-4BF57FADCE6D.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/02-retea-de-baza"
+    ]
+  },
+  {
+    "id": "S60",
+    "title": "KB 318545: ESX and ESXi host time keeping best practices",
+    "url": "https://knowledge.broadcom.com/external/article?articleNumber=318545",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/02-retea-de-baza"
+    ]
+  },
+  {
+    "id": "S61",
+    "title": "KB 317537: Configure Network Time Protocol (NTP) on the ESXi",
+    "url": "https://knowledge.broadcom.com/external/article/317537/configure-network-time-protocol-ntp-on-t.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/02-retea-de-baza"
+    ]
+  },
+  {
+    "id": "S62",
+    "title": "KB 425914: VVF 9 deployment fails during validation: NTP should be configured on the hosts",
+    "url": "https://knowledge.broadcom.com/external/article/425914/vvf-9-deployments-fails-during-the-valid.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/02-retea-de-baza"
+    ]
+  },
+  {
+    "id": "S63",
+    "title": "KB 443781: NTP Synchronization Issues on ESXi Hosts",
+    "url": "https://knowledge.broadcom.com/external/article/443781/ntp-synchronization-issues-on-esxi-host.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/02-retea-de-baza"
+    ]
+  },
+  {
+    "id": "S64",
+    "title": "RFC 1918: Address Allocation for Private Internets",
+    "url": "https://www.rfc-editor.org/rfc/rfc1918",
+    "type": "standard",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/02-retea-de-baza"
+    ]
+  },
+  {
+    "id": "S65",
+    "title": "RFC 4632: Classless Inter-domain Routing (CIDR)",
+    "url": "https://www.rfc-editor.org/rfc/rfc4632",
+    "type": "standard",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/02-retea-de-baza"
     ]
   }
 ]

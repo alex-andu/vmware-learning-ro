@@ -572,5 +572,82 @@
     "term": "overcommit",
     "ro": "Alocarea către VM-uri a mai multor resurse virtuale (vCPU, RAM) decât are hostul fizic, bazându-se pe faptul că nu toate sunt folosite simultan.",
     "en": "Allocating more virtual resources (vCPU, RAM) to VMs than the host physically has, relying on them not all being used at once."
+  },
+  {
+    "id": "fqdn",
+    "term": "FQDN",
+    "abbr": "FQDN",
+    "expansion": "Fully Qualified Domain Name",
+    "ro": "Numele complet al unui sistem, cu tot cu domeniul (ex. esx01.lab.exemplu.ro), nu doar numele scurt (esx01).",
+    "en": "A system's full name including the domain (e.g. esx01.lab.example.com), not just the short name (esx01)."
+  },
+  {
+    "id": "cidr",
+    "term": "CIDR",
+    "abbr": "CIDR",
+    "expansion": "Classless Inter-Domain Routing",
+    "ro": "Notația /prefix pentru rețele: /24 înseamnă că primii 24 de biți sunt partea de rețea (masca 255.255.255.0).",
+    "en": "The /prefix notation for networks: /24 means the first 24 bits are the network part (mask 255.255.255.0)."
+  },
+  {
+    "id": "ptr-record",
+    "term": "PTR",
+    "aliases": [
+      "PTR record",
+      "înregistrare PTR"
+    ],
+    "abbr": "PTR",
+    "expansion": "Pointer record",
+    "ro": "Înregistrarea DNS de căutare inversă: transformă o adresă IP înapoi în nume.",
+    "en": "The reverse-lookup DNS record: maps an IP address back to a name."
+  },
+  {
+    "id": "vst",
+    "term": "VST",
+    "abbr": "VST",
+    "expansion": "Virtual Switch Tagging",
+    "ro": "Mod VLAN în care switch-ul virtual pune eticheta VLAN (ID 1–4094 pe port group).",
+    "en": "VLAN mode where the virtual switch adds the VLAN tag (ID 1–4094 on the port group)."
+  },
+  {
+    "id": "est",
+    "term": "EST",
+    "abbr": "EST",
+    "expansion": "External Switch Tagging",
+    "ro": "Mod VLAN în care switch-ul fizic pune eticheta; pe port group VLAN ID este 0.",
+    "en": "VLAN mode where the physical switch adds the tag; the port group VLAN ID is 0."
+  },
+  {
+    "id": "vgt",
+    "term": "VGT",
+    "abbr": "VGT",
+    "expansion": "Virtual Guest Tagging",
+    "ro": "Mod VLAN în care sistemul de operare din VM pune eticheta; pe un standard switch se setează VLAN ID 4095.",
+    "en": "VLAN mode where the guest OS adds the tag; on a standard switch the VLAN ID is 4095."
+  },
+  {
+    "id": "udp",
+    "term": "UDP",
+    "abbr": "UDP",
+    "expansion": "User Datagram Protocol",
+    "ro": "Protocol de transport fără conexiune, folosit de exemplu de NTP (portul 123) și DNS.",
+    "en": "Connectionless transport protocol, used for example by NTP (port 123) and DNS."
+  },
+  {
+    "id": "vmk",
+    "term": "vmk",
+    "aliases": [
+      "VMkernel adapter",
+      "adaptor VMkernel",
+      "vmk0"
+    ],
+    "ro": "Adaptorul de rețea VMkernel al hostului (vmk0, vmk1…): interfața prin care ESXi însuși comunică (management, vMotion, stocare).",
+    "en": "The host's VMkernel network adapter (vmk0, vmk1…): the interface ESXi itself uses (management, vMotion, storage)."
+  },
+  {
+    "id": "jumbo-frames",
+    "term": "jumbo frames",
+    "ro": "Cadre Ethernet mai mari decât standardul de 1500 de octeți, de obicei MTU 9000; trebuie configurate pe tot drumul.",
+    "en": "Ethernet frames larger than the standard 1500 bytes, usually MTU 9000; must be configured end to end."
   }
 ]
