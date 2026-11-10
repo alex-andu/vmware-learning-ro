@@ -55,6 +55,7 @@ Corpul are exact aceste 8 blocuri `:::`, în ordinea asta (ele formează cele 6 
 - Fiecare lecție: minim 10 surse citite efectiv (țintă 20+ la modulele grele), adăugate în `content/sources.json`. Validatorul refuză lecțiile non-test cu sub 10 surse.
 - Citările inline folosesc `[Sxx]`; validatorul verifică că id-ul există.
 - Parafrazează. Citate sub 15 cuvinte, doar cu atribuire. Fără exam dumps; quiz-urile sunt originale, în stil VCP.
+- Quiz-ul NU amestecă variantele la afișare: poziția răspunsului corect (`correct`) se variază manual de la o întrebare la alta (nu mereu prima variantă).
 - Marchează clar „supported” vs „home-lab only / not supported”.
 - Explicații în română; termenii tehnici în engleză, explicați la prima apariție.
 - **Orice abreviere se explică la prima apariție** (forma completă imediat lângă ea). Validatorul verifică asta pentru toate abrevierile din `glossary.json` (`abbr` + `expansion`); o abreviere nouă se adaugă întâi în glosar.
