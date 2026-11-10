@@ -1,0 +1,118 @@
+{
+  "steps": [
+    {
+      "id": "inventory",
+      "title": {
+        "ro": "Citește stocarea existentă a hostului",
+        "en": "Read the host's existing storage"
+      },
+      "path": {
+        "ro": "Host Client → Storage → Datastores, Adapters, Devices; apoi SSH",
+        "en": "Host Client → Storage → Datastores, Adapters, Devices; then SSH"
+      },
+      "action": {
+        "ro": "Notează datastore-urile, tipul lor (VMFS5, VMFS6, NFS) și dispozitivele. Prin SSH rulează `esxcli storage vmfs extent list` (legătura datastore → dispozitiv naa), `esxcli storage filesystem list` și `esxcli storage nfs list`.",
+        "en": "Write down the datastores, their type (VMFS5, VMFS6, NFS) and the devices. Over SSH run `esxcli storage vmfs extent list` (datastore → naa device mapping), `esxcli storage filesystem list` and `esxcli storage nfs list`."
+      },
+      "why": {
+        "ro": "Legătura dintre numele datastore-ului și identificatorul NAA al dispozitivului e exact ce îți trebuie la scoaterea corectă a unui LUN (KB 323128).",
+        "en": "The link between the datastore name and the device NAA identifier is exactly what you need to remove a LUN correctly (KB 323128)."
+      }
+    },
+    {
+      "id": "nfs",
+      "title": {
+        "ro": "Montează un datastore NFS din linia de comandă",
+        "en": "Mount an NFS datastore from the command line"
+      },
+      "path": {
+        "ro": "SSH pe host",
+        "en": "SSH to the host"
+      },
+      "action": {
+        "ro": "Rulează `esxcli storage nfs add -H <IP_server_NFS> -s <cale_export> -v NFS-Lab`, apoi `esxcli storage nfs list`. Verifică în Host Client că NFS-Lab apare și că poți crea un folder pe el.",
+        "en": "Run `esxcli storage nfs add -H <NFS_server_IP> -s <export_path> -v NFS-Lab`, then `esxcli storage nfs list`. Check in Host Client that NFS-Lab appears and that you can create a folder on it."
+      },
+      "why": {
+        "ro": "Comanda vine din KB 344470. Faptul că poți scrie pe datastore confirmă că exportul permite acces root (no_root_squash), cerința NFS 3 din lecția 1.3.",
+        "en": "The command comes from KB 344470. Being able to write to the datastore confirms the export allows root access (no_root_squash), the NFS 3 requirement from lesson 1.3."
+      }
+    },
+    {
+      "id": "vmfs",
+      "title": {
+        "ro": "Creează un datastore VMFS6 pe discul liber",
+        "en": "Create a VMFS6 datastore on the free disk"
+      },
+      "path": {
+        "ro": "Host Client → Storage → Datastores → New datastore → Create new VMFS datastore",
+        "en": "Host Client → Storage → Datastores → New datastore → Create new VMFS datastore"
+      },
+      "action": {
+        "ro": "Alege discul liber (verifică de două ori că nu e discul de boot), numele VMFS-Lab și versiunea VMFS6, cu toată capacitatea. Notează identificatorul naa al discului.",
+        "en": "Choose the free disk (double-check it is not the boot disk), the name VMFS-Lab and version VMFS6, with all the capacity. Note the disk's naa identifier."
+      },
+      "why": {
+        "ro": "VMFS6 e versiunea care are recuperare automată a spațiului și suport 4Kn; un datastore VMFS5 nu se poate transforma ulterior pe loc (documentația vSphere Storage).",
+        "en": "VMFS6 is the version with automatic space reclamation and 4Kn support; a VMFS5 datastore cannot be converted in place later (vSphere Storage docs)."
+      }
+    },
+    {
+      "id": "iscsi",
+      "title": {
+        "ro": "Activează adaptorul iSCSI software și găsește-i numele IQN",
+        "en": "Enable the software iSCSI adapter and find its IQN"
+      },
+      "path": {
+        "ro": "Host Client → Storage → Adapters → Software iSCSI",
+        "en": "Host Client → Storage → Adapters → Software iSCSI"
+      },
+      "action": {
+        "ro": "Activează adaptorul, notează numele IQN primit automat și uită-te la secțiunile Network port bindings, Dynamic targets și Static targets. Dacă ai în lab un target iSCSI (de exemplu un NAS), adaugă-i adresa la Dynamic targets și fă rescan; altfel doar observă.",
+        "en": "Enable the adapter, note the automatically assigned IQN and look at the Network port bindings, Dynamic targets and Static targets sections. If your lab has an iSCSI target (for example a NAS), add its address to Dynamic targets and rescan; otherwise just observe."
+      },
+      "why": {
+        "ro": "IQN-ul este identitatea hostului pe care o pune echipa de stocare în lista de acces a LUN-ului. Port binding îl adaugi doar în cazul descris în KB 317719.",
+        "en": "The IQN is the host identity the storage team puts in the LUN access list. You add port binding only in the case KB 317719 describes."
+      }
+    },
+    {
+      "id": "paths",
+      "title": {
+        "ro": "Citește politica de căi a fiecărui dispozitiv",
+        "en": "Read each device's path policy"
+      },
+      "path": {
+        "ro": "SSH pe host",
+        "en": "SSH to the host"
+      },
+      "action": {
+        "ro": "Rulează `esxcli storage nmp device list` și notează pentru discul VMFS-Lab: Path Selection Policy și numărul de căi.",
+        "en": "Run `esxcli storage nmp device list` and note for the VMFS-Lab disk: Path Selection Policy and the number of paths."
+      },
+      "why": {
+        "ro": "Comanda e cea din KB 339621. Pe un disc local sau virtual vei vedea o singură cale; în producție, numărul de căi îți spune imediat dacă redundanța funcționează.",
+        "en": "The command is the one from KB 339621. On a local or virtual disk you will see a single path; in production the path count tells you at once whether redundancy works."
+      }
+    },
+    {
+      "id": "remove",
+      "title": {
+        "ro": "Scoate corect datastore-ul VMFS și curăță",
+        "en": "Remove the VMFS datastore correctly and clean up"
+      },
+      "path": {
+        "ro": "SSH pe host; apoi setările VM-ului ESXi nested (sau discul fizic)",
+        "en": "SSH to the host; then the nested ESXi VM settings (or the physical disk)"
+      },
+      "action": {
+        "ro": "În ordine: `esxcli storage filesystem unmount -l VMFS-Lab`; `esxcli storage core device set --state=off -d <NAA_ID>`; verifică cu `esxcli storage core device list -d <NAA_ID>` că starea e „off”; abia apoi scoate discul; la final `esxcli storage core adapter rescan --all`. Demontează și NFS-Lab cu `esxcli storage nfs remove -v NFS-Lab` și oprește SSH.",
+        "en": "In order: `esxcli storage filesystem unmount -l VMFS-Lab`; `esxcli storage core device set --state=off -d <NAA_ID>`; check with `esxcli storage core device list -d <NAA_ID>` that the state is \"off\"; only then remove the disk; finally `esxcli storage core adapter rescan --all`. Also unmount NFS-Lab with `esxcli storage nfs remove -v NFS-Lab` and turn SSH off."
+      },
+      "why": {
+        "ro": "Este procedura din KB 323128. Dacă scoți discul înaintea detach-ului, hostul intră în APD (All Paths Down), cum arată KB 318850; în lab vezi greșeala fără să afecteze pe nimeni.",
+        "en": "This is the KB 323128 procedure. If you remove the disk before detaching, the host goes into APD (All Paths Down), as KB 318850 shows; in the lab you see the mistake without hurting anyone."
+      }
+    }
+  ]
+}

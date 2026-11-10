@@ -1,0 +1,269 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Ai un datastore VMFS5 cu 20 de VM-uri pornite și vrei să ajungi pe VMFS6 fără oprire. Ce faci?",
+        "en": "You have a VMFS5 datastore with 20 running VMs and want to move to VMFS6 without downtime. What do you do?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Folosești opțiunea de upgrade din meniul datastore-ului",
+            "en": "Use the upgrade option in the datastore menu"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: nu există upgrade pe loc din VMFS5 în VMFS6.",
+            "en": "Wrong: there is no in-place upgrade from VMFS5 to VMFS6."
+          }
+        },
+        {
+          "text": {
+            "ro": "Rulezi o comandă esxcli de conversie pe host",
+            "en": "Run an esxcli conversion command on the host"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: documentația nu oferă o conversie pe loc; drumul e un datastore nou.",
+            "en": "Wrong: the docs offer no in-place conversion; the path is a new datastore."
+          }
+        },
+        {
+          "text": {
+            "ro": "Creezi un datastore VMFS6 nou și muți VM-urile cu Storage vMotion",
+            "en": "Create a new VMFS6 datastore and move the VMs with Storage vMotion"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect: așa descriu documentația și KB 316475 trecerea, fără oprirea VM-urilor.",
+            "en": "Correct: this is how the docs and KB 316475 describe the move, without powering off VMs."
+          }
+        },
+        {
+          "text": {
+            "ro": "Reformatezi LUN-ul ca VMFS6, datele rămân",
+            "en": "Reformat the LUN as VMFS6, the data stays"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: reformatarea șterge tot ce e pe LUN.",
+            "en": "Wrong: reformatting erases everything on the LUN."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Echipa de stocare a mărit LUN-ul din spatele unui datastore VMFS6 de la 2 TB la 3 TB. Cum folosești spațiul nou?",
+        "en": "The storage team grew the LUN behind a VMFS6 datastore from 2 TB to 3 TB. How do you use the new space?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Creezi un datastore nou pe spațiul liber",
+            "en": "Create a new datastore on the free space"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: ar funcționa, dar ai avea două datastore-uri; cerința era mărirea celui existent.",
+            "en": "Wrong: it would work, but you would have two datastores; the goal was to grow the existing one."
+          }
+        },
+        {
+          "text": {
+            "ro": "Oprești VM-urile și apoi mărești datastore-ul",
+            "en": "Power off the VMs and then grow the datastore"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: mărirea se face cu VM-urile pornite.",
+            "en": "Wrong: growing works with VMs running."
+          }
+        },
+        {
+          "text": {
+            "ro": "Adaugi obligatoriu un extent pe un LUN nou",
+            "en": "You must add an extent on a new LUN"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: add extent e pentru alt dispozitiv; aici spațiul e chiar după extent-ul existent.",
+            "en": "Wrong: add extent is for another device; here the space is right after the existing extent."
+          }
+        },
+        {
+          "text": {
+            "ro": "Expand pe extent-ul existent (dispozitivul apare „Expandable: Yes”), apoi rescan pe cluster",
+            "en": "Expand the existing extent (the device shows \"Expandable: Yes\"), then rescan the cluster"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect: spațiul liber e imediat după datastore, deci se mărește extent-ul, fără oprire, urmat de rescan.",
+            "en": "Correct: the free space sits right after the datastore, so you grow the extent online, then rescan."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Matricea iSCSI are două controlere, în subneturile 10.1.1.0/24 și 10.1.2.0/24. Vmk-urile iSCSI ale hostului sunt câte unul în fiecare subnet. Folosești port binding?",
+        "en": "The iSCSI array has two controllers, in subnets 10.1.1.0/24 and 10.1.2.0/24. The host has one iSCSI vmk in each subnet. Do you use port binding?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Nu: vmk-urile și target-urile sunt în subneturi diferite",
+            "en": "No: the vmks and targets are in different subnets"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect: KB 317719 spune să nu folosești port binding când target-urile sau vmk-urile sunt în subneturi și domenii de broadcast diferite.",
+            "en": "Correct: KB 317719 says not to use port binding when targets or vmks are in different subnets and broadcast domains."
+          }
+        },
+        {
+          "text": {
+            "ro": "Da: port binding e obligatoriu la iSCSI software",
+            "en": "Yes: port binding is mandatory with software iSCSI"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: e necesar doar în cazul cu un singur subnet și un singur portal.",
+            "en": "Wrong: it is needed only in the single-subnet, single-portal case."
+          }
+        },
+        {
+          "text": {
+            "ro": "Da, dar numai cu LACP pe plăci",
+            "en": "Yes, but only with LACP on the adapters"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: agregarea de legături e chiar un motiv să nu folosești port binding.",
+            "en": "Wrong: link aggregation is itself a reason not to use port binding."
+          }
+        },
+        {
+          "text": {
+            "ro": "Doar dacă treci pe NFS 4.1",
+            "en": "Only if you switch to NFS 4.1"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: NFS nu are legătură cu port binding-ul iSCSI.",
+            "en": "Wrong: NFS has nothing to do with iSCSI port binding."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "Un LUN de pe o matrice Active/Active folosește politica de căi implicită. Calea preferată cade, apoi e reparată. Ce face hostul?",
+        "en": "A LUN on an Active/Active array uses the default path policy. The preferred path fails, then gets repaired. What does the host do?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Rămâne pe calea nouă până la următoarea cădere",
+            "en": "Stays on the new path until the next failure"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: așa se comportă MRU, implicit pentru matrice Active/Passive.",
+            "en": "Wrong: that is MRU, the default for Active/Passive arrays."
+          }
+        },
+        {
+          "text": {
+            "ro": "Revine pe calea preferată",
+            "en": "Returns to the preferred path"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect: implicit pentru Active/Active este Fixed, care revine pe calea preferată după reparare.",
+            "en": "Correct: the Active/Active default is Fixed, which returns to the preferred path after repair."
+          }
+        },
+        {
+          "text": {
+            "ro": "Împarte I/O-ul pe toate căile, la 1000 de operații",
+            "en": "Spreads I/O across all paths every 1000 operations"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: așa lucrează Round Robin, care nu e implicit.",
+            "en": "Wrong: that is Round Robin, which is not a default."
+          }
+        },
+        {
+          "text": {
+            "ro": "Nu mai folosește calea până la un rescan manual",
+            "en": "Stops using the path until a manual rescan"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: failback-ul la Fixed nu cere rescan.",
+            "en": "Wrong: Fixed failback needs no rescan."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "Echipa de stocare a scos un LUN de pe matrice fără să anunțe. Matricea nu trimite niciun cod de eroare, iar hosturile care aveau datastore-ul montat apar „Not responding”. Ce se întâmplă?",
+        "en": "The storage team removed a LUN from the array without notice. The array sends no error code, and hosts that had the datastore mounted show \"Not responding\". What is happening?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "PDL: hostul a oprit imediat orice încercare",
+            "en": "PDL: the host stopped all attempts immediately"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: PDL cere un cod de la matrice; aici nu există niciunul.",
+            "en": "Wrong: PDL needs a code from the array; there is none here."
+          }
+        },
+        {
+          "text": {
+            "ro": "APD cu timeout de 30 de secunde, apoi revenire automată",
+            "en": "APD with a 30-second timeout, then automatic recovery"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: timeout-ul APD este 140 de secunde și nu există o recuperare curată pe host.",
+            "en": "Wrong: the APD timeout is 140 seconds and there is no clean recovery on the host."
+          }
+        },
+        {
+          "text": {
+            "ro": "Nimic grav: vCenter doar a pierdut temporar legătura",
+            "en": "Nothing serious: vCenter only lost the connection briefly"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: simptomele se potrivesc cu APD, descris în KB 318850.",
+            "en": "Wrong: the symptoms match APD, described in KB 318850."
+          }
+        },
+        {
+          "text": {
+            "ro": "APD: hostul reîncearcă, iar după 140 de secunde abandonează rapid I/O-ul care nu vine de la VM-uri",
+            "en": "APD: the host retries, and after 140 seconds fast-fails I/O that does not come from VMs"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect: fără cod PDL, hostul nu știe dacă pierderea e permanentă; KB 318850 descrie timeout-ul de 140 de secunde.",
+            "en": "Correct: without a PDL code the host can't tell the loss is permanent; KB 318850 describes the 140-second timeout."
+          }
+        }
+      ]
+    }
+  ]
+}

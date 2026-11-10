@@ -927,5 +927,87 @@
     ],
     "ro": "Mecanismul vSphere care anulează automat o schimbare de rețea care deconectează hostul de vCenter.",
     "en": "The vSphere mechanism that automatically reverts a network change that disconnects the host from vCenter."
+  },
+  {
+    "id": "psp",
+    "term": "PSP",
+    "abbr": "PSP",
+    "expansion": "Path Selection Policy",
+    "ro": "Politica prin care ESXi alege calea spre un LUN când există mai multe: MRU, Fixed sau Round Robin.",
+    "en": "The policy ESXi uses to choose the path to a LUN when there are several: MRU, Fixed or Round Robin."
+  },
+  {
+    "id": "nmp",
+    "term": "NMP",
+    "abbr": "NMP",
+    "expansion": "Native Multipathing Plug-in",
+    "ro": "Modulul VMware implicit care gestionează căile multiple spre stocare; folosește politicile PSP.",
+    "en": "The default VMware module that manages multiple storage paths; it uses PSP policies."
+  },
+  {
+    "id": "apd",
+    "term": "APD",
+    "abbr": "APD",
+    "expansion": "All Paths Down",
+    "ro": "Starea în care toate căile spre un dispozitiv au căzut și hostul nu știe dacă pierderea e temporară sau permanentă.",
+    "en": "The state where all paths to a device are down and the host cannot tell if the loss is temporary or permanent."
+  },
+  {
+    "id": "pdl",
+    "term": "PDL",
+    "abbr": "PDL",
+    "expansion": "Permanent Device Loss",
+    "ro": "Starea în care matricea de stocare anunță că dispozitivul nu mai există; hostul nu mai încearcă să se reconecteze.",
+    "en": "The state where the storage array reports the device is gone; the host stops trying to reconnect."
+  },
+  {
+    "id": "alua",
+    "term": "ALUA",
+    "abbr": "ALUA",
+    "expansion": "Asymmetric Logical Unit Access",
+    "ro": "Mod în care o matrice de stocare marchează unele căi ca optimizate și altele ca neoptimizate spre același LUN.",
+    "en": "A way for a storage array to mark some paths to a LUN as optimized and others as non-optimized."
+  },
+  {
+    "id": "chap",
+    "term": "CHAP",
+    "abbr": "CHAP",
+    "expansion": "Challenge-Handshake Authentication Protocol",
+    "ro": "Protocol de autentificare folosit la iSCSI între host și target.",
+    "en": "Authentication protocol used by iSCSI between the host and the target."
+  },
+  {
+    "id": "iqn",
+    "term": "IQN",
+    "abbr": "IQN",
+    "expansion": "iSCSI Qualified Name",
+    "ro": "Numele unic al unui inițiator sau target iSCSI (de forma iqn.an-luna.domeniu:nume).",
+    "en": "The unique name of an iSCSI initiator or target (shaped like iqn.year-month.domain:name)."
+  },
+  {
+    "id": "naa",
+    "term": "NAA",
+    "abbr": "NAA",
+    "expansion": "Network Address Authority",
+    "ro": "Formatul identificatorului unic al unui dispozitiv de stocare (naa.…), folosit de ESXi în comenzi.",
+    "en": "The format of a storage device's unique identifier (naa.…), used by ESXi in commands."
+  },
+  {
+    "id": "port-binding",
+    "term": "port binding",
+    "aliases": [
+      "iSCSI port binding"
+    ],
+    "ro": "Legarea adaptorului iSCSI software de anumite adaptoare VMkernel, pentru mai multe căi spre aceeași matrice.",
+    "en": "Binding the software iSCSI adapter to specific VMkernel adapters, for multiple paths to the same array."
+  },
+  {
+    "id": "extent",
+    "term": "extent",
+    "aliases": [
+      "extents"
+    ],
+    "ro": "O bucată de dispozitiv (partiție) pe care stă un datastore VMFS; un datastore poate întinde mai multe extents.",
+    "en": "A piece of a device (partition) backing a VMFS datastore; a datastore can span several extents."
   }
 ]

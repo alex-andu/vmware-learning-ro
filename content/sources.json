@@ -25,7 +25,8 @@
       "01-fundamente/04-arhitectura-esxi",
       "01-fundamente/05-cpu-memorie",
       "01-fundamente/06-masini-virtuale",
-      "01-fundamente/07-retea-esxi"
+      "01-fundamente/07-retea-esxi",
+      "01-fundamente/08-stocare-esxi"
     ]
   },
   {
@@ -541,7 +542,8 @@
       "01-fundamente/04-arhitectura-esxi",
       "01-fundamente/05-cpu-memorie",
       "01-fundamente/06-masini-virtuale",
-      "01-fundamente/07-retea-esxi"
+      "01-fundamente/07-retea-esxi",
+      "01-fundamente/08-stocare-esxi"
     ]
   },
   {
@@ -763,7 +765,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "01-fundamente/03-stocare-de-baza"
+      "01-fundamente/03-stocare-de-baza",
+      "01-fundamente/08-stocare-esxi"
     ]
   },
   {
@@ -774,7 +777,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "01-fundamente/03-stocare-de-baza"
+      "01-fundamente/03-stocare-de-baza",
+      "01-fundamente/08-stocare-esxi"
     ]
   },
   {
@@ -829,7 +833,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "01-fundamente/03-stocare-de-baza"
+      "01-fundamente/03-stocare-de-baza",
+      "01-fundamente/08-stocare-esxi"
     ]
   },
   {
@@ -1247,7 +1252,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "01-fundamente/07-retea-esxi"
+      "01-fundamente/07-retea-esxi",
+      "01-fundamente/08-stocare-esxi"
     ]
   },
   {
@@ -1347,6 +1353,149 @@
     "read": true,
     "usedBy": [
       "01-fundamente/07-retea-esxi"
+    ]
+  },
+  {
+    "id": "S121",
+    "title": "vSphere 8 Storage: VMFS datastore versions (VMFS5 vs VMFS6)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-storage/GUID-5EE84941-366D-4D37-8B7B-767D08928888.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/08-stocare-esxi"
+    ]
+  },
+  {
+    "id": "S122",
+    "title": "KB 316475: Migrating VMFS 5 datastore to VMFS 6 datastore",
+    "url": "https://knowledge.broadcom.com/external/article/316475/migrating-vmfs-5-datastore-to-vmfs-6-dat.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/08-stocare-esxi"
+    ]
+  },
+  {
+    "id": "S123",
+    "title": "KB 339621: VMware Multipathing policies in ESXi/ESX",
+    "url": "https://knowledge.broadcom.com/external/article/339621",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/08-stocare-esxi"
+    ]
+  },
+  {
+    "id": "S124",
+    "title": "KB 318712: Permanent Device Loss (PDL) and All-Paths-Down (APD) on host",
+    "url": "https://knowledge.broadcom.com/external/article/318712",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/08-stocare-esxi"
+    ]
+  },
+  {
+    "id": "S125",
+    "title": "KB 318850: All Paths Down for a storage device",
+    "url": "https://knowledge.broadcom.com/external/article/318850",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/08-stocare-esxi"
+    ]
+  },
+  {
+    "id": "S126",
+    "title": "vSphere 8 Storage: Configure the software iSCSI adapter",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-storage/GUID-6746129C-106C-4365-B50C-AA912A6E4353.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/08-stocare-esxi"
+    ]
+  },
+  {
+    "id": "S127",
+    "title": "vSphere 8 Storage: Configure dependent hardware iSCSI adapters (discovery, CHAP)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-storage/GUID-DF7C1B27-4BC7-49A1-9F44-4A76C74D858B.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/08-stocare-esxi"
+    ]
+  },
+  {
+    "id": "S128",
+    "title": "KB 317719: Considerations for using software iSCSI port binding in ESXi",
+    "url": "https://knowledge.broadcom.com/external/article/317719",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/08-stocare-esxi"
+    ]
+  },
+  {
+    "id": "S129",
+    "title": "KB 323128: Detach a LUN device from ESXi hosts",
+    "url": "https://knowledge.broadcom.com/external/article/323128",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/08-stocare-esxi"
+    ]
+  },
+  {
+    "id": "S130",
+    "title": "vSphere 8 Storage: Increase VMFS datastore capacity",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-storage/GUID-D57FEF5D-75F1-433D-B337-E760732282FC.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/08-stocare-esxi"
+    ]
+  },
+  {
+    "id": "S131",
+    "title": "KB 344470: Remounting a disconnected NFS datastore from the ESXi command line",
+    "url": "https://knowledge.broadcom.com/external/article/344470/remounting-a-disconnected-nfs-datastore.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/08-stocare-esxi"
+    ]
+  },
+  {
+    "id": "S132",
+    "title": "KB 370665: NFS Support in VMware vSphere 8.0 and Beyond",
+    "url": "https://knowledge.broadcom.com/external/article?articleNumber=370665",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/08-stocare-esxi"
+    ]
+  },
+  {
+    "id": "S133",
+    "title": "KB 410819: Step-by-step to configure iSCSI datastores on ESXi",
+    "url": "https://knowledge.broadcom.com/external/article/410819/stepbystep-to-configure-iscsi-datastores.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/08-stocare-esxi"
     ]
   }
 ]
