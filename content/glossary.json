@@ -738,5 +738,69 @@
     ],
     "ro": "Linia de comandă locală a hostului ESXi; dezactivată implicit, se pornește doar pentru depanare.",
     "en": "The ESXi host's local command line; off by default, enabled only for troubleshooting."
+  },
+  {
+    "id": "numa",
+    "term": "NUMA",
+    "abbr": "NUMA",
+    "expansion": "Non-Uniform Memory Access",
+    "ro": "Arhitectură în care fiecare procesor fizic are memoria lui „locală”, mai rapidă; accesul la memoria altui procesor e mai lent.",
+    "en": "Architecture where each physical processor has its own faster \"local\" memory; accessing another processor's memory is slower."
+  },
+  {
+    "id": "tps",
+    "term": "TPS",
+    "abbr": "TPS",
+    "expansion": "Transparent Page Sharing",
+    "ro": "ESXi găsește pagini de memorie identice și păstrează o singură copie; implicit doar în interiorul aceluiași VM.",
+    "en": "ESXi finds identical memory pages and keeps one copy; by default only within the same VM."
+  },
+  {
+    "id": "cpu-ready",
+    "term": "CPU ready",
+    "aliases": [
+      "%RDY",
+      "ready time"
+    ],
+    "ro": "Timpul în care un vCPU vrea să ruleze, dar așteaptă un procesor fizic liber. Semn de contenție pe host.",
+    "en": "Time a vCPU wants to run but waits for a free physical CPU. A sign of host contention."
+  },
+  {
+    "id": "co-stop",
+    "term": "co-stop",
+    "aliases": [
+      "%CSTP"
+    ],
+    "ro": "Timpul în care un VM cu mai multe vCPU așteaptă ca toate să poată fi programate; valori mari indică un VM cu prea multe vCPU.",
+    "en": "Time a multi-vCPU VM waits until all its vCPUs can be scheduled; high values point to too many vCPUs."
+  },
+  {
+    "id": "ballooning",
+    "term": "ballooning",
+    "aliases": [
+      "balloon driver",
+      "vmmemctl"
+    ],
+    "ro": "Tehnică de recuperare a memoriei: driverul din VM „umflă un balon” ca sistemul de operare să elibereze pagini.",
+    "en": "Memory reclamation technique: the driver in the VM \"inflates a balloon\" so the guest OS frees pages."
+  },
+  {
+    "id": "shares-reservations-limits",
+    "term": "shares, reservations, limits",
+    "aliases": [
+      "reservation",
+      "reservations"
+    ],
+    "ro": "Setările de resurse ale unui VM: shares = prioritate relativă la contenție; reservation = minim garantat; limit = plafon maxim.",
+    "en": "A VM's resource settings: shares = relative priority under contention; reservation = guaranteed minimum; limit = hard maximum."
+  },
+  {
+    "id": "hyperthreading",
+    "term": "hyperthreading",
+    "aliases": [
+      "Hyper-Threading"
+    ],
+    "ro": "Un nucleu fizic expune două fire (procesoare logice); nu dublează puterea de calcul.",
+    "en": "One physical core exposes two threads (logical processors); it does not double compute power."
   }
 ]

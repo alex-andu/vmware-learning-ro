@@ -22,7 +22,8 @@
       "01-fundamente/01-ce-este-virtualizarea",
       "content/modules.json",
       "01-fundamente/02-retea-de-baza",
-      "01-fundamente/04-arhitectura-esxi"
+      "01-fundamente/04-arhitectura-esxi",
+      "01-fundamente/05-cpu-memorie"
     ]
   },
   {
@@ -438,7 +439,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "01-fundamente/01-ce-este-virtualizarea"
+      "01-fundamente/01-ce-este-virtualizarea",
+      "01-fundamente/05-cpu-memorie"
     ]
   },
   {
@@ -449,7 +451,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "01-fundamente/01-ce-este-virtualizarea"
+      "01-fundamente/01-ce-este-virtualizarea",
+      "01-fundamente/05-cpu-memorie"
     ]
   },
   {
@@ -530,7 +533,8 @@
       "content/modules.json",
       "01-fundamente/02-retea-de-baza",
       "01-fundamente/03-stocare-de-baza",
-      "01-fundamente/04-arhitectura-esxi"
+      "01-fundamente/04-arhitectura-esxi",
+      "01-fundamente/05-cpu-memorie"
     ]
   },
   {
@@ -982,6 +986,94 @@
     "read": true,
     "usedBy": [
       "01-fundamente/04-arhitectura-esxi"
+    ]
+  },
+  {
+    "id": "S89",
+    "title": "vSphere 8 Resource Management: Resource Allocation Settings (shares, reservations, limits)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-resource-management/GUID-14102AB7-2CF9-42E3-9642-3EB6629EF530.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/05-cpu-memorie"
+    ]
+  },
+  {
+    "id": "S90",
+    "title": "vSphere 8 Resource Management: Memory Virtualization, overcommitment and reclamation",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-resource-management/GUID-2B1086F3-B3F5-426C-9162-3C3CDD23A5DF.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/05-cpu-memorie"
+    ]
+  },
+  {
+    "id": "S91",
+    "title": "KB 306576: Converting between CPU summation and CPU % ready values",
+    "url": "https://knowledge.broadcom.com/external/article/306576/converting-between-cpu-summation-and-cpu.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/05-cpu-memorie"
+    ]
+  },
+  {
+    "id": "S92",
+    "title": "KB 387750: Understanding the CPU ready values in the vSphere Client performance charts",
+    "url": "https://knowledge.broadcom.com/external/article/387750/understanding-the-cpu-ready-values-in-th.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/05-cpu-memorie"
+    ]
+  },
+  {
+    "id": "S93",
+    "title": "KB 323624: Additional Transparent Page Sharing management capabilities and new default settings",
+    "url": "https://knowledge.broadcom.com/external/article/323624/additional-transparent-page-sharing-mana.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/05-cpu-memorie"
+    ]
+  },
+  {
+    "id": "S94",
+    "title": "KB 326270: Impact of virtual machine memory and CPU resource limits",
+    "url": "https://knowledge.broadcom.com/external/article/326270/impact-of-virtual-machine-memory-and-cpu.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/05-cpu-memorie"
+    ]
+  },
+  {
+    "id": "S95",
+    "title": "KB 438023: Rightsizing virtual machines on ESXi 8.0: vCPU, memory, and CPU topology guidance",
+    "url": "https://knowledge.broadcom.com/external/article/438023",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/05-cpu-memorie"
+    ]
+  },
+  {
+    "id": "S96",
+    "title": "KB 421543: Host CPU usage alarms and VM performance degradation in VDI due to vCPU overprovisioning",
+    "url": "https://knowledge.broadcom.com/external/article/421543/esxi-host-cpu-usage-alarms-and-vm-perfor.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/05-cpu-memorie"
     ]
   }
 ]
