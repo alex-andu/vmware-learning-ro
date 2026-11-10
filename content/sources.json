@@ -26,7 +26,8 @@
       "01-fundamente/05-cpu-memorie",
       "01-fundamente/06-masini-virtuale",
       "01-fundamente/07-retea-esxi",
-      "01-fundamente/08-stocare-esxi"
+      "01-fundamente/08-stocare-esxi",
+      "02-vsphere/01-vcenter"
     ]
   },
   {
@@ -221,7 +222,8 @@
     "read": true,
     "usedBy": [
       "docs/STATE_OF_THE_ART",
-      "01-fundamente/01-ce-este-virtualizarea"
+      "01-fundamente/01-ce-este-virtualizarea",
+      "02-vsphere/01-vcenter"
     ]
   },
   {
@@ -543,7 +545,8 @@
       "01-fundamente/05-cpu-memorie",
       "01-fundamente/06-masini-virtuale",
       "01-fundamente/07-retea-esxi",
-      "01-fundamente/08-stocare-esxi"
+      "01-fundamente/08-stocare-esxi",
+      "02-vsphere/01-vcenter"
     ]
   },
   {
@@ -633,7 +636,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "01-fundamente/02-retea-de-baza"
+      "01-fundamente/02-retea-de-baza",
+      "02-vsphere/01-vcenter"
     ]
   },
   {
@@ -644,7 +648,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "01-fundamente/02-retea-de-baza"
+      "01-fundamente/02-retea-de-baza",
+      "02-vsphere/01-vcenter"
     ]
   },
   {
@@ -677,7 +682,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "01-fundamente/02-retea-de-baza"
+      "01-fundamente/02-retea-de-baza",
+      "02-vsphere/01-vcenter"
     ]
   },
   {
@@ -1496,6 +1502,116 @@
     "read": true,
     "usedBy": [
       "01-fundamente/08-stocare-esxi"
+    ]
+  },
+  {
+    "id": "S134",
+    "title": "vSphere 8 vCenter Installation: Deploy the vCenter Server appliance with the GUI (stage 1 and stage 2)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vcenter-installation/GUID-86FD9381-88B0-40F1-B516-6CC782ED9A14.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/01-vcenter"
+    ]
+  },
+  {
+    "id": "S135",
+    "title": "vSphere 8 vCenter Installation: Required information for deploying a vCenter Server appliance (worksheet)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vcenter-installation/GUID-077C7523-E0EA-4922-8D48-C026916323C4.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/01-vcenter"
+    ]
+  },
+  {
+    "id": "S136",
+    "title": "vSphere 8 vCenter Installation: vCenter Server services overview",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vcenter-installation/GUID-78933728-7F02-43AF-ABD8-0BDCE10418A6.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/01-vcenter"
+    ]
+  },
+  {
+    "id": "S137",
+    "title": "vSphere 8 vCenter Installation: Considerations and limitations for file-based backup and restore",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vcenter-installation/GUID-AFF34FA6-B7CF-4AE0-9C12-C674F160682C.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/01-vcenter"
+    ]
+  },
+  {
+    "id": "S138",
+    "title": "KB 375278: Manually make vCenter backup from VAMI",
+    "url": "https://knowledge.broadcom.com/external/article/375278",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/01-vcenter"
+    ]
+  },
+  {
+    "id": "S139",
+    "title": "KB 318731: Overview of backup and restore options in vCenter Server",
+    "url": "https://knowledge.broadcom.com/external/article/318731/overview-of-backup-and-restore-options-i.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/01-vcenter"
+    ]
+  },
+  {
+    "id": "S140",
+    "title": "KB 340943: Stop, start or restart services on vCenter Server 7.x/8.x",
+    "url": "https://knowledge.broadcom.com/external/article/340943",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/01-vcenter"
+    ]
+  },
+  {
+    "id": "S141",
+    "title": "VMware blog: Resizing VMware vCenter (May 2026)",
+    "url": "https://blogs.vmware.com/cloud-foundation/2026/05/12/resizing-vmware-vcenter/",
+    "type": "vendor",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/01-vcenter"
+    ]
+  },
+  {
+    "id": "S142",
+    "title": "VMware blog: vCenter management evolved, new vCenter Linking in VCF 9.x (June 2026)",
+    "url": "https://blogs.vmware.com/cloud-foundation/2026/06/02/vcenter-management-evolved-new-vcenter-linking-in-vmware-cloud-foundation-9-x/",
+    "type": "vendor",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/01-vcenter"
+    ]
+  },
+  {
+    "id": "S143",
+    "title": "VMware blog: Group and link your vCenter Servers to simplify workload management (June 2025)",
+    "url": "https://blogs.vmware.com/cloud-foundation/2025/06/19/group-and-link-your-vcenter-servers-to-simplify-workload-management/",
+    "type": "vendor",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/01-vcenter"
     ]
   }
 ]

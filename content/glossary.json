@@ -1009,5 +1009,59 @@
     ],
     "ro": "O bucată de dispozitiv (partiție) pe care stă un datastore VMFS; un datastore poate întinde mai multe extents.",
     "en": "A piece of a device (partition) backing a VMFS datastore; a datastore can span several extents."
+  },
+  {
+    "id": "vami",
+    "term": "VAMI",
+    "abbr": "VAMI",
+    "expansion": "vCenter Server Appliance Management Interface",
+    "ro": "Interfața web de administrare a appliance-ului vCenter (portul 5480): stare, rețea, timp, SSH, backup, actualizări.",
+    "en": "The vCenter appliance management web interface (port 5480): health, networking, time, SSH, backup, updates."
+  },
+  {
+    "id": "psc",
+    "term": "PSC",
+    "abbr": "PSC",
+    "expansion": "Platform Services Controller",
+    "ro": "Componenta care ținea SSO, licențele și certificatele; din vSphere 7.0 e integrată în vCenter și nu mai poate fi separată.",
+    "en": "The component that held SSO, licensing and certificates; since vSphere 7.0 it is built into vCenter and can no longer be separate."
+  },
+  {
+    "id": "elm",
+    "term": "ELM",
+    "abbr": "ELM",
+    "expansion": "Enhanced Linked Mode",
+    "ro": "Legarea mai multor vCenter-e în același domeniu SSO, prin replicarea bazei de date de directoare. În VCF 9 e înlocuită de vCenter Linking.",
+    "en": "Linking several vCenters in one SSO domain through directory database replication. In VCF 9 it is replaced by vCenter Linking."
+  },
+  {
+    "id": "vmca",
+    "term": "VMCA",
+    "abbr": "VMCA",
+    "expansion": "VMware Certificate Authority",
+    "ro": "Autoritatea de certificare inclusă în vCenter, care semnează implicit certificatele hosturilor ESXi.",
+    "en": "The certificate authority built into vCenter, which signs ESXi host certificates by default."
+  },
+  {
+    "id": "ceip",
+    "term": "CEIP",
+    "abbr": "CEIP",
+    "expansion": "Customer Experience Improvement Program",
+    "ro": "Programul prin care produsul trimite date de utilizare către VMware; se acceptă sau se refuză la instalare.",
+    "en": "The program through which the product sends usage data to VMware; accepted or declined at install time."
+  },
+  {
+    "id": "ova",
+    "term": "OVA",
+    "abbr": "OVA",
+    "expansion": "Open Virtual Appliance",
+    "ro": "Un singur fișier care conține un VM gata configurat (disc plus descriere), folosit pentru a instala appliance-uri.",
+    "en": "A single file holding a ready-made VM (disk plus description), used to deploy appliances."
+  },
+  {
+    "id": "vpxd",
+    "term": "vpxd",
+    "ro": "Serviciul principal vCenter Server din appliance; dacă se oprește, vSphere Client nu mai poate administra inventarul.",
+    "en": "The main vCenter Server service in the appliance; if it stops, the vSphere Client can no longer manage the inventory."
   }
 ]
