@@ -699,5 +699,44 @@
     ],
     "ro": "Virtual Volumes: tip de datastore în care array-ul de stocare gestionează direct discurile fiecărui VM.",
     "en": "Virtual Volumes: a datastore type where the storage array manages each VM's disks directly."
+  },
+  {
+    "id": "lockdown-mode",
+    "term": "Lockdown Mode",
+    "ro": "Mod de securitate al hostului ESXi în care modificările se fac doar prin vCenter. Normal: DCUI rămâne pornit pentru excepții; Strict: DCUI e oprit.",
+    "en": "ESXi host security mode in which changes go through vCenter only. Normal: DCUI stays up for exceptions; Strict: DCUI is stopped."
+  },
+  {
+    "id": "hostd",
+    "term": "hostd",
+    "ro": "Serviciul principal de management al hostului ESXi; prin el trec Host Client, API-ul și (prin vpxa) vCenter.",
+    "en": "The main ESXi host management service; Host Client, the API and (via vpxa) vCenter go through it."
+  },
+  {
+    "id": "vpxa",
+    "term": "vpxa",
+    "aliases": [
+      "vCenter Server Agent"
+    ],
+    "ro": "Agentul vCenter de pe host: canalul prin care vCenter vorbește cu hostd.",
+    "en": "The vCenter agent on the host: the channel vCenter uses to talk to hostd."
+  },
+  {
+    "id": "esx-osdata",
+    "term": "ESX-OSData",
+    "aliases": [
+      "OSData"
+    ],
+    "ro": "Partiția de sistem ESXi (VMFS-L) pentru loguri, scratch, VMware Tools și core dump-uri; nu se folosește pentru VM-uri.",
+    "en": "ESXi system partition (VMFS-L) for logs, scratch, VMware Tools and core dumps; not used for VMs."
+  },
+  {
+    "id": "esxi-shell",
+    "term": "ESXi Shell",
+    "aliases": [
+      "TSM"
+    ],
+    "ro": "Linia de comandă locală a hostului ESXi; dezactivată implicit, se pornește doar pentru depanare.",
+    "en": "The ESXi host's local command line; off by default, enabled only for troubleshooting."
   }
 ]

@@ -1,0 +1,118 @@
+{
+  "steps": [
+    {
+      "id": "dcui-tour",
+      "title": {
+        "ro": "Explorează DCUI fără să schimbi nimic",
+        "en": "Explore the DCUI without changing anything"
+      },
+      "path": {
+        "ro": "Consola hostului → F2 → System Customization",
+        "en": "Host console → F2 → System Customization"
+      },
+      "action": {
+        "ro": "Autentifică-te în DCUI. Deschide „Configure Management Network” și uită-te (fără să salvezi) la placa de rețea, VLAN, IPv4, DNS. Apoi deschide „Troubleshooting Options” și notează ce opțiuni există. Ieși cu Esc fără modificări.",
+        "en": "Log in to the DCUI. Open \"Configure Management Network\" and look (without saving) at the NIC, VLAN, IPv4 and DNS. Then open \"Troubleshooting Options\" and note the options. Leave with Esc, making no changes."
+      },
+      "why": {
+        "ro": "DCUI e singura cale de acces când rețeaua de management nu merge. E bine să-l cunoști înainte de o urgență, nu în timpul ei.",
+        "en": "The DCUI is the only access path when the management network is down. Learn it before an emergency, not during one."
+      }
+    },
+    {
+      "id": "services",
+      "title": {
+        "ro": "Inventariază serviciile hostului",
+        "en": "List the host services"
+      },
+      "path": {
+        "ro": "Host Client → Manage → Services",
+        "en": "Host Client → Manage → Services"
+      },
+      "action": {
+        "ro": "Găsește hostd, vpxa (dacă există), ntpd, TSM (ESXi Shell) și TSM-SSH. Notează pentru fiecare starea (Running/Stopped) și politica de pornire.",
+        "en": "Find hostd, vpxa (if present), ntpd, TSM (ESXi Shell) and TSM-SSH. Note each one's state (Running/Stopped) and startup policy."
+      },
+      "why": {
+        "ro": "Vezi concret că ESXi Shell și SSH sunt oprite implicit și că managementul hostului e făcut de servicii separate de VMkernel.",
+        "en": "You see that ESXi Shell and SSH are stopped by default and that host management is done by services separate from the VMkernel."
+      }
+    },
+    {
+      "id": "timeouts",
+      "title": {
+        "ro": "Setează timeout-urile pentru ESXi Shell și SSH",
+        "en": "Set the ESXi Shell and SSH timeouts"
+      },
+      "path": {
+        "ro": "Host Client → Manage → System → Advanced settings ⚠ de verificat",
+        "en": "Host Client → Manage → System → Advanced settings ⚠ to verify"
+      },
+      "action": {
+        "ro": "Caută `UserVars.ESXiShellTimeOut` și `UserVars.ESXiShellInteractiveTimeOut` și setează-le, de exemplu, la 900 (secunde). Notează valorile vechi.",
+        "en": "Find `UserVars.ESXiShellTimeOut` and `UserVars.ESXiShellInteractiveTimeOut` and set them to, for example, 900 (seconds). Note the old values."
+      },
+      "why": {
+        "ro": "Un SSH uitat pornit e o ușă deschisă. Primul timeout oprește serviciul dacă nimeni nu se loghează; al doilea închide sesiunile inactive (docs vSphere Security).",
+        "en": "A forgotten SSH service is an open door. The first timeout stops the service if nobody logs in; the second closes idle sessions (vSphere Security docs)."
+      }
+    },
+    {
+      "id": "firewall",
+      "title": {
+        "ro": "Citește regulile firewall-ului ESXi",
+        "en": "Read the ESXi firewall rules"
+      },
+      "path": {
+        "ro": "Host Client → Networking → Firewall rules ⚠ de verificat",
+        "en": "Host Client → Networking → Firewall rules ⚠ to verify"
+      },
+      "action": {
+        "ro": "Găsește regulile pentru SSH server, NTP client și vSphere Web Client. Notează porturile și dacă acceptă conexiuni de la orice IP. Nu schimba nimic dacă nu ai consolă fizică la îndemână.",
+        "en": "Find the rules for SSH server, NTP client and vSphere Web Client. Note the ports and whether they accept connections from any IP. Change nothing unless you have physical console access at hand."
+      },
+      "why": {
+        "ro": "Firewall-ul permite doar serviciile activate, dar implicit de la orice IP. În producție restrângi la rețeaua de management, cu IP-ul vCenter inclus (KB 418184).",
+        "en": "The firewall allows only enabled services, but by default from any IP. In production you restrict them to the management network, including the vCenter IP (KB 418184)."
+      }
+    },
+    {
+      "id": "hostd-restart",
+      "title": {
+        "ro": "Repornește hostd și urmărește efectul (test de avarie)",
+        "en": "Restart hostd and watch the effect (failure test)"
+      },
+      "path": {
+        "ro": "Host Client → Manage → Services → TSM-SSH → Start; apoi ssh root@<IP-ul hostului>",
+        "en": "Host Client → Manage → Services → TSM-SSH → Start; then ssh root@<host IP>"
+      },
+      "action": {
+        "ro": "Pornește un VM de test pe host. Prin SSH rulează `vmware -v`, apoi `/etc/init.d/hostd status` și `/etc/init.d/hostd restart`. Urmărește Host Client: sesiunea se întrerupe și revine în 1–2 minute. Verifică faptul că VM-ul a rulat tot timpul.",
+        "en": "Power on a test VM on the host. Over SSH run `vmware -v`, then `/etc/init.d/hostd status` and `/etc/init.d/hostd restart`. Watch Host Client: the session drops and comes back in 1–2 minutes. Check that the VM kept running throughout."
+      },
+      "why": {
+        "ro": "Demonstrezi separarea dintre planul de management (hostd) și VMkernel. Așa înțelegi de ce un host „Not Responding” are adesea VM-uri care merg normal (KB 320280, KB 316598).",
+        "en": "You prove the separation between the management plane (hostd) and the VMkernel. That is why a \"Not Responding\" host often has VMs running fine (KB 320280, KB 316598)."
+      }
+    },
+    {
+      "id": "lockdown",
+      "title": {
+        "ro": "Verifică Lockdown Mode pe un host fără vCenter și oprește SSH",
+        "en": "Check Lockdown Mode on a host without vCenter and stop SSH"
+      },
+      "path": {
+        "ro": "Consola hostului → F2 → Configure Lockdown Mode; apoi Host Client → Manage → Services",
+        "en": "Host console → F2 → Configure Lockdown Mode; then Host Client → Manage → Services"
+      },
+      "action": {
+        "ro": "În DCUI uită-te la opțiunea „Configure Lockdown Mode”: pe un host neconectat la vCenter trebuie să fie gri. Apoi oprește TSM-SSH din Host Client.",
+        "en": "In the DCUI look at \"Configure Lockdown Mode\": on a host not connected to vCenter it must be greyed out. Then stop TSM-SSH from Host Client."
+      },
+      "why": {
+        "ro": "Lockdown Mode obligă managementul prin vCenter, deci n-are sens fără vCenter (KB 336894). Îl vei activa în modulul 2, după ce instalezi vCenter. SSH-ul se oprește pentru că nu mai ai nevoie de el.",
+        "en": "Lockdown Mode forces management through vCenter, so it makes no sense without one (KB 336894). You will enable it in module 2 after installing vCenter. SSH is stopped because you no longer need it."
+      }
+    }
+  ]
+}

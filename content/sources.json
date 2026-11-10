@@ -21,7 +21,8 @@
       "docs/STATE_OF_THE_ART",
       "01-fundamente/01-ce-este-virtualizarea",
       "content/modules.json",
-      "01-fundamente/02-retea-de-baza"
+      "01-fundamente/02-retea-de-baza",
+      "01-fundamente/04-arhitectura-esxi"
     ]
   },
   {
@@ -528,7 +529,8 @@
       "01-fundamente/01-ce-este-virtualizarea",
       "content/modules.json",
       "01-fundamente/02-retea-de-baza",
-      "01-fundamente/03-stocare-de-baza"
+      "01-fundamente/03-stocare-de-baza",
+      "01-fundamente/04-arhitectura-esxi"
     ]
   },
   {
@@ -859,6 +861,127 @@
     "read": true,
     "usedBy": [
       "01-fundamente/03-stocare-de-baza"
+    ]
+  },
+  {
+    "id": "S78",
+    "title": "vSphere 8 Security: Lockdown Mode Behavior",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-security/GUID-88B24613-E8F9-40D2-B838-225F5FF480FF.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/04-arhitectura-esxi"
+    ]
+  },
+  {
+    "id": "S79",
+    "title": "KB 336894: Enabling or disabling Lockdown mode on an ESXi host",
+    "url": "https://knowledge.broadcom.com/external/article/336894/",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/04-arhitectura-esxi"
+    ]
+  },
+  {
+    "id": "S80",
+    "title": "vSphere 8 Security: Use the ESXi Shell (ESXi Shell, SSH, timeouts)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-security/GUID-12E27BF3-3769-4665-8769-DA76C2BC9FFE.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/04-arhitectura-esxi"
+    ]
+  },
+  {
+    "id": "S81",
+    "title": "vSphere 8 Security: ESXi Firewall Configuration",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-security/GUID-8912DD42-C6EA-4299-9B10-5F3AEA52C605.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/04-arhitectura-esxi"
+    ]
+  },
+  {
+    "id": "S82",
+    "title": "KB 418184: Allowing Host Client access only from specific IP addresses",
+    "url": "https://knowledge.broadcom.com/external/article/418184/allowing-host-client-access-only-from-sp.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/04-arhitectura-esxi"
+    ]
+  },
+  {
+    "id": "S83",
+    "title": "KB 320280: Restarting Management Agents in ESXi",
+    "url": "https://knowledge.broadcom.com/external/article/320280",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/04-arhitectura-esxi"
+    ]
+  },
+  {
+    "id": "S84",
+    "title": "KB 316598: Troubleshooting the hostd service if it fails or stops responding",
+    "url": "https://knowledge.broadcom.com/external/article/316598",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/04-arhitectura-esxi"
+    ]
+  },
+  {
+    "id": "S85",
+    "title": "KB 311805: Troubleshooting the vCenter Server Agent when it does not start",
+    "url": "https://knowledge.broadcom.com/external/article/311805",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/04-arhitectura-esxi"
+    ]
+  },
+  {
+    "id": "S86",
+    "title": "vSphere 8 ESXi Upgrade: ESXi System Storage Overview",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-esxi-upgrade/GUID-474D003B-C6FB-465D-BC1B-5FD30F8E2209.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/04-arhitectura-esxi"
+    ]
+  },
+  {
+    "id": "S87",
+    "title": "KB 317631: SD card/USB boot device revised guidance",
+    "url": "https://knowledge.broadcom.com/external/article/317631",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/04-arhitectura-esxi"
+    ]
+  },
+  {
+    "id": "S88",
+    "title": "vSphere 8 Host Client: About VMware Host Client",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-esxi-host-client/GUID-4EAFC4E4-D666-4E40-8CF9-7B96418DD3DB.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/04-arhitectura-esxi"
     ]
   }
 ]
