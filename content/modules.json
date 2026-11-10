@@ -1,0 +1,15 @@
+[
+  {
+    "id": "01-fundamente",
+    "order": 1,
+    "title": { "ro": "1. Fundamente IT & ESXi", "en": "1. IT Fundamentals & ESXi" },
+    "competency": {
+      "ro": "Provizoriu (se finalizează în Etapa 2): instalează și configurează un host ESXi standalone și explică rolul hypervisorului.",
+      "en": "Provisional (finalized in Stage 2): installs and configures a standalone ESXi host and explains the hypervisor's role."
+    },
+    "labTitle": {
+      "ro": "Provizoriu: primul host ESXi nested în VMware Workstation Pro",
+      "en": "Provisional: first nested ESXi host in VMware Workstation Pro"
+    }
+  }
+]

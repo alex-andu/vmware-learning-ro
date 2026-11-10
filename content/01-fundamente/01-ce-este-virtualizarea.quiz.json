@@ -1,0 +1,54 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": { "ro": "O firmă vrea să consolideze 20 de servere fizice subutilizate pe 3 servere noi, în producție. Ce tip de hypervisor e potrivit?", "en": "A company wants to consolidate 20 underused physical servers onto 3 new servers in production. Which hypervisor type fits?" },
+      "options": [
+        { "text": { "ro": "Type 1 (bare-metal), de exemplu ESXi", "en": "Type 1 (bare-metal), e.g. ESXi" }, "correct": true, "explanation": { "ro": "Corect: rulează direct pe hardware, cu overhead mic, și e standardul pentru producție.", "en": "Correct: it runs directly on hardware with low overhead and is the production standard." } },
+        { "text": { "ro": "Type 2 (hosted), de exemplu Workstation Pro pe Windows Server", "en": "Type 2 (hosted), e.g. Workstation Pro on Windows Server" }, "correct": false, "explanation": { "ro": "Greșit: depinde de un OS gazdă și e gândit pentru stații de lucru, nu pentru consolidare în data center.", "en": "Wrong: it depends on a host OS and is meant for workstations, not data center consolidation." } },
+        { "text": { "ro": "ESXi nested în VM-uri pe serverele noi", "en": "Nested ESXi in VMs on the new servers" }, "correct": false, "explanation": { "ro": "Greșit: ESXi nested nu e suportat în producție.", "en": "Wrong: nested ESXi is not supported in production." } },
+        { "text": { "ro": "Nu e nevoie de hypervisor, ajung containerele", "en": "No hypervisor needed, containers are enough" }, "correct": false, "explanation": { "ro": "Greșit: scenariul cere consolidarea unor servere întregi, cu sisteme de operare diferite, ceea ce face un hypervisor.", "en": "Wrong: the scenario consolidates whole servers with different OSes, which is a hypervisor's job." } }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": { "ro": "Un student instalează ESXi 8.0U3e din ISO-ul Free și încearcă să-l adauge în vCenter. Ce se întâmplă?", "en": "A student installs ESXi 8.0U3e from the Free ISO and tries to add it to vCenter. What happens?" },
+      "options": [
+        { "text": { "ro": "Hostul se adaugă, dar fără HA", "en": "The host is added, but without HA" }, "correct": false, "explanation": { "ro": "Greșit: licența gratuită nu permite deloc management din vCenter.", "en": "Wrong: the free license does not allow vCenter management at all." } },
+        { "text": { "ro": "Operația eșuează: licența gratuită nu permite management din vCenter", "en": "It fails: the free license does not allow vCenter management" }, "correct": true, "explanation": { "ro": "Corect: KB 399823 enumeră lipsa managementului din vCenter printre limitări.", "en": "Correct: KB 399823 lists no vCenter management among the limitations." } },
+        { "text": { "ro": "Hostul intră automat în evaluare de 60 de zile", "en": "The host automatically enters a 60-day evaluation" }, "correct": false, "explanation": { "ro": "Greșit: un host instalat din ISO-ul Free nu poate intra în trial.", "en": "Wrong: a host installed from the Free ISO cannot enter trial mode." } },
+        { "text": { "ro": "Hostul se adaugă dacă are maxim 8 vCPU per VM", "en": "The host is added if VMs have at most 8 vCPU" }, "correct": false, "explanation": { "ro": "Greșit: limita de 8 vCPU e separată și nu deblochează vCenter.", "en": "Wrong: the 8 vCPU limit is separate and doesn't unlock vCenter." } }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": { "ro": "Ai 3 ESXi nested pe un ESXi fizic, conectați la un vSphere Standard Switch. VM-urile din hosturile nested nu au rețea. Ce setări activezi pe port group?", "en": "You have 3 nested ESXi hosts on a physical ESXi, connected to a vSphere Standard Switch. VMs inside the nested hosts have no network. Which port group settings do you enable?" },
+      "options": [
+        { "text": { "ro": "MAC Learning", "en": "MAC Learning" }, "correct": false, "explanation": { "ro": "Greșit pentru acest caz: MAC Learning nativ există pe VDS, nu pe VSS.", "en": "Wrong here: native MAC Learning exists on a VDS, not on a VSS." } },
+        { "text": { "ro": "Promiscuous mode și Forged Transmits", "en": "Promiscuous mode and Forged Transmits" }, "correct": true, "explanation": { "ro": "Corect: pe VSS acestea sunt setările necesare pentru ca traficul VM-urilor interioare să treacă.", "en": "Correct: on a VSS these are the settings needed for inner VM traffic to pass." } },
+        { "text": { "ro": "Doar MAC Address Changes", "en": "Only MAC Address Changes" }, "correct": false, "explanation": { "ro": "Greșit: nu rezolvă primirea cadrelor destinate MAC-urilor necunoscute.", "en": "Wrong: it doesn't solve receiving frames for unknown MACs." } },
+        { "text": { "ro": "Jumbo frames (MTU 9000)", "en": "Jumbo frames (MTU 9000)" }, "correct": false, "explanation": { "ro": "Greșit: MTU-ul nu are legătură cu filtrarea după adresa MAC.", "en": "Wrong: MTU is unrelated to MAC-based filtering." } }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": { "ro": "Managerul tău întreabă dacă poate rula ESXi nested în producție pentru un client mic, ca să economisească hardware. Care e răspunsul corect?", "en": "Your manager asks whether nested ESXi can run in production for a small customer to save hardware. What is the correct answer?" },
+      "options": [
+        { "text": { "ro": "Da, dacă hostul fizic e pe Compatibility Guide", "en": "Yes, if the physical host is on the Compatibility Guide" }, "correct": false, "explanation": { "ro": "Greșit: hardware-ul certificat nu schimbă politica de suport pentru nested.", "en": "Wrong: certified hardware doesn't change the nested support policy." } },
+        { "text": { "ro": "Da, cu Workstation Pro, care e gratuit și pentru uz comercial", "en": "Yes, with Workstation Pro, which is free for commercial use too" }, "correct": false, "explanation": { "ro": "Greșit: faptul că Workstation e gratuit nu face ESXi nested suportat.", "en": "Wrong: Workstation being free doesn't make nested ESXi supported." } },
+        { "text": { "ro": "Nu: nested ESXi e nesuportat în producție; excepția e doar vSAN Witness Appliance pe ESXi fizic", "en": "No: nested ESXi is unsupported in production; the only exception is the vSAN Witness Appliance on physical ESXi" }, "correct": true, "explanation": { "ro": "Corect, conform KB 313547.", "en": "Correct, per KB 313547." } },
+        { "text": { "ro": "Da, dacă folosește licența ESXi Free", "en": "Yes, if it uses the free ESXi license" }, "correct": false, "explanation": { "ro": "Greșit: licența nu schimbă politica, iar ESXi Free nu are suport deloc.", "en": "Wrong: the license doesn't change the policy, and free ESXi has no support at all." } }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": { "ro": "Vrei vCenter într-un lab cu 3 hosturi și puțin RAM. Care e cea mai mică mărime de vCenter 8.0 care acoperă labul?", "en": "You want vCenter in a 3-host lab with little RAM. What is the smallest vCenter 8.0 size that covers the lab?" },
+      "options": [
+        { "text": { "ro": "Tiny: 2 vCPU, 14 GB RAM, până la 10 hosturi", "en": "Tiny: 2 vCPU, 14 GB RAM, up to 10 hosts" }, "correct": true, "explanation": { "ro": "Corect: Tiny acoperă până la 10 hosturi și 100 VM-uri.", "en": "Correct: Tiny covers up to 10 hosts and 100 VMs." } },
+        { "text": { "ro": "Small: 4 vCPU, 21 GB RAM", "en": "Small: 4 vCPU, 21 GB RAM" }, "correct": false, "explanation": { "ro": "Greșit: funcționează, dar consumă RAM inutil pentru 3 hosturi.", "en": "Wrong: it works but wastes RAM for 3 hosts." } },
+        { "text": { "ro": "Tiny: 2 vCPU, 12 GB RAM", "en": "Tiny: 2 vCPU, 12 GB RAM" }, "correct": false, "explanation": { "ro": "Greșit: 12 GB era cerința în 7.0; în 8.0 Tiny cere 14 GB.", "en": "Wrong: 12 GB was the 7.0 requirement; in 8.0 Tiny needs 14 GB." } },
+        { "text": { "ro": "Nu ai nevoie de vCenter, Host Client face clustere", "en": "You don't need vCenter, Host Client builds clusters" }, "correct": false, "explanation": { "ro": "Greșit: Host Client gestionează un singur host; clusterele cer vCenter.", "en": "Wrong: Host Client manages a single host; clusters need vCenter." } }
+      ]
+    }
+  ]
+}

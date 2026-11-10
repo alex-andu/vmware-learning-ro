@@ -1,0 +1,43 @@
+{
+  "steps": [
+    {
+      "id": "bios",
+      "title": { "ro": "Activează virtualizarea hardware în BIOS/UEFI", "en": "Enable hardware virtualization in BIOS/UEFI" },
+      "path": { "ro": "BIOS/UEFI → setări CPU → Intel VT-x sau AMD-V (SVM) ⚠ de verificat: numele exact diferă de la producător la producător", "en": "BIOS/UEFI → CPU settings → Intel VT-x or AMD-V (SVM) ⚠ to verify: exact name varies by vendor" },
+      "action": { "ro": "Repornește PC-ul, intră în BIOS/UEFI și activează opțiunea de virtualizare a procesorului. Salvează și repornește.", "en": "Reboot, enter BIOS/UEFI and enable CPU virtualization. Save and reboot." },
+      "why": { "ro": "Fără extensiile hardware de virtualizare, Workstation nu poate expune virtualizarea către VM, iar ESXi nested nu poate rula propriile VM-uri.", "en": "Without hardware virtualization extensions, Workstation cannot expose virtualization to the VM and nested ESXi cannot run its own VMs." }
+    },
+    {
+      "id": "install-ws",
+      "title": { "ro": "Instalează VMware Workstation Pro", "en": "Install VMware Workstation Pro" },
+      "action": { "ro": "Descarcă Workstation Pro din Broadcom Support Portal (cont gratuit) și instalează-l. Nu ai nevoie de cheie de licență.", "en": "Download Workstation Pro from the Broadcom Support Portal (free account) and install it. No license key is needed." },
+      "why": { "ro": "Workstation Pro este gratuit pentru toți din 11.11.2024 și este hypervisorul Type 2 pe care rulăm laboratorul pe un PC obișnuit.", "en": "Workstation Pro has been free for everyone since 2024-11-11 and is the Type 2 hypervisor we use to run the lab on a regular PC." }
+    },
+    {
+      "id": "iso",
+      "title": { "ro": "Descarcă ISO-ul ESXi potrivit", "en": "Download the right ESXi ISO" },
+      "action": { "ro": "Pentru acest lab, oricare ISO ESXi 8.0U3e merge. Pentru laboratoarele viitoare cu vCenter alege ISO-ul standard (evaluare 60 de zile), nu ISO-ul Free (build 24677879).", "en": "For this lab any ESXi 8.0U3e ISO works. For future vCenter labs choose the standard ISO (60-day evaluation), not the Free ISO (build 24677879)." },
+      "why": { "ro": "Un host instalat din ISO-ul Free nu poate fi adăugat în vCenter și nu poate intra în trial. Alegerea greșită te obligă să reinstalezi.", "en": "A host installed from the Free ISO cannot be added to vCenter and cannot enter trial mode. The wrong choice forces a reinstall." }
+    },
+    {
+      "id": "create-vm",
+      "title": { "ro": "Creează VM-ul pentru ESXi", "en": "Create the ESXi VM" },
+      "path": { "ro": "File → New Virtual Machine → Typical → Installer disc image (ISO) ⚠ de verificat pe versiunea ta de Workstation", "en": "File → New Virtual Machine → Typical → Installer disc image (ISO) ⚠ verify on your Workstation version" },
+      "action": { "ro": "Alege ISO-ul ESXi. Dă VM-ului 2 vCPU, minim 8 GB RAM ⚠ de verificat cerința exactă pentru 8.0 și un disc de 40 GB, thin.", "en": "Pick the ESXi ISO. Give the VM 2 vCPU, at least 8 GB RAM ⚠ verify the exact 8.0 requirement and a 40 GB thin disk." },
+      "why": { "ro": "Sub minimul de RAM instalarea ESXi se oprește. Discul thin ocupă pe SSD doar cât scrie efectiv ESXi, deci economisești spațiu pentru hosturile următoare.", "en": "Below the RAM minimum the ESXi installer stops. A thin disk only uses the SSD space ESXi actually writes, saving room for future hosts." }
+    },
+    {
+      "id": "vhv",
+      "title": { "ro": "Expune virtualizarea către VM", "en": "Expose virtualization to the VM" },
+      "path": { "ro": "VM → Settings → Processors → Virtualize Intel VT-x/EPT or AMD-V/RVI", "en": "VM → Settings → Processors → Virtualize Intel VT-x/EPT or AMD-V/RVI" },
+      "action": { "ro": "Bifează opțiunea înainte de prima pornire a VM-ului.", "en": "Tick the option before the VM's first power-on." },
+      "why": { "ro": "ESXi verifică la instalare dacă procesorul are extensii de virtualizare. Fără această bifă, ESXi nested nu poate porni VM-uri pe 64 de biți.", "en": "ESXi checks for virtualization extensions at install. Without this, nested ESXi cannot power on 64-bit VMs." }
+    },
+    {
+      "id": "install-esxi",
+      "title": { "ro": "Instalează ESXi și verifică Host Client", "en": "Install ESXi and check Host Client" },
+      "action": { "ro": "Pornește VM-ul, urmează instalatorul, setează parola de root. După repornire, deschide în browser adresa IP afișată pe consola ESXi (DCUI) și autentifică-te în Host Client.", "en": "Power on the VM, follow the installer, set the root password. After reboot, open the IP shown on the ESXi console (DCUI) in a browser and log in to Host Client." },
+      "why": { "ro": "Host Client confirmă că rețeaua de management funcționează. Fără el nu poți administra hostul de pe laptop.", "en": "Host Client confirms the management network works. Without it you can't manage the host from your laptop." }
+    }
+  ]
+}
