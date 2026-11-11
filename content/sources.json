@@ -37,7 +37,8 @@
       "02-vsphere/08-ha-ft",
       "02-vsphere/09-content-library",
       "02-vsphere/10-securitate",
-      "02-vsphere/11-backup"
+      "02-vsphere/11-backup",
+      "02-vsphere/12-monitorizare"
     ]
   },
   {
@@ -469,7 +470,8 @@
     "read": true,
     "usedBy": [
       "01-fundamente/01-ce-este-virtualizarea",
-      "01-fundamente/05-cpu-memorie"
+      "01-fundamente/05-cpu-memorie",
+      "02-vsphere/12-monitorizare"
     ]
   },
   {
@@ -566,7 +568,8 @@
       "02-vsphere/08-ha-ft",
       "02-vsphere/09-content-library",
       "02-vsphere/10-securitate",
-      "02-vsphere/11-backup"
+      "02-vsphere/11-backup",
+      "02-vsphere/12-monitorizare"
     ]
   },
   {
@@ -1072,7 +1075,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "01-fundamente/05-cpu-memorie"
+      "01-fundamente/05-cpu-memorie",
+      "02-vsphere/12-monitorizare"
     ]
   },
   {
@@ -3444,6 +3448,226 @@
     "read": true,
     "usedBy": [
       "02-vsphere/11-backup"
+    ]
+  },
+  {
+    "id": "S306",
+    "title": "vSphere 8 Monitoring and Performance: Data collection levels (statistics levels 1-4)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-monitoring-performance/GUID-12B1493A-5657-4BB3-8935-44B6B8E8B67C.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/12-monitorizare"
+    ]
+  },
+  {
+    "id": "S307",
+    "title": "vSphere 8 vCenter Configuration: Configure statistics settings (intervals, save for, level)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vcenter-configuration/GUID-B2F91FDE-F7FC-46C4-91D0-7AD7E4CC87FC.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/12-monitorizare"
+    ]
+  },
+  {
+    "id": "S308",
+    "title": "vSphere 8 Monitoring and Performance: Create or edit alarms (rules, reset rule, email, SNMP, script)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-monitoring-performance/GUID-E30ED662-D851-4230-9AFE-1BBBC55C98D6.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/12-monitorizare"
+    ]
+  },
+  {
+    "id": "S309",
+    "title": "vSphere 8 Monitoring and Performance: Alarms and the object they are defined on (disable on a leaf entity)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-monitoring-performance/GUID-9272E3B2-6A7F-427B-994C-B15FF8CADC25.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/12-monitorizare"
+    ]
+  },
+  {
+    "id": "S310",
+    "title": "vSphere 8 Monitoring and Performance: Working with performance charts (overview and advanced)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-monitoring-performance/GUID-17857489-FA76-4EFC-827B-D1C647F818CC.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/12-monitorizare"
+    ]
+  },
+  {
+    "id": "S311",
+    "title": "KB 318939: Configuring syslog on ESXi",
+    "url": "https://knowledge.broadcom.com/external/article/318939/configuring-syslog-on-esxi.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/12-monitorizare"
+    ]
+  },
+  {
+    "id": "S312",
+    "title": "KB 390265: Persisting vSphere metrics outside vCenter instead of raising the statistics level",
+    "url": "https://knowledge.broadcom.com/external/article/390265",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/12-monitorizare"
+    ]
+  },
+  {
+    "id": "S313",
+    "title": "KB 417754: Custom vCenter alarm does not send email notifications",
+    "url": "https://knowledge.broadcom.com/external/article/417754",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/12-monitorizare"
+    ]
+  },
+  {
+    "id": "S314",
+    "title": "KB 376894: Setting up email notifications for alarms in vCenter Server",
+    "url": "https://knowledge.broadcom.com/external/article/376894/setting-up-email-notifications-for-alarm.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/12-monitorizare"
+    ]
+  },
+  {
+    "id": "S315",
+    "title": "KB 434289: Configuring a global email recipient for all vCenter Server alarms",
+    "url": "https://knowledge.broadcom.com/external/article/434289/configuring-a-global-email-recipient-for.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/12-monitorizare"
+    ]
+  },
+  {
+    "id": "S316",
+    "title": "KB 308290: ESXTOP overview for performance troubleshooting",
+    "url": "https://knowledge.broadcom.com/external/article/308290",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/12-monitorizare"
+    ]
+  },
+  {
+    "id": "S317",
+    "title": "KB 344099: Using esxtop to identify storage performance issues for ESXi",
+    "url": "https://knowledge.broadcom.com/external/article/344099",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/12-monitorizare"
+    ]
+  },
+  {
+    "id": "S318",
+    "title": "KB 414844: VM reboot alerts in Aria and VCF Operations (alert definition, wait and cancel cycles)",
+    "url": "https://knowledge.broadcom.com/external/article/414844/vm-reboot-alerts-in-aria-and-vcf-operati.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/12-monitorizare"
+    ]
+  },
+  {
+    "id": "S319",
+    "title": "KB 431771: Configuring component log forwarding to a VCF Operations for Logs 9.0.x cluster",
+    "url": "https://knowledge.broadcom.com/external/article/431771/configuring-component-log-forwarding-to.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/12-monitorizare"
+    ]
+  },
+  {
+    "id": "S320",
+    "title": "KB 441532: Alerts from VCF Operations for Logs 9.0.x not transferred during the upgrade to Log Management 9.1",
+    "url": "https://knowledge.broadcom.com/external/article/441532/alerts-from-vcf-operations-for-logs-90x.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/12-monitorizare"
+    ]
+  },
+  {
+    "id": "S321",
+    "title": "ntpro.nl blog: VCF Operations for Logs 9.0, log management for VMware Cloud Foundation",
+    "url": "https://www.ntpro.nl/blog/archives/3862-VCF-Operations-for-Logs-9.0-A-New-Era-of-Log-Management-for-VMware-Cloud-Foundation.html",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/12-monitorizare"
+    ]
+  },
+  {
+    "id": "S322",
+    "title": "ESX Virtualization: VCP-VVF study guide, objective 4.3, configure alerting in VCF Operations",
+    "url": "https://www.vladan.fr/?p=234661",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/12-monitorizare"
+    ]
+  },
+  {
+    "id": "S323",
+    "title": "ESX Virtualization: VCP-VVF study guide, objective 4.3, VCF Operations for Logs cluster components",
+    "url": "https://www.vladan.fr/vcp-vvf-administrator-study-guide-objective-4-3-vvf-operate-describe-the-cluster-components-and-deployment-options-of-vcf-operations-for-logs-part-18/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/12-monitorizare"
+    ]
+  },
+  {
+    "id": "S324",
+    "title": "KB 397782: VCF Operations 9.0 sizing guidelines (node sizes, HA, Continuous Availability, cloud proxies, log cluster)",
+    "url": "https://knowledge.broadcom.com/external/article/397782/vcf-operations-90-sizing-guidelines.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/12-monitorizare"
+    ]
+  },
+  {
+    "id": "S325",
+    "title": "KB 341964: Shutdown and startup sequence for a VCF/Aria Operations cluster (primary, replica, data, witness)",
+    "url": "https://knowledge.broadcom.com/external/article/341964/shutdown-and-startup-sequence-for-aria-o.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/12-monitorizare"
     ]
   }
 ]

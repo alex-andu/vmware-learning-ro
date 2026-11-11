@@ -1,0 +1,269 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Un auditor cere graficul CPU al unui VM de acum trei săptămâni, cu cât mai multe detalii. Cu setările implicite, care e cel mai fin interval disponibil?",
+        "en": "An auditor asks for a VM CPU chart from three weeks ago, with as much detail as possible. With default settings, what is the finest interval available?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "2 ore, pentru că intervalul de 2 ore se păstrează o lună",
+            "en": "2 hours, because the 2-hour interval is kept for one month"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. 5 minute se păstrează o zi, 30 de minute o săptămână, 2 ore o lună.",
+            "en": "Correct. 5 minutes is kept one day, 30 minutes one week, 2 hours one month."
+          }
+        },
+        {
+          "text": {
+            "ro": "5 minute",
+            "en": "5 minutes"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Intervalul de 5 minute se păstrează doar o zi.",
+            "en": "Wrong. The 5-minute interval is kept for one day only."
+          }
+        },
+        {
+          "text": {
+            "ro": "30 de minute",
+            "en": "30 minutes"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Intervalul de 30 de minute se păstrează o săptămână.",
+            "en": "Wrong. The 30-minute interval is kept for one week."
+          }
+        },
+        {
+          "text": {
+            "ro": "20 de secunde (real-time)",
+            "en": "20 seconds (real-time)"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Datele real-time se păstrează 60 de minute.",
+            "en": "Wrong. Real-time data are kept for 60 minutes."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Ai creat o alarmă vCenter pe cluster care trebuie să trimită mail când un host trece de 90% CPU. Alarma devine roșie, dar nu vine niciun mail. Ce verifici întâi?",
+        "en": "You created a vCenter alarm on a cluster that must email when a host passes 90% CPU. The alarm turns red but no email arrives. What do you check first?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Nivelul de statistici al intervalului de 5 minute",
+            "en": "The statistics level of the 5-minute interval"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Alarma s-a declanșat, deci datele există; problema e la trimitere.",
+            "en": "Wrong. The alarm fired, so the data exist; the problem is the sending."
+          }
+        },
+        {
+          "text": {
+            "ro": "Dacă wait cycle-ul e prea mare",
+            "en": "Whether the wait cycle is too high"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Wait cycle e un concept VCF Operations, nu al alarmelor vCenter.",
+            "en": "Wrong. Wait cycle is a VCF Operations concept, not a vCenter alarm one."
+          }
+        },
+        {
+          "text": {
+            "ro": "Dacă alarma e definită pe fiecare host în parte",
+            "en": "Whether the alarm is defined on each host individually"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. O alarmă pe cluster se aplică hosturilor din el.",
+            "en": "Wrong. An alarm on the cluster applies to its hosts."
+          }
+        },
+        {
+          "text": {
+            "ro": "Mail server și Mail sender în vCenter > Configure > Settings > General, apoi acțiunea Send email notifications din alarmă",
+            "en": "Mail server and Mail sender in vCenter > Configure > Settings > General, then the Send email notifications action in the alarm"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Fără SMTP configurat și fără acțiunea bifată, alarma nu poate trimite mail.",
+            "en": "Correct. Without SMTP configured and the action enabled, the alarm cannot send mail."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Graficul real-time arată CPU ready 1 000 ms pentru un VM cu 2 vCPU. Cât e, aproximativ, %RDY per vCPU?",
+        "en": "The real-time chart shows CPU ready 1 000 ms for a VM with 2 vCPUs. Roughly what is %RDY per vCPU?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "10%",
+            "en": "10%"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Ai împărțit la 10 000 ms; intervalul real-time e de 20 000 ms.",
+            "en": "Wrong. You divided by 10 000 ms; the real-time interval is 20 000 ms."
+          }
+        },
+        {
+          "text": {
+            "ro": "5%",
+            "en": "5%"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. 5% e valoarea pentru tot VM-ul; mai împarți la 2 vCPU.",
+            "en": "Wrong. 5% is the whole-VM value; you still divide by 2 vCPUs."
+          }
+        },
+        {
+          "text": {
+            "ro": "2,5%",
+            "en": "2.5%"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. 1 000 × 100 / 20 000 = 5%, împărțit la 2 vCPU = 2,5%.",
+            "en": "Correct. 1 000 × 100 / 20 000 = 5%, divided by 2 vCPUs = 2.5%."
+          }
+        },
+        {
+          "text": {
+            "ro": "0,33%",
+            "en": "0.33%"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Ai folosit intervalul de 5 minute (300 000 ms), dar datele sunt real-time.",
+            "en": "Wrong. You used the 5-minute interval (300 000 ms), but the data are real-time."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "Hostul ESXi are Syslog.global.logHost setat corect, dar după o pană de rețea serverul nu mai primește loguri. În vmsyslogd.err apare „failed to write log”. Ce faci?",
+        "en": "The ESXi host has Syslog.global.logHost set correctly, but after a network outage the server no longer receives logs. vmsyslogd.err shows \"failed to write log\". What do you do?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Repornești hostul",
+            "en": "Reboot the host"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. E disruptiv și nu e necesar.",
+            "en": "Wrong. It is disruptive and not needed."
+          }
+        },
+        {
+          "text": {
+            "ro": "Rulezi esxcli system syslog reload",
+            "en": "Run esxcli system syslog reload"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. După pierderea conexiunii, hostul nu retrimite nimic până la reload (KB 318939).",
+            "en": "Correct. After a lost connection the host sends nothing until a reload (KB 318939)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Ridici nivelul de statistici la 4",
+            "en": "Raise the statistics level to 4"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Nivelul de statistici nu are legătură cu syslog.",
+            "en": "Wrong. The statistics level has nothing to do with syslog."
+          }
+        },
+        {
+          "text": {
+            "ro": "Schimbi portul din 514 în 9000",
+            "en": "Change the port from 514 to 9000"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. 9000 e un port de API de ingestie, iar portul nu e problema.",
+            "en": "Wrong. 9000 is an ingestion API port, and the port is not the problem."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "În VCF Operations, o alertă de CPU apare la fiecare vârf scurt de un ciclu, iar echipa vrea alerte doar pentru probleme care durează. Ce schimbi în alert definition?",
+        "en": "In VCF Operations, a CPU alert appears at every one-cycle spike, and the team wants alerts only for lasting problems. What do you change in the alert definition?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Crești Wait Cycle",
+            "en": "Raise the Wait Cycle"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Alerta apare doar după ce simptomul e adevărat mai multe cicluri la rând.",
+            "en": "Correct. The alert appears only after the symptom is true for several cycles in a row."
+          }
+        },
+        {
+          "text": {
+            "ro": "Scazi Wait Cycle la 0",
+            "en": "Lower the Wait Cycle to 0"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Ar face alerta și mai sensibilă.",
+            "en": "Wrong. It would make the alert even more sensitive."
+          }
+        },
+        {
+          "text": {
+            "ro": "Crești Cancel Cycle",
+            "en": "Raise the Cancel Cycle"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Cancel Cycle decide cât rămâne alerta după ce simptomul trece, nu când apare.",
+            "en": "Wrong. Cancel Cycle decides how long the alert stays after the symptom clears, not when it appears."
+          }
+        },
+        {
+          "text": {
+            "ro": "Adaugi o acțiune SNMP",
+            "en": "Add an SNMP action"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Asta schimbă unde merge notificarea, nu când apare alerta.",
+            "en": "Wrong. That changes where the notification goes, not when the alert appears."
+          }
+        }
+      ]
+    }
+  ]
+}

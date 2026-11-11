@@ -1517,5 +1517,57 @@
     "expansion": "Recovery Time Objective",
     "ro": "Cât timp îți permiți până când serviciul funcționează din nou după un incident.",
     "en": "How long you can afford until the service works again after an incident."
+  },
+  {
+    "id": "snmp",
+    "term": "SNMP",
+    "abbr": "SNMP",
+    "expansion": "Simple Network Management Protocol",
+    "ro": "Protocol prin care echipamentele trimit notificări („trap-uri”) către un sistem de monitorizare; vCenter îl poate folosi ca acțiune de alarmă.",
+    "en": "A protocol through which devices send notifications (traps) to a monitoring system; vCenter can use it as an alarm action."
+  },
+  {
+    "id": "smtp",
+    "term": "SMTP",
+    "abbr": "SMTP",
+    "expansion": "Simple Mail Transfer Protocol",
+    "ro": "Protocolul de trimitere a e-mailurilor; vCenter are nevoie de un server SMTP configurat ca alarmele să poată trimite mail.",
+    "en": "The protocol used to send email; vCenter needs an SMTP server configured before alarms can send mail."
+  },
+  {
+    "id": "statistics-level",
+    "term": "Statistics level",
+    "aliases": [
+      "nivel de statistici"
+    ],
+    "ro": "Nivelul 1–4 care decide câte contoare de performanță salvează vCenter în baza de date pentru fiecare interval; implicit 1.",
+    "en": "The 1–4 level that decides how many performance counters vCenter stores in its database for each interval; the default is 1."
+  },
+  {
+    "id": "alarm",
+    "term": "Alarm (vCenter)",
+    "aliases": [
+      "alarmă"
+    ],
+    "ro": "Regulă definită pe un obiect din inventar care urmărește o condiție, o stare sau un eveniment și schimbă culoarea obiectului (Warning/Critical), opțional cu acțiuni.",
+    "en": "A rule defined on an inventory object that watches a condition, state or event and changes the object status (Warning/Critical), optionally with actions."
+  },
+  {
+    "id": "syslog",
+    "term": "Syslog",
+    "ro": "Standardul de trimitere a mesajelor de log prin rețea către un server central; ESXi îl configurează prin Syslog.global.logHost.",
+    "en": "The standard for sending log messages over the network to a central server; ESXi sets it through Syslog.global.logHost."
+  },
+  {
+    "id": "esxtop",
+    "term": "esxtop",
+    "ro": "Utilitarul de linie de comandă din ESXi care arată în timp real contoare de CPU, memorie, disc și rețea.",
+    "en": "The ESXi command-line utility that shows real-time CPU, memory, disk and network counters."
+  },
+  {
+    "id": "symptom",
+    "term": "Symptom (VCF Operations)",
+    "ro": "Condiție pe o metrică, proprietate sau eveniment (de exemplu CPU peste 80%); una sau mai multe simptome formează o alert definition.",
+    "en": "A condition on a metric, property or event (for example CPU above 80%); one or more symptoms make up an alert definition."
   }
 ]
