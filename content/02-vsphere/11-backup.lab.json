@@ -1,0 +1,118 @@
+{
+  "steps": [
+    {
+      "id": "schedule",
+      "title": {
+        "ro": "Programează backup-ul vCenter",
+        "en": "Schedule the vCenter backup"
+      },
+      "path": {
+        "ro": "https://<vcenter>:5480 → Backup → Configure ⚠ de verificat",
+        "en": "https://<vcenter>:5480 → Backup → Configure ⚠ to verify"
+      },
+      "action": {
+        "ro": "Alege SFTP sau SMB, introdu locația și credențialele serverului de fișiere, pune o parolă de criptare, programează un backup zilnic și o retenție de câteva backup-uri. Notează parola de criptare într-un loc sigur.",
+        "en": "Choose SFTP or SMB, enter the file server location and credentials, set an encryption password, schedule a daily backup and a retention of a few backups. Write the encryption password down somewhere safe."
+      },
+      "why": {
+        "ro": "File-based backup e metoda recomandată pentru appliance; FTP și HTTP nu sunt sigure, iar poți avea o singură programare (KB 318731, documentația vSphere 8).",
+        "en": "File-based backup is the recommended method for the appliance; FTP and HTTP are not secure, and you can have only one schedule (KB 318731, vSphere 8 docs)."
+      }
+    },
+    {
+      "id": "backupnow",
+      "title": {
+        "ro": "Fă un backup manual și verifică-l",
+        "en": "Take a manual backup and check it"
+      },
+      "path": {
+        "ro": "VAMI → Backup → Backup Now",
+        "en": "VAMI → Backup → Backup Now"
+      },
+      "action": {
+        "ro": "Rulează Backup Now cu locația din programare. Când se termină, verifică în Activity că starea e Complete, apoi uită-te pe serverul de fișiere la folderul creat.",
+        "en": "Run Backup Now with the schedule's location. When it finishes, check in Activity that the status is Complete, then look at the folder created on the file server."
+      },
+      "why": {
+        "ro": "Un backup programat poate eșua fără ca cineva să observe (de exemplu KB 428785 pe 9.0.1 și 9.0.2), deci verifici starea, nu doar existența programării.",
+        "en": "A scheduled backup can fail without anyone noticing (for example KB 428785 on 9.0.1 and 9.0.2), so you check the status, not just that the schedule exists."
+      }
+    },
+    {
+      "id": "esxi",
+      "title": {
+        "ro": "Salvează configurația unui host ESXi",
+        "en": "Save an ESXi host configuration"
+      },
+      "path": {
+        "ro": "SSH pe host → shell; apoi browser la URL-ul afișat",
+        "en": "SSH to the host → shell; then a browser to the URL shown"
+      },
+      "action": {
+        "ro": "Rulează vim-cmd hostsvc/firmware/sync_config, apoi vim-cmd hostsvc/firmware/backup_config și descarcă fișierul configBundle din URL-ul afișat. Notează build-ul cu vmware -vl și UUID-ul cu esxcfg-info -u. La final dezactivează SSH.",
+        "en": "Run vim-cmd hostsvc/firmware/sync_config, then vim-cmd hostsvc/firmware/backup_config and download the configBundle file from the URL shown. Note the build with vmware -vl and the UUID with esxcfg-info -u. Finally disable SSH."
+      },
+      "why": {
+        "ro": "Backup-ul de imagine al ESXi nu e suportat; restaurarea configurației cere același build și același UUID, de aceea le notezi lângă fișier (KB 313510, KB 445744).",
+        "en": "An ESXi image backup is not supported; restoring the configuration needs the same build and the same UUID, which is why you note them next to the file (KB 313510, KB 445744)."
+      }
+    },
+    {
+      "id": "snapshots",
+      "title": {
+        "ro": "Compară snapshot-ul cu memorie și cel quiesced",
+        "en": "Compare the memory snapshot and the quiesced one"
+      },
+      "path": {
+        "ro": "click dreapta pe VM → Snapshots → Take Snapshot",
+        "en": "right-click the VM → Snapshots → Take Snapshot"
+      },
+      "action": {
+        "ro": "Fă un snapshot cu Include virtual machine's memory bifat. Apoi fă unul cu memoria debifată și Quiesce guest file system bifat. Compară în datastore browser fișierele .vmsn și delta, apoi uită-te la detaliile snapshot-urilor. La final, Delete All Snapshots și așteaptă consolidarea, fără s-o anulezi.",
+        "en": "Take a snapshot with Include virtual machine's memory ticked. Then take one with memory unticked and Quiesce guest file system ticked. Compare the .vmsn and delta files in the datastore browser, then look at the snapshot details. Finally, Delete All Snapshots and wait for the consolidation, without cancelling it."
+      },
+      "why": {
+        "ro": "Memoria și quiesce se exclud reciproc, quiesce cere VMware Tools, iar o consolidare anulată poate corupe date (documentația vSphere 8, KB 342618, KB 318825).",
+        "en": "Memory and quiesce are mutually exclusive, quiesce needs VMware Tools, and a cancelled consolidation can corrupt data (vSphere 8 docs, KB 342618, KB 318825)."
+      }
+    },
+    {
+      "id": "cbt",
+      "title": {
+        "ro": "Verifică dacă VM-ul are CBT",
+        "en": "Check whether the VM has CBT"
+      },
+      "path": {
+        "ro": "datastore → Files → folderul VM-ului",
+        "en": "datastore → Files → the VM folder"
+      },
+      "action": {
+        "ro": "Caută fișiere care se termină în -ctk.vmdk. Dacă ai un produs de backup în lab, fă un backup al VM-ului și caută-le din nou; dacă nu, notează că lipsesc pentru că CBT e dezactivat implicit.",
+        "en": "Look for files ending in -ctk.vmdk. If you have a backup product in the lab, back up the VM and look for them again; if not, note that they are missing because CBT is off by default."
+      },
+      "why": {
+        "ro": "CBT (Changed Block Tracking) e dezactivat implicit și creează câte un fișier -ctk.vmdk pe disc; produsele de backup îl activează pentru incrementale (KB 320557).",
+        "en": "CBT (Changed Block Tracking) is off by default and creates one -ctk.vmdk file per disk; backup products enable it for incrementals (KB 320557)."
+      }
+    },
+    {
+      "id": "restore",
+      "title": {
+        "ro": "Testează restaurarea vCenter (opțional, izolat)",
+        "en": "Test the vCenter restore (optional, isolated)"
+      },
+      "path": {
+        "ro": "installer vCenter → Restore",
+        "en": "vCenter installer → Restore"
+      },
+      "action": {
+        "ro": "Doar într-o rețea izolată: oprește vCenter-ul din lab, pornește installer-ul, alege Restore, fă etapa 1 (appliance nou) și etapa 2 (datele din backup-ul de la pasul 2). Verifică inventarul, apoi decide pe care appliance îl păstrezi.",
+        "en": "Only on an isolated network: power off the lab vCenter, start the installer, choose Restore, run stage 1 (new appliance) and stage 2 (the data from the step 2 backup). Check the inventory, then decide which appliance you keep."
+      },
+      "why": {
+        "ro": "Restaurarea deploy-ează un appliance nou și copiază datele; vechiul vCenter trebuie oprit, iar un backup netestat nu e un backup de încredere (documentația vSphere 8).",
+        "en": "The restore deploys a new appliance and copies the data; the old vCenter must be off, and an untested backup is not a trustworthy backup (vSphere 8 docs)."
+      }
+    }
+  ]
+}

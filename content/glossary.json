@@ -1477,5 +1477,45 @@
     "expansion": "Virtualization-Based Security",
     "ro": "Funcție Windows care izolează părți sensibile ale sistemului într-o zonă protejată de hypervisor; în vSphere cere EFI și hardware virtual 14+ (Intel).",
     "en": "A Windows feature that isolates sensitive parts of the system in a hypervisor-protected area; in vSphere it needs EFI and virtual hardware 14+ (Intel)."
+  },
+  {
+    "id": "vadp",
+    "term": "VADP",
+    "abbr": "VADP",
+    "expansion": "vSphere Storage APIs - Data Protection",
+    "ro": "Interfețele prin care produsele de backup citesc discurile VM-urilor dintr-un snapshot, fără agent în VM.",
+    "en": "The interfaces through which backup products read VM disks from a snapshot, without an agent in the VM."
+  },
+  {
+    "id": "cbt",
+    "term": "CBT",
+    "abbr": "CBT",
+    "expansion": "Changed Block Tracking",
+    "ro": "Funcție VMkernel care ține evidența blocurilor schimbate pe disc, ca backup-ul incremental să copieze doar ce s-a modificat; e dezactivată implicit.",
+    "en": "A VMkernel feature that tracks changed disk blocks so incremental backups copy only what changed; it is off by default."
+  },
+  {
+    "id": "vddk",
+    "term": "VDDK",
+    "abbr": "VDDK",
+    "expansion": "Virtual Disk Development Kit",
+    "ro": "Bibliotecă VMware folosită de produsele de backup pentru a citi și scrie discuri virtuale prin modurile de transport SAN, HotAdd și NBD.",
+    "en": "A VMware library backup products use to read and write virtual disks through the SAN, HotAdd and NBD transport modes."
+  },
+  {
+    "id": "rpo",
+    "term": "RPO",
+    "abbr": "RPO",
+    "expansion": "Recovery Point Objective",
+    "ro": "Câte date îți permiți să pierzi, măsurat în timp (de exemplu ultimele 24 de ore); decide cât de des faci backup.",
+    "en": "How much data you can afford to lose, measured in time (for example the last 24 hours); it decides how often you back up."
+  },
+  {
+    "id": "rto",
+    "term": "RTO",
+    "abbr": "RTO",
+    "expansion": "Recovery Time Objective",
+    "ro": "Cât timp îți permiți până când serviciul funcționează din nou după un incident.",
+    "en": "How long you can afford until the service works again after an incident."
   }
 ]

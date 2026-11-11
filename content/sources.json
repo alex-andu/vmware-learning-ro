@@ -36,7 +36,8 @@
       "02-vsphere/07-drs",
       "02-vsphere/08-ha-ft",
       "02-vsphere/09-content-library",
-      "02-vsphere/10-securitate"
+      "02-vsphere/10-securitate",
+      "02-vsphere/11-backup"
     ]
   },
   {
@@ -564,7 +565,8 @@
       "02-vsphere/07-drs",
       "02-vsphere/08-ha-ft",
       "02-vsphere/09-content-library",
-      "02-vsphere/10-securitate"
+      "02-vsphere/10-securitate",
+      "02-vsphere/11-backup"
     ]
   },
   {
@@ -1574,7 +1576,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "02-vsphere/01-vcenter"
+      "02-vsphere/01-vcenter",
+      "02-vsphere/11-backup"
     ]
   },
   {
@@ -1585,7 +1588,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "02-vsphere/01-vcenter"
+      "02-vsphere/01-vcenter",
+      "02-vsphere/11-backup"
     ]
   },
   {
@@ -1596,7 +1600,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "02-vsphere/01-vcenter"
+      "02-vsphere/01-vcenter",
+      "02-vsphere/11-backup"
     ]
   },
   {
@@ -3183,7 +3188,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "02-vsphere/10-securitate"
+      "02-vsphere/10-securitate",
+      "02-vsphere/11-backup"
     ]
   },
   {
@@ -3205,7 +3211,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "02-vsphere/10-securitate"
+      "02-vsphere/10-securitate",
+      "02-vsphere/11-backup"
     ]
   },
   {
@@ -3294,6 +3301,149 @@
     "read": true,
     "usedBy": [
       "02-vsphere/10-securitate"
+    ]
+  },
+  {
+    "id": "S293",
+    "title": "vSphere 8 vCenter Installation: Schedule a file-based backup",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vcenter-installation/GUID-8A16C037-F1E0-40C9-B106-05C30625B9CB.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/11-backup"
+    ]
+  },
+  {
+    "id": "S294",
+    "title": "vSphere 8 vCenter Installation: Restore vCenter Server from a file-based backup",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vcenter-installation/GUID-F02AF073-7CFD-45B2-ACC8-DE3B6ED28022.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/11-backup"
+    ]
+  },
+  {
+    "id": "S295",
+    "title": "KB 428785: vCenter Server 9.0.x scheduled file-based backups fail when using \"Retain Last X Backups\"",
+    "url": "https://knowledge.broadcom.com/external/article/428785",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/11-backup"
+    ]
+  },
+  {
+    "id": "S296",
+    "title": "KB 419664: File-based backups of vCenter Server persist beyond the retention limit when the protocol is FTP",
+    "url": "https://knowledge.broadcom.com/external/article/419664/filebased-backups-of-vcenter-server-pers.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/11-backup"
+    ]
+  },
+  {
+    "id": "S297",
+    "title": "KB 318825: Best practices for using VMware snapshots in the vSphere environment",
+    "url": "https://knowledge.broadcom.com/external/article/318825/best-practices-for-using-vmware-snapshots.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/11-backup"
+    ]
+  },
+  {
+    "id": "S298",
+    "title": "Virtual Disk Development Kit programming guide: Tips and best practices (transport modes, CBT)",
+    "url": "https://developer.broadcom.com/xapis/virtual-disk-api/latest/vddkBkupVadp.9.5.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/11-backup"
+    ]
+  },
+  {
+    "id": "S299",
+    "title": "KB 313510: How to back up and restore the ESXi host configuration",
+    "url": "https://knowledge.broadcom.com/external/article/313510/how-to-back-up-and-restore-the-esxi-host.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/11-backup"
+    ]
+  },
+  {
+    "id": "S300",
+    "title": "KB 445744: Image-level and bare-metal backups of the ESXi hypervisor are not supported",
+    "url": "https://knowledge.broadcom.com/external/article/445744/imagelevel-and-baremetal-backups-of-the.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/11-backup"
+    ]
+  },
+  {
+    "id": "S301",
+    "title": "VMware blog: 10 VMware Cloud Foundation 9 enhancements simplifying day-2 operations (backups through VCF Operations)",
+    "url": "https://blogs.vmware.com/cloud-foundation/2025/09/18/10-vmware-cloud-foundation-9-enhancements-simplifying-your-day-2-operations/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/11-backup"
+    ]
+  },
+  {
+    "id": "S302",
+    "title": "KB 442696: NSX backup retention settings in SDDC Manager not applied in VCF 9.0 and 9.1",
+    "url": "https://knowledge.broadcom.com/external/article/442696/nsx-backup-retention-settings-in-sddc-ma.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/11-backup"
+    ]
+  },
+  {
+    "id": "S303",
+    "title": "vSphere 8 VM Administration: Taking snapshots of a virtual machine (memory, quiesce, independent disks)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vm-administration/GUID-64B866EF-7636-401C-A8FF-2B4584D9CA72.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/11-backup"
+    ]
+  },
+  {
+    "id": "S304",
+    "title": "KB 320557: Changed Block Tracking (CBT) on virtual machines",
+    "url": "https://knowledge.broadcom.com/external/article/320557/changed-block-tracking-cbt-on-virtual-machines.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/11-backup"
+    ]
+  },
+  {
+    "id": "S305",
+    "title": "KB 342618: Overview of virtual machine snapshots in vSphere",
+    "url": "https://knowledge.broadcom.com/external/article/342618/overview-of-virtual-machine-snapshots-in-vsphere.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/11-backup"
     ]
   }
 ]
