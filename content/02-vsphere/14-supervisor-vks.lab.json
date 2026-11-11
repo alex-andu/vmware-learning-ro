@@ -1,0 +1,118 @@
+{
+  "steps": [
+    {
+      "id": "enable",
+      "title": {
+        "ro": "Activează sau verifică Supervisor-ul",
+        "en": "Enable or review the Supervisor"
+      },
+      "path": {
+        "ro": "Menu → Supervisor Management (în 8: Workload Management) → Get Started ⚠ de verificat",
+        "en": "Menu → Supervisor Management (in 8: Workload Management) → Get Started ⚠ to verify"
+      },
+      "action": {
+        "ro": "Alege rețeaua VDS și load balancer-ul (FLB în 9.0), clusterul (o zonă), politica de stocare pentru control plane, rețeaua de management cu blocul de 5 IP-uri consecutive și rețeaua de workload pe altă subrețea. Pentru lab poți alege 1 control plane VM. Notează adresa control plane-ului la final.",
+        "en": "Pick VDS networking and the load balancer (FLB in 9.0), the cluster (one zone), the control plane storage policy, the management network with the block of 5 consecutive IPs and the workload network on another subnet. For a lab you can choose 1 control plane VM. Note the control plane address at the end."
+      },
+      "why": {
+        "ro": "Fiecare alegere de aici (rețea, load balancer, zone) e greu de schimbat după; subrețelele separate și IP-urile consecutive sunt cauza clasică a activărilor blocate.",
+        "en": "Every choice here (network, load balancer, zones) is hard to change later; separate subnets and consecutive IPs are the classic cause of stuck enablements."
+      }
+    },
+    {
+      "id": "namespace",
+      "title": {
+        "ro": "Creează un vSphere Namespace",
+        "en": "Create a vSphere Namespace"
+      },
+      "path": {
+        "ro": "Supervisor Management → Namespaces → New Namespace",
+        "en": "Supervisor Management → Namespaces → New Namespace"
+      },
+      "action": {
+        "ro": "Dă un nume compatibil DNS (litere mici, cifre, cratimă). Apoi Storage → Add Storage cu o politică de stocare, VM Service → Add VM Class cu una sau două clase mici și setează limite de CPU și memorie.",
+        "en": "Give a DNS-compliant name (lowercase letters, digits, hyphen). Then Storage → Add Storage with a storage policy, VM Service → Add VM Class with one or two small classes, and set CPU and memory limits."
+      },
+      "why": {
+        "ro": "Fără politică de stocare și VM class, echipa nu poate crea nici VM-uri, nici clustere VKS în namespace.",
+        "en": "Without a storage policy and a VM class, the team cannot create VMs or VKS clusters in the namespace."
+      }
+    },
+    {
+      "id": "perms",
+      "title": {
+        "ro": "Dă permisiuni unui utilizator SSO",
+        "en": "Grant permissions to an SSO user"
+      },
+      "path": {
+        "ro": "Namespace → Summary → Permissions → Add Permissions ⚠ de verificat",
+        "en": "Namespace → Summary → Permissions → Add Permissions ⚠ to verify"
+      },
+      "action": {
+        "ro": "Creează un utilizator de test în vsphere.local și dă-i Can View pe namespace. Testează mai târziu ce poate face, apoi schimbă în Can Edit.",
+        "en": "Create a test user in vsphere.local and grant Can View on the namespace. Later test what it can do, then change it to Can Edit."
+      },
+      "why": {
+        "ro": "Vezi în practică diferența dintre Can View (fără acces în VKS) și Can Edit (cluster-admin în VKS).",
+        "en": "You see in practice the difference between Can View (no VKS access) and Can Edit (cluster-admin in VKS)."
+      }
+    },
+    {
+      "id": "lci",
+      "title": {
+        "ro": "Instalează LCI ca Supervisor Service",
+        "en": "Install LCI as a Supervisor Service"
+      },
+      "path": {
+        "ro": "Supervisor Management → Services → Add, apoi Configure / Install pe Supervisor",
+        "en": "Supervisor Management → Services → Add, then Configure / Install on the Supervisor"
+      },
+      "action": {
+        "ro": "Descarcă manifestul LCI din portalul Broadcom (Free Downloads, vSphere Supervisor Services), încarcă-l, înregistrează serviciul și instalează-l pe Supervisor-ul tău.",
+        "en": "Download the LCI manifest from the Broadcom portal (Free Downloads, vSphere Supervisor Services), upload it, register the service and install it on your Supervisor."
+      },
+      "why": {
+        "ro": "Așa funcționează toate serviciile opționale: înregistrare în vCenter din YAML, apoi instalare pe un Supervisor.",
+        "en": "This is how every optional service works: registration in vCenter from YAML, then installation on a Supervisor."
+      }
+    },
+    {
+      "id": "vks",
+      "title": {
+        "ro": "Creează un cluster VKS mic",
+        "en": "Create a small VKS cluster"
+      },
+      "path": {
+        "ro": "Namespace → Resources → LCI → Create Kubernetes cluster ⚠ de verificat",
+        "en": "Namespace → Resources → LCI → Create Kubernetes cluster ⚠ to verify"
+      },
+      "action": {
+        "ro": "Alege 1 nod de control plane și 1 worker, cu o VM class mică și politica de stocare a namespace-ului. Descarcă manifestul YAML generat și citește-l. Așteaptă până clusterul e Running.",
+        "en": "Choose 1 control plane node and 1 worker, with a small VM class and the namespace storage policy. Download the generated YAML manifest and read it. Wait until the cluster is Running."
+      },
+      "why": {
+        "ro": "Vezi cum VKS transformă un manifest în VM-uri reale în namespace, folosind exact resursele pe care le-ai permis.",
+        "en": "You see how VKS turns a manifest into real VMs in the namespace, using exactly the resources you allowed."
+      }
+    },
+    {
+      "id": "kubectl",
+      "title": {
+        "ro": "Conectează-te cu kubectl și testează permisiunile",
+        "en": "Connect with kubectl and test permissions"
+      },
+      "path": {
+        "ro": "Stația ta → kubectl vsphere login (sau VCF CLI în VCF 9)",
+        "en": "Your workstation → kubectl vsphere login (or VCF CLI in VCF 9)"
+      },
+      "action": {
+        "ro": "Ca utilizatorul de test: kubectl vsphere login --server <adresa control plane> --vsphere-username <user>@vsphere.local, apoi cu --tanzu-kubernetes-cluster-namespace și --tanzu-kubernetes-cluster-name. Rulează kubectl config get-contexts și kubectl get nodes. Schimbă în Can Edit, refă login-ul și repetă.",
+        "en": "As the test user: kubectl vsphere login --server <control plane address> --vsphere-username <user>@vsphere.local, then with --tanzu-kubernetes-cluster-namespace and --tanzu-kubernetes-cluster-name. Run kubectl config get-contexts and kubectl get nodes. Change to Can Edit, log in again and repeat."
+      },
+      "why": {
+        "ro": "Confirmi că Can View primește Forbidden în clusterul VKS și că permisiunile noi apar doar după un nou login.",
+        "en": "You confirm that Can View gets Forbidden in the VKS cluster and that new permissions appear only after a new login."
+      }
+    }
+  ]
+}

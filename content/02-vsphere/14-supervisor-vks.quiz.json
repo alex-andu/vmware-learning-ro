@@ -1,0 +1,269 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "O echipă vrea propriul Kubernetes, cu versiunea și add-on-urile ei, pe vSphere 9.0. Ce îi oferi?",
+        "en": "A team wants its own Kubernetes, with its own version and add-ons, on vSphere 9.0. What do you offer?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Un vSphere Pod pentru fiecare aplicație",
+            "en": "A vSphere Pod for each application"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. vSphere Pod rulează containere direct pe ESXi, dar nu e un cluster Kubernetes al echipei.",
+            "en": "Wrong. A vSphere Pod runs containers directly on ESXi, but it is not the team's own Kubernetes cluster."
+          }
+        },
+        {
+          "text": {
+            "ro": "Un VM mare prin VM Service, pe care își instalează singuri Kubernetes",
+            "en": "A large VM through the VM Service, where they install Kubernetes themselves"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Merge, dar pierzi gestiunea, versiunile suportate și integrarea VKS.",
+            "en": "Wrong. It works, but you lose management, supported versions and VKS integration."
+          }
+        },
+        {
+          "text": {
+            "ro": "Un cluster VKS într-un vSphere Namespace al echipei",
+            "en": "A VKS cluster in the team's vSphere Namespace"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. VKS creează clustere Kubernetes complete, cu versiuni suportate (N-2), în limitele namespace-ului.",
+            "en": "Correct. VKS creates full Kubernetes clusters, with supported versions (N-2), within the namespace limits."
+          }
+        },
+        {
+          "text": {
+            "ro": "Un al doilea Supervisor pe același cluster",
+            "en": "A second Supervisor on the same cluster"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Un cluster are un singur Supervisor; echipele se separă prin namespace-uri.",
+            "en": "Wrong. A cluster has one Supervisor; teams are separated by namespaces."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Un utilizator are Can View pe un namespace. Rulează kubectl get pods în clusterul VKS din acel namespace. Ce se întâmplă?",
+        "en": "A user has Can View on a namespace. They run kubectl get pods in that namespace's VKS cluster. What happens?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Primește Forbidden: Can View nu are acces în clusterele VKS",
+            "en": "They get Forbidden: Can View has no access inside VKS clusters"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Can View e doar citire în contextul Supervisor (KB 424897).",
+            "en": "Correct. Can View is read-only in the Supervisor context (KB 424897)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Vede pod-urile, dar nu le poate modifica",
+            "en": "They see the pods but cannot change them"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Asta ar fi o permisiune de citire în cluster, pe care Can View nu o dă.",
+            "en": "Wrong. That would be read access in the cluster, which Can View does not give."
+          }
+        },
+        {
+          "text": {
+            "ro": "Primește cluster-admin automat",
+            "en": "They get cluster-admin automatically"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. cluster-admin vine cu Can Edit sau Owner.",
+            "en": "Wrong. cluster-admin comes with Can Edit or Owner."
+          }
+        },
+        {
+          "text": {
+            "ro": "Comanda merge doar cu -A",
+            "en": "The command works only with -A"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. -A e chiar mai larg și e refuzat.",
+            "en": "Wrong. -A is even broader and is refused."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Pregătești un Supervisor nou pe VVF 9.0 cu rețea VDS. Ce load balancer e inclus în licență și recomandat?",
+        "en": "You are preparing a new Supervisor on VVF 9.0 with VDS networking. Which load balancer is included in the license and recommended?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "HAProxy",
+            "en": "HAProxy"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. E încă suportat în 9.0, dar depreciat (KB 420255).",
+            "en": "Wrong. It is still supported in 9.0 but deprecated (KB 420255)."
+          }
+        },
+        {
+          "text": {
+            "ro": "NSX load balancer",
+            "en": "NSX load balancer"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. NSX LB merge cu segmente NSX și vine cu VCF, nu cu o rețea VDS în VVF.",
+            "en": "Wrong. NSX LB works with NSX segments and comes with VCF, not with VDS networking in VVF."
+          }
+        },
+        {
+          "text": {
+            "ro": "Avi Enterprise",
+            "en": "Avi Enterprise"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Merge pe VDS, dar cere licență Avi separată.",
+            "en": "Wrong. It works on VDS, but needs a separate Avi license."
+          }
+        },
+        {
+          "text": {
+            "ro": "Foundation Load Balancer",
+            "en": "Foundation Load Balancer"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. FLB e inclus cu VVF și VCF și merge cu rețeaua VDS.",
+            "en": "Correct. FLB is included with VVF and VCF and works with VDS networking."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "Activarea Supervisor-ului se blochează. Rețeaua de management și cea de workload sunt pe aceeași subrețea, iar control plane-ul are IP-uri împrăștiate. Ce corectezi?",
+        "en": "Supervisor enablement gets stuck. The management and workload networks are on the same subnet, and the control plane has scattered IPs. What do you fix?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Treci la 1 control plane VM",
+            "en": "Switch to 1 control plane VM"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Numărul de VM-uri nu rezolvă rețelele suprapuse.",
+            "en": "Wrong. The VM count does not fix overlapping networks."
+          }
+        },
+        {
+          "text": {
+            "ro": "Subrețele diferite pentru management și workload și un bloc de 5 IP-uri statice consecutive",
+            "en": "Different subnets for management and workload and a block of 5 consecutive static IPs"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Asta cer cerințele de rețea ale Supervisor-ului.",
+            "en": "Correct. That is what the Supervisor network requirements ask for."
+          }
+        },
+        {
+          "text": {
+            "ro": "Dezactivezi HA pe cluster",
+            "en": "Disable HA on the cluster"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. HA e o cerință, nu cauza problemei.",
+            "en": "Wrong. HA is a requirement, not the cause of the problem."
+          }
+        },
+        {
+          "text": {
+            "ro": "Activezi DHCP pe rețeaua de workload",
+            "en": "Enable DHCP on the workload network"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Nu rezolvă suprapunerea, iar DHCP nu e suportat pentru workload networks cu Supervisor Services pe VDS.",
+            "en": "Wrong. It does not fix the overlap, and DHCP is not supported for workload networks with Supervisor Services on VDS."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "Ai dat Can Edit unui dezvoltator acum cinci minute, dar el încă nu vede contextul clusterului VKS. Ce îi spui?",
+        "en": "You granted Can Edit to a developer five minutes ago, but they still do not see the VKS cluster context. What do you tell them?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Să aștepte 24 de ore pentru sincronizarea SSO",
+            "en": "Wait 24 hours for SSO synchronization"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Nu există o astfel de întârziere; permisiunile se aplică la login.",
+            "en": "Wrong. There is no such delay; permissions apply at login."
+          }
+        },
+        {
+          "text": {
+            "ro": "Să ceară Owner",
+            "en": "Ask for Owner"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Owner adaugă crearea de namespace-uri, nu rezolvă contextul lipsă.",
+            "en": "Wrong. Owner adds namespace creation; it does not fix the missing context."
+          }
+        },
+        {
+          "text": {
+            "ro": "Să refacă kubectl vsphere login cu --tanzu-kubernetes-cluster-namespace și --tanzu-kubernetes-cluster-name",
+            "en": "Run kubectl vsphere login again with --tanzu-kubernetes-cluster-namespace and --tanzu-kubernetes-cluster-name"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Permisiunile noi se aplică la următorul login, iar contextul clusterului vine cu aceste opțiuni (KB 435399).",
+            "en": "Correct. New permissions apply at the next login, and the cluster context comes with these options (KB 435399)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Să repornească Supervisor-ul",
+            "en": "Restart the Supervisor"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. E disruptiv și inutil.",
+            "en": "Wrong. It is disruptive and unnecessary."
+          }
+        }
+      ]
+    }
+  ]
+}

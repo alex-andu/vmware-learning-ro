@@ -1631,5 +1631,74 @@
     "term": "Live Patch",
     "ro": "Aplicarea unor patch-uri ESXi fără maintenance mode și fără repornirea hostului; în 9.0 acoperă mai multe părți din imagine.",
     "en": "Applying some ESXi patches without maintenance mode or a host reboot; in 9.0 it covers more of the image."
+  },
+  {
+    "id": "supervisor",
+    "term": "vSphere Supervisor",
+    "aliases": [
+      "Supervisor",
+      "Supervisor Cluster"
+    ],
+    "ro": "Un cluster vSphere pe care ai activat planul de control Kubernetes integrat; de aici rulezi VM-uri, vSphere Pods și clustere VKS prin API-ul Kubernetes.",
+    "en": "A vSphere cluster with the built-in Kubernetes control plane enabled; from it you run VMs, vSphere Pods and VKS clusters through the Kubernetes API."
+  },
+  {
+    "id": "vsphere-namespace",
+    "term": "vSphere Namespace",
+    "aliases": [
+      "Supervisor Namespace"
+    ],
+    "ro": "Spațiu logic pe Supervisor cu limite de CPU, memorie și stocare, politici de stocare, VM classes și permisiuni pentru echipe.",
+    "en": "A logical space on the Supervisor with CPU, memory and storage limits, storage policies, VM classes and team permissions."
+  },
+  {
+    "id": "vsphere-pod",
+    "term": "vSphere Pod",
+    "ro": "Un VM foarte mic care rulează unul sau mai multe containere Linux direct pe ESXi; echivalentul unui pod Kubernetes.",
+    "en": "A very small VM that runs one or more Linux containers directly on ESXi; the equivalent of a Kubernetes pod."
+  },
+  {
+    "id": "vsphere-zone",
+    "term": "vSphere Zone",
+    "ro": "Un cluster vSphere mapat ca zonă de disponibilitate pentru Supervisor; un Supervisor are o zonă sau trei.",
+    "en": "A vSphere cluster mapped as an availability zone for the Supervisor; a Supervisor has one zone or three."
+  },
+  {
+    "id": "vm-class",
+    "term": "VM Class",
+    "ro": "Șablon de mărime (vCPU, memorie) pe care îl atribui unui namespace, ca echipele să creeze VM-uri și noduri doar în mărimile permise.",
+    "en": "A size template (vCPU, memory) you assign to a namespace, so teams create VMs and nodes only in allowed sizes."
+  },
+  {
+    "id": "lci",
+    "term": "LCI",
+    "abbr": "LCI",
+    "expansion": "Local Consumption Interface",
+    "ro": "Interfață grafică instalată ca Supervisor Service, prin care creezi clustere VKS și VM-uri dintr-un namespace fără să scrii YAML de mână.",
+    "en": "A graphical interface installed as a Supervisor Service, used to create VKS clusters and VMs in a namespace without writing YAML by hand."
+  },
+  {
+    "id": "flb",
+    "term": "FLB",
+    "abbr": "FLB",
+    "expansion": "Foundation Load Balancer",
+    "ro": "Load balancer-ul inclus în VVF și VCF 9.0 pentru Supervisor cu rețea VDS.",
+    "en": "The load balancer included with VVF and VCF 9.0 for a Supervisor with VDS networking."
+  },
+  {
+    "id": "vpc",
+    "term": "VPC",
+    "abbr": "VPC",
+    "expansion": "Virtual Private Cloud",
+    "ro": "Rețea izolată NSX pe care o poți delega unei echipe; Supervisor-ul din 9.0 poate folosi rețeaua NSX VPC.",
+    "en": "An isolated NSX network you can delegate to a team; the 9.0 Supervisor can use NSX VPC networking."
+  },
+  {
+    "id": "tkg",
+    "term": "TKG",
+    "abbr": "TKG",
+    "expansion": "Tanzu Kubernetes Grid",
+    "ro": "Numele vechi al clusterelor Kubernetes create de Supervisor; în 9.0 serviciul se numește VKS.",
+    "en": "The old name of the Kubernetes clusters created by the Supervisor; in 9.0 the service is called VKS."
   }
 ]

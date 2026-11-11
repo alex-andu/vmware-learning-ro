@@ -39,7 +39,8 @@
       "02-vsphere/10-securitate",
       "02-vsphere/11-backup",
       "02-vsphere/12-monitorizare",
-      "02-vsphere/13-lifecycle"
+      "02-vsphere/13-lifecycle",
+      "02-vsphere/14-supervisor-vks"
     ]
   },
   {
@@ -571,7 +572,8 @@
       "02-vsphere/10-securitate",
       "02-vsphere/11-backup",
       "02-vsphere/12-monitorizare",
-      "02-vsphere/13-lifecycle"
+      "02-vsphere/13-lifecycle",
+      "02-vsphere/14-supervisor-vks"
     ]
   },
   {
@@ -3836,6 +3838,160 @@
     "read": true,
     "usedBy": [
       "02-vsphere/13-lifecycle"
+    ]
+  },
+  {
+    "id": "S341",
+    "title": "vSphere with Tanzu terminology (Supervisor, vSphere Pod, CRX, Spherelet, TKG cluster, VM Service)",
+    "url": "https://vdc-download.vmware.com/vmwb-repository/dcr-public/dc16a887-b15b-4576-9801-c05a37c437cc/8f65d07c-0299-4c9c-a885-bd28aa63f049/GUID-EB9F5266-C0BF-4F87-9E88-CA51A6B1C40B.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/14-supervisor-vks"
+    ]
+  },
+  {
+    "id": "S342",
+    "title": "VMware blog: Choosing the right load balancer for vSphere Supervisor in vSphere 9.0 and VCF 9.0 (2026-07-13)",
+    "url": "https://blogs.vmware.com/cloud-foundation/2026/07/13/choosing-the-right-load-balancer-for-vsphere-supervisor-in-vsphere-9-0-and-vmware-cloud-foundation-9-0/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/14-supervisor-vks"
+    ]
+  },
+  {
+    "id": "S343",
+    "title": "KB 420255: Support for Supervisor networking with vDS + HAProxy in VCF 9.0 (deprecated)",
+    "url": "https://knowledge.broadcom.com/external/article/420255/support-for-supervisor-networking-with-v.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/14-supervisor-vks"
+    ]
+  },
+  {
+    "id": "S344",
+    "title": "VMware blog: Modern applications on VMware Cloud Foundation 9.0 (2025-08-01)",
+    "url": "https://blogs.vmware.com/cloud-foundation/2025/08/01/modern-applications-on-vmware-cloud-foundation-9-0/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/14-supervisor-vks"
+    ]
+  },
+  {
+    "id": "S345",
+    "title": "VMware: vSphere 9 FAQ (Supervisor, VKS, N-2 Kubernetes versions)",
+    "url": "https://www.vmware.com/docs/vsphere9-faq",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/14-supervisor-vks"
+    ]
+  },
+  {
+    "id": "S346",
+    "title": "vSphere 8 IaaS control plane: Requirements for a Supervisor on one vSphere cluster mapped to one zone",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-with-tanzu-concepts-planning/GUID-EF65C2B2-EB93-4191-B2B4-206B3760009A.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/14-supervisor-vks"
+    ]
+  },
+  {
+    "id": "S347",
+    "title": "vSphere 8 IaaS control plane: Requirements for a three-zone Supervisor with VDS networking and Avi",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-with-tanzu-concepts-planning/GUID-3845FEC7-C2C4-48E7-A4BC-6067D8FAA3FE.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/14-supervisor-vks"
+    ]
+  },
+  {
+    "id": "S348",
+    "title": "vSphere 8 IaaS control plane: Requirements for a Supervisor with VDS networking and Avi Load Balancer",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-with-tanzu-concepts-planning/GUID-7FF30A74-DDDD-4231-AAAE-0A92828B93CD.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/14-supervisor-vks"
+    ]
+  },
+  {
+    "id": "S349",
+    "title": "KB 424897: vSphere Namespace permissions for VKS (Can View, Can Edit, Owner)",
+    "url": "https://knowledge.broadcom.com/external/article/424897/vsphere-namespace-permissions-for-vks.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/14-supervisor-vks"
+    ]
+  },
+  {
+    "id": "S350",
+    "title": "KB 435399: Troubleshooting kubectl vSphere contexts",
+    "url": "https://knowledge.broadcom.com/external/article/435399/troubleshooting-kubectl-vsphere-contexts.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/14-supervisor-vks"
+    ]
+  },
+  {
+    "id": "S351",
+    "title": "VMware blog: Run modern AI and traditional apps better with vSphere in VCF 9.0 (2025-06-17)",
+    "url": "https://blogs.vmware.com/cloud-foundation/2025/06/17/run-modern-ai-and-traditional-apps-better-with-vsphere-in-vcf-9-0/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/14-supervisor-vks"
+    ]
+  },
+  {
+    "id": "S352",
+    "title": "vSphere Automation API 9.0: Supervisors ControlPlane data structure (count 1 or 3)",
+    "url": "https://developer.broadcom.com/xapis/vsphere-automation-api/9.0/data-structures/Vcenter NamespaceManagement Supervisors ControlPlane/",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/14-supervisor-vks"
+    ]
+  },
+  {
+    "id": "S353",
+    "title": "William Lam: VCF 9.0 lab, configuring vSphere Kubernetes Service (Local Consumption Interface)",
+    "url": "https://williamlam.com/2025/08/ms-a2-vcf-9-0-lab-configuring-vsphere-kubernetes-service-vks.html",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/14-supervisor-vks"
+    ]
+  },
+  {
+    "id": "S354",
+    "title": "ESX Virtualization: VCP-VVF study guide, objective 4.4, Supervisor-based services",
+    "url": "https://www.vladan.fr/?p=234788",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/14-supervisor-vks"
     ]
   }
 ]
