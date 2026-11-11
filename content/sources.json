@@ -73,7 +73,8 @@
       "04-nsx/04-edge",
       "04-nsx/05-rutare",
       "04-nsx/06-servicii",
-      "04-nsx/07-dfw"
+      "04-nsx/07-dfw",
+      "04-nsx/08-operare"
     ]
   },
   {
@@ -612,7 +613,8 @@
       "04-nsx/04-edge",
       "04-nsx/05-rutare",
       "04-nsx/06-servicii",
-      "04-nsx/07-dfw"
+      "04-nsx/07-dfw",
+      "04-nsx/08-operare"
     ]
   },
   {
@@ -5923,7 +5925,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "04-nsx/07-dfw"
+      "04-nsx/07-dfw",
+      "04-nsx/08-operare"
     ]
   },
   {
@@ -6001,6 +6004,138 @@
     "read": true,
     "usedBy": [
       "04-nsx/07-dfw"
+    ]
+  },
+  {
+    "id": "S532",
+    "title": "KB 387914: Troubleshooting NSX Traceflow",
+    "url": "https://knowledge.broadcom.com/external/article/387914/troubleshooting-nsx-traceflow.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/08-operare"
+    ]
+  },
+  {
+    "id": "S533",
+    "title": "KB 372865: How to Configure and Manage VMware NSX Manager Backups",
+    "url": "https://knowledge.broadcom.com/external/article/372865/how-to-configure-and-manage-vmware-nsx-m.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/08-operare"
+    ]
+  },
+  {
+    "id": "S534",
+    "title": "KB 373896: Troubleshooting NSX Backup and Restore Failures",
+    "url": "https://knowledge.broadcom.com/external/article/373896/troubleshooting-nsx-backup-and-restore-f.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/08-operare"
+    ]
+  },
+  {
+    "id": "S535",
+    "title": "KB 373068: Restore NSX Manager from Backup",
+    "url": "https://knowledge.broadcom.com/external/article/373068/restore-nsx-manager-from-backup.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/08-operare"
+    ]
+  },
+  {
+    "id": "S536",
+    "title": "KB 433822: Virtual machine snapshots are not supported on NSX Manager and Edge nodes",
+    "url": "https://knowledge.broadcom.com/external/article/433822",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/08-operare"
+    ]
+  },
+  {
+    "id": "S537",
+    "title": "KB 381235: Troubleshooting NSX Network Connectivity Issues",
+    "url": "https://knowledge.broadcom.com/external/article/381235/troubleshooting-nsx-network-connectivity.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/08-operare"
+    ]
+  },
+  {
+    "id": "S538",
+    "title": "KB 416675: NSX Remote L3 Span Port Mirroring",
+    "url": "https://knowledge.broadcom.com/external/article/416675/nsx-remote-l3-span-port-mirroring.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/08-operare"
+    ]
+  },
+  {
+    "id": "S539",
+    "title": "KB 448198: Incomplete flow visibility in VCF Operations for Networks after migrating VMs from DVPG to NSX Segments",
+    "url": "https://knowledge.broadcom.com/external/article/448198/incomplete-flow-visibility-in-vcf-operat.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/08-operare"
+    ]
+  },
+  {
+    "id": "S540",
+    "title": "KB 383034: How to collect a support bundle for NSX nodes via CLI",
+    "url": "https://knowledge.broadcom.com/external/article/383034/how-to-collect-a-support-bundle-for-nsx.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/08-operare"
+    ]
+  },
+  {
+    "id": "S541",
+    "title": "KB 345925: Troubleshooting NSX using Packet Captures",
+    "url": "https://knowledge.broadcom.com/external/article/345925/troubleshooting-vmware-nsxt-using-packet.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/08-operare"
+    ]
+  },
+  {
+    "id": "S542",
+    "title": "KB 375209: Manager CPU usage very high alarm",
+    "url": "https://knowledge.broadcom.com/external/article/375209/manager-cpu-usage-very-high-alarm.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/08-operare"
+    ]
+  },
+  {
+    "id": "S543",
+    "title": "KB 322521: NSX-T configured host encounters a PSOD when port used in Live Traffic Analysis session is disabled",
+    "url": "https://knowledge.broadcom.com/external/article/322521/nsxt-configured-host-encounters-a-psod-w.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/08-operare"
     ]
   }
 ]

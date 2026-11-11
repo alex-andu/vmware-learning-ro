@@ -2312,5 +2312,49 @@
     "term": "vDefend Firewall",
     "ro": "Licența de securitate Broadcom pentru firewall-ul NSX (distribuit și de gateway), separată de licența VCF de bază.",
     "en": "The Broadcom security license for the NSX firewall (distributed and gateway), separate from the base VCF license."
+  },
+  {
+    "id": "traceflow",
+    "term": "Traceflow",
+    "ro": "Unealta NSX care injectează un pachet de test și arată fiecare componentă prin care trece sau unde e aruncat; VM-urile nu văd pachetul.",
+    "en": "The NSX tool that injects a test packet and shows every component it passes or where it is dropped; the VMs never see the packet."
+  },
+  {
+    "id": "live-traffic-analysis",
+    "term": "Live Traffic Analysis",
+    "ro": "Unealta NSX care urmărește și capturează trafic real pe un port sursă, pentru analiză.",
+    "en": "The NSX tool that traces and captures real traffic on a source port, for analysis."
+  },
+  {
+    "id": "support-bundle",
+    "term": "Support bundle",
+    "ro": "Arhiva cu loguri și configurație a unui nod NSX, cerută de suportul Broadcom când deschizi un caz.",
+    "en": "The archive of logs and configuration from an NSX node that Broadcom support asks for when you open a case."
+  },
+  {
+    "id": "pktcap-uw",
+    "term": "pktcap-uw",
+    "ro": "Unealta de captură de pachete din ESX, care poate captura în diferite puncte ale căii de date (vNIC, uplink).",
+    "en": "The ESX packet capture tool, which can capture at different points of the data path (vNIC, uplink)."
+  },
+  {
+    "id": "sftp",
+    "term": "SFTP",
+    "abbr": "SFTP",
+    "expansion": "SSH File Transfer Protocol",
+    "ro": "Protocolul de transfer de fișiere peste SSH; NSX Manager îl folosește ca să-și trimită backup-urile pe un server extern.",
+    "en": "The file transfer protocol over SSH; NSX Manager uses it to send its backups to an external server."
+  },
+  {
+    "id": "backup-passphrase",
+    "term": "Backup passphrase",
+    "ro": "Fraza secretă care criptează backup-ul NSX; fără ea backup-ul nu poate fi restaurat.",
+    "en": "The secret phrase that encrypts the NSX backup; without it the backup cannot be restored."
+  },
+  {
+    "id": "vcf-operations-networks",
+    "term": "VCF Operations for Networks",
+    "ro": "Produsul de vizibilitate și analiză a fluxurilor de rețea din VCF, fost Aria Operations for Networks și înainte vRealize Network Insight.",
+    "en": "The VCF network visibility and flow analytics product, formerly Aria Operations for Networks and before that vRealize Network Insight."
   }
 ]
