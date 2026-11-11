@@ -32,7 +32,8 @@
       "02-vsphere/03-licente-certificate",
       "02-vsphere/04-vds",
       "02-vsphere/05-stocare-partajata",
-      "02-vsphere/06-vmotion"
+      "02-vsphere/06-vmotion",
+      "02-vsphere/07-drs"
     ]
   },
   {
@@ -556,7 +557,8 @@
       "02-vsphere/03-licente-certificate",
       "02-vsphere/04-vds",
       "02-vsphere/05-stocare-partajata",
-      "02-vsphere/06-vmotion"
+      "02-vsphere/06-vmotion",
+      "02-vsphere/07-drs"
     ]
   },
   {
@@ -1028,7 +1030,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "01-fundamente/05-cpu-memorie"
+      "01-fundamente/05-cpu-memorie",
+      "02-vsphere/07-drs"
     ]
   },
   {
@@ -2096,7 +2099,8 @@
     "read": true,
     "usedBy": [
       "02-vsphere/05-stocare-partajata",
-      "02-vsphere/06-vmotion"
+      "02-vsphere/06-vmotion",
+      "02-vsphere/07-drs"
     ]
   },
   {
@@ -2283,7 +2287,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "02-vsphere/06-vmotion"
+      "02-vsphere/06-vmotion",
+      "02-vsphere/07-drs"
     ]
   },
   {
@@ -2416,6 +2421,160 @@
     "read": true,
     "usedBy": [
       "02-vsphere/06-vmotion"
+    ]
+  },
+  {
+    "id": "S215",
+    "title": "vSphere 8 Resource Management: Creating a DRS cluster and DRS settings (automation, migration threshold, DRS score)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-resource-management/GUID-8ACF3502-5314-469F-8CC9-4A9BD5925BC2.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/07-drs"
+    ]
+  },
+  {
+    "id": "S216",
+    "title": "VMware performance study: DRS in vSphere 7 (VM-centric DRS, every minute, migration threshold levels)",
+    "url": "https://www.vmware.com/docs/drs-vsphere7-perf",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/07-drs"
+    ]
+  },
+  {
+    "id": "S217",
+    "title": "vSphere 8 Resource Management: Managing resource pools",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-resource-management/GUID-60077B40-66FF-4625-934A-641703ED7601.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/07-drs"
+    ]
+  },
+  {
+    "id": "S218",
+    "title": "Yellow Bricks (Duncan Epping): Introducing Scalable Shares in vSphere 7",
+    "url": "https://www.yellow-bricks.com/2020/03/12/introducing-scalable-shares-vsphere-7/",
+    "type": "community",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/07-drs"
+    ]
+  },
+  {
+    "id": "S219",
+    "title": "vSphere 8 Resource Management: VM-VM affinity rules",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-resource-management/GUID-FF28F29C-8B67-4EFF-A2EF-63B3537E6934.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/07-drs"
+    ]
+  },
+  {
+    "id": "S220",
+    "title": "vSphere 8 Resource Management: VM-Host affinity rules",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-resource-management/GUID-2FB90EF5-7733-4095-8B66-F10D6C57B820.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/07-drs"
+    ]
+  },
+  {
+    "id": "S221",
+    "title": "vSphere 8 Resource Management: Using VM-Host affinity rules (conflicts, required vs preferential, HA)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-resource-management/GUID-793013E2-0976-43B7-9A00-340FA76859D0.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/07-drs"
+    ]
+  },
+  {
+    "id": "S222",
+    "title": "KB 447700: Understanding VM-Host affinity rules: Must (hard) vs Should (soft)",
+    "url": "https://knowledge.broadcom.com/external/article/447700/understanding-vmhost-affinity-rules-must.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/07-drs"
+    ]
+  },
+  {
+    "id": "S223",
+    "title": "vSphere 7 Resource Management: DRS cluster requirements (processor compatibility)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.resmgmt.doc/GUID-70CE9CC1-EE40-4398-9E8D-2F0828EF63D5.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/07-drs"
+    ]
+  },
+  {
+    "id": "S224",
+    "title": "vSphere 8 Resource Management: vSphere Cluster Services (vCLS)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-resource-management/GUID-96BD6016-4BE7-4B1C-8269-568D1555B08C.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/07-drs"
+    ]
+  },
+  {
+    "id": "S225",
+    "title": "KB 312147: vSphere Cluster Services (vCLS) in vSphere 7.0 Update 1 and newer versions",
+    "url": "https://knowledge.broadcom.com/external/article/312147/vsphere-cluster-services-vcls-in-vsphere.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/07-drs"
+    ]
+  },
+  {
+    "id": "S226",
+    "title": "VMware blog: Embedded vSphere Cluster Services overview (2024-07-17)",
+    "url": "https://blogs.vmware.com/cloud-foundation/2024/07/17/embedded-vsphere-cluster-services-overview/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/07-drs"
+    ]
+  },
+  {
+    "id": "S227",
+    "title": "vSphere 8 Resource Management: Using maintenance mode",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-resource-management/GUID-8F705E83-6788-42D4-93DF-63A2B892367F.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/07-drs"
+    ]
+  },
+  {
+    "id": "S228",
+    "title": "KB 451053: VMs will not vMotion off host when host is put in maintenance mode",
+    "url": "https://knowledge.broadcom.com/external/article/451053/vms-wont-vmotion-off-host-when-host-is-p.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/07-drs"
     ]
   }
 ]

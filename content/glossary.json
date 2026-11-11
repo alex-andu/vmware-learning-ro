@@ -1293,5 +1293,49 @@
     ],
     "ro": "Migrarea unui VM între instanțe vCenter din domenii SSO diferite, prin Import sau Export VMs, de la 7.0 U1c.",
     "en": "Migrating a VM between vCenter instances in different SSO domains, through Import or Export VMs, from 7.0 U1c."
+  },
+  {
+    "id": "vcls",
+    "term": "vCLS",
+    "abbr": "vCLS",
+    "expansion": "vSphere Cluster Services",
+    "ro": "VM-uri mici de sistem care țin DRS (și HA) funcționale. Din 8.0 U3 sunt „embedded” (în memoria hostului, maximum 2); în 9.0 dezactivarea lor nu mai afectează DRS și HA.",
+    "en": "Small system VMs that keep DRS (and HA) working. From 8.0 U3 they are \"embedded\" (in host memory, at most 2); in 9.0 disabling them no longer affects DRS and HA."
+  },
+  {
+    "id": "resource-pool",
+    "term": "Resource pool",
+    "ro": "Grup logic de CPU și memorie dintr-un host sau cluster, cu shares, reservation și limit proprii, care se poate împărți ierarhic.",
+    "en": "A logical group of CPU and memory from a host or cluster, with its own shares, reservation and limit, that can be nested."
+  },
+  {
+    "id": "expandable-reservation",
+    "term": "Expandable reservation",
+    "ro": "Opțiune (activă implicit) prin care un resource pool împrumută rezervare de la părinte când VM-urile lui cer mai mult decât are.",
+    "en": "An option (on by default) that lets a resource pool borrow reservation from its parent when its VMs need more than it has."
+  },
+  {
+    "id": "scalable-shares",
+    "term": "Scalable shares",
+    "ro": "Funcție DRS din vSphere 7 care calculează shares-urile unui resource pool și după numărul de VM-uri din el.",
+    "en": "A vSphere 7 DRS feature that computes a resource pool's shares also from the number of VMs in it."
+  },
+  {
+    "id": "drs-score",
+    "term": "VM DRS score",
+    "aliases": [
+      "DRS score"
+    ],
+    "ro": "Cât de bine își primește VM-ul resursele pe hostul actual; DRS face migrări ca să-l crească.",
+    "en": "How well the VM gets its resources on its current host; DRS migrates to raise it."
+  },
+  {
+    "id": "affinity-rules",
+    "term": "Affinity rules",
+    "aliases": [
+      "anti-affinity"
+    ],
+    "ro": "Reguli DRS: VM-VM (împreună sau separat) și VM-Host (must/should run sau not run pe un grup de hosturi).",
+    "en": "DRS rules: VM-VM (together or apart) and VM-Host (must/should run or not run on a host group)."
   }
 ]
