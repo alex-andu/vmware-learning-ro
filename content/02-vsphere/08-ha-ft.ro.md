@@ -241,5 +241,5 @@ Cinci întrebări originale, în stilul examenelor VCP (VMware Certified Profess
 - Yellow Bricks: restart priority [S247]
 - Documentația vSphere 8: Fault Tolerance, cum funcționează [S248], cerințe și limite [S249], ce nu suportă [S250], bune practici [S252]
 - KB 307309: FAQ Fault Tolerance [S254]
-- KB 306275: opțiunea Turn on Fault Tolerance lipsește. Atenție: articolul mai listează cerințe vechi (discuri thick, fără SMP, adică Symmetric Multiprocessing, VM-uri cu mai multe vCPU), care nu mai corespund documentației vSphere 8; urmezi documentația versiunii tale [S255] [S249]
+- KB 306275: opțiunea Turn on Fault Tolerance lipsește. Atenție: articolul mai spune că VM-urile SMP (Symmetric Multiprocessing, cu mai multe vCPU) nu sunt suportate, deși documentația vSphere 8 permite până la 8 vCPU. Cerința lui de discuri thick o verifici în documentația versiunii tale (`⚠ de verificat`) [S255] [S249]
 :::

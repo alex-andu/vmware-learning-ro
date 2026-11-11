@@ -242,5 +242,5 @@ Five original questions in the style of the VCP (VMware Certified Professional) 
 - Yellow Bricks: restart priority [S247]
 - vSphere 8 docs: Fault Tolerance, how it works [S248], requirements and limits [S249], what it does not support [S250], best practices [S252]
 - KB 307309: Fault Tolerance FAQ [S254]
-- KB 306275: the Turn on Fault Tolerance option is missing. Careful: the article still lists old requirements (thick disks, no SMP, that is Symmetric Multiprocessing, VMs with several vCPUs), which no longer match the vSphere 8 documentation; follow the docs for your version [S255] [S249]
+- KB 306275: the Turn on Fault Tolerance option is missing. Careful: the article still says SMP (Symmetric Multiprocessing, several vCPUs) VMs are not supported, although the vSphere 8 documentation allows up to 8 vCPUs. Check its thick-disk requirement in the documentation for your version (`⚠ to verify`) [S255] [S249]
 :::
