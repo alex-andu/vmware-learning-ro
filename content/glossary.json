@@ -1824,5 +1824,44 @@
     "term": "Storage policy compliance",
     "ro": "Starea care arată dacă un obiect respectă politica atribuită (Compliant) sau nu (Noncompliant), de exemplu după căderea unui host.",
     "en": "The state that shows whether an object meets its assigned policy (Compliant) or not (Noncompliant), for example after a host failure."
+  },
+  {
+    "id": "deduplication",
+    "term": "Deduplication (vSAN)",
+    "ro": "Tehnica prin care blocurile identice se păstrează o singură dată, iar celelalte devin pointeri către ea. În OSA lucrează pe disk group, în ESA (global deduplication) pe tot clusterul.",
+    "en": "The technique that keeps identical blocks only once and turns the others into pointers to it. In OSA it works per disk group, in ESA (global deduplication) across the whole cluster."
+  },
+  {
+    "id": "compression-only",
+    "term": "Compression-only (vSAN OSA)",
+    "ro": "Modul OSA all-flash care comprimă datele fără deduplicare; lucrează pe disc, nu pe disk group, deci un disc defect nu scoate tot disk group-ul.",
+    "en": "The OSA all-flash mode that compresses data without deduplication; it works per disk, not per disk group, so a failed disk does not take the whole disk group down."
+  },
+  {
+    "id": "global-dedup",
+    "term": "Global deduplication (vSAN ESA)",
+    "ro": "Deduplicarea ESA la nivel de cluster, post-process, pe blocuri de 4 KiB; în 9.0 doar prin program restrâns, în 9.1 general disponibilă.",
+    "en": "ESA cluster-wide, post-process deduplication on 4 KiB blocks; in 9.0 only through a restricted program, generally available in 9.1."
+  },
+  {
+    "id": "scsi-unmap",
+    "term": "TRIM/UNMAP (vSAN)",
+    "aliases": [
+      "Guest Trim/Unmap"
+    ],
+    "ro": "Comenzile prin care sistemul de operare din VM anunță ce blocuri a eliberat, ca vSAN să recupereze spațiul.",
+    "en": "The commands through which the guest operating system reports which blocks it freed, so vSAN can reclaim the space."
+  },
+  {
+    "id": "data-reduction-ratio",
+    "term": "Data reduction ratio",
+    "ro": "Raportul dintre spațiul logic (înainte) și cel fizic (după) deduplicare și compresie; 3x înseamnă 3 unități logice pe 1 unitate fizică.",
+    "en": "The ratio of logical space (before) to physical space (after) deduplication and compression; 3x means 3 logical units on 1 physical unit."
+  },
+  {
+    "id": "operations-reserve",
+    "term": "Operations reserve (vSAN)",
+    "ro": "Capacitate rezervată pentru operațiile interne vSAN (resync, rebalance, schimbări de politică); peste prag, vSAN poate să nu mai funcționeze corect.",
+    "en": "Capacity reserved for internal vSAN operations (resync, rebalance, policy changes); above the threshold vSAN might not operate properly."
   }
 ]

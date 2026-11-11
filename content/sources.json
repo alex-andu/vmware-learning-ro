@@ -43,7 +43,8 @@
       "02-vsphere/14-supervisor-vks",
       "03-vsan/01-concepte-osa-esa",
       "03-vsan/02-deploy",
-      "03-vsan/03-spbm-ftt"
+      "03-vsan/03-spbm-ftt",
+      "03-vsan/04-eficienta-spatiu"
     ]
   },
   {
@@ -60,7 +61,8 @@
       "01-fundamente/02-retea-de-baza",
       "03-vsan/01-concepte-osa-esa",
       "03-vsan/02-deploy",
-      "03-vsan/03-spbm-ftt"
+      "03-vsan/03-spbm-ftt",
+      "03-vsan/04-eficienta-spatiu"
     ]
   },
   {
@@ -4026,7 +4028,8 @@
     "read": true,
     "usedBy": [
       "03-vsan/01-concepte-osa-esa",
-      "03-vsan/02-deploy"
+      "03-vsan/02-deploy",
+      "03-vsan/04-eficienta-spatiu"
     ]
   },
   {
@@ -4083,7 +4086,8 @@
     "usedBy": [
       "03-vsan/01-concepte-osa-esa",
       "03-vsan/02-deploy",
-      "03-vsan/03-spbm-ftt"
+      "03-vsan/03-spbm-ftt",
+      "03-vsan/04-eficienta-spatiu"
     ]
   },
   {
@@ -4226,7 +4230,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "03-vsan/03-spbm-ftt"
+      "03-vsan/03-spbm-ftt",
+      "03-vsan/04-eficienta-spatiu"
     ]
   },
   {
@@ -4237,7 +4242,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "03-vsan/03-spbm-ftt"
+      "03-vsan/03-spbm-ftt",
+      "03-vsan/04-eficienta-spatiu"
     ]
   },
   {
@@ -4414,6 +4420,160 @@
     "read": true,
     "usedBy": [
       "03-vsan/03-spbm-ftt"
+    ]
+  },
+  {
+    "id": "S392",
+    "title": "VCF 9.0 vSAN Administration: Using Deduplication and Compression in vSAN Cluster",
+    "url": "https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-0/vsan-deployment-administration-and-monitoring/administering-vmware-vsan/increasing-space-efficiency-in-a-vsan-cluster/using-deduplication-and-compression-in-vsan-cluster.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/04-eficienta-spatiu"
+    ]
+  },
+  {
+    "id": "S393",
+    "title": "VCF 9.0 vSAN Administration: vSAN Space Efficiency Features",
+    "url": "https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-0/vsan-deployment-administration-and-monitoring/administering-vmware-vsan/increasing-space-efficiency-in-a-vsan-cluster/vsan-space-efficiency-features.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/04-eficienta-spatiu"
+    ]
+  },
+  {
+    "id": "S394",
+    "title": "VCF 9.0 vSAN Administration: Reclaiming Storage Space in vSAN with SCSI Unmap",
+    "url": "https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-0/vsan-deployment-administration-and-monitoring/administering-vmware-vsan/increasing-space-efficiency-in-a-vsan-cluster/reclaiming-stroage-space-in-vsan-with-scsi-unmap.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/04-eficienta-spatiu"
+    ]
+  },
+  {
+    "id": "S395",
+    "title": "VCF 9.0 vSAN Monitoring: Monitor vSAN Capacity",
+    "url": "https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-0/vsan-deployment-administration-and-monitoring/vsan-monitoring-and-troubleshooting/monitor-the-vsan-cluster/monitor-vsan-capacity.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/04-eficienta-spatiu"
+    ]
+  },
+  {
+    "id": "S396",
+    "title": "VCF 9.1 Release Notes: What is new in vSAN",
+    "url": "https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-1/release-notes/vmware-cloud-foundation-9-1-0-0-release-notes/what-s-new/whats-new-vsan.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/04-eficienta-spatiu"
+    ]
+  },
+  {
+    "id": "S397",
+    "title": "KB 426751: How to enable/disable Deduplication and Compression in vSAN and the caveats to consider",
+    "url": "https://knowledge.broadcom.com/external/article/426751/how-to-enabledisable-deduplication-and-c.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/04-eficienta-spatiu"
+    ]
+  },
+  {
+    "id": "S398",
+    "title": "KB 445850: Enabling Deduplication and Compression fails with \"General vSAN error. Resource check failed\"",
+    "url": "https://knowledge.broadcom.com/external/article/445850/enabling-the-deduplication-and-compressi.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/04-eficienta-spatiu"
+    ]
+  },
+  {
+    "id": "S399",
+    "title": "KB 327008: vSAN OSA, Deduplication & Compression enabled, identifying and replacing a failed cache or capacity disk",
+    "url": "https://knowledge.broadcom.com/external/article/327008/vsan-osa-deduplication-compression-en.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/04-eficienta-spatiu"
+    ]
+  },
+  {
+    "id": "S400",
+    "title": "KB 437757: vSAN ESA Storage Policy and Encryption FAQ, VCF 9.0",
+    "url": "https://knowledge.broadcom.com/external/article/437757/vsan-esa-storage-policy-and-encryption-f.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/04-eficienta-spatiu"
+    ]
+  },
+  {
+    "id": "S401",
+    "title": "VMware: vSAN Space Efficiency Technologies (VCF 9.1 edition, May 2026)",
+    "url": "https://www.vmware.com/docs/vmw-vsan-space-efficiency",
+    "type": "whitepaper",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/04-eficienta-spatiu"
+    ]
+  },
+  {
+    "id": "S402",
+    "title": "VMware blog: Global Deduplication in vSAN ESA for VMware Cloud Foundation 9.0",
+    "url": "https://blogs.vmware.com/cloud-foundation/2025/06/19/global-deduplication-in-vsan-esa-for-vmware-cloud-foundation-9-0/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/04-eficienta-spatiu"
+    ]
+  },
+  {
+    "id": "S403",
+    "title": "VMware blog: vSAN compression and global deduplication in VCF 9.1",
+    "url": "https://blogs.vmware.com/cloud-foundation/2026/05/07/vsan-compression-and-global-deduplication-in-vcf-9-1/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/04-eficienta-spatiu"
+    ]
+  },
+  {
+    "id": "S404",
+    "title": "Yellow Bricks (Duncan Epping): Introducing vSAN 9.0",
+    "url": "https://www.yellow-bricks.com/2025/06/18/introducing-vsan-9-0",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/04-eficienta-spatiu"
+    ]
+  },
+  {
+    "id": "S405",
+    "title": "vcdx181: vSAN ESA global deduplication in vSAN 9.0.1",
+    "url": "https://vcdx181.com/2025/11/27/vsan-esa-global-deduplication-in-vsan-9-0-1/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/04-eficienta-spatiu"
     ]
   }
 ]
