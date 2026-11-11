@@ -2162,5 +2162,49 @@
     "term": "Edge cluster profile",
     "ro": "Profilul care setează parametrii BFD între Edge-uri și pragul Stand By Relocation pentru un Edge cluster.",
     "en": "The profile that sets BFD parameters between Edges and the Stand By Relocation threshold for an Edge cluster."
+  },
+  {
+    "id": "tier-0",
+    "term": "Tier-0 gateway",
+    "ro": "Gateway-ul NSX de sus, care leagă rețelele virtuale de routerele fizice (BGP, OSPF sau rute statice) și are la el Tier-1-urile.",
+    "en": "The top NSX gateway, which connects virtual networks to the physical routers (BGP, OSPF or static routes) and has the Tier-1s attached."
+  },
+  {
+    "id": "tier-1",
+    "term": "Tier-1 gateway",
+    "ro": "Gateway-ul NSX de jos, de care se leagă segmentele; e conectat la un Tier-0 și își anunță rețelele către el prin route advertisement.",
+    "en": "The lower NSX gateway, to which segments attach; it is connected to a Tier-0 and announces its networks to it through route advertisement."
+  },
+  {
+    "id": "ecmp",
+    "term": "Equal-Cost Multi-Path",
+    "abbr": "ECMP",
+    "expansion": "Equal-Cost Multi-Path",
+    "ro": "Folosirea simultană a mai multor drumuri de același cost spre o destinație, ca să împarți traficul.",
+    "en": "Using several equal-cost paths to a destination at the same time to share traffic."
+  },
+  {
+    "id": "route-advertisement",
+    "term": "Route advertisement (Tier-1)",
+    "ro": "Setarea unui Tier-1 care decide ce rețele (segmente conectate, NAT, rute statice, VIP-uri LB) anunță către Tier-0.",
+    "en": "The Tier-1 setting that decides which networks (connected segments, NAT, static routes, LB VIPs) it announces to the Tier-0."
+  },
+  {
+    "id": "route-redistribution",
+    "term": "Route redistribution (Tier-0)",
+    "ro": "Setarea unui Tier-0 care decide ce rute proprii și primite de la Tier-1 trimite mai departe în BGP sau OSPF.",
+    "en": "The Tier-0 setting that decides which of its own routes and those received from Tier-1s it passes on into BGP or OSPF."
+  },
+  {
+    "id": "transit-subnet",
+    "term": "Transit subnet (NSX)",
+    "ro": "Subrețelele interne create automat de NSX: 100.64.0.0/16 între Tier-0 și Tier-1, 169.254.0.0/24 între componentele aceluiași gateway.",
+    "en": "The internal subnets NSX creates automatically: 100.64.0.0/16 between Tier-0 and Tier-1, 169.254.0.0/24 between components of the same gateway."
+  },
+  {
+    "id": "graceful-restart",
+    "term": "BGP graceful restart",
+    "ro": "Mecanism prin care vecinii BGP păstrează rutele unui router care repornește; pe Tier-0 implicit e Helper Only.",
+    "en": "A mechanism by which BGP neighbors keep the routes of a restarting router; on a Tier-0 the default is Helper Only."
   }
 ]

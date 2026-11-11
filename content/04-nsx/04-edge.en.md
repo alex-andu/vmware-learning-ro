@@ -111,7 +111,7 @@ The **Edge cluster profile** (System > Fabric > Profiles > Edge Cluster Profiles
 | NSX outside VCF, from 4.2.2 | The *Redeploy Edge* action in the UI, which keeps the FQDN (FQDN, Fully Qualified Domain Name) and IP (IP, Internet Protocol) addresses | [S491] |
 | VCF 9.1.1 and later | Core allocation profiles (L4Forwarding, Security) on the Edge cluster, with a node reboot | [S495] |
 
-`[IMAGE SEARCH / PROMPT]` "NSX Edge cluster Tier-0 active active ECMP diagram" and "NSX Edge VM fp-eth0 fp-eth1 management vNIC".
+`[IMAGE SEARCH / PROMPT]` "NSX Edge cluster Tier-0 active active diagram" and "NSX Edge VM fp-eth0 fp-eth1 management vNIC".
 :::
 
 :::exam-alert

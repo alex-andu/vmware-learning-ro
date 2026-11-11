@@ -70,7 +70,8 @@
       "04-nsx/01-sdn-arhitectura",
       "04-nsx/02-transport",
       "04-nsx/03-segmente",
-      "04-nsx/04-edge"
+      "04-nsx/04-edge",
+      "04-nsx/05-rutare"
     ]
   },
   {
@@ -606,7 +607,8 @@
       "04-nsx/01-sdn-arhitectura",
       "04-nsx/02-transport",
       "04-nsx/03-segmente",
-      "04-nsx/04-edge"
+      "04-nsx/04-edge",
+      "04-nsx/05-rutare"
     ]
   },
   {
@@ -4971,7 +4973,8 @@
       "04-nsx/01-sdn-arhitectura",
       "04-nsx/02-transport",
       "04-nsx/03-segmente",
-      "04-nsx/04-edge"
+      "04-nsx/04-edge",
+      "04-nsx/05-rutare"
     ]
   },
   {
@@ -5447,7 +5450,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "04-nsx/04-edge"
+      "04-nsx/04-edge",
+      "04-nsx/05-rutare"
     ]
   },
   {
@@ -5568,7 +5572,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "04-nsx/04-edge"
+      "04-nsx/04-edge",
+      "04-nsx/05-rutare"
     ]
   },
   {
@@ -5591,6 +5596,138 @@
     "read": true,
     "usedBy": [
       "04-nsx/04-edge"
+    ]
+  },
+  {
+    "id": "S496",
+    "title": "NSX 4.2 Administration Guide: Add a Tier-0 Gateway",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.2/administration/GUID-7B0CD287-C5EB-493C-A57F-EEA8782A741A.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/05-rutare"
+    ]
+  },
+  {
+    "id": "S497",
+    "title": "NSX 4.1 Administration Guide: Configure BGP between a tier-0 logical router and a physical router",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.1/administration/GUID-4BC07C6A-DC62-496B-A6A9-7219ACF5AC7B.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/05-rutare"
+    ]
+  },
+  {
+    "id": "S498",
+    "title": "NSX 4.1 Administration Guide: Configure BGP on a Tier-0 Gateway",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.1/administration/GUID-7A0F6D44-4AE8-411F-8D33-2560819699CA.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/05-rutare"
+    ]
+  },
+  {
+    "id": "S499",
+    "title": "NSX 4.0 Administration Guide: Configure OSPF on a Tier-0 Gateway",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.0/administration/GUID-5BEC626C-5312-467D-B873-8E117349E9FC.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/05-rutare"
+    ]
+  },
+  {
+    "id": "S500",
+    "title": "NSX 4.1 Administration Guide: Add a Tier-1 Gateway",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.1/administration/GUID-EEBA627A-0860-477A-95A7-7645BA562D62.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/05-rutare"
+    ]
+  },
+  {
+    "id": "S501",
+    "title": "VMware: Demystifying Multi-Tier Gateways in NSX",
+    "url": "https://www.vmware.com/docs/vmware-demystifying-multi-tier-gateways-in-nsx",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/05-rutare"
+    ]
+  },
+  {
+    "id": "S502",
+    "title": "KB 424033: Intermittent BGP Flapping due to Aggressive Keepalive/Hold Timers",
+    "url": "https://knowledge.broadcom.com/external/article/424033/intermittent-bgp-flapping-due-to-aggress.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/05-rutare"
+    ]
+  },
+  {
+    "id": "S503",
+    "title": "KB 319569: After BGP peer configuration, active and standby edge nodes continuously failover",
+    "url": "https://knowledge.broadcom.com/external/article/319569/after-bgp-peer-configuration-active-and.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/05-rutare"
+    ]
+  },
+  {
+    "id": "S504",
+    "title": "KB 317909: NSX-T BGP configuration changes are not working due to Non-Default values of BGP Timers",
+    "url": "https://knowledge.broadcom.com/external/article/317909/nsxt-bgp-configuration-changes-are-not-w.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/05-rutare"
+    ]
+  },
+  {
+    "id": "S505",
+    "title": "KB 425908: Routes are not being advertised from T1 to the upstream neighbors",
+    "url": "https://knowledge.broadcom.com/external/article/425908/routes-are-not-being-advertised-from-t1.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/05-rutare"
+    ]
+  },
+  {
+    "id": "S506",
+    "title": "KB 408951: East-West connectivity between VMs connected to two different overlay segments and Tier-1 gateways is down",
+    "url": "https://knowledge.broadcom.com/external/article/408951/eastwest-connectivity-between-vms-connec.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/05-rutare"
+    ]
+  },
+  {
+    "id": "S507",
+    "title": "KB 412422: Dynamic routing protocol selection for multi-site NSX deployments with single or multiple ISP connections",
+    "url": "https://knowledge.broadcom.com/external/article/412422/dynamic-routing-protocol-selection-for-m.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/05-rutare"
     ]
   }
 ]

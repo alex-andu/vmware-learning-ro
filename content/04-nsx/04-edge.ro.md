@@ -112,7 +112,7 @@ flowchart TD
 | NSX în afara VCF, de la 4.2.2 | Acțiunea *Redeploy Edge* din UI, care păstrează FQDN-ul (FQDN, Fully Qualified Domain Name) și adresele IP (IP, Internet Protocol) | [S491] |
 | VCF 9.1.1 și mai nou | Profile de alocare a nucleelor (L4Forwarding, Security) pe Edge cluster, cu restart al nodurilor | [S495] |
 
-`[IMAGE SEARCH / PROMPT]` „NSX Edge cluster Tier-0 active active ECMP diagram” și „NSX Edge VM fp-eth0 fp-eth1 management vNIC”.
+`[IMAGE SEARCH / PROMPT]` „NSX Edge cluster Tier-0 active active diagram” și „NSX Edge VM fp-eth0 fp-eth1 management vNIC”.
 :::
 
 :::exam-alert
