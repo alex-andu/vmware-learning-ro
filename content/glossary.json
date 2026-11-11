@@ -1203,5 +1203,57 @@
     "term": "Port mirroring",
     "ro": "Copierea traficului unor porturi spre alt port sau spre un agent la distanță, pentru analiză. Se configurează pe VDS.",
     "en": "Copying traffic from some ports to another port or a remote agent, for analysis. Configured on a VDS."
+  },
+  {
+    "id": "vaai",
+    "term": "VAAI",
+    "abbr": "VAAI",
+    "expansion": "vSphere APIs for Array Integration",
+    "ro": "Funcții prin care ESXi lasă matricea de stocare să facă singură unele operații (blocare ATS, copiere, zero-uri, UNMAP), mai repede.",
+    "en": "Functions through which ESXi lets the storage array do some operations itself (ATS locking, copy, zeroing, UNMAP), faster."
+  },
+  {
+    "id": "ats",
+    "term": "ATS",
+    "abbr": "ATS",
+    "expansion": "Atomic Test and Set",
+    "ro": "Primitiva VAAI care blochează doar fișierul de pe VMFS, în loc să rezerve tot LUN-ul cu o rezervare SCSI.",
+    "en": "The VAAI primitive that locks only the file on VMFS instead of reserving the whole LUN with a SCSI reservation."
+  },
+  {
+    "id": "vasa",
+    "term": "VASA",
+    "abbr": "VASA",
+    "expansion": "vSphere APIs for Storage Awareness",
+    "ro": "Cadrul prin care un storage provider spune vCenter ce capabilități și ce stare are stocarea, folosite de politicile de stocare.",
+    "en": "The framework through which a storage provider tells vCenter what capabilities and state the storage has, used by storage policies."
+  },
+  {
+    "id": "sioc",
+    "term": "SIOC",
+    "abbr": "SIOC",
+    "expansion": "Storage I/O Control",
+    "ro": "Prioritizează I/O-ul pe un datastore aglomerat după shares. În VCF 9.0 politicile SIOC păstrează doar limitele IOPS.",
+    "en": "Prioritizes I/O on a congested datastore by shares. In VCF 9.0 SIOC policies keep only IOPS limits."
+  },
+  {
+    "id": "sdrs",
+    "term": "Storage DRS",
+    "abbr": "SDRS",
+    "expansion": "Storage Distributed Resource Scheduler",
+    "aliases": [
+      "datastore cluster"
+    ],
+    "ro": "Plasează și echilibrează discurile VM-urilor între datastore-urile unui datastore cluster, după spațiu (și, până la deprecare, după latență).",
+    "en": "Places and balances VM disks across the datastores of a datastore cluster, by space (and, until deprecation, by latency)."
+  },
+  {
+    "id": "storage-policy",
+    "term": "VM storage policy",
+    "aliases": [
+      "storage policy"
+    ],
+    "ro": "Set de reguli (bazate pe capabilități sau pe tag-uri) care spune pe ce datastore poate sta un VM și ce servicii primește.",
+    "en": "A set of rules (capability-based or tag-based) that says which datastore a VM can live on and which services it gets."
   }
 ]

@@ -30,7 +30,8 @@
       "02-vsphere/01-vcenter",
       "02-vsphere/02-identitate-rbac",
       "02-vsphere/03-licente-certificate",
-      "02-vsphere/04-vds"
+      "02-vsphere/04-vds",
+      "02-vsphere/05-stocare-partajata"
     ]
   },
   {
@@ -552,7 +553,8 @@
       "02-vsphere/01-vcenter",
       "02-vsphere/02-identitate-rbac",
       "02-vsphere/03-licente-certificate",
-      "02-vsphere/04-vds"
+      "02-vsphere/04-vds",
+      "02-vsphere/05-stocare-partajata"
     ]
   },
   {
@@ -790,7 +792,8 @@
     "read": true,
     "usedBy": [
       "01-fundamente/03-stocare-de-baza",
-      "01-fundamente/08-stocare-esxi"
+      "01-fundamente/08-stocare-esxi",
+      "02-vsphere/05-stocare-partajata"
     ]
   },
   {
@@ -801,7 +804,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "01-fundamente/03-stocare-de-baza"
+      "01-fundamente/03-stocare-de-baza",
+      "02-vsphere/05-stocare-partajata"
     ]
   },
   {
@@ -1400,7 +1404,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "01-fundamente/08-stocare-esxi"
+      "01-fundamente/08-stocare-esxi",
+      "02-vsphere/05-stocare-partajata"
     ]
   },
   {
@@ -1455,7 +1460,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "01-fundamente/08-stocare-esxi"
+      "01-fundamente/08-stocare-esxi",
+      "02-vsphere/05-stocare-partajata"
     ]
   },
   {
@@ -2075,6 +2081,171 @@
     "read": true,
     "usedBy": [
       "02-vsphere/04-vds"
+    ]
+  },
+  {
+    "id": "S185",
+    "title": "vSphere 8 vCenter and Host Management: vMotion requirements (shared storage)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vcenter-esxi-management/GUID-30FAA00F-D5F3-475D-820E-5D45517AC18E.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/05-stocare-partajata"
+    ]
+  },
+  {
+    "id": "S186",
+    "title": "KB 400097: NFS3 datastore has a different UUID across hosts for the same export",
+    "url": "https://knowledge.broadcom.com/external/article/400097/nfs3-datastore-has-a-different-uuid-acro.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/05-stocare-partajata"
+    ]
+  },
+  {
+    "id": "S187",
+    "title": "KB 318941: Frequently Asked Questions for vStorage APIs for Array Integration (VAAI)",
+    "url": "https://knowledge.broadcom.com/external/article/318941/frequently-asked-questions-for-vstorage.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/05-stocare-partajata"
+    ]
+  },
+  {
+    "id": "S188",
+    "title": "vSphere 8 Storage: About rules and rule sets in VM storage policies",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-storage/GUID-CE4F36A1-33F5-43DD-B573-805A3BF0FFB2.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/05-stocare-partajata"
+    ]
+  },
+  {
+    "id": "S189",
+    "title": "KB 404217: Steps to create VM-datastore affinity using tag-based storage profiles",
+    "url": "https://knowledge.broadcom.com/external/article/404217/steps-to-create-vmdatastore-affinity-usi.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/05-stocare-partajata"
+    ]
+  },
+  {
+    "id": "S190",
+    "title": "vSphere 8 Storage: Check compliance for a VM storage policy",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-storage/GUID-70C026D0-E72C-48DE-9751-34FE03CFD83A.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/05-stocare-partajata"
+    ]
+  },
+  {
+    "id": "S191",
+    "title": "vSphere 8 Storage: Using storage providers (VASA)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-storage/GUID-E65B34EF-E125-4014-94BB-8DD7F7C4E6EB.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/05-stocare-partajata"
+    ]
+  },
+  {
+    "id": "S192",
+    "title": "KB 401070: Deprecation of vSphere Virtual Volumes (vVols) in VCF 9.0 and VVF 9.0",
+    "url": "https://knowledge.broadcom.com/external/article/401070/deprecation-of-vmware-vsphere-virtual-vo.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/05-stocare-partajata"
+    ]
+  },
+  {
+    "id": "S193",
+    "title": "vSphere 8 Resource Management: Managing storage I/O resources (Storage I/O Control)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-resource-management/GUID-7686FEC3-1FAC-4DA7-B698-B808C44E5E96.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/05-stocare-partajata"
+    ]
+  },
+  {
+    "id": "S194",
+    "title": "vSphere 6.7 Resource Management: Set Storage I/O Control threshold value (older version, used for the threshold options)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.resmgmt.doc/GUID-D3FE742F-5398-4274-83C0-C9D14DBE372A.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/05-stocare-partajata"
+    ]
+  },
+  {
+    "id": "S195",
+    "title": "KB 323063: Setting the congestion threshold value for Storage I/O Control",
+    "url": "https://knowledge.broadcom.com/external/article/323063/setting-the-congestion-threshold-value-f.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/05-stocare-partajata"
+    ]
+  },
+  {
+    "id": "S196",
+    "title": "VMware blog: Storage DRS and Storage I/O Control deprecations (2024-06-25)",
+    "url": "https://blogs.vmware.com/cloud-foundation/2024/06/25/storage-drs-storage-io-control-deprecations/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/05-stocare-partajata"
+    ]
+  },
+  {
+    "id": "S197",
+    "title": "KB 385396: Deprecation of default storage policy components for SIOC storage policy (VCF 9.0)",
+    "url": "https://knowledge.broadcom.com/external/article/385396/deprecation-of-default-storage-policy-co.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/05-stocare-partajata"
+    ]
+  },
+  {
+    "id": "S198",
+    "title": "KB 320864: Storage DRS FAQ",
+    "url": "https://knowledge.broadcom.com/external/article/320864/storage-drs-faq.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/05-stocare-partajata"
+    ]
+  },
+  {
+    "id": "S199",
+    "title": "Yellow Bricks (Duncan Epping): Storage IO Control deprecation notice with 8.0 U3",
+    "url": "https://www.yellow-bricks.com/2024/11/25/storage-io-control-aka-sioc-deprecation-notice-with-8-0-u3",
+    "type": "community",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/05-stocare-partajata"
     ]
   }
 ]
