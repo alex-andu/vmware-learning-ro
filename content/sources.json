@@ -45,7 +45,8 @@
       "03-vsan/02-deploy",
       "03-vsan/03-spbm-ftt",
       "03-vsan/04-eficienta-spatiu",
-      "03-vsan/05-stretched"
+      "03-vsan/05-stretched",
+      "03-vsan/06-operare"
     ]
   },
   {
@@ -64,7 +65,8 @@
       "03-vsan/02-deploy",
       "03-vsan/03-spbm-ftt",
       "03-vsan/04-eficienta-spatiu",
-      "03-vsan/05-stretched"
+      "03-vsan/05-stretched",
+      "03-vsan/06-operare"
     ]
   },
   {
@@ -4358,7 +4360,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "03-vsan/03-spbm-ftt"
+      "03-vsan/03-spbm-ftt",
+      "03-vsan/06-operare"
     ]
   },
   {
@@ -4369,7 +4372,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "03-vsan/03-spbm-ftt"
+      "03-vsan/03-spbm-ftt",
+      "03-vsan/06-operare"
     ]
   },
   {
@@ -4469,7 +4473,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "03-vsan/04-eficienta-spatiu"
+      "03-vsan/04-eficienta-spatiu",
+      "03-vsan/06-operare"
     ]
   },
   {
@@ -4591,7 +4596,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "03-vsan/05-stretched"
+      "03-vsan/05-stretched",
+      "03-vsan/06-operare"
     ]
   },
   {
@@ -4724,6 +4730,193 @@
     "read": true,
     "usedBy": [
       "03-vsan/05-stretched"
+    ]
+  },
+  {
+    "id": "S419",
+    "title": "VCF 9.0 vSAN Administration: Working with Members of the vSAN Cluster in Maintenance Mode",
+    "url": "https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-0/vsan-deployment-administration-and-monitoring/administering-vmware-vsan/expanding-and-managing-a-vsan-cluster/working-with-members-of-vsan-cluster-in-maintenance-mode.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/06-operare"
+    ]
+  },
+  {
+    "id": "S420",
+    "title": "vSAN 8 Administration: Place a Member of vSAN Cluster in Maintenance Mode (evacuation modes, esxcli)",
+    "url": "https://techdocs.broadcom.com/us/en/vmware-cis/vsan/vsan/8-0/vsan-administration/expanding-and-managing-a-vsan-cluster/working-with-members-of-vsan-cluster-in-maintenance-mode/place-a-member-of-vsan-cluster-in-maintenance-mode.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/06-operare"
+    ]
+  },
+  {
+    "id": "S421",
+    "title": "KB 326857: vSAN host fails to enter maintenance mode with Full data migration",
+    "url": "https://knowledge.broadcom.com/external/article/326857/vsan-host-fails-to-enter-maintenance-mod.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/06-operare"
+    ]
+  },
+  {
+    "id": "S422",
+    "title": "KB 415685: vSAN host fails Full data migration pre-check with RAID-6 and six hosts",
+    "url": "https://knowledge.broadcom.com/external/article/415685/vsan-host-fails-full-data-migration-prec.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/06-operare"
+    ]
+  },
+  {
+    "id": "S423",
+    "title": "KB 435985: vSAN data resync after exiting Ensure Accessibility maintenance mode",
+    "url": "https://knowledge.broadcom.com/external/article/435985",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/06-operare"
+    ]
+  },
+  {
+    "id": "S424",
+    "title": "KB 416539: Warning \"No data can be migrated from the disk group\" (host in maintenance mode)",
+    "url": "https://knowledge.broadcom.com/external/article/416539/warning-no-data-can-be-migrated-from-the.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/06-operare"
+    ]
+  },
+  {
+    "id": "S425",
+    "title": "KB 319926: vSAN Proactive rebalance and Automatic Rebalance",
+    "url": "https://knowledge.broadcom.com/external/article/319926/vsan-proactive-rebalance-and-automatic-r.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/06-operare"
+    ]
+  },
+  {
+    "id": "S426",
+    "title": "KB 403351: vSAN cluster constantly resyncing due to Automatic rebalance activity",
+    "url": "https://knowledge.broadcom.com/external/article/403351/vsan-cluster-constantly-resyncing-due-to.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/06-operare"
+    ]
+  },
+  {
+    "id": "S427",
+    "title": "KB 327031: Changing the default repair delay time for a host failure in vSAN",
+    "url": "https://knowledge.broadcom.com/external/article/327031",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/06-operare"
+    ]
+  },
+  {
+    "id": "S428",
+    "title": "KB 445909: Reference for vSAN resync wait period and ESXCLI commands",
+    "url": "https://knowledge.broadcom.com/external/article/445909/reference-for-vsan-resync-wait-period-an.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/06-operare"
+    ]
+  },
+  {
+    "id": "S429",
+    "title": "KB 420087: Graceful shutdown of a vSAN cluster with hosted vCenter (Cluster Shutdown Wizard)",
+    "url": "https://knowledge.broadcom.com/external/article/420087/graceful-shutdown-of-vsan-cluster-with-h.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/06-operare"
+    ]
+  },
+  {
+    "id": "S430",
+    "title": "KB 447177: vSAN Skyline Health score remains low after silencing alerts",
+    "url": "https://knowledge.broadcom.com/external/article/447177/vsan-skyline-health-score-remains-low-or.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/06-operare"
+    ]
+  },
+  {
+    "id": "S431",
+    "title": "KB 424487: VCF Health, vSAN fault domain maintenance state health check (vSAN 9.1)",
+    "url": "https://knowledge.broadcom.com/external/article/424487/vcf-health-vsan-fault-domain-maintenanc.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/06-operare"
+    ]
+  },
+  {
+    "id": "S432",
+    "title": "KB 447339: VCF Health storage alerts do not align with Storage Operations alerts",
+    "url": "https://knowledge.broadcom.com/external/article/447339/vcf-health-storage-alerts-do-not-align-w.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/06-operare"
+    ]
+  },
+  {
+    "id": "S433",
+    "title": "VMware blog: Holistic views for vSAN clusters using VCF Operations",
+    "url": "https://blogs.vmware.com/cloud-foundation/2025/08/07/holistic-views-for-vsan-clusters-using-vcf-operations/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/06-operare"
+    ]
+  },
+  {
+    "id": "S434",
+    "title": "VMware: vSAN Frequently Asked Questions (October 2026)",
+    "url": "https://www.vmware.com/docs/vmw-vsan-faqs",
+    "type": "whitepaper",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/06-operare"
+    ]
+  },
+  {
+    "id": "S435",
+    "title": "Yellow Bricks (Duncan Epping): Doing site maintenance in a vSAN stretched cluster configuration",
+    "url": "https://www.yellow-bricks.com/2025/01/15/doing-site-maintenance-in-a-vsan-stretched-cluster-configuration",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/06-operare"
     ]
   }
 ]

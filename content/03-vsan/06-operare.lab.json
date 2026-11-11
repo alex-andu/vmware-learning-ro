@@ -1,0 +1,137 @@
+{
+  "steps": [
+    {
+      "id": "health",
+      "title": {
+        "ro": "Verifică sănătatea clusterului",
+        "en": "Check cluster health"
+      },
+      "path": {
+        "ro": "Cluster → Monitor → vSAN → Skyline Health",
+        "en": "Cluster → Monitor → vSAN → Skyline Health"
+      },
+      "action": {
+        "ro": "Notează scorul și verificările galbene sau roșii, apasă Retest și vezi dacă se schimbă ceva. Nu începe nicio mentenanță cu probleme deschise.",
+        "en": "Note the score and the yellow or red checks, click Retest and see whether anything changes. Do not start any maintenance with open issues."
+      },
+      "why": {
+        "ro": "O mentenanță pornită pe un cluster deja degradat poate transforma o problemă mică într-una de disponibilitate.",
+        "en": "Maintenance started on an already degraded cluster can turn a small problem into an availability one."
+      }
+    },
+    {
+      "id": "precheck",
+      "title": {
+        "ro": "Rulează data migration pre-check",
+        "en": "Run the data migration pre-check"
+      },
+      "path": {
+        "ro": "Cluster → Monitor → vSAN → Data Migration Pre-check (⚠ de verificat numele exact)",
+        "en": "Cluster → Monitor → vSAN → Data Migration Pre-check (⚠ to verify the exact name)"
+      },
+      "action": {
+        "ro": "Alege un host și rulează pre-check-ul pe rând pentru Ensure accessibility, Full data migration și No data migration. Notează câte date s-ar muta și câte obiecte devin noncompliant sau inaccesibile la fiecare.",
+        "en": "Pick a host and run the pre-check in turn for Ensure accessibility, Full data migration and No data migration. Note how much data would move and how many objects become noncompliant or inaccessible for each."
+      },
+      "why": {
+        "ro": "Pre-check-ul îți arată consecințele fiecărui mod înainte să le suporți; pe 3 hosturi vezi direct că Full data migration nu e posibil.",
+        "en": "The pre-check shows the consequences of each mode before you live with them; on 3 hosts you see directly that Full data migration is not possible."
+      }
+    },
+    {
+      "id": "timer",
+      "title": {
+        "ro": "Verifică Object Repair Timer și rebalance-ul",
+        "en": "Check Object Repair Timer and rebalance"
+      },
+      "path": {
+        "ro": "Cluster → Configure → vSAN → Services → Advanced Options; SSH (Secure Shell) pe un host",
+        "en": "Cluster → Configure → vSAN → Services → Advanced Options; SSH (Secure Shell) on a host"
+      },
+      "action": {
+        "ro": "Notează valoarea Object Repair Timer și dacă Automatic Rebalance e pornit, cu ce prag. Pe un host rulează esxcli system settings advanced list -o /VSAN/ClomRepairDelay și compară. Nu schimba valorile.",
+        "en": "Note the Object Repair Timer value and whether Automatic Rebalance is on, with which threshold. On a host run esxcli system settings advanced list -o /VSAN/ClomRepairDelay and compare. Do not change the values."
+      },
+      "why": {
+        "ro": "Trebuie să știi când pornește reconstrucția (60 de minute implicit) și cum se echilibrează discurile înainte să planifici mentenanța.",
+        "en": "You must know when rebuild starts (60 minutes by default) and how disks are balanced before you plan maintenance."
+      }
+    },
+    {
+      "id": "mm",
+      "title": {
+        "ro": "Pune un host în Ensure accessibility",
+        "en": "Put a host into Ensure accessibility"
+      },
+      "path": {
+        "ro": "Host → clic dreapta → Maintenance Mode → Enter Maintenance Mode → vSAN data migration: Ensure accessibility",
+        "en": "Host → right-click → Maintenance Mode → Enter Maintenance Mode → vSAN data migration: Ensure accessibility"
+      },
+      "action": {
+        "ro": "Intră în mentenanță cu Ensure accessibility, lasă hostul câteva minute (sub 60) și între timp scrie date în VM-ul de test (de exemplu copiază un fișier mare). Uită-te la Capacity: capacitatea totală a scăzut.",
+        "en": "Enter maintenance with Ensure accessibility, leave the host a few minutes (under 60) and meanwhile write data in the test VM (for example copy a large file). Look at Capacity: total capacity dropped."
+      },
+      "why": {
+        "ro": "Acesta e testul de avarie controlat: obiectele rămân accesibile, dar cu redundanță redusă, iar hostul nu mai contribuie cu stocare.",
+        "en": "This is the controlled failure test: objects stay accessible but with reduced redundancy, and the host no longer contributes storage."
+      }
+    },
+    {
+      "id": "resync",
+      "title": {
+        "ro": "Ieși din mentenanță și urmărește resync-ul",
+        "en": "Exit maintenance and follow the resync"
+      },
+      "path": {
+        "ro": "Host → Maintenance Mode → Exit; Cluster → Monitor → vSAN → Resyncing Objects",
+        "en": "Host → Maintenance Mode → Exit; Cluster → Monitor → vSAN → Resyncing Objects"
+      },
+      "action": {
+        "ro": "Ieși din mentenanță și urmărește în Resyncing Objects cât de mic e resync-ul. Pe host rulează esxcli vsan debug resync summary get până ajunge la zero, apoi esxcli vsan debug object health summary get.",
+        "en": "Exit maintenance and watch in Resyncing Objects how small the resync is. On the host run esxcli vsan debug resync summary get until it reaches zero, then esxcli vsan debug object health summary get."
+      },
+      "why": {
+        "ro": "vSAN copiază doar scrierile pierdute; nu treci la hostul următor până nu se termină și toate obiectele sunt healthy.",
+        "en": "vSAN copies only the missed writes; you do not move to the next host until it finishes and every object is healthy."
+      }
+    },
+    {
+      "id": "vcfops",
+      "title": {
+        "ro": "Deschide Storage Operations în VCF Operations",
+        "en": "Open Storage Operations in VCF Operations"
+      },
+      "path": {
+        "ro": "VCF Operations → Infrastructure Operations → Storage Operations",
+        "en": "VCF Operations → Infrastructure Operations → Storage Operations"
+      },
+      "action": {
+        "ro": "Găsește clusterul tău, notează scorul Skyline Health și banda lui de culoare, apoi deschide View Dashboard. Dacă nu ai VCF Operations în lab, sari pasul.",
+        "en": "Find your cluster, note its Skyline Health score and colour band, then open View Dashboard. If you have no VCF Operations in the lab, skip the step."
+      },
+      "why": {
+        "ro": "În producție urmărești toate clusterele dintr-un singur loc, iar scorul de aici trebuie să coincidă cu cel din vCenter.",
+        "en": "In production you watch every cluster from one place, and the score here must match the one in vCenter."
+      }
+    },
+    {
+      "id": "shutdown",
+      "title": {
+        "ro": "Citește pre-check-ul Cluster Shutdown Wizard (doar lab)",
+        "en": "Read the Cluster Shutdown Wizard pre-check (lab only)"
+      },
+      "path": {
+        "ro": "Cluster → clic dreapta → vSAN → Shutdown cluster",
+        "en": "Cluster → right-click → vSAN → Shutdown cluster"
+      },
+      "action": {
+        "ro": "Deschide asistentul, citește pre-check-ul și notează ce avertismente apar (de exemplu vCenter pe acest cluster). Apasă Cancel: nu opri clusterul decât într-un lab de unică folosință.",
+        "en": "Open the wizard, read the pre-check and note the warnings (for example vCenter on this cluster). Click Cancel: do not shut the cluster down except in a throwaway lab."
+      },
+      "why": {
+        "ro": "Înveți ce verifică asistentul și ce trebuie pregătit (hostul de orchestrare, accesul prin Host Client) fără să riști clusterul.",
+        "en": "You learn what the wizard checks and what you must prepare (the orchestration host, Host Client access) without risking the cluster."
+      }
+    }
+  ]
+}

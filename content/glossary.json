@@ -1908,5 +1908,55 @@
     "term": "Shared witness",
     "ro": "Un singur witness care servește mai multe clustere vSAN cu două noduri (până la 64), introdus în vSAN 7 U1.",
     "en": "A single witness serving several two-node vSAN clusters (up to 64), introduced in vSAN 7 U1."
+  },
+  {
+    "id": "evacuation-mode",
+    "term": "vSAN evacuation mode (maintenance mode)",
+    "aliases": [
+      "Ensure accessibility",
+      "Full data migration",
+      "No data migration"
+    ],
+    "ro": "Opțiunea aleasă când pui un host vSAN în maintenance mode: Ensure accessibility (implicit, mută doar cât să rămână obiectele accesibile), Full data migration (mută tot) sau No data migration (nu mută nimic).",
+    "en": "The option chosen when you put a vSAN host into maintenance mode: Ensure accessibility (default, moves only enough to keep objects accessible), Full data migration (moves everything) or No data migration (moves nothing)."
+  },
+  {
+    "id": "object-repair-timer",
+    "term": "Object Repair Timer",
+    "aliases": [
+      "ClomRepairDelay"
+    ],
+    "ro": "Timpul (implicit 60 de minute) cât așteaptă vSAN după căderea sau intrarea în mentenanță a unui host înainte să reconstruiască componentele lipsă pe alte hosturi.",
+    "en": "The time (60 minutes by default) vSAN waits after a host fails or enters maintenance before rebuilding missing components on other hosts."
+  },
+  {
+    "id": "resync",
+    "term": "Resync (vSAN)",
+    "ro": "Copierea datelor între hosturi ca obiectele să revină la politica lor: după o avarie, după mentenanță, la schimbări de politică sau la rebalance.",
+    "en": "Copying data between hosts so objects return to their policy: after a failure, after maintenance, on policy changes or on rebalance."
+  },
+  {
+    "id": "automatic-rebalance",
+    "term": "Automatic Rebalance",
+    "ro": "Setare vSAN (din 6.7 U3) care mută automat componente când diferența de ocupare dintre discuri trece de prag (implicit 30%).",
+    "en": "A vSAN setting (from 6.7 U3) that automatically moves components when the usage difference between disks exceeds the threshold (30% by default)."
+  },
+  {
+    "id": "skyline-health",
+    "term": "Skyline Health (vSAN)",
+    "ro": "Setul de verificări de sănătate vSAN din vCenter (Monitor > vSAN > Skyline Health), cu scor procentual și butonul Retest.",
+    "en": "The set of vSAN health checks in vCenter (Monitor > vSAN > Skyline Health), with a percentage score and the Retest button."
+  },
+  {
+    "id": "storage-operations",
+    "term": "Storage Operations (VCF Operations)",
+    "ro": "Vederea din VCF Operations (Infrastructure Operations > Storage Operations) care arată alertele, scorurile Skyline Health și performanța tuturor clusterelor vSAN și datastore-urilor.",
+    "en": "The VCF Operations view (Infrastructure Operations > Storage Operations) that shows alerts, Skyline Health scores and performance for every vSAN cluster and datastore."
+  },
+  {
+    "id": "cluster-shutdown",
+    "term": "vSAN Cluster Shutdown Wizard",
+    "ro": "Asistentul din vCenter (clic dreapta pe cluster > vSAN > Shutdown cluster) care oprește controlat un cluster vSAN și îl repornește cu Restart cluster.",
+    "en": "The vCenter wizard (right-click the cluster > vSAN > Shutdown cluster) that shuts a vSAN cluster down in an orderly way and brings it back with Restart cluster."
   }
 ]
