@@ -1700,5 +1700,50 @@
     "expansion": "Tanzu Kubernetes Grid",
     "ro": "Numele vechi al clusterelor Kubernetes create de Supervisor; în 9.0 serviciul se numește VKS.",
     "en": "The old name of the Kubernetes clusters created by the Supervisor; in 9.0 the service is called VKS."
+  },
+  {
+    "id": "hci",
+    "term": "HCI",
+    "abbr": "HCI",
+    "expansion": "Hyper-Converged Infrastructure",
+    "ro": "Infrastructură în care aceleași servere dau și calcul, și stocare (vSAN pe discurile locale ale hosturilor).",
+    "en": "Infrastructure where the same servers provide both compute and storage (vSAN on the hosts' local disks)."
+  },
+  {
+    "id": "disk-group",
+    "term": "Disk group",
+    "ro": "În vSAN OSA, grupul format dintr-un dispozitiv de cache și unul sau mai multe dispozitive de capacitate; maximum 5 pe host, cu până la 7 de capacitate fiecare.",
+    "en": "In vSAN OSA, the group made of one cache device and one or more capacity devices; up to 5 per host, each with up to 7 capacity devices."
+  },
+  {
+    "id": "storage-pool",
+    "term": "Storage pool (vSAN ESA)",
+    "aliases": [
+      "disk pool"
+    ],
+    "ro": "În vSAN ESA, toate dispozitivele NVMe ale hostului, fiecare dând și performanță, și capacitate; căderea unuia nu le afectează pe celelalte.",
+    "en": "In vSAN ESA, all of the host's NVMe devices, each providing both performance and capacity; one failing does not affect the others."
+  },
+  {
+    "id": "vsan-object",
+    "term": "vSAN object",
+    "aliases": [
+      "obiect vSAN",
+      "component"
+    ],
+    "ro": "Unitatea în care vSAN stochează un VM (VM home, fiecare VMDK, swap, snapshot-uri); fiecare obiect e format din componente plasate pe hosturi diferite după politică.",
+    "en": "The unit in which vSAN stores a VM (VM home, each VMDK, swap, snapshots); each object is made of components placed on different hosts according to the policy."
+  },
+  {
+    "id": "vsan-storage-cluster",
+    "term": "vSAN storage cluster",
+    "ro": "Cluster vSAN ESA care doar oferă stocare altor clustere de calcul, prin datastore sharing.",
+    "en": "A vSAN ESA cluster that only provides storage to other compute clusters, through datastore sharing."
+  },
+  {
+    "id": "vsan",
+    "term": "vSAN",
+    "ro": "Stocarea software VMware care adună discurile locale ale hosturilor ESXi într-un datastore partajat de tot clusterul.",
+    "en": "VMware software-defined storage that pools the local disks of ESXi hosts into one datastore shared by the whole cluster."
   }
 ]

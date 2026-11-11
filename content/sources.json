@@ -40,7 +40,8 @@
       "02-vsphere/11-backup",
       "02-vsphere/12-monitorizare",
       "02-vsphere/13-lifecycle",
-      "02-vsphere/14-supervisor-vks"
+      "02-vsphere/14-supervisor-vks",
+      "03-vsan/01-concepte-osa-esa"
     ]
   },
   {
@@ -54,7 +55,8 @@
       "docs/STATE_OF_THE_ART",
       "01-fundamente/01-ce-este-virtualizarea",
       "content/modules.json",
-      "01-fundamente/02-retea-de-baza"
+      "01-fundamente/02-retea-de-baza",
+      "03-vsan/01-concepte-osa-esa"
     ]
   },
   {
@@ -291,7 +293,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "docs/STATE_OF_THE_ART"
+      "docs/STATE_OF_THE_ART",
+      "03-vsan/01-concepte-osa-esa"
     ]
   },
   {
@@ -573,7 +576,8 @@
       "02-vsphere/11-backup",
       "02-vsphere/12-monitorizare",
       "02-vsphere/13-lifecycle",
-      "02-vsphere/14-supervisor-vks"
+      "02-vsphere/14-supervisor-vks",
+      "03-vsan/01-concepte-osa-esa"
     ]
   },
   {
@@ -1810,7 +1814,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "02-vsphere/03-licente-certificate"
+      "02-vsphere/03-licente-certificate",
+      "03-vsan/01-concepte-osa-esa"
     ]
   },
   {
@@ -2199,7 +2204,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "02-vsphere/05-stocare-partajata"
+      "02-vsphere/05-stocare-partajata",
+      "03-vsan/01-concepte-osa-esa"
     ]
   },
   {
@@ -3992,6 +3998,116 @@
     "read": true,
     "usedBy": [
       "02-vsphere/14-supervisor-vks"
+    ]
+  },
+  {
+    "id": "S355",
+    "title": "vSphere 8 vSAN Planning: Design and sizing of vSAN hosts (memory, CPU, network, disk groups vs storage pools)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsan-planning/GUID-07EFD36A-F844-4E7D-830D-3863E4AA617C.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/01-concepte-osa-esa"
+    ]
+  },
+  {
+    "id": "S356",
+    "title": "VMware blog: Comparing the Original Storage Architecture to the vSAN 8 Express Storage Architecture (2022-08-31)",
+    "url": "https://blogs.vmware.com/cloud-foundation/2022/08/31/comparing-the-original-storage-architecture-to-the-vsan-8-express-storage-architecture/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/01-concepte-osa-esa"
+    ]
+  },
+  {
+    "id": "S357",
+    "title": "VMware: vSAN ESA with VMware Cloud on AWS technical deep dive (log-structured file system, performance and capacity legs)",
+    "url": "https://www.vmware.com/docs/vsan-esa-with-vmware-cloud-on-aws-technical-deep-dive",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/01-concepte-osa-esa"
+    ]
+  },
+  {
+    "id": "S358",
+    "title": "KB 387380: How to convert a vSAN ESA cluster to an OSA cluster",
+    "url": "https://knowledge.broadcom.com/external/article/387380/how-to-convert-a-vsan-esa-express-storag.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/01-concepte-osa-esa"
+    ]
+  },
+  {
+    "id": "S359",
+    "title": "KB 432894: How to convert a vSAN OSA cluster to a vSAN ESA cluster (no in-place upgrade)",
+    "url": "https://knowledge.broadcom.com/external/article/432894",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/01-concepte-osa-esa"
+    ]
+  },
+  {
+    "id": "S360",
+    "title": "VMware blog: Migrating to the Express Storage Architecture in vSAN 8 (2023-01-01)",
+    "url": "https://blogs.vmware.com/cloud-foundation/2023/01/01/migrating-to-the-express-storage-architecture-in-vsan-8/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/01-concepte-osa-esa"
+    ]
+  },
+  {
+    "id": "S361",
+    "title": "VMware: vSAN Design Guide (objects, components, witness, HCI and storage clusters)",
+    "url": "https://www.vmware.com/docs/vmware-vsan-design-guide",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/01-concepte-osa-esa"
+    ]
+  },
+  {
+    "id": "S362",
+    "title": "VMware blog: Announcing availability of vSAN 9.0 (2025-06-17)",
+    "url": "https://blogs.vmware.com/cloud-foundation/2025/06/17/announcing-availability-of-vsan-9-0/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/01-concepte-osa-esa"
+    ]
+  },
+  {
+    "id": "S363",
+    "title": "KB 433469: vSAN Data Protection support for vSAN OSA and external storage arrays",
+    "url": "https://knowledge.broadcom.com/external/article/433469/vsan-data-protection-support-for-vsan-os.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/01-concepte-osa-esa"
+    ]
+  },
+  {
+    "id": "S364",
+    "title": "VMware blog: Global deduplication in vSAN ESA for VMware Cloud Foundation 9.0 (2025-06-19)",
+    "url": "https://blogs.vmware.com/cloud-foundation/2025/06/19/global-deduplication-in-vsan-esa-for-vmware-cloud-foundation-9-0/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/01-concepte-osa-esa"
     ]
   }
 ]
