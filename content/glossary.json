@@ -1380,5 +1380,46 @@
     "term": "Proactive HA",
     "ro": "Reacție la defecte parțiale de hardware (de exemplu o sursă de alimentare din mai multe): VM-urile sunt evacuate și hostul intră în Quarantine sau Maintenance mode.",
     "en": "A reaction to partial hardware faults (for example one of several power supplies): VMs are evacuated and the host enters Quarantine or Maintenance mode."
+  },
+  {
+    "id": "ovf",
+    "term": "OVF",
+    "abbr": "OVF",
+    "expansion": "Open Virtualization Format",
+    "ro": "Format standard de împachetare a unui VM: descriptor .ovf, discuri .vmdk și manifest .mf. OVA e același conținut într-un singur fișier.",
+    "en": "A standard format for packaging a VM: an .ovf descriptor, .vmdk disks and an .mf manifest. OVA is the same content in a single file."
+  },
+  {
+    "id": "content-library",
+    "term": "Content library",
+    "aliases": [
+      "content libraries"
+    ],
+    "ro": "Container gestionat de vCenter pentru template-uri de VM, template-uri OVF, ISO-uri și alte fișiere, care se poate publica și abona între vCenter-e.",
+    "en": "A vCenter-managed container for VM templates, OVF templates, ISOs and other files, which can be published and subscribed across vCenters."
+  },
+  {
+    "id": "vm-template-cl",
+    "term": "VM template (VMTX)",
+    "aliases": [
+      "VMTX"
+    ],
+    "ro": "Template de VM în formatul nativ vSphere, păstrat în content library de la 7.0 U1, cu check-out, check-in și versiuni.",
+    "en": "A VM template in the native vSphere format, kept in a content library since 7.0 U1, with check-out, check-in and versions."
+  },
+  {
+    "id": "subscribed-library",
+    "term": "Subscribed library",
+    "ro": "Bibliotecă abonată la una publicată: nu primește importuri, doar se sincronizează, imediat sau la cerere.",
+    "en": "A library subscribed to a published one: it accepts no imports, it only synchronizes, immediately or on demand."
+  },
+  {
+    "id": "customization-spec",
+    "term": "Customization specification",
+    "aliases": [
+      "guest customization"
+    ],
+    "ro": "Set de setări salvate în vCenter (nume, rețea, domeniu, licență) aplicat sistemului de operare la clonare sau deploy, ca VM-urile noi să nu fie identice.",
+    "en": "A set of settings saved in vCenter (name, network, domain, licence) applied to the guest OS at clone or deploy time, so new VMs are not identical."
   }
 ]

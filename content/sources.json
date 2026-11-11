@@ -34,7 +34,8 @@
       "02-vsphere/05-stocare-partajata",
       "02-vsphere/06-vmotion",
       "02-vsphere/07-drs",
-      "02-vsphere/08-ha-ft"
+      "02-vsphere/08-ha-ft",
+      "02-vsphere/09-content-library"
     ]
   },
   {
@@ -560,7 +561,8 @@
       "02-vsphere/05-stocare-partajata",
       "02-vsphere/06-vmotion",
       "02-vsphere/07-drs",
-      "02-vsphere/08-ha-ft"
+      "02-vsphere/08-ha-ft",
+      "02-vsphere/09-content-library"
     ]
   },
   {
@@ -1625,7 +1627,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "02-vsphere/01-vcenter"
+      "02-vsphere/01-vcenter",
+      "02-vsphere/09-content-library"
     ]
   },
   {
@@ -1637,7 +1640,8 @@
     "read": true,
     "usedBy": [
       "02-vsphere/01-vcenter",
-      "02-vsphere/02-identitate-rbac"
+      "02-vsphere/02-identitate-rbac",
+      "02-vsphere/09-content-library"
     ]
   },
   {
@@ -2890,6 +2894,215 @@
     "read": true,
     "usedBy": [
       "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S257",
+    "title": "vSphere 8 VM Administration: Using content libraries (types, item types, limitations)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vm-administration/GUID-254B2CE8-20A8-43F0-90E8-3F6776C2C896.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/09-content-library"
+    ]
+  },
+  {
+    "id": "S258",
+    "title": "vSphere 8 VM Administration: Managing content library items (update, export, clone, edit, delete)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vm-administration/GUID-D3DD122F-16A5-4F36-8467-97994A854B16.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/09-content-library"
+    ]
+  },
+  {
+    "id": "S259",
+    "title": "vSphere 8 VM Administration: Local library publishing and subscriptions",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vm-administration/GUID-28567D95-D2B6-44F8-9AC7-7D8B618A5848.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/09-content-library"
+    ]
+  },
+  {
+    "id": "S260",
+    "title": "vSphere 8 VM Administration: Deploying VMs and vApps from templates in a content library",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vm-administration/GUID-AE275F8E-6C7D-4654-A02E-9C3F6EF4B8BD.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/09-content-library"
+    ]
+  },
+  {
+    "id": "S261",
+    "title": "vSphere 8 VM Administration: Create and edit a content library",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vm-administration/GUID-A58AF4FD-6CBE-4210-9E67-27EFBDCC1EF2.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/09-content-library"
+    ]
+  },
+  {
+    "id": "S262",
+    "title": "vSphere 8 VM Administration: Populating libraries with content (import, clone to library)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vm-administration/GUID-B413FBAE-8FCB-4598-A3C2-8B6DDA772D5C.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/09-content-library"
+    ]
+  },
+  {
+    "id": "S263",
+    "title": "vSphere 8 VM Administration: Synchronizing a subscribed content library",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vm-administration/GUID-9DE2BD8F-E499-4F1E-956B-67212DE593C6.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/09-content-library"
+    ]
+  },
+  {
+    "id": "S264",
+    "title": "vSphere 8 VM Administration: Managing VM templates (check-out, check-in, versions)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vm-administration/GUID-E9EAF7AC-1C08-441A-AB80-0BAA1EAF9F0A.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/09-content-library"
+    ]
+  },
+  {
+    "id": "S265",
+    "title": "William Lam: Benefits of VM templates (VMTX) in vSphere Content Library (2023-05)",
+    "url": "https://williamlam.com/2023/05/benefits-of-vm-templates-vmtx-in-vsphere-content-library.html",
+    "type": "community",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/09-content-library"
+    ]
+  },
+  {
+    "id": "S266",
+    "title": "vSphere 8 VM Administration: Customizing guest operating systems (specifications, Sysprep, cloud-init)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vm-administration/GUID-EB5F090E-723C-4470-B640-50B35D1EC016.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/09-content-library"
+    ]
+  },
+  {
+    "id": "S267",
+    "title": "vSphere 8 VM Administration: Guest operating system customization requirements",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vm-administration/GUID-E63B6FAA-8D35-428D-B40C-744769845906.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/09-content-library"
+    ]
+  },
+  {
+    "id": "S268",
+    "title": "vSphere 8 VM Administration: Clone a virtual machine to a template",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vm-administration/GUID-5B3737CC-28DB-4334-BD18-6E12011CDC9F.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/09-content-library"
+    ]
+  },
+  {
+    "id": "S269",
+    "title": "vSphere 8 VM Administration: Clone a template to a template",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vm-administration/GUID-E1E7AC27-CE65-4C6A-8E27-9BF5DDC3AF2E.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/09-content-library"
+    ]
+  },
+  {
+    "id": "S270",
+    "title": "KB 429830: Error when checking out VM Template from Content Library",
+    "url": "https://knowledge.broadcom.com/external/article/429830/error-when-checking-out-vm-template-from.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/09-content-library"
+    ]
+  },
+  {
+    "id": "S271",
+    "title": "KB 414494: VM Templates not syncing in Subscribed Library",
+    "url": "https://knowledge.broadcom.com/external/article/414494/vm-templates-not-syncing-in-subscribed-l.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/09-content-library"
+    ]
+  },
+  {
+    "id": "S272",
+    "title": "KB 406860: Applying OVF Security Policy to existing Content Library produces an error",
+    "url": "https://knowledge.broadcom.com/external/article/406860/applying-ovf-security-policy-to-existing.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/09-content-library"
+    ]
+  },
+  {
+    "id": "S273",
+    "title": "KB 400125: Migration of VM Templates in a Content Library to another datastore (vCenter 9.0)",
+    "url": "https://knowledge.broadcom.com/external/article/400125/migration-of-vm-templates-in-a-content-l.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/09-content-library"
+    ]
+  },
+  {
+    "id": "S274",
+    "title": "KB 408721: Content Libraries syncing is very slow between vCenters",
+    "url": "https://knowledge.broadcom.com/external/article/408721/content-libraries-syncing-is-very-slow-b.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/09-content-library"
+    ]
+  },
+  {
+    "id": "S275",
+    "title": "KB 429744: Deployment of VM from Subscribed Content Library fails with \"Cannot find library item in storage backing\"",
+    "url": "https://knowledge.broadcom.com/external/article/429744/deployment-of-vm-from-subscribed-content.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/09-content-library"
     ]
   }
 ]
