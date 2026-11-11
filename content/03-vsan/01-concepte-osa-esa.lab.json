@@ -1,0 +1,99 @@
+{
+  "steps": [
+    {
+      "id": "arch",
+      "title": {
+        "ro": "Află ce arhitectură are clusterul",
+        "en": "Find out the cluster architecture"
+      },
+      "path": {
+        "ro": "Cluster → Configure → vSAN → Services ⚠ de verificat",
+        "en": "Cluster → Configure → vSAN → Services ⚠ to verify"
+      },
+      "action": {
+        "ro": "Notează dacă vSAN e OSA sau ESA, ce servicii sunt active (compresie, criptare, deduplicare dacă e cazul) și câte hosturi are clusterul.",
+        "en": "Note whether vSAN is OSA or ESA, which services are on (compression, encryption, deduplication if any) and how many hosts the cluster has."
+      },
+      "why": {
+        "ro": "Arhitectura decide ce funcții ai (RAID-5/6 eficient, compresie per VM, Data Protection) și nu se schimbă pe loc.",
+        "en": "The architecture decides which features you get (efficient RAID-5/6, per-VM compression, Data Protection) and cannot be changed in place."
+      }
+    },
+    {
+      "id": "disks",
+      "title": {
+        "ro": "Uită-te la discuri: disk groups sau storage pool",
+        "en": "Look at the disks: disk groups or storage pool"
+      },
+      "path": {
+        "ro": "Cluster → Configure → vSAN → Disk Management ⚠ de verificat",
+        "en": "Cluster → Configure → vSAN → Disk Management ⚠ to verify"
+      },
+      "action": {
+        "ro": "Pe OSA, numără disk groups pe fiecare host și vezi care e discul de cache. Pe ESA, vezi că toate dispozitivele NVMe stau în același pool, fără cache.",
+        "en": "On OSA, count the disk groups on each host and find the cache disk. On ESA, see that all NVMe devices are in the same pool, with no cache."
+      },
+      "why": {
+        "ro": "Așa înțelegi domeniul de defect: pe OSA un disc de cache scoate tot grupul, pe ESA doar dispozitivul respectiv.",
+        "en": "This is how you understand the failure domain: on OSA a cache disk takes the whole group, on ESA only that device."
+      }
+    },
+    {
+      "id": "objects",
+      "title": {
+        "ro": "Vezi obiectele și componentele unui VM",
+        "en": "See a VM objects and components"
+      },
+      "path": {
+        "ro": "Cluster → Monitor → vSAN → Virtual Objects → alege VM-ul → View Placement Details ⚠ de verificat",
+        "en": "Cluster → Monitor → vSAN → Virtual Objects → pick the VM → View Placement Details ⚠ to verify"
+      },
+      "action": {
+        "ro": "Pentru VM home și pentru discul VM-ului, notează politica, numărul de componente, pe ce hosturi stau și dacă există o componentă witness.",
+        "en": "For the VM home and the VM disk, note the policy, the number of components, which hosts they sit on and whether there is a witness component."
+      },
+      "why": {
+        "ro": "Vezi concret cum transformă politica un obiect în componente pe hosturi diferite, ca să supraviețuiască unei căderi.",
+        "en": "You see concretely how the policy turns an object into components on different hosts, so it survives a failure."
+      }
+    },
+    {
+      "id": "network",
+      "title": {
+        "ro": "Verifică rețeaua vSAN",
+        "en": "Check the vSAN network"
+      },
+      "path": {
+        "ro": "Host → Configure → Networking → VMkernel adapters",
+        "en": "Host → Configure → Networking → VMkernel adapters"
+      },
+      "action": {
+        "ro": "Găsește VMkernel adapter-ul cu serviciul vSAN pe fiecare host, notează VLAN-ul, IP-ul și MTU-ul și verifică că sunt la fel pe toate hosturile.",
+        "en": "Find the VMkernel adapter with the vSAN service on each host, note the VLAN, IP and MTU and check they are the same on every host."
+      },
+      "why": {
+        "ro": "Traficul vSAN și comunicarea HA trec pe această rețea; o nepotrivire de VLAN sau MTU împarte clusterul.",
+        "en": "vSAN traffic and HA communication run on this network; a VLAN or MTU mismatch splits the cluster."
+      }
+    },
+    {
+      "id": "capacity",
+      "title": {
+        "ro": "Compară capacitatea liberă cu cea brută",
+        "en": "Compare free and raw capacity"
+      },
+      "path": {
+        "ro": "Cluster → Monitor → vSAN → Capacity",
+        "en": "Cluster → Monitor → vSAN → Capacity"
+      },
+      "action": {
+        "ro": "Notează capacitatea din Capacity Overview. Apoi adună capacitatea brută a dispozitivelor din Disk Management și calculează câți TiB ar trebui licențiați față de TiB incluși (VCF 1 per core, VVF 0,25 per core).",
+        "en": "Note the capacity in Capacity Overview. Then add up the raw device capacity from Disk Management and work out how many TiB must be licensed compared to the included TiB (VCF 1 per core, VVF 0.25 per core)."
+      },
+      "why": {
+        "ro": "Licențierea vSAN se face pe capacitate brută, nu pe ce arată interfața ca liber.",
+        "en": "vSAN licensing is based on raw capacity, not on what the interface shows as free."
+      }
+    }
+  ]
+}

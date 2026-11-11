@@ -1,0 +1,123 @@
+[
+  {
+    "id": "01-fundamente",
+    "order": 1,
+    "title": { "ro": "1. Fundamente IT & ESXi", "en": "1. IT Fundamentals & ESXi" },
+    "target": { "ro": "Baza pentru toate examenele (VVF/VCF secțiunea 2)", "en": "Foundation for every exam (VVF/VCF section 2)" },
+    "competency": {
+      "ro": "Explic ce este virtualizarea și instalez, configurez și administrez un host ESXi standalone: rețea, stocare și mașini virtuale.",
+      "en": "Explains virtualization and installs, configures and manages a standalone ESXi host: networking, storage and virtual machines."
+    },
+    "labTitle": {
+      "ro": "Un host ESXi complet configurat: rețea de management, datastore, primele VM-uri și snapshot-uri",
+      "en": "A fully configured ESXi host: management network, datastore, first VMs and snapshots"
+    },
+    "chapters": [
+      { "id": "01-ce-este-virtualizarea", "title": { "ro": "Ce este virtualizarea: hypervisor, VM, Type 1 vs Type 2", "en": "What virtualization is: hypervisor, VM, Type 1 vs Type 2" }, "exam": ["VVF 2.1.1", "VVF 2.1.2", "VVF 2.1.3", "VCF 2.1", "DCV 1.1"] },
+      { "id": "02-retea-de-baza", "title": { "ro": "Rețelistică de bază pentru virtualizare: IP, VLAN, MTU, DNS, NTP", "en": "Networking basics for virtualization: IP, VLAN, MTU, DNS, NTP" }, "exam": ["VCF profil candidat (DNS, NTP)", "DCV 4.19.1"] },
+      { "id": "03-stocare-de-baza", "title": { "ro": "Stocare de bază: discuri, RAID, LUN, SAN vs NAS", "en": "Storage basics: disks, RAID, LUN, SAN vs NAS" }, "exam": ["DCV 1.3.1", "DCV 1.3.2"] },
+      { "id": "04-arhitectura-esxi", "title": { "ro": "Arhitectura ESXi: VMkernel, DCUI, Host Client, servicii, Lockdown Mode", "en": "ESXi architecture: VMkernel, DCUI, Host Client, services, Lockdown Mode" }, "exam": ["VVF 2.2.1", "DCV 1.1", "DCV 4.19"] },
+      { "id": "05-cpu-memorie", "title": { "ro": "CPU și memorie: planificarea vCPU, overcommit, shares, limits, reservations", "en": "CPU and memory: vCPU scheduling, overcommit, shares, limits, reservations" }, "exam": ["VVF 2.2.3", "DCV 5.1.1", "DCV 7.3"] },
+      { "id": "06-masini-virtuale", "title": { "ro": "Mașini virtuale: hardware virtual, fișiere, VMware Tools, snapshot-uri", "en": "Virtual machines: virtual hardware, files, VMware Tools, snapshots" }, "exam": ["VVF 2.2.3", "DCV 1.12", "DCV 7.1", "DCV 7.2"] },
+      { "id": "07-retea-esxi", "title": { "ro": "Rețeaua în ESXi: vSphere Standard Switch, port groups, adaptoare VMkernel", "en": "ESXi networking: vSphere Standard Switch, port groups, VMkernel adapters" }, "exam": ["VVF 2.4.1", "DCV 1.5", "DCV 1.5.1", "DCV 4.3"] },
+      { "id": "08-stocare-esxi", "title": { "ro": "Stocarea în ESXi: datastore VMFS, NFS, iSCSI", "en": "ESXi storage: VMFS, NFS and iSCSI datastores" }, "exam": ["VVF 2.3.1", "DCV 1.3", "DCV 7.4.1"] }
+    ]
+  },
+  {
+    "id": "02-vsphere",
+    "order": 2,
+    "title": { "ro": "2. vSphere & vCenter", "en": "2. vSphere & vCenter" },
+    "target": { "ro": "VCP-VVF Administrator (2V0-16.25), cu harta către fostul VCP-DCV (2V0-21.23)", "en": "VCP-VVF Administrator (2V0-16.25), mapped to the former VCP-DCV (2V0-21.23)" },
+    "competency": {
+      "ro": "Administrez un mediu vSphere/VVF 9: vCenter, identitate și roluri, clustere cu HA și DRS, vMotion, Distributed Switch, stocare partajată, certificate, lifecycle, monitorizare și Kubernetes de bază (VKS).",
+      "en": "Administers a vSphere/VVF 9 environment: vCenter, identity and roles, HA/DRS clusters, vMotion, Distributed Switch, shared storage, certificates, lifecycle, monitoring and basic Kubernetes (VKS)."
+    },
+    "labTitle": {
+      "ro": "Cluster cu 3 hosturi: vCenter, Distributed Switch, stocare iSCSI/NFS, vMotion, DRS, HA și un test de avarie",
+      "en": "3-host cluster: vCenter, Distributed Switch, iSCSI/NFS storage, vMotion, DRS, HA and a failure test"
+    },
+    "chapters": [
+      { "id": "01-vcenter", "title": { "ro": "vCenter Server: arhitectură, instalare, domeniul SSO", "en": "vCenter Server: architecture, deployment, SSO domain" }, "exam": ["VVF 2.2.1", "VVF 4.1.1", "VVF 4.1.2", "DCV 1.2", "DCV 4.1", "DCV 4.5"] },
+      { "id": "02-identitate-rbac", "title": { "ro": "Identitate și roluri (RBAC): surse de identitate, permisiuni", "en": "Identity and roles (RBAC): identity sources, permissions" }, "exam": ["VVF 4.2.1", "DCV 1.10", "DCV 4.4", "DCV 7.7"] },
+      { "id": "03-licente-certificate", "title": { "ro": "Licențe și certificate în VVF", "en": "Licensing and certificates in VVF" }, "exam": ["VVF 4.2.2", "VVF 4.2.3", "DCV 4.13"] },
+      { "id": "04-vds", "title": { "ro": "vSphere Distributed Switch: politici, NIOC, VSS vs VDS", "en": "vSphere Distributed Switch: policies, NIOC, VSS vs VDS" }, "exam": ["VVF 2.4.1", "DCV 1.5.2", "DCV 1.5.3", "DCV 1.5.4", "DCV 4.2", "DCV 5.4"] },
+      { "id": "05-stocare-partajata", "title": { "ro": "Stocare partajată: iSCSI, NFS, VMFS, multipathing, politici de stocare", "en": "Shared storage: iSCSI, NFS, VMFS, multipathing, storage policies" }, "exam": ["VVF 2.3.1", "DCV 1.3", "DCV 1.3.3", "DCV 1.3.4", "DCV 7.4"] },
+      { "id": "06-vmotion", "title": { "ro": "Migrare: vMotion, Storage vMotion, EVC", "en": "Migration: vMotion, Storage vMotion, EVC" }, "exam": ["VVF 2.2.4", "VVF 2.2.5", "DCV 1.4.2", "DCV 7.6"] },
+      { "id": "07-drs", "title": { "ro": "Clustere și DRS: resource pools, reguli de afinitate", "en": "Clusters and DRS: resource pools, affinity rules" }, "exam": ["VVF 2.2.2", "DCV 1.4.1", "DCV 1.4.3", "DCV 5.1", "DCV 7.5"] },
+      { "id": "08-ha-ft", "title": { "ro": "Disponibilitate: vSphere HA și Fault Tolerance", "en": "Availability: vSphere HA and Fault Tolerance" }, "exam": ["VVF 2.2.2", "DCV 1.4.4", "DCV 1.4.5", "DCV 4.6"] },
+      { "id": "09-content-library", "title": { "ro": "Content Libraries și template-uri", "en": "Content Libraries and templates" }, "exam": ["VVF 2.2.6", "DCV 4.8", "DCV 4.9", "DCV 4.10"] },
+      { "id": "10-securitate", "title": { "ro": "Securitate: criptarea VM-urilor, vTPM, Secure Boot", "en": "Security: VM encryption, vTPM, Secure Boot" }, "exam": ["VVF 2.2.7", "DCV 1.8", "DCV 1.9", "DCV 4.17.2", "DCV 7.12"] },
+      { "id": "11-backup", "title": { "ro": "Backup: vCenter file-based backup și protecția VM-urilor", "en": "Backup: vCenter file-based backup and VM protection" }, "exam": ["VVF 2.2.5", "DCV 4.11"] },
+      { "id": "12-monitorizare", "title": { "ro": "Monitorizare: alarme, grafice de performanță, VCF Operations și Logs", "en": "Monitoring: alarms, performance charts, VCF Operations and Logs" }, "exam": ["VVF 4.3", "DCV 5.2", "DCV 5.10", "DCV 7.10", "DCV 7.11"] },
+      { "id": "13-lifecycle", "title": { "ro": "vSphere Lifecycle Manager: imagini de cluster, update-uri", "en": "vSphere Lifecycle Manager: cluster images, updates" }, "exam": ["VVF 4.2.4", "DCV 1.6", "DCV 4.14", "DCV 5.9", "DCV 7.9"] },
+      { "id": "14-supervisor-vks", "title": { "ro": "vSphere Supervisor și VKS: Kubernetes pentru administratori vSphere", "en": "vSphere Supervisor and VKS: Kubernetes for vSphere admins" }, "exam": ["VVF 2.5", "VVF 4.1.3", "VVF 4.4.1", "DCV 1.13", "DCV 4.20"] }
+    ]
+  },
+  {
+    "id": "03-vsan",
+    "order": 3,
+    "title": { "ro": "3. vSAN", "en": "3. vSAN" },
+    "target": { "ro": "Obiectivele de stocare din VCP-VVF și VCP-VCF (2.3)", "en": "Storage objectives in VCP-VVF and VCP-VCF (2.3)" },
+    "competency": {
+      "ro": "Construiesc și operez clustere vSAN OSA și ESA, aleg politici de stocare (SPBM) cu nivelul potrivit de toleranță la defecte și diagnostichez problemele de sănătate.",
+      "en": "Builds and operates vSAN OSA and ESA clusters, chooses storage policies (SPBM) with the right failure tolerance and troubleshoots health issues."
+    },
+    "labTitle": {
+      "ro": "Cluster vSAN în lab: politici FTT=1 cu RAID-1 vs RAID-5, simularea căderii unui host și refacerea datelor",
+      "en": "Lab vSAN cluster: FTT=1 policies with RAID-1 vs RAID-5, simulated host failure and data rebuild"
+    },
+    "chapters": [
+      { "id": "01-concepte-osa-esa", "title": { "ro": "Concepte vSAN: OSA vs ESA, disk groups vs storage pool", "en": "vSAN concepts: OSA vs ESA, disk groups vs storage pool" }, "exam": ["VVF 2.3.2", "VCF 2.3.2", "DCV 1.3.5", "DCV 1.7"] },
+      { "id": "02-deploy", "title": { "ro": "Crearea unui cluster vSAN", "en": "Deploying a vSAN cluster" }, "exam": ["VVF 2.3.3", "VCF 2.3.3"] },
+      { "id": "03-spbm-ftt", "title": { "ro": "Politici de stocare (SPBM): FTT, RAID-1 vs RAID-5/6", "en": "Storage policies (SPBM): FTT, RAID-1 vs RAID-5/6" }, "exam": ["VVF 2.3.4", "VVF 2.3.5", "VCF 2.3.4"] },
+      { "id": "04-eficienta-spatiu", "title": { "ro": "Eficiența spațiului: compresie, deduplicare", "en": "Space efficiency: compression, deduplication" }, "exam": ["VVF 2.3.6", "VCF 2.3.6"] },
+      { "id": "05-stretched", "title": { "ro": "Stretched cluster, cluster cu 2 noduri și witness", "en": "Stretched cluster, 2-node cluster and witness" }, "exam": ["VVF 2.3.5", "VCF 2.3.5"] },
+      { "id": "06-operare", "title": { "ro": "Operare și troubleshooting: mentenanță, rebalance, health, VCF Storage Operations", "en": "Operations and troubleshooting: maintenance, rebalance, health, VCF Storage Operations" }, "exam": ["VVF 4.3.13", "VCF 4.3.10"] }
+    ]
+  },
+  {
+    "id": "04-nsx",
+    "order": 4,
+    "title": { "ro": "4. Rețea virtuală: NSX și VCF Networking", "en": "4. Virtual networking: NSX and VCF Networking" },
+    "target": { "ro": "Rețeaua din VCP-VCF Administrator (2V0-17.25), cu harta către fostul VCP-NV (2V0-41.24)", "en": "Networking in VCP-VCF Administrator (2V0-17.25), mapped to the former VCP-NV (2V0-41.24)" },
+    "competency": {
+      "ro": "Implementez rețele virtuale cu NSX: transport zones, segmente, rutare Tier-0/Tier-1 cu BGP, NAT și firewall distribuit pentru microsegmentare.",
+      "en": "Implements virtual networks with NSX: transport zones, segments, Tier-0/Tier-1 routing with BGP, NAT and distributed firewall micro-segmentation."
+    },
+    "labTitle": {
+      "ro": "NSX în lab: segmente, Tier-1 și Tier-0 cu BGP către un router virtual, microsegmentarea unei aplicații pe 3 niveluri",
+      "en": "NSX in the lab: segments, Tier-1 and Tier-0 with BGP to a virtual router, micro-segmenting a 3-tier app"
+    },
+    "chapters": [
+      { "id": "01-sdn-arhitectura", "title": { "ro": "SDN și arhitectura NSX: NSX Manager, management, control și data plane", "en": "SDN and NSX architecture: NSX Manager, management, control and data plane" }, "exam": ["VCF 2.4.1", "NV 4.1"] },
+      { "id": "02-transport", "title": { "ro": "Transport zones, TEP, GENEVE și pregătirea hosturilor (VDS, nu N-VDS)", "en": "Transport zones, TEP, GENEVE and host preparation (VDS, not N-VDS)" }, "exam": ["VCF 2.4.2", "NV 4.1"] },
+      { "id": "03-segmente", "title": { "ro": "Segmente și switching logic", "en": "Segments and logical switching" }, "exam": ["VCF 2.4.2", "NV 4.2"] },
+      { "id": "04-edge", "title": { "ro": "Edge nodes și Edge cluster", "en": "Edge nodes and Edge cluster" }, "exam": ["VCF 4.1.5 ⚠", "NV 4.3"], "examNote": { "ro": "⚠ de verificat: dacă „VCF Network Gateway” din 2V0-17.25 corespunde NSX Edge.", "en": "⚠ to verify: whether the \"VCF Network Gateway\" in 2V0-17.25 maps to NSX Edge." } },
+      { "id": "05-rutare", "title": { "ro": "Rutare: Tier-1, Tier-0, BGP și OSPF de bază", "en": "Routing: Tier-1, Tier-0, basic BGP and OSPF" }, "exam": ["VCF 2.4.3", "NV 4.4", "NV 4.5", "NV 4.6"] },
+      { "id": "06-servicii", "title": { "ro": "Servicii de rețea: NAT, DHCP, VPN", "en": "Network services: NAT, DHCP, VPN" }, "exam": ["VCF 2.4.4", "NV 4.8", "NV 4.9"] },
+      { "id": "07-dfw", "title": { "ro": "Distributed Firewall și microsegmentare", "en": "Distributed Firewall and micro-segmentation" }, "exam": ["VCF 2.4.4"], "examNote": { "ro": "Obiectivul DFW apare explicit în ghidul 2V0-41.23 (4.8); în ghidul 2V0-41.24 secțiunea 4 nu îl numește separat.", "en": "The DFW objective appears explicitly in the 2V0-41.23 guide (4.8); the 2V0-41.24 section 4 doesn't list it separately." } },
+      { "id": "08-operare", "title": { "ro": "Operare și troubleshooting NSX, VCF Network Operations", "en": "NSX operations and troubleshooting, VCF Network Operations" }, "exam": ["VCF 4.3.9", "NV 4.11", "NV 4.12"] },
+      { "id": "09-vcf", "title": { "ro": "VCF 9: componente, workload domains, Fleet Management", "en": "VCF 9: components, workload domains, Fleet Management" }, "exam": ["VCF 4.1.1", "VCF 4.1.2", "VCF 4.1.7", "VCF 4.2.1"] }
+    ]
+  },
+  {
+    "id": "05-job-ready",
+    "order": 5,
+    "title": { "ro": "5. Job Ready", "en": "5. Job Ready" },
+    "target": { "ro": "Interviul de VMware System/Infrastructure Engineer și planul de examen", "en": "The VMware System/Infrastructure Engineer interview and exam plan" },
+    "competency": {
+      "ro": "Prezint un portofoliu de laboratoare documentate, susțin un interviu tehnic și am un plan de examen pentru VCP-VVF și VCP-VCF.",
+      "en": "Presents a portfolio of documented labs, handles a technical interview and has an exam plan for VCP-VVF and VCP-VCF."
+    },
+    "labTitle": {
+      "ro": "Portofoliu: documentarea celor 4 laboratoare (diagrame, decizii, teste de avarie) într-un depozit Git public",
+      "en": "Portfolio: documenting the 4 labs (diagrams, decisions, failure tests) in a public Git repository"
+    },
+    "chapters": [
+      { "id": "01-cv-portofoliu", "title": { "ro": "CV și portofoliu de laboratoare", "en": "CV and lab portfolio" }, "exam": [] },
+      { "id": "02-interviu", "title": { "ro": "Întrebări de interviu transversale și scenarii de troubleshooting", "en": "Cross-module interview questions and troubleshooting scenarios" }, "exam": [] },
+      { "id": "03-harti-examen", "title": { "ro": "Hărți de studiu pe examen: VVF, VCF, DCV și NV (legacy)", "en": "Exam study maps: VVF, VCF, DCV and NV (legacy)" }, "exam": ["VVF", "VCF", "DCV", "NV"] },
+      { "id": "04-drum-vcf9", "title": { "ro": "Drumul către VCF 9: Operations, Automation, importul unui vCenter existent", "en": "The road to VCF 9: Operations, Automation, importing an existing vCenter" }, "exam": ["VCF 4.2.6", "VCF 4.3", "VCF 4.4.1"] }
+    ]
+  }
+]

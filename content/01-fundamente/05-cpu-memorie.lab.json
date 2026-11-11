@@ -1,0 +1,118 @@
+{
+  "steps": [
+    {
+      "id": "host-cpu",
+      "title": {
+        "ro": "Notează topologia CPU a hostului",
+        "en": "Write down the host CPU topology"
+      },
+      "path": {
+        "ro": "Host Client → Host → Hardware → CPU ⚠ de verificat",
+        "en": "Host Client → Host → Hardware → CPU ⚠ to verify"
+      },
+      "action": {
+        "ro": "Notează numărul de socket-uri, nuclee per socket, procesoare logice și dacă hyperthreading e activ. Calculează nucleele efective: nuclee fizice × 1,25 dacă hyperthreading e activ.",
+        "en": "Write down sockets, cores per socket, logical processors and whether hyper-threading is active. Compute effective cores: physical cores × 1.25 if hyper-threading is on."
+      },
+      "why": {
+        "ro": "Toate calculele de overcommit și limita de vCPU pornesc de aici. Nucleele efective (KB 421543) îți dau o imagine realistă: hyperthreading-ul nu dublează puterea.",
+        "en": "All overcommit maths and the vCPU limit start here. Effective cores (KB 421543) give a realistic picture: hyper-threading does not double capacity."
+      }
+    },
+    {
+      "id": "vm-defaults",
+      "title": {
+        "ro": "Citește setările de resurse implicite ale VM-ului",
+        "en": "Read the VM's default resource settings"
+      },
+      "path": {
+        "ro": "Host Client → Virtual Machines → VM-ul de test → Edit settings → CPU și Memory (extinde secțiunile)",
+        "en": "Host Client → Virtual Machines → test VM → Edit settings → CPU and Memory (expand the sections)"
+      },
+      "action": {
+        "ro": "Notează Reservation, Limit și Shares pentru CPU și memorie. Valorile așteptate: Reservation 0, Limit Unlimited, Shares Normal.",
+        "en": "Note Reservation, Limit and Shares for CPU and memory. Expected: Reservation 0, Limit Unlimited, Shares Normal."
+      },
+      "why": {
+        "ro": "Confirmi valorile implicite din documentație. Orice altă valoare găsită într-un mediu real trebuie să aibă o justificare scrisă.",
+        "en": "You confirm the documented defaults. Any other value found in a real environment must have a written justification."
+      }
+    },
+    {
+      "id": "load",
+      "title": {
+        "ro": "Încarcă procesorul VM-ului",
+        "en": "Load the VM's CPU"
+      },
+      "path": {
+        "ro": "Consola VM-ului (sistemul de operare din VM)",
+        "en": "VM console (guest OS)"
+      },
+      "action": {
+        "ro": "Pornește VM-ul și generează sarcină pe ambele vCPU. Pe Linux, de exemplu, rulează de două ori `yes > /dev/null &`. Lasă sarcina să ruleze.",
+        "en": "Power on the VM and load both vCPUs. On Linux, for example, run `yes > /dev/null &` twice. Leave the load running."
+      },
+      "why": {
+        "ro": "Fără sarcină, o limită de CPU nu are niciun efect vizibil. Ai nevoie de un VM care chiar cere procesor.",
+        "en": "Without load a CPU limit has no visible effect. You need a VM that actually asks for CPU."
+      }
+    },
+    {
+      "id": "limit",
+      "title": {
+        "ro": "Pune o limită de CPU și urmărește esxtop (test de avarie)",
+        "en": "Set a CPU limit and watch esxtop (failure test)"
+      },
+      "path": {
+        "ro": "Edit settings → CPU → Limit; apoi SSH pe host → `esxtop`, tasta `c`",
+        "en": "Edit settings → CPU → Limit; then SSH to the host → `esxtop`, key `c`"
+      },
+      "action": {
+        "ro": "Pune Limit, de exemplu, la 500 MHz și salvează (se poate și cu VM-ul pornit). În esxtop, pe ecranul CPU, găsește VM-ul și notează `%USED`, `%RDY`, `%MLMTD` și `%CSTP`.",
+        "en": "Set Limit to, for example, 500 MHz and save (works with the VM running). In esxtop's CPU screen, find the VM and note `%USED`, `%RDY`, `%MLMTD` and `%CSTP`."
+      },
+      "why": {
+        "ro": "Vezi direct ce descrie KB 326270: limita ține VM-ul departe de procesor chiar dacă hostul e liber, iar asta apare ca %MLMTD și %RDY mari.",
+        "en": "You see what KB 326270 describes: the limit keeps the VM off the CPU even when the host is idle, showing up as high %MLMTD and %RDY."
+      }
+    },
+    {
+      "id": "remove-limit",
+      "title": {
+        "ro": "Scoate limita și compară",
+        "en": "Remove the limit and compare"
+      },
+      "path": {
+        "ro": "Edit settings → CPU → Limit → Unlimited; apoi esxtop",
+        "en": "Edit settings → CPU → Limit → Unlimited; then esxtop"
+      },
+      "action": {
+        "ro": "Setează Limit înapoi pe Unlimited. După câteva secunde, compară în esxtop `%USED`, `%RDY` și `%MLMTD` cu valorile de la pasul anterior. Oprește sarcina din VM.",
+        "en": "Set Limit back to Unlimited. After a few seconds compare `%USED`, `%RDY` and `%MLMTD` in esxtop with the previous step. Stop the load inside the VM."
+      },
+      "why": {
+        "ro": "Dovedești cauza: aceeași sarcină, aceeași mașină, doar limita schimbată. Așa diagnostichezi în producție un VM lent pe un host liber.",
+        "en": "You prove the cause: same load, same machine, only the limit changed. That is how you diagnose a slow VM on an idle host in production."
+      }
+    },
+    {
+      "id": "memory-view",
+      "title": {
+        "ro": "Privește memoria în esxtop și oprește SSH",
+        "en": "Look at memory in esxtop and stop SSH"
+      },
+      "path": {
+        "ro": "esxtop, tasta `m`; apoi Host Client → Manage → Services → TSM-SSH → Stop",
+        "en": "esxtop, key `m`; then Host Client → Manage → Services → TSM-SSH → Stop"
+      },
+      "action": {
+        "ro": "Pe ecranul de memorie găsește coloanele pentru balon (`MCTLSZ`) și swap (`SWCUR`); dacă nu apar, adaugă-le din meniul de câmpuri (tasta `f`, ⚠ de verificat). Pe un host fără presiune, ambele trebuie să fie 0. Ieși din esxtop (`q`) și oprește SSH.",
+        "en": "On the memory screen find the balloon (`MCTLSZ`) and swap (`SWCUR`) columns; if missing, add them from the field menu (key `f`, ⚠ to verify). On a host without pressure both must be 0. Quit esxtop (`q`) and stop SSH."
+      },
+      "why": {
+        "ro": "Știi unde să te uiți când apare o problemă de memorie. Valori diferite de 0 fără presiune pe host te duc direct la o limită de memorie (KB 326270).",
+        "en": "You know where to look when a memory problem appears. Non-zero values without host pressure lead straight to a memory limit (KB 326270)."
+      }
+    }
+  ]
+}

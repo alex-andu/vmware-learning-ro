@@ -1,0 +1,118 @@
+{
+  "steps": [
+    {
+      "id": "vmk",
+      "title": {
+        "ro": "Pregătește VMkernel-ul vSAN",
+        "en": "Prepare the vSAN VMkernel"
+      },
+      "path": {
+        "ro": "Host → Configure → Networking → VMkernel adapters → Add Networking (sau prin Quickstart)",
+        "en": "Host → Configure → Networking → VMkernel adapters → Add Networking (or through Quickstart)"
+      },
+      "action": {
+        "ro": "Pe fiecare host creează un VMkernel pe un port group dedicat vSAN, cu serviciul vSAN bifat, același VLAN, IP-uri din aceeași subrețea și același MTU. Notează numele vmk-ului.",
+        "en": "On each host create a VMkernel on a dedicated vSAN port group, with the vSAN service ticked, the same VLAN, IPs from the same subnet and the same MTU. Note the vmk name."
+      },
+      "why": {
+        "ro": "HA va comunica prin această rețea după activarea vSAN; fără ea, HA nu se mai configurează.",
+        "en": "HA will communicate over this network once vSAN is enabled; without it, HA no longer configures."
+      }
+    },
+    {
+      "id": "ping",
+      "title": {
+        "ro": "Testează rețeaua cu vmkping",
+        "en": "Test the network with vmkping"
+      },
+      "path": {
+        "ro": "SSH pe host → vmkping",
+        "en": "SSH to the host → vmkping"
+      },
+      "action": {
+        "ro": "Rulează vmkping -I vmkX -d -s 8972 <IP vSAN al altui host> dacă folosești MTU 9000, sau -s 1472 pentru MTU 1500. Repetă către toate hosturile.",
+        "en": "Run vmkping -I vmkX -d -s 8972 <another host vSAN IP> if you use MTU 9000, or -s 1472 for MTU 1500. Repeat towards every host."
+      },
+      "why": {
+        "ro": "Opțiunea -d interzice fragmentarea, deci vezi imediat un MTU nepotrivit pe drum, cauza clasică a partițiilor.",
+        "en": "The -d option forbids fragmentation, so you immediately see an MTU mismatch on the path, the classic cause of partitions."
+      }
+    },
+    {
+      "id": "ha",
+      "title": {
+        "ro": "Oprește HA înainte de activare",
+        "en": "Turn HA off before enabling"
+      },
+      "path": {
+        "ro": "Cluster → Configure → Services → vSphere Availability → Edit",
+        "en": "Cluster → Configure → Services → vSphere Availability → Edit"
+      },
+      "action": {
+        "ro": "Dacă HA e pornit, oprește-l temporar. Notează-ți să-l repornești la pasul 6.",
+        "en": "If HA is on, turn it off temporarily. Make a note to turn it back on in step 6."
+      },
+      "why": {
+        "ro": "KB 327002 cere HA oprit cât activezi sau dezactivezi vSAN; după activare, HA va comunica prin rețeaua vSAN.",
+        "en": "KB 327002 requires HA off while you enable or disable vSAN; after enablement, HA communicates over the vSAN network."
+      }
+    },
+    {
+      "id": "quickstart",
+      "title": {
+        "ro": "Configurează vSAN cu Quickstart",
+        "en": "Configure vSAN with Quickstart"
+      },
+      "path": {
+        "ro": "Cluster → Configure → vSAN → Quickstart (sau Services → Configure vSAN)",
+        "en": "Cluster → Configure → vSAN → Quickstart (or Services → Configure vSAN)"
+      },
+      "action": {
+        "ro": "Parcurge Cluster basics (vSAN, alegi OSA sau ESA), Add hosts, Configure cluster și Claim disks: pe OSA un disc de cache și discuri de capacitate pe disk group, pe ESA dispozitivele pentru storage pool. Lasă fault domains goale pentru un singur rack.",
+        "en": "Go through Cluster basics (vSAN, choose OSA or ESA), Add hosts, Configure cluster and Claim disks: on OSA one cache disk and capacity disks per disk group, on ESA the devices for the storage pool. Leave fault domains empty for a single rack."
+      },
+      "why": {
+        "ro": "Quickstart aplică aceeași configurație pe toate hosturile; diferențele între hosturi sunt cauza celor mai multe probleme de început.",
+        "en": "Quickstart applies the same configuration to every host; differences between hosts cause most early problems."
+      }
+    },
+    {
+      "id": "verify",
+      "title": {
+        "ro": "Verifică clusterul din linia de comandă",
+        "en": "Check the cluster from the command line"
+      },
+      "path": {
+        "ro": "SSH pe host → esxcli vsan",
+        "en": "SSH to the host → esxcli vsan"
+      },
+      "action": {
+        "ro": "Rulează esxcli vsan network list, esxcli vsan cluster get (Sub-Cluster Member Count trebuie să fie numărul de hosturi) și esxcli vsan cluster unicastagent list.",
+        "en": "Run esxcli vsan network list, esxcli vsan cluster get (Sub-Cluster Member Count must equal the number of hosts) and esxcli vsan cluster unicastagent list."
+      },
+      "why": {
+        "ro": "Confirmi că toate hosturile sunt în aceeași partiție și se văd prin unicast.",
+        "en": "You confirm every host is in the same partition and they see each other over unicast."
+      }
+    },
+    {
+      "id": "haon",
+      "title": {
+        "ro": "Repornește HA și verifică sănătatea",
+        "en": "Turn HA back on and check health"
+      },
+      "path": {
+        "ro": "Cluster → Configure → vSphere Availability; apoi Cluster → Monitor → vSAN → Skyline Health",
+        "en": "Cluster → Configure → vSphere Availability; then Cluster → Monitor → vSAN → Skyline Health"
+      },
+      "action": {
+        "ro": "Pornește HA la loc. Rulează testele de sănătate și notează orice avertisment de rețea sau de compatibilitate hardware (normale în lab nested).",
+        "en": "Turn HA back on. Run the health tests and note any network or hardware compatibility warnings (normal in a nested lab)."
+      },
+      "why": {
+        "ro": "HA comunică acum prin rețeaua vSAN; testele de sănătate îți arată dacă ai lăsat ceva nepotrivit.",
+        "en": "HA now communicates over the vSAN network; the health tests show whether you left anything mismatched."
+      }
+    }
+  ]
+}

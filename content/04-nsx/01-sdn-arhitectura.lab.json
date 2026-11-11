@@ -1,0 +1,137 @@
+{
+  "steps": [
+    {
+      "id": "appl",
+      "title": {
+        "ro": "Vezi appliance-urile NSX Manager",
+        "en": "Look at the NSX Manager appliances"
+      },
+      "path": {
+        "ro": "NSX Manager → System → Appliances",
+        "en": "NSX Manager → System → Appliances"
+      },
+      "action": {
+        "ro": "Notează câte noduri NSX Manager ai, starea clusterului, mărimea fiecărui nod și dacă există un Virtual IP setat.",
+        "en": "Note how many NSX Manager nodes you have, the cluster state, the size of each node and whether a Virtual IP is set."
+      },
+      "why": {
+        "ro": "Știi astfel dacă ești pe modelul Simple sau High Availability și dacă ai un singur punct de cădere pentru interfață și API.",
+        "en": "This tells you whether you are on the Simple or High Availability model and whether you have a single point of failure for the interface and the API."
+      }
+    },
+    {
+      "id": "cli",
+      "title": {
+        "ro": "Verifică clusterul din CLI",
+        "en": "Check the cluster from the CLI"
+      },
+      "path": {
+        "ro": "Consola sau SSH (Secure Shell) pe un NSX Manager, ca admin",
+        "en": "Console or SSH (Secure Shell) on an NSX Manager, as admin"
+      },
+      "action": {
+        "ro": "Rulează get cluster status verbose și notează liderul de API, grupurile de servicii și starea lor (de exemplu STABLE).",
+        "en": "Run get cluster status verbose and note the API leader, the service groups and their state (for example STABLE)."
+      },
+      "why": {
+        "ro": "Comanda e verificarea oficială după setarea VIP-ului și primul pas când interfața nu răspunde.",
+        "en": "The command is the official check after setting the VIP and the first step when the interface does not respond."
+      }
+    },
+    {
+      "id": "cm",
+      "title": {
+        "ro": "Vezi compute manager-ul",
+        "en": "Look at the compute manager"
+      },
+      "path": {
+        "ro": "NSX Manager → System → Fabric → Compute Managers (⚠ de verificat calea)",
+        "en": "NSX Manager → System → Fabric → Compute Managers (⚠ to verify the path)"
+      },
+      "action": {
+        "ro": "Verifică ce vCenter e înregistrat, starea conexiunii și versiunea lui.",
+        "en": "Check which vCenter is registered, the connection state and its version."
+      },
+      "why": {
+        "ro": "NSX ia inventarul de hosturi și VM-uri din vCenter; în NSX 9 configurația rețelei depinde de vCenter.",
+        "en": "NSX takes the host and VM inventory from vCenter; in NSX 9 network configuration depends on vCenter."
+      }
+    },
+    {
+      "id": "tn",
+      "title": {
+        "ro": "Vezi transport nodes",
+        "en": "Look at the transport nodes"
+      },
+      "path": {
+        "ro": "NSX Manager → System → Fabric → Hosts (⚠ de verificat calea)",
+        "en": "NSX Manager → System → Fabric → Hosts (⚠ to verify the path)"
+      },
+      "action": {
+        "ro": "Notează pentru fiecare host starea de configurare NSX, versiunea și ce VDS folosește.",
+        "en": "Note for each host the NSX configuration state, the version and which VDS it uses."
+      },
+      "why": {
+        "ro": "Hosturile ESX sunt transport nodes pe VDS; aici vezi unde rulează LCP-ul și data plane-ul.",
+        "en": "ESX hosts are transport nodes on VDS; here you see where the LCP and the data plane run."
+      }
+    },
+    {
+      "id": "planes",
+      "title": {
+        "ro": "Leagă ce ai văzut de cele trei planuri",
+        "en": "Map what you saw to the three planes"
+      },
+      "path": {
+        "ro": "Notițele tale",
+        "en": "Your notes"
+      },
+      "action": {
+        "ro": "Scrie pentru fiecare plan unde l-ai văzut: management plane (interfața și API-ul NSX Manager), CCP (nodurile NSX Manager), LCP și data plane (hosturile și Edge-urile).",
+        "en": "Write for each plane where you saw it: management plane (the NSX Manager interface and API), CCP (the NSX Manager nodes), LCP and data plane (the hosts and Edges)."
+      },
+      "why": {
+        "ro": "Întrebările de examen și de interviu pornesc exact de la această hartă.",
+        "en": "Exam and interview questions start exactly from this map."
+      }
+    },
+    {
+      "id": "fail",
+      "title": {
+        "ro": "Testează failover-ul VIP-ului (doar cu 3 noduri)",
+        "en": "Test VIP failover (3 nodes only)"
+      },
+      "path": {
+        "ro": "vSphere Client → VM-ul NSX Manager lider → Power → Shut Down Guest OS",
+        "en": "vSphere Client → leader NSX Manager VM → Power → Shut Down Guest OS"
+      },
+      "action": {
+        "ro": "Oprește liderul, cronometrează până intri din nou prin VIP și notează că trebuie să te autentifici din nou. Pornește apoi nodul și așteaptă clusterul STABLE.",
+        "en": "Shut down the leader, time how long until you get back in through the VIP and note that you must authenticate again. Then power the node on and wait for the cluster to be STABLE."
+      },
+      "why": {
+        "ro": "Acesta e testul de avarie: vezi cu ochii tăi că failover-ul durează minute și că VIP-ul nu e un load balancer.",
+        "en": "This is the failure test: you see for yourself that failover takes minutes and that the VIP is not a load balancer."
+      }
+    },
+    {
+      "id": "backup",
+      "title": {
+        "ro": "Verifică backup-ul NSX",
+        "en": "Check the NSX backup"
+      },
+      "path": {
+        "ro": "NSX Manager → System → Backup and Restore (⚠ de verificat calea)",
+        "en": "NSX Manager → System → Backup and Restore (⚠ to verify the path)"
+      },
+      "action": {
+        "ro": "Notează dacă există un server de backup extern configurat și când a rulat ultimul backup.",
+        "en": "Note whether an external backup server is configured and when the last backup ran."
+      },
+      "why": {
+        "ro": "Fără backup extern nu poți reveni după un upgrade greșit (KB 401775).",
+        "en": "Without an external backup you cannot roll back after a wrong upgrade (KB 401775)."
+      }
+    }
+  ]
+}

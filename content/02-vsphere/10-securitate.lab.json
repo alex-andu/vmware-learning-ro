@@ -1,0 +1,118 @@
+{
+  "steps": [
+    {
+      "id": "nkp",
+      "title": {
+        "ro": "Adaugă și salvează un Native Key Provider",
+        "en": "Add and back up a Native Key Provider"
+      },
+      "path": {
+        "ro": "vCenter → Configure → Security → Key Providers → Add → Add Native Key Provider ⚠ de verificat",
+        "en": "vCenter → Configure → Security → Key Providers → Add → Add Native Key Provider ⚠ to verify"
+      },
+      "action": {
+        "ro": "Numește-l lab-nkp. Dacă hosturile din lab nu au TPM fizic, debifează Use key provider only with TPM protected ESXi hosts. Apoi Back Up, cu parolă, și păstrează fișierul .p12 în afara lab-ului. Verifică că alarma de backup dispare și că lab-nkp e default.",
+        "en": "Name it lab-nkp. If the lab hosts have no physical TPM, untick Use key provider only with TPM protected ESXi hosts. Then Back Up, with a password, and keep the .p12 file outside the lab. Check that the backup alarm clears and that lab-nkp is the default."
+      },
+      "why": {
+        "ro": "NKP (Native Key Provider) nu poate fi folosit până nu e salvat, iar backup-ul conține cheia de derivare; opțiunea TPM-only ar exclude hosturile fără TPM (documentația vSphere 8, Q&A NKP).",
+        "en": "NKP (Native Key Provider) cannot be used until it is backed up, and the backup contains the derivation key; the TPM-only option would exclude hosts without TPM (vSphere 8 docs, NKP Q&A)."
+      }
+    },
+    {
+      "id": "secureboot",
+      "title": {
+        "ro": "Creează un VM cu EFI și Secure Boot",
+        "en": "Create a VM with EFI and Secure Boot"
+      },
+      "path": {
+        "ro": "New Virtual Machine → Customize hardware → VM Options → Boot Options",
+        "en": "New Virtual Machine → Customize hardware → VM Options → Boot Options"
+      },
+      "action": {
+        "ro": "Creează VM-ul sec-vm cu compatibilitate ESXi 8.0, firmware EFI și Secure Boot bifat. Instalează sistemul de operare din ISO și verifică în el că Secure Boot e activ (de exemplu mokutil --sb-state pe Linux sau msinfo32 pe Windows ⚠ de verificat).",
+        "en": "Create the VM sec-vm with ESXi 8.0 compatibility, EFI firmware and Secure Boot ticked. Install the operating system from the ISO and check inside it that Secure Boot is active (for example mokutil --sb-state on Linux or msinfo32 on Windows ⚠ to verify)."
+      },
+      "why": {
+        "ro": "Secure Boot cere EFI, hardware virtual 13+ și un sistem de operare care îl suportă; dacă pornești cu BIOS și schimbi mai târziu, discul MBR nu mai bootează (documentația vSphere 8, KB 377377).",
+        "en": "Secure Boot needs EFI, virtual hardware 13+ and an operating system that supports it; if you start with BIOS and switch later, the MBR disk no longer boots (vSphere 8 docs, KB 377377)."
+      }
+    },
+    {
+      "id": "vtpm",
+      "title": {
+        "ro": "Adaugă un vTPM",
+        "en": "Add a vTPM"
+      },
+      "path": {
+        "ro": "VM oprit → Edit Settings → Add New Device → Trusted Platform Module",
+        "en": "powered-off VM → Edit Settings → Add New Device → Trusted Platform Module"
+      },
+      "action": {
+        "ro": "Oprește sec-vm și adaugă vTPM-ul. După salvare, uită-te în Summary la starea de criptare și la discuri: fișierele home sunt criptate, discul nu.",
+        "en": "Power off sec-vm and add the vTPM. After saving, look in Summary at the encryption state and at the disks: the home files are encrypted, the disk is not."
+      },
+      "why": {
+        "ro": "vTPM cere EFI, hardware 14+ și un key provider, nu TPM fizic; criptează fișierele home și .nvram, dar nu discurile (documentația vSphere 8).",
+        "en": "vTPM needs EFI, hardware 14+ and a key provider, not a physical TPM; it encrypts the home files and .nvram, but not the disks (vSphere 8 docs)."
+      }
+    },
+    {
+      "id": "encrypt",
+      "title": {
+        "ro": "Criptează discul cu VM Encryption Policy",
+        "en": "Encrypt the disk with VM Encryption Policy"
+      },
+      "path": {
+        "ro": "VM oprit → Edit Settings → Hard disk 1 → VM storage policy → VM Encryption Policy",
+        "en": "powered-off VM → Edit Settings → Hard disk 1 → VM storage policy → VM Encryption Policy"
+      },
+      "action": {
+        "ro": "Verifică întâi că datastore-ul are liber cel puțin dublul spațiului folosit de VM. Aplică politica pe disc și așteaptă task-ul. Apoi deschide VM Options → Encryption și uită-te la Encrypted vMotion.",
+        "en": "First check that the datastore has free at least twice the space the VM uses. Apply the policy to the disk and wait for the task. Then open VM Options → Encryption and look at Encrypted vMotion."
+      },
+      "why": {
+        "ro": "Criptarea unui VM existent cere cel puțin dublul spațiului, majoritatea operațiilor cer VM-ul oprit, iar un VM criptat folosește mereu encrypted vMotion (documentația vSphere 8).",
+        "en": "Encrypting an existing VM needs at least twice the space, most operations need the VM off, and an encrypted VM always uses encrypted vMotion (vSphere 8 docs)."
+      }
+    },
+    {
+      "id": "role",
+      "title": {
+        "ro": "Testează rolul fără privilegii criptografice",
+        "en": "Test the role without cryptographic privileges"
+      },
+      "path": {
+        "ro": "Administration → Access Control → Roles; apoi sec-vm → Permissions → Add",
+        "en": "Administration → Access Control → Roles; then sec-vm → Permissions → Add"
+      },
+      "action": {
+        "ro": "Dă utilizatorului de test rolul No cryptography administrator pe sec-vm. Autentifică-te cu el și încearcă să schimbi politica discului înapoi pe una fără criptare. Notează mesajul, apoi revino la contul de administrator.",
+        "en": "Give the test user the No cryptography administrator role on sec-vm. Log in as that user and try to change the disk policy back to one without encryption. Note the message, then go back to the administrator account."
+      },
+      "why": {
+        "ro": "Rolul No cryptography administrator nu are privilegiile Cryptographic Operations, deci nu poate decripta; așa separi administrarea zilnică de gestionarea cheilor (documentația vSphere 8).",
+        "en": "The No cryptography administrator role lacks the Cryptographic Operations privileges, so it cannot decrypt; this separates daily administration from key management (vSphere 8 docs)."
+      }
+    },
+    {
+      "id": "attest",
+      "title": {
+        "ro": "Verifică atestarea hosturilor",
+        "en": "Check host attestation"
+      },
+      "path": {
+        "ro": "data center → Monitor → Security; apoi SSH pe host → secureBoot.py -s",
+        "en": "data center → Monitor → Security; then SSH to the host → secureBoot.py -s"
+      },
+      "action": {
+        "ro": "Notează starea Attestation a fiecărui host și mesajul. Pe un host, rulează secureBoot.py -s ca să vezi dacă Secure Boot e activ, apoi dezactivează SSH. Într-un lab nested, notează alarma „Host TPM attestation” și cauza ei.",
+        "en": "Note each host's Attestation status and message. On one host, run secureBoot.py -s to see whether Secure Boot is on, then disable SSH. In a nested lab, note the \"Host TPM attestation\" alarm and its cause."
+      },
+      "why": {
+        "ro": "Atestarea cere TPM 2.0 și UEFI Secure Boot pe host; alarma apare de obicei când Secure Boot e dezactivat (documentația vSphere 8, KB 369525).",
+        "en": "Attestation needs TPM 2.0 and UEFI Secure Boot on the host; the alarm usually appears when Secure Boot is off (vSphere 8 docs, KB 369525)."
+      }
+    }
+  ]
+}

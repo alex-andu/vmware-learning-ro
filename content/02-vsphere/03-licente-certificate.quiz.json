@@ -1,0 +1,269 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Un cluster are 3 hosturi, fiecare cu 2 procesoare de 12 nuclee. Câte nuclee de licență VVF (VMware vSphere Foundation) 9.0 consumă clusterul?",
+        "en": "A cluster has 3 hosts, each with 2 CPUs of 12 cores. How many VVF (VMware vSphere Foundation) 9.0 license cores does the cluster consume?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "96",
+            "en": "96"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Fiecare procesor consumă minimum 16 nuclee: 3 hosturi × 2 procesoare × 16 = 96 (KB 313548).",
+            "en": "Correct. Each CPU consumes at least 16 cores: 3 hosts × 2 CPUs × 16 = 96 (KB 313548)."
+          }
+        },
+        {
+          "text": {
+            "ro": "72",
+            "en": "72"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. 72 înseamnă nucleele fizice reale (3 × 2 × 12), fără minimul de 16 pe procesor.",
+            "en": "Wrong. 72 is the real physical core count (3 × 2 × 12), without the 16-per-CPU minimum."
+          }
+        },
+        {
+          "text": {
+            "ro": "48",
+            "en": "48"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. 48 ar aplica minimul de 16 pe host, nu pe procesor; minimul se aplică fiecărui procesor.",
+            "en": "Wrong. 48 applies the 16 minimum per host, not per CPU; the minimum applies to each CPU."
+          }
+        },
+        {
+          "text": {
+            "ro": "6, câte o licență pe procesor",
+            "en": "6, one license per CPU"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Din 9.0 licențierea nu e pe procesor, ci pe nuclee, cu minimum 16 pe procesor.",
+            "en": "Wrong. From 9.0 licensing is not per CPU but per core, with at least 16 per CPU."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Perioada de evaluare a vCenter a expirat, iar vCenter nu are licență. Ce se întâmplă cu mediul?",
+        "en": "The vCenter evaluation period has expired and vCenter has no license. What happens to the environment?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "ESXi oprește imediat toate VM-urile (VM, Virtual Machine) care rulează",
+            "en": "ESXi immediately stops all running VMs (VM, Virtual Machine)"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Workload-urile care rulează nu sunt oprite automat la expirare (documentația VCF 9.0).",
+            "en": "Wrong. Running workloads are not stopped automatically on expiry (VCF 9.0 docs)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Doar hostul cu cea mai veche instalare se deconectează",
+            "en": "Only the host with the oldest installation disconnects"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Asta ar fi cazul unui host cu evaluare expirată într-un vCenter licențiat; aici expiră evaluarea vCenter.",
+            "en": "Wrong. That would be a host with an expired evaluation under a licensed vCenter; here vCenter's evaluation expires."
+          }
+        },
+        {
+          "text": {
+            "ro": "Nimic, evaluarea se prelungește automat cu încă 90 de zile",
+            "en": "Nothing, the evaluation is extended automatically by another 90 days"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Nu există prelungire automată; recuperarea cere atribuirea unei licențe valide din VCF Operations.",
+            "en": "Wrong. There is no automatic extension; recovery requires assigning a valid license from VCF Operations."
+          }
+        },
+        {
+          "text": {
+            "ro": "Toate hosturile lui se deconectează, iar VM-urile pornite continuă să ruleze",
+            "en": "All its hosts disconnect, and powered-on VMs keep running"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Când expiră evaluarea vCenter, toate hosturile se deconectează și administrarea e blocată, dar workload-urile care rulează nu sunt oprite (documentația VCF 9.0).",
+            "en": "Correct. When the vCenter evaluation expires, all hosts disconnect and management is blocked, but running workloads are not stopped (VCF 9.0 docs)."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Un client VVF are 96 de nuclee licențiate. Câtă capacitate vSAN e inclusă în licență?",
+        "en": "A VVF customer has 96 licensed cores. How much vSAN capacity is included in the license?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "96 TiB",
+            "en": "96 TiB"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. 1 TiB pe nucleu e valoarea pentru VCF (VMware Cloud Foundation), nu pentru VVF.",
+            "en": "Wrong. 1 TiB per core is the VCF (VMware Cloud Foundation) value, not VVF."
+          }
+        },
+        {
+          "text": {
+            "ro": "24 TiB (tebibyte)",
+            "en": "24 TiB (tebibyte)"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. VVF include 0,25 TiB pe nucleu licențiat: 96 × 0,25 = 24 TiB (KB 313548).",
+            "en": "Correct. VVF includes 0.25 TiB per licensed core: 96 × 0.25 = 24 TiB (KB 313548)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Zero; vSAN se cumpără mereu separat",
+            "en": "Zero; vSAN is always bought separately"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. VVF include o cantitate de vSAN; add-on-ul se cumpără doar pentru capacitatea brută peste ea.",
+            "en": "Wrong. VVF includes some vSAN; the add-on is only bought for raw capacity above it."
+          }
+        },
+        {
+          "text": {
+            "ro": "16 TiB, adică minimul pe procesor",
+            "en": "16 TiB, the per-CPU minimum"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Minimul de 16 se referă la nuclee pe procesor, nu la TiB de vSAN.",
+            "en": "Wrong. The 16 minimum refers to cores per CPU, not TiB of vSAN."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "Politica de securitate cere ca pagina vCenter să aibă certificat de la autoritatea firmei, dar interzice autoritățile intermediare. Ce mod de certificate alegi?",
+        "en": "Security policy requires the vCenter page to have a certificate from the company authority but forbids intermediate authorities. Which certificate mode do you choose?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "VMCA (VMware Certificate Authority) ca autoritate intermediară",
+            "en": "VMCA (VMware Certificate Authority) as intermediate authority"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Politica interzice tocmai autoritățile intermediare.",
+            "en": "Wrong. The policy forbids exactly intermediate authorities."
+          }
+        },
+        {
+          "text": {
+            "ro": "VMCA implicit",
+            "en": "VMCA default"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. În modul implicit, pagina vCenter folosește un certificat semnat de VMCA, nu de autoritatea firmei.",
+            "en": "Wrong. In default mode the vCenter page uses a VMCA-signed certificate, not one from the company authority."
+          }
+        },
+        {
+          "text": {
+            "ro": "Hibrid: Machine SSL personalizat, VMCA pentru solution users și hosturi",
+            "en": "Hybrid: custom Machine SSL, VMCA for solution users and hosts"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Modul hibrid e recomandat când politica nu permite intermediare: doar Machine SSL e înlocuit (documentația vSphere Authentication).",
+            "en": "Correct. Hybrid mode is recommended when policy does not allow intermediates: only Machine SSL is replaced (vSphere Authentication docs)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Thumbprint pe toate hosturile",
+            "en": "Thumbprint on every host"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Thumbprint privește doar hosturile ESXi și e o soluție temporară; nu schimbă certificatul paginii vCenter.",
+            "en": "Wrong. Thumbprint concerns only ESXi hosts and is a temporary fallback; it does not change the vCenter page certificate."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "Care afirmație despre modul `thumbprint` pentru hosturile ESXi este corectă?",
+        "en": "Which statement about `thumbprint` mode for ESXi hosts is correct?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "E o soluție de rezervă, de folosit doar temporar",
+            "en": "It is a fallback, to be used only temporarily"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Documentația vSphere Security îl descrie ca opțiune de rezervă; recomandat e modul vmca.",
+            "en": "Correct. The vSphere Security docs describe it as a fallback option; vmca mode is the recommended one."
+          }
+        },
+        {
+          "text": {
+            "ro": "E modul recomandat, pentru că nu cere certificate",
+            "en": "It is the recommended mode because it needs no certificates"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Recomandat e vmca; thumbprint e doar temporar.",
+            "en": "Wrong. vmca is recommended; thumbprint is temporary only."
+          }
+        },
+        {
+          "text": {
+            "ro": "Permite reînnoirea automată cu 10 zile înainte",
+            "en": "It enables automatic renewal 10 days ahead"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Reînnoirea automată funcționează doar în modul vmca (KB 427937).",
+            "en": "Wrong. Automatic renewal only works in vmca mode (KB 427937)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Se activează din host → Configure → System → Certificate",
+            "en": "It is enabled from host → Configure → System → Certificate"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Modul se setează în vCenter, la Advanced Settings, prin vpxd.certmgmt.mode.",
+            "en": "Wrong. The mode is set in vCenter, under Advanced Settings, through vpxd.certmgmt.mode."
+          }
+        }
+      ]
+    }
+  ]
+}

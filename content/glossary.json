@@ -1,0 +1,2408 @@
+[
+  {
+    "id": "hypervisor",
+    "term": "hypervisor",
+    "ro": "Stratul software care împarte resursele fizice ale unui server (CPU, RAM, stocare, rețea) între mai multe mașini virtuale izolate.",
+    "en": "The software layer that shares a physical server's resources (CPU, RAM, storage, network) among multiple isolated virtual machines."
+  },
+  {
+    "id": "type-1-hypervisor",
+    "term": "Type 1 hypervisor",
+    "aliases": [
+      "bare-metal hypervisor"
+    ],
+    "ro": "Hypervisor instalat direct pe hardware, fără sistem de operare dedesubt (ex. ESXi).",
+    "en": "A hypervisor installed directly on hardware, with no operating system underneath (e.g. ESXi)."
+  },
+  {
+    "id": "type-2-hypervisor",
+    "term": "Type 2 hypervisor",
+    "aliases": [
+      "hosted hypervisor"
+    ],
+    "ro": "Hypervisor care rulează ca aplicație pe un sistem de operare existent (ex. VMware Workstation Pro pe Windows/Linux).",
+    "en": "A hypervisor that runs as an application on an existing operating system (e.g. VMware Workstation Pro on Windows/Linux)."
+  },
+  {
+    "id": "vm",
+    "term": "virtual machine",
+    "aliases": [
+      "VM",
+      "mașină virtuală"
+    ],
+    "ro": "Un calculator emulat în software, cu propriul sistem de operare, care folosește resurse alocate de hypervisor.",
+    "en": "A software-emulated computer with its own operating system, using resources allocated by the hypervisor.",
+    "expansion": "Virtual Machine",
+    "abbr": "VM"
+  },
+  {
+    "id": "vcpu",
+    "term": "vCPU",
+    "ro": "Procesor virtual văzut de VM; hypervisorul îl programează pe nucleele fizice ale hostului.",
+    "en": "A virtual processor seen by the VM; the hypervisor schedules it onto the host's physical cores.",
+    "expansion": "virtual CPU",
+    "abbr": "vCPU"
+  },
+  {
+    "id": "esxi",
+    "term": "ESXi",
+    "aliases": [
+      "ESX"
+    ],
+    "ro": "Hypervisorul Type 1 al VMware. În documentația VCF 9 apare din nou sub numele „ESX”.",
+    "en": "VMware's Type 1 hypervisor. VCF 9 documentation refers to it again as \"ESX\"."
+  },
+  {
+    "id": "host-client",
+    "term": "Host Client",
+    "aliases": [
+      "VMware Host Client"
+    ],
+    "ro": "Interfața web pentru administrarea unui singur host ESXi, fără vCenter.",
+    "en": "The web interface for managing a single ESXi host without vCenter."
+  },
+  {
+    "id": "vcenter",
+    "term": "vCenter Server",
+    "aliases": [
+      "vCenter"
+    ],
+    "ro": "Serverul de management centralizat pentru mai multe hosturi ESXi; necesar pentru clustere, vMotion, HA, DRS.",
+    "en": "The centralized management server for multiple ESXi hosts; required for clusters, vMotion, HA, DRS."
+  },
+  {
+    "id": "workstation-pro",
+    "term": "VMware Workstation Pro",
+    "aliases": [
+      "Workstation Pro"
+    ],
+    "ro": "Hypervisor Type 2 pentru Windows/Linux; gratuit pentru toți utilizatorii din 11 noiembrie 2024.",
+    "en": "Type 2 hypervisor for Windows/Linux; free for all users since November 11, 2024."
+  },
+  {
+    "id": "nested-virtualization",
+    "term": "nested virtualization",
+    "aliases": [
+      "nested ESXi",
+      "nested"
+    ],
+    "ro": "Rularea unui hypervisor (ex. ESXi) în interiorul unei VM. Bun pentru laborator, nesuportat în producție.",
+    "en": "Running a hypervisor (e.g. ESXi) inside a VM. Good for labs, not supported in production."
+  },
+  {
+    "id": "promiscuous-mode",
+    "term": "Promiscuous mode",
+    "ro": "Setare de securitate a unui port group care lasă o VM să vadă tot traficul de pe acel port group. Necesară (alături de Forged Transmits) pentru ESXi nested pe un VSS.",
+    "en": "Port group security setting that lets a VM see all traffic on that port group. Needed (with Forged Transmits) for nested ESXi on a VSS."
+  },
+  {
+    "id": "forged-transmits",
+    "term": "Forged Transmits",
+    "ro": "Setare de securitate care permite unei VM să trimită cadre cu altă adresă MAC sursă decât cea a vNIC-ului său.",
+    "en": "Security setting that allows a VM to send frames with a source MAC address different from its vNIC's."
+  },
+  {
+    "id": "mac-learning",
+    "term": "MAC Learning",
+    "ro": "Funcție a VDS (și a segmentelor NSX) prin care switch-ul învață adresele MAC din spatele unui port; alternativa performantă la Promiscuous mode pentru ESXi nested.",
+    "en": "VDS (and NSX segment) feature where the switch learns the MAC addresses behind a port; the efficient alternative to Promiscuous mode for nested ESXi."
+  },
+  {
+    "id": "vss",
+    "term": "vSphere Standard Switch",
+    "aliases": [
+      "VSS"
+    ],
+    "ro": "Switch virtual configurat individual pe fiecare host ESXi.",
+    "en": "A virtual switch configured individually on each ESXi host.",
+    "expansion": "vSphere Standard Switch",
+    "abbr": "VSS"
+  },
+  {
+    "id": "vds",
+    "term": "vSphere Distributed Switch",
+    "aliases": [
+      "VDS"
+    ],
+    "ro": "Switch virtual definit centralizat în vCenter și aplicat pe mai multe hosturi.",
+    "en": "A virtual switch defined centrally in vCenter and applied across multiple hosts.",
+    "expansion": "vSphere Distributed Switch",
+    "abbr": "VDS"
+  },
+  {
+    "id": "vcf",
+    "term": "VMware Cloud Foundation",
+    "aliases": [
+      "VCF"
+    ],
+    "ro": "Platforma completă de private cloud Broadcom/VMware (vSphere, vSAN, NSX, VCF Operations, VCF Automation).",
+    "en": "Broadcom/VMware's full private cloud platform (vSphere, vSAN, NSX, VCF Operations, VCF Automation).",
+    "expansion": "VMware Cloud Foundation",
+    "abbr": "VCF"
+  },
+  {
+    "id": "vvf",
+    "term": "VMware vSphere Foundation",
+    "aliases": [
+      "VVF"
+    ],
+    "ro": "Ediția mai mică a platformei: vSphere (ESX, vCenter), vSAN, VCF Operations.",
+    "en": "The smaller platform edition: vSphere (ESX, vCenter), vSAN, VCF Operations.",
+    "expansion": "VMware vSphere Foundation",
+    "abbr": "VVF"
+  },
+  {
+    "id": "cpu",
+    "term": "CPU",
+    "ro": "Procesorul fizic al calculatorului; execută instrucțiunile.",
+    "en": "The physical processor; it executes instructions.",
+    "expansion": "Central Processing Unit",
+    "abbr": "CPU"
+  },
+  {
+    "id": "ram",
+    "term": "RAM",
+    "ro": "Memoria de lucru, rapidă și volatilă (se pierde la oprire).",
+    "en": "Fast, volatile working memory (lost on power-off).",
+    "expansion": "Random Access Memory",
+    "abbr": "RAM"
+  },
+  {
+    "id": "nic",
+    "term": "NIC",
+    "ro": "Placa de rețea. Pe un host ESXi plăcile fizice apar ca vmnic0, vmnic1…",
+    "en": "Network card. On an ESXi host physical NICs appear as vmnic0, vmnic1…",
+    "expansion": "Network Interface Card",
+    "abbr": "NIC"
+  },
+  {
+    "id": "os",
+    "term": "OS",
+    "ro": "Sistemul de operare (Windows, Linux) care rulează într-o VM sau pe un PC.",
+    "en": "The operating system (Windows, Linux) running in a VM or on a PC.",
+    "expansion": "Operating System",
+    "abbr": "OS"
+  },
+  {
+    "id": "bios",
+    "term": "BIOS",
+    "ro": "Firmware-ul vechi care pornește calculatorul; succesorul modern e UEFI.",
+    "en": "Legacy firmware that boots the computer; the modern successor is UEFI.",
+    "expansion": "Basic Input/Output System",
+    "abbr": "BIOS"
+  },
+  {
+    "id": "uefi",
+    "term": "UEFI",
+    "ro": "Firmware-ul modern de pornire; necesar pentru Secure Boot.",
+    "en": "Modern boot firmware; required for Secure Boot.",
+    "expansion": "Unified Extensible Firmware Interface",
+    "abbr": "UEFI"
+  },
+  {
+    "id": "iso",
+    "term": "ISO",
+    "ro": "Fișier-imagine al unui disc de instalare (de exemplu instalatorul ESXi).",
+    "en": "Image file of an installation disc (e.g. the ESXi installer)."
+  },
+  {
+    "id": "kb",
+    "term": "KB",
+    "ro": "Articol oficial de suport Broadcom, identificat printr-un număr (ex. KB 318825).",
+    "en": "Official Broadcom support article, identified by a number (e.g. KB 318825).",
+    "expansion": "Knowledge Base article",
+    "abbr": "KB"
+  },
+  {
+    "id": "vcp",
+    "term": "VCP",
+    "ro": "Nivelul profesional al certificărilor VMware; se obține prin promovarea unui examen.",
+    "en": "VMware's professional certification level, earned by passing an exam.",
+    "expansion": "VMware Certified Professional",
+    "abbr": "VCP"
+  },
+  {
+    "id": "dcv",
+    "term": "DCV",
+    "ro": "Vechea certificare VCP-DCV (examen 2V0-21.23, vSphere 8), acum în grupa Legacy.",
+    "en": "The former VCP-DCV certification (exam 2V0-21.23, vSphere 8), now in the Legacy group.",
+    "expansion": "Data Center Virtualization",
+    "abbr": "DCV"
+  },
+  {
+    "id": "nv",
+    "term": "NV",
+    "ro": "Vechea certificare VCP-NV (examen 2V0-41.24, NSX 4.x), acum în grupa Legacy.",
+    "en": "The former VCP-NV certification (exam 2V0-41.24, NSX 4.x), now in the Legacy group.",
+    "expansion": "Network Virtualization",
+    "abbr": "NV"
+  },
+  {
+    "id": "ha",
+    "term": "HA",
+    "ro": "vSphere HA repornește automat VM-urile pe alt host dacă hostul lor cade.",
+    "en": "vSphere HA automatically restarts VMs on another host if their host fails.",
+    "expansion": "High Availability",
+    "abbr": "HA"
+  },
+  {
+    "id": "drs",
+    "term": "DRS",
+    "ro": "Echilibrează automat VM-urile între hosturile unui cluster, folosind vMotion.",
+    "en": "Automatically balances VMs across a cluster's hosts using vMotion.",
+    "expansion": "Distributed Resource Scheduler",
+    "abbr": "DRS"
+  },
+  {
+    "id": "ft",
+    "term": "FT",
+    "ro": "Ține o copie „în oglindă” a unei VM pe alt host, ca să nu existe întrerupere la căderea hostului.",
+    "en": "Keeps a live mirror copy of a VM on another host so a host failure causes no downtime.",
+    "expansion": "Fault Tolerance",
+    "abbr": "FT"
+  },
+  {
+    "id": "evc",
+    "term": "EVC",
+    "ro": "Maschează diferențele dintre generațiile de procesoare dintr-un cluster ca vMotion să funcționeze.",
+    "en": "Masks CPU generation differences in a cluster so vMotion works.",
+    "expansion": "Enhanced vMotion Compatibility",
+    "abbr": "EVC"
+  },
+  {
+    "id": "nioc",
+    "term": "NIOC",
+    "ro": "Împarte lățimea de bandă a unui VDS între tipuri de trafic (vMotion, VM, stocare).",
+    "en": "Shares a VDS's bandwidth among traffic types (vMotion, VM, storage).",
+    "expansion": "Network I/O Control",
+    "abbr": "NIOC"
+  },
+  {
+    "id": "sso",
+    "term": "SSO",
+    "ro": "Serviciul de autentificare al vCenter (domeniul implicit vsphere.local).",
+    "en": "vCenter's authentication service (default domain vsphere.local).",
+    "expansion": "Single Sign-On",
+    "abbr": "SSO"
+  },
+  {
+    "id": "rbac",
+    "term": "RBAC",
+    "ro": "Controlul accesului pe bază de roluri: drepturile se dau prin roluri, nu individual.",
+    "en": "Access control where rights are granted through roles, not individually.",
+    "expansion": "Role-Based Access Control",
+    "abbr": "RBAC"
+  },
+  {
+    "id": "vmfs",
+    "term": "VMFS",
+    "ro": "Sistemul de fișiere VMware pentru datastore-uri pe disc bloc (local, iSCSI, Fibre Channel).",
+    "en": "VMware's file system for block-storage datastores (local, iSCSI, Fibre Channel).",
+    "expansion": "Virtual Machine File System",
+    "abbr": "VMFS"
+  },
+  {
+    "id": "nfs",
+    "term": "NFS",
+    "ro": "Protocol de stocare la nivel de fișier, prin rețea; un share NFS poate fi datastore.",
+    "en": "File-level network storage protocol; an NFS share can be a datastore.",
+    "expansion": "Network File System",
+    "abbr": "NFS"
+  },
+  {
+    "id": "iscsi",
+    "term": "iSCSI",
+    "ro": "Protocol care transportă comenzi de disc (SCSI) prin rețeaua IP; stocare bloc prin Ethernet.",
+    "en": "Carries disk (SCSI) commands over IP networks; block storage over Ethernet.",
+    "expansion": "Internet Small Computer Systems Interface",
+    "abbr": "iSCSI"
+  },
+  {
+    "id": "lun",
+    "term": "LUN",
+    "ro": "Un „disc” logic oferit de o matrice de stocare; pe un LUN se creează un datastore VMFS.",
+    "en": "A logical disk presented by a storage array; a VMFS datastore is created on a LUN.",
+    "expansion": "Logical Unit Number",
+    "abbr": "LUN"
+  },
+  {
+    "id": "san",
+    "term": "SAN",
+    "ro": "Rețea dedicată pentru stocare la nivel de bloc (Fibre Channel sau iSCSI).",
+    "en": "Dedicated network for block-level storage (Fibre Channel or iSCSI).",
+    "expansion": "Storage Area Network",
+    "abbr": "SAN"
+  },
+  {
+    "id": "nas",
+    "term": "NAS",
+    "ro": "Stocare la nivel de fișier, partajată prin rețea (NFS, SMB).",
+    "en": "File-level storage shared over the network (NFS, SMB).",
+    "expansion": "Network Attached Storage",
+    "abbr": "NAS"
+  },
+  {
+    "id": "raid",
+    "term": "RAID",
+    "ro": "Combinarea mai multor discuri pentru redundanță și/sau performanță (RAID-1 oglindă, RAID-5/6 cu paritate).",
+    "en": "Combining disks for redundancy and/or performance (RAID-1 mirror, RAID-5/6 with parity).",
+    "expansion": "Redundant Array of Independent Disks",
+    "abbr": "RAID"
+  },
+  {
+    "id": "ip",
+    "term": "IP",
+    "ro": "Protocolul de adresare din rețea; fiecare interfață are o adresă IP.",
+    "en": "The network addressing protocol; each interface has an IP address.",
+    "expansion": "Internet Protocol",
+    "abbr": "IP"
+  },
+  {
+    "id": "vlan",
+    "term": "VLAN",
+    "ro": "Împarte un switch fizic în mai multe rețele logice izolate, identificate prin VLAN ID.",
+    "en": "Splits a physical switch into isolated logical networks identified by a VLAN ID.",
+    "expansion": "Virtual Local Area Network",
+    "abbr": "VLAN"
+  },
+  {
+    "id": "mtu",
+    "term": "MTU",
+    "ro": "Dimensiunea maximă a unui pachet; implicit 1500 de octeți, „jumbo frames” ≈ 9000.",
+    "en": "Maximum packet size; 1500 bytes by default, jumbo frames ≈ 9000.",
+    "expansion": "Maximum Transmission Unit",
+    "abbr": "MTU"
+  },
+  {
+    "id": "dns",
+    "term": "DNS",
+    "ro": "Traduce nume (vcenter.lab.local) în adrese IP; vCenter și VCF depind critic de DNS corect.",
+    "en": "Translates names (vcenter.lab.local) to IP addresses; vCenter and VCF depend critically on correct DNS.",
+    "expansion": "Domain Name System",
+    "abbr": "DNS"
+  },
+  {
+    "id": "ntp",
+    "term": "NTP",
+    "ro": "Sincronizează ceasul; ceasurile desincronizate strică autentificarea și certificatele.",
+    "en": "Synchronizes clocks; out-of-sync clocks break authentication and certificates.",
+    "expansion": "Network Time Protocol",
+    "abbr": "NTP"
+  },
+  {
+    "id": "mac",
+    "term": "MAC",
+    "ro": "Adresa fizică (hardware) a unei plăci de rețea, folosită de switch-uri.",
+    "en": "The hardware address of a network card, used by switches.",
+    "expansion": "Media Access Control",
+    "abbr": "MAC"
+  },
+  {
+    "id": "dcui",
+    "term": "DCUI",
+    "ro": "Ecranul text galben-gri al ESXi de pe consolă, pentru configurarea de bază (IP, parolă, restart rețea).",
+    "en": "ESXi's yellow-grey text console for basic setup (IP, password, network restart).",
+    "expansion": "Direct Console User Interface",
+    "abbr": "DCUI"
+  },
+  {
+    "id": "vhv",
+    "term": "VHV",
+    "ro": "Opțiunea care expune extensiile de virtualizare ale CPU către o VM; necesară pentru ESXi nested.",
+    "en": "Option that exposes the CPU's virtualization extensions to a VM; required for nested ESXi.",
+    "expansion": "Virtual Hardware-assisted Virtualization",
+    "abbr": "VHV"
+  },
+  {
+    "id": "vlcm",
+    "term": "vLCM",
+    "ro": "Gestionează update-urile și imaginea de software/firmware a hosturilor dintr-un cluster.",
+    "en": "Manages updates and the software/firmware image of a cluster's hosts.",
+    "expansion": "vSphere Lifecycle Manager",
+    "abbr": "vLCM"
+  },
+  {
+    "id": "vtpm",
+    "term": "vTPM",
+    "ro": "Cip de securitate virtual pentru o VM (necesar de exemplu pentru Windows 11).",
+    "en": "Virtual security chip for a VM (needed e.g. by Windows 11).",
+    "expansion": "virtual Trusted Platform Module",
+    "abbr": "vTPM"
+  },
+  {
+    "id": "spbm",
+    "term": "SPBM",
+    "ro": "Stocare administrată prin politici atașate VM-urilor (de ex. câte cópii ale datelor păstrează vSAN).",
+    "en": "Storage managed through policies attached to VMs (e.g. how many data copies vSAN keeps).",
+    "expansion": "Storage Policy-Based Management",
+    "abbr": "SPBM"
+  },
+  {
+    "id": "ftt",
+    "term": "FTT",
+    "ro": "Câte căderi (de host/disc) suportă un obiect vSAN fără pierdere de date.",
+    "en": "How many host/disk failures a vSAN object survives without data loss.",
+    "expansion": "Failures To Tolerate",
+    "abbr": "FTT"
+  },
+  {
+    "id": "osa",
+    "term": "OSA",
+    "ro": "Arhitectura clasică vSAN, cu disk groups (un disc de cache + discuri de capacitate).",
+    "en": "Classic vSAN architecture with disk groups (one cache disk + capacity disks).",
+    "expansion": "Original Storage Architecture",
+    "abbr": "OSA"
+  },
+  {
+    "id": "esa",
+    "term": "ESA",
+    "ro": "Arhitectura vSAN modernă, doar NVMe, cu un singur storage pool per host.",
+    "en": "Modern NVMe-only vSAN architecture with a single storage pool per host.",
+    "expansion": "Express Storage Architecture",
+    "abbr": "ESA"
+  },
+  {
+    "id": "sdn",
+    "term": "SDN",
+    "ro": "Rețea definită în software: switching, rutare și firewall create din NSX, nu din echipamente fizice.",
+    "en": "Networking defined in software: switching, routing and firewall built in NSX, not in physical devices.",
+    "expansion": "Software-Defined Networking",
+    "abbr": "SDN"
+  },
+  {
+    "id": "tep",
+    "term": "TEP",
+    "ro": "Interfața prin care un host NSX trimite și primește trafic încapsulat GENEVE.",
+    "en": "The interface through which an NSX host sends and receives GENEVE-encapsulated traffic.",
+    "expansion": "Tunnel Endpoint",
+    "abbr": "TEP"
+  },
+  {
+    "id": "geneve",
+    "term": "GENEVE",
+    "ro": "Protocolul de tunelare folosit de NSX pentru a transporta segmentele logice peste rețeaua fizică.",
+    "en": "The tunneling protocol NSX uses to carry logical segments over the physical network.",
+    "expansion": "Generic Network Virtualization Encapsulation",
+    "abbr": "GENEVE"
+  },
+  {
+    "id": "bgp",
+    "term": "BGP",
+    "ro": "Protocol de rutare dinamică între rețele; NSX Tier-0 îl folosește spre routerele fizice.",
+    "en": "Dynamic routing protocol between networks; NSX Tier-0 uses it toward physical routers.",
+    "expansion": "Border Gateway Protocol",
+    "abbr": "BGP"
+  },
+  {
+    "id": "ospf",
+    "term": "OSPF",
+    "ro": "Protocol de rutare dinamică în interiorul unei rețele.",
+    "en": "Dynamic routing protocol inside a network.",
+    "expansion": "Open Shortest Path First",
+    "abbr": "OSPF"
+  },
+  {
+    "id": "nat",
+    "term": "NAT",
+    "ro": "Traduce adrese IP private în publice (sau invers) la trecerea printr-un gateway.",
+    "en": "Translates private IP addresses to public ones (or back) at a gateway.",
+    "expansion": "Network Address Translation",
+    "abbr": "NAT"
+  },
+  {
+    "id": "dhcp",
+    "term": "DHCP",
+    "ro": "Atribuie automat adrese IP dispozitivelor din rețea.",
+    "en": "Automatically assigns IP addresses to network devices.",
+    "expansion": "Dynamic Host Configuration Protocol",
+    "abbr": "DHCP"
+  },
+  {
+    "id": "vpn",
+    "term": "VPN",
+    "ro": "Tunel criptat între două rețele sau între un utilizator și o rețea.",
+    "en": "Encrypted tunnel between two networks or a user and a network.",
+    "expansion": "Virtual Private Network",
+    "abbr": "VPN"
+  },
+  {
+    "id": "dfw",
+    "term": "DFW",
+    "ro": "Firewall-ul NSX aplicat direct la placa de rețea a fiecărei VM, în kernelul hostului.",
+    "en": "NSX firewall applied at each VM's network card, in the host kernel.",
+    "expansion": "Distributed Firewall",
+    "abbr": "DFW"
+  },
+  {
+    "id": "vks",
+    "term": "VKS",
+    "ro": "Serviciul care creează și administrează clustere Kubernetes peste vSphere Supervisor.",
+    "en": "Service that creates and manages Kubernetes clusters on top of vSphere Supervisor.",
+    "expansion": "vSphere Kubernetes Service",
+    "abbr": "VKS"
+  },
+  {
+    "id": "vcsa",
+    "term": "VCSA",
+    "ro": "vCenter livrat ca mașină virtuală Linux gata configurată.",
+    "en": "vCenter delivered as a preconfigured Linux virtual machine.",
+    "expansion": "vCenter Server Appliance",
+    "abbr": "VCSA"
+  },
+  {
+    "id": "vmkernel",
+    "term": "VMkernel",
+    "ro": "Nucleul (kernelul) ESXi: programează CPU-ul, memoria, stocarea și rețeaua pentru toate VM-urile.",
+    "en": "The ESXi kernel: schedules CPU, memory, storage and network for all VMs."
+  },
+  {
+    "id": "snapshot",
+    "term": "snapshot",
+    "ro": "Starea salvată a unei VM la un moment dat; după snapshot, scrierile merg într-un fișier delta care crește. Nu este backup.",
+    "en": "A VM's saved state at a point in time; afterwards, writes go to a growing delta file. Not a backup."
+  },
+  {
+    "id": "datastore",
+    "term": "datastore",
+    "ro": "Spațiul de stocare (VMFS, NFS, vSAN) unde stau fișierele VM-urilor.",
+    "en": "The storage container (VMFS, NFS, vSAN) holding VM files."
+  },
+  {
+    "id": "overcommit",
+    "term": "overcommit",
+    "ro": "Alocarea către VM-uri a mai multor resurse virtuale (vCPU, RAM) decât are hostul fizic, bazându-se pe faptul că nu toate sunt folosite simultan.",
+    "en": "Allocating more virtual resources (vCPU, RAM) to VMs than the host physically has, relying on them not all being used at once."
+  },
+  {
+    "id": "fqdn",
+    "term": "FQDN",
+    "abbr": "FQDN",
+    "expansion": "Fully Qualified Domain Name",
+    "ro": "Numele complet al unui sistem, cu tot cu domeniul (ex. esx01.lab.exemplu.ro), nu doar numele scurt (esx01).",
+    "en": "A system's full name including the domain (e.g. esx01.lab.example.com), not just the short name (esx01)."
+  },
+  {
+    "id": "cidr",
+    "term": "CIDR",
+    "abbr": "CIDR",
+    "expansion": "Classless Inter-Domain Routing",
+    "ro": "Notația /prefix pentru rețele: /24 înseamnă că primii 24 de biți sunt partea de rețea (masca 255.255.255.0).",
+    "en": "The /prefix notation for networks: /24 means the first 24 bits are the network part (mask 255.255.255.0)."
+  },
+  {
+    "id": "ptr-record",
+    "term": "PTR",
+    "aliases": [
+      "PTR record",
+      "înregistrare PTR"
+    ],
+    "abbr": "PTR",
+    "expansion": "Pointer record",
+    "ro": "Înregistrarea DNS de căutare inversă: transformă o adresă IP înapoi în nume.",
+    "en": "The reverse-lookup DNS record: maps an IP address back to a name."
+  },
+  {
+    "id": "vst",
+    "term": "VST",
+    "abbr": "VST",
+    "expansion": "Virtual Switch Tagging",
+    "ro": "Mod VLAN în care switch-ul virtual pune eticheta VLAN (ID 1–4094 pe port group).",
+    "en": "VLAN mode where the virtual switch adds the VLAN tag (ID 1–4094 on the port group)."
+  },
+  {
+    "id": "est",
+    "term": "EST",
+    "abbr": "EST",
+    "expansion": "External Switch Tagging",
+    "ro": "Mod VLAN în care switch-ul fizic pune eticheta; pe port group VLAN ID este 0.",
+    "en": "VLAN mode where the physical switch adds the tag; the port group VLAN ID is 0."
+  },
+  {
+    "id": "vgt",
+    "term": "VGT",
+    "abbr": "VGT",
+    "expansion": "Virtual Guest Tagging",
+    "ro": "Mod VLAN în care sistemul de operare din VM pune eticheta; pe un standard switch se setează VLAN ID 4095.",
+    "en": "VLAN mode where the guest OS adds the tag; on a standard switch the VLAN ID is 4095."
+  },
+  {
+    "id": "udp",
+    "term": "UDP",
+    "abbr": "UDP",
+    "expansion": "User Datagram Protocol",
+    "ro": "Protocol de transport fără conexiune, folosit de exemplu de NTP (portul 123) și DNS.",
+    "en": "Connectionless transport protocol, used for example by NTP (port 123) and DNS."
+  },
+  {
+    "id": "vmk",
+    "term": "vmk",
+    "aliases": [
+      "VMkernel adapter",
+      "adaptor VMkernel",
+      "vmk0"
+    ],
+    "ro": "Adaptorul de rețea VMkernel al hostului (vmk0, vmk1…): interfața prin care ESXi însuși comunică (management, vMotion, stocare).",
+    "en": "The host's VMkernel network adapter (vmk0, vmk1…): the interface ESXi itself uses (management, vMotion, storage)."
+  },
+  {
+    "id": "jumbo-frames",
+    "term": "jumbo frames",
+    "ro": "Cadre Ethernet mai mari decât standardul de 1500 de octeți, de obicei MTU 9000; trebuie configurate pe tot drumul.",
+    "en": "Ethernet frames larger than the standard 1500 bytes, usually MTU 9000; must be configured end to end."
+  },
+  {
+    "id": "hba",
+    "term": "HBA",
+    "abbr": "HBA",
+    "expansion": "Host Bus Adapter",
+    "ro": "Adaptorul prin care hostul ajunge la stocare (ex. placă Fibre Channel). În ESXi apare ca vmhba0, vmhba1…",
+    "en": "The adapter a host uses to reach storage (e.g. a Fibre Channel card). In ESXi it appears as vmhba0, vmhba1…"
+  },
+  {
+    "id": "nvme",
+    "term": "NVMe",
+    "abbr": "NVMe",
+    "expansion": "Non-Volatile Memory Express",
+    "ro": "Protocol modern pentru discuri flash, mult mai rapid decât SATA/SAS; există și în variantă de rețea (NVMe over Fabrics).",
+    "en": "Modern protocol for flash drives, much faster than SATA/SAS; also exists over the network (NVMe over Fabrics)."
+  },
+  {
+    "id": "ssd",
+    "term": "SSD",
+    "abbr": "SSD",
+    "expansion": "Solid-State Drive",
+    "ro": "Disc pe memorie flash, fără piese în mișcare.",
+    "en": "A flash-memory drive with no moving parts."
+  },
+  {
+    "id": "hdd",
+    "term": "HDD",
+    "abbr": "HDD",
+    "expansion": "Hard Disk Drive",
+    "ro": "Disc clasic, cu platane care se rotesc; mare și ieftin, dar lent la acces aleator.",
+    "en": "Classic spinning-platter disk; large and cheap but slow at random access."
+  },
+  {
+    "id": "rdm",
+    "term": "RDM",
+    "abbr": "RDM",
+    "expansion": "Raw Device Mapping",
+    "ro": "Un VM primește acces direct la un LUN întreg, fără VMFS la mijloc; nu e posibil pe NFS.",
+    "en": "A VM gets direct access to a whole LUN without VMFS in between; not possible on NFS."
+  },
+  {
+    "id": "vvols",
+    "term": "vVols",
+    "aliases": [
+      "vVol",
+      "Virtual Volumes"
+    ],
+    "ro": "Virtual Volumes: tip de datastore în care array-ul de stocare gestionează direct discurile fiecărui VM.",
+    "en": "Virtual Volumes: a datastore type where the storage array manages each VM's disks directly."
+  },
+  {
+    "id": "lockdown-mode",
+    "term": "Lockdown Mode",
+    "ro": "Mod de securitate al hostului ESXi în care modificările se fac doar prin vCenter. Normal: DCUI rămâne pornit pentru excepții; Strict: DCUI e oprit.",
+    "en": "ESXi host security mode in which changes go through vCenter only. Normal: DCUI stays up for exceptions; Strict: DCUI is stopped."
+  },
+  {
+    "id": "hostd",
+    "term": "hostd",
+    "ro": "Serviciul principal de management al hostului ESXi; prin el trec Host Client, API-ul și (prin vpxa) vCenter.",
+    "en": "The main ESXi host management service; Host Client, the API and (via vpxa) vCenter go through it."
+  },
+  {
+    "id": "vpxa",
+    "term": "vpxa",
+    "aliases": [
+      "vCenter Server Agent"
+    ],
+    "ro": "Agentul vCenter de pe host: canalul prin care vCenter vorbește cu hostd.",
+    "en": "The vCenter agent on the host: the channel vCenter uses to talk to hostd."
+  },
+  {
+    "id": "esx-osdata",
+    "term": "ESX-OSData",
+    "aliases": [
+      "OSData"
+    ],
+    "ro": "Partiția de sistem ESXi (VMFS-L) pentru loguri, scratch, VMware Tools și core dump-uri; nu se folosește pentru VM-uri.",
+    "en": "ESXi system partition (VMFS-L) for logs, scratch, VMware Tools and core dumps; not used for VMs."
+  },
+  {
+    "id": "esxi-shell",
+    "term": "ESXi Shell",
+    "aliases": [
+      "TSM"
+    ],
+    "ro": "Linia de comandă locală a hostului ESXi; dezactivată implicit, se pornește doar pentru depanare.",
+    "en": "The ESXi host's local command line; off by default, enabled only for troubleshooting."
+  },
+  {
+    "id": "numa",
+    "term": "NUMA",
+    "abbr": "NUMA",
+    "expansion": "Non-Uniform Memory Access",
+    "ro": "Arhitectură în care fiecare procesor fizic are memoria lui „locală”, mai rapidă; accesul la memoria altui procesor e mai lent.",
+    "en": "Architecture where each physical processor has its own faster \"local\" memory; accessing another processor's memory is slower."
+  },
+  {
+    "id": "tps",
+    "term": "TPS",
+    "abbr": "TPS",
+    "expansion": "Transparent Page Sharing",
+    "ro": "ESXi găsește pagini de memorie identice și păstrează o singură copie; implicit doar în interiorul aceluiași VM.",
+    "en": "ESXi finds identical memory pages and keeps one copy; by default only within the same VM."
+  },
+  {
+    "id": "cpu-ready",
+    "term": "CPU ready",
+    "aliases": [
+      "%RDY",
+      "ready time"
+    ],
+    "ro": "Timpul în care un vCPU vrea să ruleze, dar așteaptă un procesor fizic liber. Semn de contenție pe host.",
+    "en": "Time a vCPU wants to run but waits for a free physical CPU. A sign of host contention."
+  },
+  {
+    "id": "co-stop",
+    "term": "co-stop",
+    "aliases": [
+      "%CSTP"
+    ],
+    "ro": "Timpul în care un VM cu mai multe vCPU așteaptă ca toate să poată fi programate; valori mari indică un VM cu prea multe vCPU.",
+    "en": "Time a multi-vCPU VM waits until all its vCPUs can be scheduled; high values point to too many vCPUs."
+  },
+  {
+    "id": "ballooning",
+    "term": "ballooning",
+    "aliases": [
+      "balloon driver",
+      "vmmemctl"
+    ],
+    "ro": "Tehnică de recuperare a memoriei: driverul din VM „umflă un balon” ca sistemul de operare să elibereze pagini.",
+    "en": "Memory reclamation technique: the driver in the VM \"inflates a balloon\" so the guest OS frees pages."
+  },
+  {
+    "id": "shares-reservations-limits",
+    "term": "shares, reservations, limits",
+    "aliases": [
+      "reservation",
+      "reservations"
+    ],
+    "ro": "Setările de resurse ale unui VM: shares = prioritate relativă la contenție; reservation = minim garantat; limit = plafon maxim.",
+    "en": "A VM's resource settings: shares = relative priority under contention; reservation = guaranteed minimum; limit = hard maximum."
+  },
+  {
+    "id": "hyperthreading",
+    "term": "hyperthreading",
+    "aliases": [
+      "Hyper-Threading"
+    ],
+    "ro": "Un nucleu fizic expune două fire (procesoare logice); nu dublează puterea de calcul.",
+    "en": "One physical core exposes two threads (logical processors); it does not double compute power."
+  },
+  {
+    "id": "pvscsi",
+    "term": "PVSCSI",
+    "abbr": "PVSCSI",
+    "expansion": "Paravirtual SCSI",
+    "ro": "Controlerul de disc paravirtualizat VMware: mai mult throughput și mai puțin CPU decât controlerele emulate; are nevoie de driver în sistemul de operare.",
+    "en": "VMware's paravirtual disk controller: more throughput and less CPU than emulated controllers; needs a driver in the guest OS."
+  },
+  {
+    "id": "vmxnet3",
+    "term": "VMXNET3",
+    "aliases": [
+      "VMXNET 3"
+    ],
+    "ro": "Placa de rețea virtuală paravirtualizată VMware, cu performanță maximă; recomandată unde sistemul de operare are driver.",
+    "en": "VMware's paravirtual virtual NIC with the best performance; recommended wherever the guest OS has a driver."
+  },
+  {
+    "id": "vmware-tools",
+    "term": "VMware Tools",
+    "aliases": [
+      "open-vm-tools"
+    ],
+    "ro": "Setul de drivere și servicii din VM: sincronizare de timp, snapshot-uri quiesced, drivere paravirtuale. Pe Linux se folosește open-vm-tools din distribuție.",
+    "en": "The drivers and services inside a VM: time sync, quiesced snapshots, paravirtual drivers. On Linux, use the distro's open-vm-tools."
+  },
+  {
+    "id": "hardware-version",
+    "term": "hardware version",
+    "aliases": [
+      "virtual hardware version",
+      "compatibility level",
+      "VM compatibility"
+    ],
+    "ro": "Versiunea hardware-ului virtual al unui VM (ex. 22 pentru ESXi 9.0); un VM cu versiune mai nouă nu rulează pe un host mai vechi.",
+    "en": "The VM's virtual hardware version (e.g. 22 for ESXi 9.0); a VM with a newer version cannot run on an older host."
+  },
+  {
+    "id": "thin-provisioning",
+    "term": "thin provisioning",
+    "aliases": [
+      "thick provision",
+      "eager zeroed",
+      "lazy zeroed"
+    ],
+    "ro": "Discul thin ocupă spațiu doar pe măsură ce se scrie; thick alocă totul de la început (lazy zeroed sau eager zeroed).",
+    "en": "A thin disk uses space only as data is written; thick allocates everything up front (lazy zeroed or eager zeroed)."
+  },
+  {
+    "id": "port-group",
+    "term": "port group",
+    "aliases": [
+      "port groups",
+      "grup de porturi"
+    ],
+    "ro": "Grup de porturi pe un switch virtual care împart aceleași setări (VLAN, securitate, teaming). VM-urile și adaptoarele VMkernel se conectează la un port group.",
+    "en": "A group of ports on a virtual switch sharing the same settings (VLAN, security, teaming). VMs and VMkernel adapters connect to a port group."
+  },
+  {
+    "id": "vmnic",
+    "term": "vmnic",
+    "aliases": [
+      "uplink",
+      "uplinks",
+      "vmnic0"
+    ],
+    "ro": "Placa de rețea fizică a hostului ESXi, văzută de ESXi ca vmnic0, vmnic1…; legată la un switch virtual devine uplink.",
+    "en": "A physical network adapter of the ESXi host, seen as vmnic0, vmnic1…; attached to a virtual switch it becomes an uplink."
+  },
+  {
+    "id": "nic-teaming",
+    "term": "NIC teaming",
+    "aliases": [
+      "teaming"
+    ],
+    "ro": "Gruparea mai multor plăci fizice pe același switch virtual, pentru redundanță și distribuirea traficului.",
+    "en": "Grouping several physical adapters on one virtual switch for redundancy and traffic distribution."
+  },
+  {
+    "id": "lacp",
+    "term": "LACP",
+    "abbr": "LACP",
+    "expansion": "Link Aggregation Control Protocol",
+    "ro": "Protocol care negociază dinamic agregarea mai multor legături fizice într-una logică. În vSphere e disponibil doar pe Distributed Switch.",
+    "en": "Protocol that dynamically negotiates bundling several physical links into one logical link. In vSphere it is available only on the Distributed Switch."
+  },
+  {
+    "id": "tcp",
+    "term": "TCP",
+    "abbr": "TCP",
+    "expansion": "Transmission Control Protocol",
+    "ro": "Protocol de transport orientat pe conexiune, cu confirmarea livrării. „TCP/IP stack” înseamnă setul complet de protocoale de rețea al unui sistem.",
+    "en": "Connection-oriented transport protocol with delivery acknowledgement. A \"TCP/IP stack\" is a system's complete set of network protocols."
+  },
+  {
+    "id": "arp",
+    "term": "ARP",
+    "abbr": "ARP",
+    "expansion": "Address Resolution Protocol",
+    "ro": "Protocolul care află adresa MAC corespunzătoare unei adrese IP în aceeași rețea locală.",
+    "en": "The protocol that finds the MAC address matching an IP address on the same local network."
+  },
+  {
+    "id": "nlb",
+    "term": "NLB",
+    "abbr": "NLB",
+    "expansion": "Network Load Balancing",
+    "ro": "Funcția Microsoft Windows Server care împarte traficul între mai multe servere folosind o adresă comună.",
+    "en": "The Microsoft Windows Server feature that spreads traffic across several servers using a shared address."
+  },
+  {
+    "id": "traffic-shaping",
+    "term": "traffic shaping",
+    "ro": "Limitarea lățimii de bandă a unui port group: medie, vârf și dimensiunea rafalei. Pe Standard Switch se aplică doar traficului care iese.",
+    "en": "Bandwidth limiting on a port group: average, peak and burst size. On a Standard Switch it applies to outbound traffic only."
+  },
+  {
+    "id": "network-rollback",
+    "term": "network rollback",
+    "aliases": [
+      "rollback de rețea"
+    ],
+    "ro": "Mecanismul vSphere care anulează automat o schimbare de rețea care deconectează hostul de vCenter.",
+    "en": "The vSphere mechanism that automatically reverts a network change that disconnects the host from vCenter."
+  },
+  {
+    "id": "psp",
+    "term": "PSP",
+    "abbr": "PSP",
+    "expansion": "Path Selection Policy",
+    "ro": "Politica prin care ESXi alege calea spre un LUN când există mai multe: MRU, Fixed sau Round Robin.",
+    "en": "The policy ESXi uses to choose the path to a LUN when there are several: MRU, Fixed or Round Robin."
+  },
+  {
+    "id": "nmp",
+    "term": "NMP",
+    "abbr": "NMP",
+    "expansion": "Native Multipathing Plug-in",
+    "ro": "Modulul VMware implicit care gestionează căile multiple spre stocare; folosește politicile PSP.",
+    "en": "The default VMware module that manages multiple storage paths; it uses PSP policies."
+  },
+  {
+    "id": "apd",
+    "term": "APD",
+    "abbr": "APD",
+    "expansion": "All Paths Down",
+    "ro": "Starea în care toate căile spre un dispozitiv au căzut și hostul nu știe dacă pierderea e temporară sau permanentă.",
+    "en": "The state where all paths to a device are down and the host cannot tell if the loss is temporary or permanent."
+  },
+  {
+    "id": "pdl",
+    "term": "PDL",
+    "abbr": "PDL",
+    "expansion": "Permanent Device Loss",
+    "ro": "Starea în care matricea de stocare anunță că dispozitivul nu mai există; hostul nu mai încearcă să se reconecteze.",
+    "en": "The state where the storage array reports the device is gone; the host stops trying to reconnect."
+  },
+  {
+    "id": "alua",
+    "term": "ALUA",
+    "abbr": "ALUA",
+    "expansion": "Asymmetric Logical Unit Access",
+    "ro": "Mod în care o matrice de stocare marchează unele căi ca optimizate și altele ca neoptimizate spre același LUN.",
+    "en": "A way for a storage array to mark some paths to a LUN as optimized and others as non-optimized."
+  },
+  {
+    "id": "chap",
+    "term": "CHAP",
+    "abbr": "CHAP",
+    "expansion": "Challenge-Handshake Authentication Protocol",
+    "ro": "Protocol de autentificare folosit la iSCSI între host și target.",
+    "en": "Authentication protocol used by iSCSI between the host and the target."
+  },
+  {
+    "id": "iqn",
+    "term": "IQN",
+    "abbr": "IQN",
+    "expansion": "iSCSI Qualified Name",
+    "ro": "Numele unic al unui inițiator sau target iSCSI (de forma iqn.an-luna.domeniu:nume).",
+    "en": "The unique name of an iSCSI initiator or target (shaped like iqn.year-month.domain:name)."
+  },
+  {
+    "id": "naa",
+    "term": "NAA",
+    "abbr": "NAA",
+    "expansion": "Network Address Authority",
+    "ro": "Formatul identificatorului unic al unui dispozitiv de stocare (naa.…), folosit de ESXi în comenzi.",
+    "en": "The format of a storage device's unique identifier (naa.…), used by ESXi in commands."
+  },
+  {
+    "id": "port-binding",
+    "term": "port binding",
+    "aliases": [
+      "iSCSI port binding"
+    ],
+    "ro": "Legarea adaptorului iSCSI software de anumite adaptoare VMkernel, pentru mai multe căi spre aceeași matrice.",
+    "en": "Binding the software iSCSI adapter to specific VMkernel adapters, for multiple paths to the same array."
+  },
+  {
+    "id": "extent",
+    "term": "extent",
+    "aliases": [
+      "extents"
+    ],
+    "ro": "O bucată de dispozitiv (partiție) pe care stă un datastore VMFS; un datastore poate întinde mai multe extents.",
+    "en": "A piece of a device (partition) backing a VMFS datastore; a datastore can span several extents."
+  },
+  {
+    "id": "vami",
+    "term": "VAMI",
+    "abbr": "VAMI",
+    "expansion": "vCenter Server Appliance Management Interface",
+    "ro": "Interfața web de administrare a appliance-ului vCenter (portul 5480): stare, rețea, timp, SSH, backup, actualizări.",
+    "en": "The vCenter appliance management web interface (port 5480): health, networking, time, SSH, backup, updates."
+  },
+  {
+    "id": "psc",
+    "term": "PSC",
+    "abbr": "PSC",
+    "expansion": "Platform Services Controller",
+    "ro": "Componenta care ținea SSO, licențele și certificatele; din vSphere 7.0 e integrată în vCenter și nu mai poate fi separată.",
+    "en": "The component that held SSO, licensing and certificates; since vSphere 7.0 it is built into vCenter and can no longer be separate."
+  },
+  {
+    "id": "elm",
+    "term": "ELM",
+    "abbr": "ELM",
+    "expansion": "Enhanced Linked Mode",
+    "ro": "Legarea mai multor vCenter-e în același domeniu SSO, prin replicarea bazei de date de directoare. În VCF 9 e înlocuită de vCenter Linking.",
+    "en": "Linking several vCenters in one SSO domain through directory database replication. In VCF 9 it is replaced by vCenter Linking."
+  },
+  {
+    "id": "vmca",
+    "term": "VMCA",
+    "abbr": "VMCA",
+    "expansion": "VMware Certificate Authority",
+    "ro": "Autoritatea de certificare inclusă în vCenter, care semnează implicit certificatele hosturilor ESXi.",
+    "en": "The certificate authority built into vCenter, which signs ESXi host certificates by default."
+  },
+  {
+    "id": "ceip",
+    "term": "CEIP",
+    "abbr": "CEIP",
+    "expansion": "Customer Experience Improvement Program",
+    "ro": "Programul prin care produsul trimite date de utilizare către VMware; se acceptă sau se refuză la instalare.",
+    "en": "The program through which the product sends usage data to VMware; accepted or declined at install time."
+  },
+  {
+    "id": "ova",
+    "term": "OVA",
+    "abbr": "OVA",
+    "expansion": "Open Virtual Appliance",
+    "ro": "Un singur fișier care conține un VM gata configurat (disc plus descriere), folosit pentru a instala appliance-uri.",
+    "en": "A single file holding a ready-made VM (disk plus description), used to deploy appliances."
+  },
+  {
+    "id": "vpxd",
+    "term": "vpxd",
+    "ro": "Serviciul principal vCenter Server din appliance; dacă se oprește, vSphere Client nu mai poate administra inventarul.",
+    "en": "The main vCenter Server service in the appliance; if it stops, the vSphere Client can no longer manage the inventory."
+  },
+  {
+    "id": "ldap",
+    "term": "LDAP",
+    "abbr": "LDAP",
+    "expansion": "Lightweight Directory Access Protocol",
+    "ro": "Protocolul prin care o aplicație interoghează un director de utilizatori, de exemplu Active Directory sau OpenLDAP.",
+    "en": "The protocol an application uses to query a user directory, for example Active Directory or OpenLDAP."
+  },
+  {
+    "id": "ldaps",
+    "term": "LDAPS",
+    "abbr": "LDAPS",
+    "expansion": "LDAP over SSL",
+    "ro": "LDAP criptat; pentru Active Directory se folosesc porturile 636 sau 3269 (Global Catalog).",
+    "en": "Encrypted LDAP; for Active Directory it uses ports 636 or 3269 (Global Catalog)."
+  },
+  {
+    "id": "ad",
+    "term": "Active Directory",
+    "abbr": "AD",
+    "expansion": "Active Directory",
+    "aliases": [
+      "Active Directory"
+    ],
+    "ro": "Serviciul de director Microsoft care ține utilizatorii, grupurile și calculatoarele unei organizații.",
+    "en": "The Microsoft directory service holding an organization's users, groups and computers."
+  },
+  {
+    "id": "iwa",
+    "term": "IWA",
+    "abbr": "IWA",
+    "expansion": "Integrated Windows Authentication",
+    "ro": "Metoda veche prin care vCenter intra în domeniul Active Directory; depreciată în vSphere 7.0 și eliminată în vSphere 9.0.",
+    "en": "The old method by which vCenter joined the Active Directory domain; deprecated in vSphere 7.0 and removed in vSphere 9.0."
+  },
+  {
+    "id": "idp",
+    "term": "IdP",
+    "abbr": "IdP",
+    "expansion": "Identity Provider",
+    "ro": "Serviciul care autentifică utilizatorii și emite dovada identității lor (de exemplu Okta, Microsoft Entra ID, AD FS).",
+    "en": "The service that authenticates users and issues proof of their identity (for example Okta, Microsoft Entra ID, AD FS)."
+  },
+  {
+    "id": "global-permissions",
+    "term": "global permissions",
+    "aliases": [
+      "global permission",
+      "permisiuni globale"
+    ],
+    "ro": "Permisiuni puse pe obiectul rădăcină global, peste toate ierarhiile, plus obiectele globale precum tag-urile și content library.",
+    "en": "Permissions on the global root object, spanning all hierarchies, plus global objects such as tags and content libraries."
+  },
+  {
+    "id": "vecs",
+    "term": "VECS",
+    "abbr": "VECS",
+    "expansion": "VMware Endpoint Certificate Store",
+    "ro": "Depozitul local de certificate și chei din vCenter, organizat pe store-uri (de exemplu MACHINE_SSL_CERT).",
+    "en": "The local certificate and key store in vCenter, organized in stores (for example MACHINE_SSL_CERT)."
+  },
+  {
+    "id": "machine-ssl",
+    "term": "Machine SSL certificate",
+    "aliases": [
+      "Machine SSL"
+    ],
+    "ro": "Certificatul care securizează traficul SSL/TLS al vCenter (pagina vSphere Client, API-urile).",
+    "en": "The certificate securing vCenter SSL/TLS traffic (the vSphere Client page, the APIs)."
+  },
+  {
+    "id": "vcf-operations",
+    "term": "VCF Operations",
+    "ro": "Platforma de operare și monitorizare din VCF/VVF 9, prin care se administrează și licențele.",
+    "en": "The VCF/VVF 9 operations and monitoring platform, also used to manage licenses."
+  },
+  {
+    "id": "pvlan",
+    "term": "PVLAN",
+    "abbr": "PVLAN",
+    "expansion": "Private VLAN",
+    "ro": "Împarte un VLAN principal în VLAN-uri secundare (isolated, community) ca porturile din același subnet să nu comunice liber între ele. Se configurează pe VDS.",
+    "en": "Splits a primary VLAN into secondary VLANs (isolated, community) so ports in the same subnet cannot talk freely to each other. Configured on a VDS."
+  },
+  {
+    "id": "lag",
+    "term": "LAG",
+    "abbr": "LAG",
+    "expansion": "Link Aggregation Group",
+    "ro": "Grup de plăci de rețea fizice agregate dinamic prin LACP într-o singură legătură logică, pe un VDS.",
+    "en": "A group of physical NICs aggregated dynamically through LACP into one logical link, on a VDS."
+  },
+  {
+    "id": "lbt",
+    "term": "LBT",
+    "abbr": "LBT",
+    "expansion": "Load-Based Teaming",
+    "ro": "Politica „Route Based on Physical NIC Load”: mută portul cel mai încărcat pe alt uplink când un uplink trece de 75% în 30 de secunde. Doar pe VDS.",
+    "en": "The \"Route Based on Physical NIC Load\" policy: moves the busiest port to another uplink when an uplink exceeds 75% over 30 seconds. VDS only."
+  },
+  {
+    "id": "ipfix",
+    "term": "IPFIX",
+    "abbr": "IPFIX",
+    "expansion": "IP Flow Information Export",
+    "ro": "Standardul de export al fluxurilor de trafic (NetFlow versiunea 10) către un colector extern.",
+    "en": "The standard for exporting traffic flow records (NetFlow version 10) to an external collector."
+  },
+  {
+    "id": "dpu",
+    "term": "DPU",
+    "abbr": "DPU",
+    "expansion": "Data Processing Unit",
+    "ro": "Placă de rețea cu procesor propriu, care poate prelua (offload) funcții ale switch-ului virtual.",
+    "en": "A network card with its own processor that can offload virtual switch functions."
+  },
+  {
+    "id": "ephemeral-binding",
+    "term": "Ephemeral port binding",
+    "aliases": [
+      "ephemeral"
+    ],
+    "ro": "Mod de alocare a porturilor pe VDS în care hostul creează portul la pornirea VM-ului, fără vCenter. Folosit pentru recuperare, de exemplu pentru VM-ul vCenter.",
+    "en": "A VDS port allocation mode where the host creates the port when the VM powers on, without vCenter. Used for recovery, for example for the vCenter VM."
+  },
+  {
+    "id": "health-check",
+    "term": "VDS health check",
+    "aliases": [
+      "health check"
+    ],
+    "ro": "Verificare periodică (implicit la 1 minut) a potrivirii VLAN, MTU și teaming dintre VDS și switch-ul fizic.",
+    "en": "A periodic check (every 1 minute by default) that VLAN, MTU and teaming match between the VDS and the physical switch."
+  },
+  {
+    "id": "port-mirroring",
+    "term": "Port mirroring",
+    "ro": "Copierea traficului unor porturi spre alt port sau spre un agent la distanță, pentru analiză. Se configurează pe VDS.",
+    "en": "Copying traffic from some ports to another port or a remote agent, for analysis. Configured on a VDS."
+  },
+  {
+    "id": "vaai",
+    "term": "VAAI",
+    "abbr": "VAAI",
+    "expansion": "vSphere APIs for Array Integration",
+    "ro": "Funcții prin care ESXi lasă matricea de stocare să facă singură unele operații (blocare ATS, copiere, zero-uri, UNMAP), mai repede.",
+    "en": "Functions through which ESXi lets the storage array do some operations itself (ATS locking, copy, zeroing, UNMAP), faster."
+  },
+  {
+    "id": "ats",
+    "term": "ATS",
+    "abbr": "ATS",
+    "expansion": "Atomic Test and Set",
+    "ro": "Primitiva VAAI care blochează doar fișierul de pe VMFS, în loc să rezerve tot LUN-ul cu o rezervare SCSI.",
+    "en": "The VAAI primitive that locks only the file on VMFS instead of reserving the whole LUN with a SCSI reservation."
+  },
+  {
+    "id": "vasa",
+    "term": "VASA",
+    "abbr": "VASA",
+    "expansion": "vSphere APIs for Storage Awareness",
+    "ro": "Cadrul prin care un storage provider spune vCenter ce capabilități și ce stare are stocarea, folosite de politicile de stocare.",
+    "en": "The framework through which a storage provider tells vCenter what capabilities and state the storage has, used by storage policies."
+  },
+  {
+    "id": "sioc",
+    "term": "SIOC",
+    "abbr": "SIOC",
+    "expansion": "Storage I/O Control",
+    "ro": "Prioritizează I/O-ul pe un datastore aglomerat după shares. În VCF 9.0 politicile SIOC păstrează doar limitele IOPS.",
+    "en": "Prioritizes I/O on a congested datastore by shares. In VCF 9.0 SIOC policies keep only IOPS limits."
+  },
+  {
+    "id": "sdrs",
+    "term": "Storage DRS",
+    "abbr": "SDRS",
+    "expansion": "Storage Distributed Resource Scheduler",
+    "aliases": [
+      "datastore cluster"
+    ],
+    "ro": "Plasează și echilibrează discurile VM-urilor între datastore-urile unui datastore cluster, după spațiu (și, până la deprecare, după latență).",
+    "en": "Places and balances VM disks across the datastores of a datastore cluster, by space (and, until deprecation, by latency)."
+  },
+  {
+    "id": "storage-policy",
+    "term": "VM storage policy",
+    "aliases": [
+      "storage policy"
+    ],
+    "ro": "Set de reguli (bazate pe capabilități sau pe tag-uri) care spune pe ce datastore poate sta un VM și ce servicii primește.",
+    "en": "A set of rules (capability-based or tag-based) that says which datastore a VM can live on and which services it gets."
+  },
+  {
+    "id": "storage-vmotion",
+    "term": "Storage vMotion",
+    "ro": "Mută fișierele și discurile unui VM pornit pe alt datastore, fără oprire; hostul rămâne același.",
+    "en": "Moves a running VM's files and disks to another datastore with no downtime; the host stays the same."
+  },
+  {
+    "id": "cold-migration",
+    "term": "Cold migration",
+    "aliases": [
+      "migrare la rece"
+    ],
+    "ro": "Mutarea unui VM oprit sau suspendat pe alt host și/sau datastore.",
+    "en": "Moving a powered-off or suspended VM to another host and/or datastore."
+  },
+  {
+    "id": "sdps",
+    "term": "SDPS",
+    "abbr": "SDPS",
+    "expansion": "Stun During Page Send",
+    "ro": "Mecanism vMotion care încetinește foarte puțin VM-ul când acesta murdărește memoria mai repede decât se poate copia, ca migrarea să se termine.",
+    "en": "A vMotion mechanism that slows the VM very slightly when it dirties memory faster than it can be copied, so the migration can finish."
+  },
+  {
+    "id": "per-vm-evc",
+    "term": "Per-VM EVC",
+    "ro": "Mod EVC setat pe VM, nu pe cluster; se schimbă doar cu VM-ul oprit și îl urmează pe VM între clustere și vCenter-e.",
+    "en": "An EVC mode set on the VM rather than the cluster; changed only with the VM powered off and follows the VM across clusters and vCenters."
+  },
+  {
+    "id": "cross-vcenter-vmotion",
+    "term": "Advanced Cross vCenter vMotion",
+    "aliases": [
+      "cross vCenter vMotion"
+    ],
+    "ro": "Migrarea unui VM între instanțe vCenter din domenii SSO diferite, prin Import sau Export VMs, de la 7.0 U1c.",
+    "en": "Migrating a VM between vCenter instances in different SSO domains, through Import or Export VMs, from 7.0 U1c."
+  },
+  {
+    "id": "vcls",
+    "term": "vCLS",
+    "abbr": "vCLS",
+    "expansion": "vSphere Cluster Services",
+    "ro": "VM-uri mici de sistem care țin DRS (și HA) funcționale. Din 8.0 U3 sunt „embedded” (în memoria hostului, maximum 2); în 9.0 dezactivarea lor nu mai afectează DRS și HA.",
+    "en": "Small system VMs that keep DRS (and HA) working. From 8.0 U3 they are \"embedded\" (in host memory, at most 2); in 9.0 disabling them no longer affects DRS and HA."
+  },
+  {
+    "id": "resource-pool",
+    "term": "Resource pool",
+    "ro": "Grup logic de CPU și memorie dintr-un host sau cluster, cu shares, reservation și limit proprii, care se poate împărți ierarhic.",
+    "en": "A logical group of CPU and memory from a host or cluster, with its own shares, reservation and limit, that can be nested."
+  },
+  {
+    "id": "expandable-reservation",
+    "term": "Expandable reservation",
+    "ro": "Opțiune (activă implicit) prin care un resource pool împrumută rezervare de la părinte când VM-urile lui cer mai mult decât are.",
+    "en": "An option (on by default) that lets a resource pool borrow reservation from its parent when its VMs need more than it has."
+  },
+  {
+    "id": "scalable-shares",
+    "term": "Scalable shares",
+    "ro": "Funcție DRS din vSphere 7 care calculează shares-urile unui resource pool și după numărul de VM-uri din el.",
+    "en": "A vSphere 7 DRS feature that computes a resource pool's shares also from the number of VMs in it."
+  },
+  {
+    "id": "drs-score",
+    "term": "VM DRS score",
+    "aliases": [
+      "DRS score"
+    ],
+    "ro": "Cât de bine își primește VM-ul resursele pe hostul actual; DRS face migrări ca să-l crească.",
+    "en": "How well the VM gets its resources on its current host; DRS migrates to raise it."
+  },
+  {
+    "id": "affinity-rules",
+    "term": "Affinity rules",
+    "aliases": [
+      "anti-affinity"
+    ],
+    "ro": "Reguli DRS: VM-VM (împreună sau separat) și VM-Host (must/should run sau not run pe un grup de hosturi).",
+    "en": "DRS rules: VM-VM (together or apart) and VM-Host (must/should run or not run on a host group)."
+  },
+  {
+    "id": "vmcp",
+    "term": "VMCP",
+    "abbr": "VMCP",
+    "expansion": "VM Component Protection",
+    "ro": "Funcție vSphere HA care reacționează când un host pierde accesul la un datastore (PDL sau APD): emite evenimente sau oprește și repornește VM-urile pe alt host.",
+    "en": "A vSphere HA feature that reacts when a host loses access to a datastore (PDL or APD): it issues events or powers off and restarts the VMs on another host."
+  },
+  {
+    "id": "icmp",
+    "term": "ICMP",
+    "abbr": "ICMP",
+    "expansion": "Internet Control Message Protocol",
+    "ro": "Protocolul folosit de ping; HA îl folosește ca verificare suplimentară a unui host și pentru adresele de izolare.",
+    "en": "The protocol used by ping; HA uses it as an extra check of a host and for isolation addresses."
+  },
+  {
+    "id": "admission-control",
+    "term": "Admission control (HA)",
+    "ro": "Mecanism vSphere HA care păstrează capacitate liberă pentru failover și blochează pornirea sau mutarea VM-urilor care ar consuma-o.",
+    "en": "A vSphere HA mechanism that keeps spare capacity for failover and blocks VM power-ons or migrations that would consume it."
+  },
+  {
+    "id": "host-isolation",
+    "term": "Host isolation",
+    "aliases": [
+      "isolation response"
+    ],
+    "ro": "Starea unui host care rulează, dar nu mai vede traficul HA pe rețeaua de management și nu răspund nici adresele de izolare; isolation response decide ce face cu VM-urile.",
+    "en": "The state of a host that runs but no longer sees HA traffic on the management network and cannot reach its isolation addresses; the isolation response decides what happens to the VMs."
+  },
+  {
+    "id": "datastore-heartbeating",
+    "term": "Datastore heartbeating",
+    "ro": "Al doilea canal de heartbeat al HA, prin datastore-uri partajate, care separă un host căzut de unul izolat sau partiționat.",
+    "en": "HA's second heartbeat channel, through shared datastores, which tells a failed host apart from an isolated or partitioned one."
+  },
+  {
+    "id": "proactive-ha",
+    "term": "Proactive HA",
+    "ro": "Reacție la defecte parțiale de hardware (de exemplu o sursă de alimentare din mai multe): VM-urile sunt evacuate și hostul intră în Quarantine sau Maintenance mode.",
+    "en": "A reaction to partial hardware faults (for example one of several power supplies): VMs are evacuated and the host enters Quarantine or Maintenance mode."
+  },
+  {
+    "id": "ovf",
+    "term": "OVF",
+    "abbr": "OVF",
+    "expansion": "Open Virtualization Format",
+    "ro": "Format standard de împachetare a unui VM: descriptor .ovf, discuri .vmdk și manifest .mf. OVA e același conținut într-un singur fișier.",
+    "en": "A standard format for packaging a VM: an .ovf descriptor, .vmdk disks and an .mf manifest. OVA is the same content in a single file."
+  },
+  {
+    "id": "content-library",
+    "term": "Content library",
+    "aliases": [
+      "content libraries"
+    ],
+    "ro": "Container gestionat de vCenter pentru template-uri de VM, template-uri OVF, ISO-uri și alte fișiere, care se poate publica și abona între vCenter-e.",
+    "en": "A vCenter-managed container for VM templates, OVF templates, ISOs and other files, which can be published and subscribed across vCenters."
+  },
+  {
+    "id": "vm-template-cl",
+    "term": "VM template (VMTX)",
+    "aliases": [
+      "VMTX"
+    ],
+    "ro": "Template de VM în formatul nativ vSphere, păstrat în content library de la 7.0 U1, cu check-out, check-in și versiuni.",
+    "en": "A VM template in the native vSphere format, kept in a content library since 7.0 U1, with check-out, check-in and versions."
+  },
+  {
+    "id": "subscribed-library",
+    "term": "Subscribed library",
+    "ro": "Bibliotecă abonată la una publicată: nu primește importuri, doar se sincronizează, imediat sau la cerere.",
+    "en": "A library subscribed to a published one: it accepts no imports, it only synchronizes, immediately or on demand."
+  },
+  {
+    "id": "customization-spec",
+    "term": "Customization specification",
+    "aliases": [
+      "guest customization"
+    ],
+    "ro": "Set de setări salvate în vCenter (nume, rețea, domeniu, licență) aplicat sistemului de operare la clonare sau deploy, ca VM-urile noi să nu fie identice.",
+    "en": "A set of settings saved in vCenter (name, network, domain, licence) applied to the guest OS at clone or deploy time, so new VMs are not identical."
+  },
+  {
+    "id": "kms",
+    "term": "KMS",
+    "abbr": "KMS",
+    "expansion": "Key Management Server",
+    "ro": "Server extern de chei pe care vCenter îl folosește prin KMIP pentru Standard Key Provider.",
+    "en": "An external key server that vCenter uses through KMIP for the Standard Key Provider."
+  },
+  {
+    "id": "kmip",
+    "term": "KMIP",
+    "abbr": "KMIP",
+    "expansion": "Key Management Interoperability Protocol",
+    "ro": "Protocolul standard prin care vCenter cere chei de la un server de chei.",
+    "en": "The standard protocol vCenter uses to request keys from a key server."
+  },
+  {
+    "id": "tpm",
+    "term": "TPM",
+    "abbr": "TPM",
+    "expansion": "Trusted Platform Module",
+    "ro": "Cip criptografic. Pe host (TPM 2.0) atestă că ESXi a pornit cu software semnat; vTPM e varianta software pentru VM-uri.",
+    "en": "A cryptographic chip. On a host (TPM 2.0) it attests that ESXi booted signed software; vTPM is the software version for VMs."
+  },
+  {
+    "id": "kek",
+    "term": "KEK",
+    "abbr": "KEK",
+    "expansion": "Key Encryption Key",
+    "ro": "Cheia de la key provider care criptează cheile interne (DEK) ale VM-ului.",
+    "en": "The key from the key provider that encrypts the VM's internal keys (DEK)."
+  },
+  {
+    "id": "dek",
+    "term": "DEK",
+    "abbr": "DEK",
+    "expansion": "Data Encryption Key",
+    "ro": "Cheia internă cu care ESXi criptează efectiv fișierele și discurile VM-ului; e păstrată criptată cu KEK.",
+    "en": "The internal key ESXi uses to actually encrypt the VM's files and disks; it is stored encrypted with the KEK."
+  },
+  {
+    "id": "nkp",
+    "term": "NKP",
+    "abbr": "NKP",
+    "expansion": "Native Key Provider",
+    "ro": "Key provider integrat în vCenter (de la 7.0 U2), fără server extern de chei; trebuie salvat (backup) înainte de folosire.",
+    "en": "A key provider built into vCenter (since 7.0 U2), with no external key server; it must be backed up before use."
+  },
+  {
+    "id": "vbs",
+    "term": "VBS",
+    "abbr": "VBS",
+    "expansion": "Virtualization-Based Security",
+    "ro": "Funcție Windows care izolează părți sensibile ale sistemului într-o zonă protejată de hypervisor; în vSphere cere EFI și hardware virtual 14+ (Intel).",
+    "en": "A Windows feature that isolates sensitive parts of the system in a hypervisor-protected area; in vSphere it needs EFI and virtual hardware 14+ (Intel)."
+  },
+  {
+    "id": "vadp",
+    "term": "VADP",
+    "abbr": "VADP",
+    "expansion": "vSphere Storage APIs - Data Protection",
+    "ro": "Interfețele prin care produsele de backup citesc discurile VM-urilor dintr-un snapshot, fără agent în VM.",
+    "en": "The interfaces through which backup products read VM disks from a snapshot, without an agent in the VM."
+  },
+  {
+    "id": "cbt",
+    "term": "CBT",
+    "abbr": "CBT",
+    "expansion": "Changed Block Tracking",
+    "ro": "Funcție VMkernel care ține evidența blocurilor schimbate pe disc, ca backup-ul incremental să copieze doar ce s-a modificat; e dezactivată implicit.",
+    "en": "A VMkernel feature that tracks changed disk blocks so incremental backups copy only what changed; it is off by default."
+  },
+  {
+    "id": "vddk",
+    "term": "VDDK",
+    "abbr": "VDDK",
+    "expansion": "Virtual Disk Development Kit",
+    "ro": "Bibliotecă VMware folosită de produsele de backup pentru a citi și scrie discuri virtuale prin modurile de transport SAN, HotAdd și NBD.",
+    "en": "A VMware library backup products use to read and write virtual disks through the SAN, HotAdd and NBD transport modes."
+  },
+  {
+    "id": "rpo",
+    "term": "RPO",
+    "abbr": "RPO",
+    "expansion": "Recovery Point Objective",
+    "ro": "Câte date îți permiți să pierzi, măsurat în timp (de exemplu ultimele 24 de ore); decide cât de des faci backup.",
+    "en": "How much data you can afford to lose, measured in time (for example the last 24 hours); it decides how often you back up."
+  },
+  {
+    "id": "rto",
+    "term": "RTO",
+    "abbr": "RTO",
+    "expansion": "Recovery Time Objective",
+    "ro": "Cât timp îți permiți până când serviciul funcționează din nou după un incident.",
+    "en": "How long you can afford until the service works again after an incident."
+  },
+  {
+    "id": "snmp",
+    "term": "SNMP",
+    "abbr": "SNMP",
+    "expansion": "Simple Network Management Protocol",
+    "ro": "Protocol prin care echipamentele trimit notificări („trap-uri”) către un sistem de monitorizare; vCenter îl poate folosi ca acțiune de alarmă.",
+    "en": "A protocol through which devices send notifications (traps) to a monitoring system; vCenter can use it as an alarm action."
+  },
+  {
+    "id": "smtp",
+    "term": "SMTP",
+    "abbr": "SMTP",
+    "expansion": "Simple Mail Transfer Protocol",
+    "ro": "Protocolul de trimitere a e-mailurilor; vCenter are nevoie de un server SMTP configurat ca alarmele să poată trimite mail.",
+    "en": "The protocol used to send email; vCenter needs an SMTP server configured before alarms can send mail."
+  },
+  {
+    "id": "statistics-level",
+    "term": "Statistics level",
+    "aliases": [
+      "nivel de statistici"
+    ],
+    "ro": "Nivelul 1–4 care decide câte contoare de performanță salvează vCenter în baza de date pentru fiecare interval; implicit 1.",
+    "en": "The 1–4 level that decides how many performance counters vCenter stores in its database for each interval; the default is 1."
+  },
+  {
+    "id": "alarm",
+    "term": "Alarm (vCenter)",
+    "aliases": [
+      "alarmă"
+    ],
+    "ro": "Regulă definită pe un obiect din inventar care urmărește o condiție, o stare sau un eveniment și schimbă culoarea obiectului (Warning/Critical), opțional cu acțiuni.",
+    "en": "A rule defined on an inventory object that watches a condition, state or event and changes the object status (Warning/Critical), optionally with actions."
+  },
+  {
+    "id": "syslog",
+    "term": "Syslog",
+    "ro": "Standardul de trimitere a mesajelor de log prin rețea către un server central; ESXi îl configurează prin Syslog.global.logHost.",
+    "en": "The standard for sending log messages over the network to a central server; ESXi sets it through Syslog.global.logHost."
+  },
+  {
+    "id": "esxtop",
+    "term": "esxtop",
+    "ro": "Utilitarul de linie de comandă din ESXi care arată în timp real contoare de CPU, memorie, disc și rețea.",
+    "en": "The ESXi command-line utility that shows real-time CPU, memory, disk and network counters."
+  },
+  {
+    "id": "symptom",
+    "term": "Symptom (VCF Operations)",
+    "ro": "Condiție pe o metrică, proprietate sau eveniment (de exemplu CPU peste 80%); una sau mai multe simptome formează o alert definition.",
+    "en": "A condition on a metric, property or event (for example CPU above 80%); one or more symptoms make up an alert definition."
+  },
+  {
+    "id": "vib",
+    "term": "VIB",
+    "abbr": "VIB",
+    "expansion": "vSphere Installation Bundle",
+    "ro": "Pachetul de software instalabil pe ESXi (driver, agent, plugin); componentele unei imagini vLCM sunt formate din VIB-uri.",
+    "en": "The installable software package for ESXi (driver, agent, plugin); the components of a vLCM image are made of VIBs."
+  },
+  {
+    "id": "vum",
+    "term": "VUM",
+    "abbr": "VUM",
+    "expansion": "vSphere Update Manager",
+    "ro": "Vechiul mod de patch-uire prin baselines; în vSphere 9 nu mai poate gestiona hosturi 9.x.",
+    "en": "The older patching method based on baselines; in vSphere 9 it can no longer manage 9.x hosts."
+  },
+  {
+    "id": "hcl",
+    "term": "HCL",
+    "abbr": "HCL",
+    "expansion": "Hardware Compatibility List",
+    "ro": "Lista de hardware certificat; vLCM verifică clusterele vSAN față de vSAN HCL.",
+    "en": "The list of certified hardware; vLCM checks vSAN clusters against the vSAN HCL."
+  },
+  {
+    "id": "vcg",
+    "term": "VCG",
+    "abbr": "VCG",
+    "expansion": "VMware Compatibility Guide",
+    "ro": "Ghidul Broadcom cu serverele și dispozitivele certificate pentru fiecare versiune vSphere.",
+    "en": "The Broadcom guide listing servers and devices certified for each vSphere release."
+  },
+  {
+    "id": "rdu",
+    "term": "RDU",
+    "abbr": "RDU",
+    "expansion": "Reduced Downtime Update",
+    "ro": "Metoda recomandată în vCenter 9.0 pentru upgrade și patch: se pregătește un appliance nou în paralel, apoi se face comutarea.",
+    "en": "The recommended vCenter 9.0 method for upgrades and patches: a new appliance is prepared in parallel, then a switchover happens."
+  },
+  {
+    "id": "vlcm-image",
+    "term": "Image (vLCM)",
+    "aliases": [
+      "imagine vLCM",
+      "cluster image"
+    ],
+    "ro": "Starea dorită a software-ului pe hosturile unui cluster: base image ESXi obligatoriu, plus opțional vendor add-on, firmware and drivers add-on și componente.",
+    "en": "The desired software state of a cluster's hosts: a mandatory ESXi base image, plus optional vendor add-on, firmware and drivers add-on and components."
+  },
+  {
+    "id": "quick-boot",
+    "term": "Quick Boot",
+    "ro": "Repornire a ESXi care sare peste inițializarea firmware-ului și a dispozitivelor, ca upgrade-ul să dureze mai puțin; cere platformă compatibilă.",
+    "en": "An ESXi restart that skips firmware and device initialization so upgrades take less time; it needs a compatible platform."
+  },
+  {
+    "id": "live-patch",
+    "term": "Live Patch",
+    "ro": "Aplicarea unor patch-uri ESXi fără maintenance mode și fără repornirea hostului; în 9.0 acoperă mai multe părți din imagine.",
+    "en": "Applying some ESXi patches without maintenance mode or a host reboot; in 9.0 it covers more of the image."
+  },
+  {
+    "id": "supervisor",
+    "term": "vSphere Supervisor",
+    "aliases": [
+      "Supervisor",
+      "Supervisor Cluster"
+    ],
+    "ro": "Un cluster vSphere pe care ai activat planul de control Kubernetes integrat; de aici rulezi VM-uri, vSphere Pods și clustere VKS prin API-ul Kubernetes.",
+    "en": "A vSphere cluster with the built-in Kubernetes control plane enabled; from it you run VMs, vSphere Pods and VKS clusters through the Kubernetes API."
+  },
+  {
+    "id": "vsphere-namespace",
+    "term": "vSphere Namespace",
+    "aliases": [
+      "Supervisor Namespace"
+    ],
+    "ro": "Spațiu logic pe Supervisor cu limite de CPU, memorie și stocare, politici de stocare, VM classes și permisiuni pentru echipe.",
+    "en": "A logical space on the Supervisor with CPU, memory and storage limits, storage policies, VM classes and team permissions."
+  },
+  {
+    "id": "vsphere-pod",
+    "term": "vSphere Pod",
+    "ro": "Un VM foarte mic care rulează unul sau mai multe containere Linux direct pe ESXi; echivalentul unui pod Kubernetes.",
+    "en": "A very small VM that runs one or more Linux containers directly on ESXi; the equivalent of a Kubernetes pod."
+  },
+  {
+    "id": "vsphere-zone",
+    "term": "vSphere Zone",
+    "ro": "Un cluster vSphere mapat ca zonă de disponibilitate pentru Supervisor; un Supervisor are o zonă sau trei.",
+    "en": "A vSphere cluster mapped as an availability zone for the Supervisor; a Supervisor has one zone or three."
+  },
+  {
+    "id": "vm-class",
+    "term": "VM Class",
+    "ro": "Șablon de mărime (vCPU, memorie) pe care îl atribui unui namespace, ca echipele să creeze VM-uri și noduri doar în mărimile permise.",
+    "en": "A size template (vCPU, memory) you assign to a namespace, so teams create VMs and nodes only in allowed sizes."
+  },
+  {
+    "id": "lci",
+    "term": "LCI",
+    "abbr": "LCI",
+    "expansion": "Local Consumption Interface",
+    "ro": "Interfață grafică instalată ca Supervisor Service, prin care creezi clustere VKS și VM-uri dintr-un namespace fără să scrii YAML de mână.",
+    "en": "A graphical interface installed as a Supervisor Service, used to create VKS clusters and VMs in a namespace without writing YAML by hand."
+  },
+  {
+    "id": "flb",
+    "term": "FLB",
+    "abbr": "FLB",
+    "expansion": "Foundation Load Balancer",
+    "ro": "Load balancer-ul inclus în VVF și VCF 9.0 pentru Supervisor cu rețea VDS.",
+    "en": "The load balancer included with VVF and VCF 9.0 for a Supervisor with VDS networking."
+  },
+  {
+    "id": "vpc",
+    "term": "VPC",
+    "abbr": "VPC",
+    "expansion": "Virtual Private Cloud",
+    "ro": "Rețea izolată NSX pe care o poți delega unei echipe; Supervisor-ul din 9.0 poate folosi rețeaua NSX VPC.",
+    "en": "An isolated NSX network you can delegate to a team; the 9.0 Supervisor can use NSX VPC networking."
+  },
+  {
+    "id": "tkg",
+    "term": "TKG",
+    "abbr": "TKG",
+    "expansion": "Tanzu Kubernetes Grid",
+    "ro": "Numele vechi al clusterelor Kubernetes create de Supervisor; în 9.0 serviciul se numește VKS.",
+    "en": "The old name of the Kubernetes clusters created by the Supervisor; in 9.0 the service is called VKS."
+  },
+  {
+    "id": "hci",
+    "term": "HCI",
+    "abbr": "HCI",
+    "expansion": "Hyper-Converged Infrastructure",
+    "ro": "Infrastructură în care aceleași servere dau și calcul, și stocare (vSAN pe discurile locale ale hosturilor).",
+    "en": "Infrastructure where the same servers provide both compute and storage (vSAN on the hosts' local disks)."
+  },
+  {
+    "id": "disk-group",
+    "term": "Disk group",
+    "ro": "În vSAN OSA, grupul format dintr-un dispozitiv de cache și unul sau mai multe dispozitive de capacitate; maximum 5 pe host, cu până la 7 de capacitate fiecare.",
+    "en": "In vSAN OSA, the group made of one cache device and one or more capacity devices; up to 5 per host, each with up to 7 capacity devices."
+  },
+  {
+    "id": "storage-pool",
+    "term": "Storage pool (vSAN ESA)",
+    "aliases": [
+      "disk pool"
+    ],
+    "ro": "În vSAN ESA, toate dispozitivele NVMe ale hostului, fiecare dând și performanță, și capacitate; căderea unuia nu le afectează pe celelalte.",
+    "en": "In vSAN ESA, all of the host's NVMe devices, each providing both performance and capacity; one failing does not affect the others."
+  },
+  {
+    "id": "vsan-object",
+    "term": "vSAN object",
+    "aliases": [
+      "obiect vSAN",
+      "component"
+    ],
+    "ro": "Unitatea în care vSAN stochează un VM (VM home, fiecare VMDK, swap, snapshot-uri); fiecare obiect e format din componente plasate pe hosturi diferite după politică.",
+    "en": "The unit in which vSAN stores a VM (VM home, each VMDK, swap, snapshots); each object is made of components placed on different hosts according to the policy."
+  },
+  {
+    "id": "vsan-storage-cluster",
+    "term": "vSAN storage cluster",
+    "ro": "Cluster vSAN ESA care doar oferă stocare altor clustere de calcul, prin datastore sharing.",
+    "en": "A vSAN ESA cluster that only provides storage to other compute clusters, through datastore sharing."
+  },
+  {
+    "id": "vsan",
+    "term": "vSAN",
+    "ro": "Stocarea software VMware care adună discurile locale ale hosturilor ESXi într-un datastore partajat de tot clusterul.",
+    "en": "VMware software-defined storage that pools the local disks of ESXi hosts into one datastore shared by the whole cluster."
+  },
+  {
+    "id": "quickstart",
+    "term": "Quickstart (vSAN)",
+    "ro": "Asistentul din Configure al clusterului care configurează pas cu pas hosturile, rețeaua (VDS, port groups vMotion și vSAN), serviciile și discurile unui cluster vSAN.",
+    "en": "The wizard on the cluster Configure tab that sets up the hosts, networking (VDS, vMotion and vSAN port groups), services and disks of a vSAN cluster step by step."
+  },
+  {
+    "id": "fault-domain",
+    "term": "Fault domain (vSAN)",
+    "ro": "Grup de hosturi care pot cădea împreună (de exemplu același rack); vSAN pune componentele unui obiect în fault domains diferite.",
+    "en": "A group of hosts that can fail together (for example the same rack); vSAN places an object's components in different fault domains."
+  },
+  {
+    "id": "cluster-partition",
+    "term": "Cluster partition (vSAN)",
+    "ro": "Situația în care hosturile vSAN nu se mai văd prin rețeaua vSAN și clusterul se rupe în grupuri; cauze tipice: VLAN greșit, MTU nepotrivit, porturi blocate.",
+    "en": "The situation where vSAN hosts no longer see each other on the vSAN network and the cluster splits into groups; typical causes: wrong VLAN, MTU mismatch, blocked ports."
+  },
+  {
+    "id": "erasure-coding",
+    "term": "Erasure coding (RAID-5/6)",
+    "ro": "Metodă de protecție care împarte datele în bucăți și adaugă paritate (RAID-5: o paritate, RAID-6: două); ocupă mai puțin spațiu decât oglindirea, dar cere mai multe hosturi.",
+    "en": "A protection method that splits data into pieces and adds parity (RAID-5: one parity, RAID-6: two); uses less space than mirroring but needs more hosts."
+  },
+  {
+    "id": "osr",
+    "term": "Object Space Reservation",
+    "abbr": "OSR",
+    "expansion": "Object Space Reservation",
+    "ro": "Regula de politică ce spune cât din dimensiunea logică a unui disc virtual se rezervă la creare: thin (implicit), 25%, 50%, 75% sau thick.",
+    "en": "The policy rule that sets how much of a virtual disk logical size is reserved at creation: thin (default), 25%, 50%, 75% or thick."
+  },
+  {
+    "id": "force-provisioning",
+    "term": "Force provisioning",
+    "ro": "Regula care creează obiectul chiar dacă politica nu poate fi respectată (FTT, stripes); implicit No, gândită pentru bootstrap sau avarii.",
+    "en": "The rule that creates the object even if the policy cannot be met (FTT, stripes); default No, meant for bootstrapping or outages."
+  },
+  {
+    "id": "disk-stripes",
+    "term": "Number of disk stripes per object",
+    "aliases": [
+      "stripe width"
+    ],
+    "ro": "Numărul minim de dispozitive de capacitate pe care se împarte fiecare replică; implicit 1, maximum 12.",
+    "en": "The minimum number of capacity devices each replica is striped across; default 1, maximum 12."
+  },
+  {
+    "id": "auto-policy",
+    "term": "Auto-policy management (vSAN ESA)",
+    "ro": "Funcție ESA care generează o politică implicită optimă pentru datastore în funcție de numărul de hosturi și semnalează prin health când trebuie actualizată.",
+    "en": "An ESA feature that generates an optimal default datastore policy based on host count and raises a health finding when it should be updated."
+  },
+  {
+    "id": "auto-raid",
+    "term": "Auto-RAID (VCF 9.1)",
+    "ro": "Politica gestionată de sistem din VCF 9.1 care alege singură reziliența (RAID-5, RAID-6, oglindire de site) după tipul și mărimea clusterului.",
+    "en": "The system-managed policy in VCF 9.1 that picks resilience (RAID-5, RAID-6, site mirroring) by itself from cluster type and size."
+  },
+  {
+    "id": "adaptive-raid5",
+    "term": "Adaptive RAID-5 (ESA)",
+    "ro": "Comportamentul ESA care folosește RAID-5 2+1 pe clustere mici și 4+1 de la 6 hosturi, schimbând schema la 24 de ore după ce se schimbă mărimea clusterului.",
+    "en": "The ESA behaviour that uses RAID-5 2+1 on small clusters and 4+1 from 6 hosts, switching scheme 24 hours after the cluster size changes."
+  },
+  {
+    "id": "hrr",
+    "term": "Host Rebuild Reserve",
+    "abbr": "HRR",
+    "expansion": "Host Rebuild Reserve",
+    "ro": "Rezervă de capacitate vSAN care păstrează loc pentru reconstruirea datelor unui host căzut.",
+    "en": "A vSAN capacity reserve that keeps room to rebuild the data of a failed host."
+  },
+  {
+    "id": "policy-compliance",
+    "term": "Storage policy compliance",
+    "ro": "Starea care arată dacă un obiect respectă politica atribuită (Compliant) sau nu (Noncompliant), de exemplu după căderea unui host.",
+    "en": "The state that shows whether an object meets its assigned policy (Compliant) or not (Noncompliant), for example after a host failure."
+  },
+  {
+    "id": "deduplication",
+    "term": "Deduplication (vSAN)",
+    "ro": "Tehnica prin care blocurile identice se păstrează o singură dată, iar celelalte devin pointeri către ea. În OSA lucrează pe disk group, în ESA (global deduplication) pe tot clusterul.",
+    "en": "The technique that keeps identical blocks only once and turns the others into pointers to it. In OSA it works per disk group, in ESA (global deduplication) across the whole cluster."
+  },
+  {
+    "id": "compression-only",
+    "term": "Compression-only (vSAN OSA)",
+    "ro": "Modul OSA all-flash care comprimă datele fără deduplicare; lucrează pe disc, nu pe disk group, deci un disc defect nu scoate tot disk group-ul.",
+    "en": "The OSA all-flash mode that compresses data without deduplication; it works per disk, not per disk group, so a failed disk does not take the whole disk group down."
+  },
+  {
+    "id": "global-dedup",
+    "term": "Global deduplication (vSAN ESA)",
+    "ro": "Deduplicarea ESA la nivel de cluster, post-process, pe blocuri de 4 KiB; în 9.0 doar prin program restrâns, în 9.1 general disponibilă.",
+    "en": "ESA cluster-wide, post-process deduplication on 4 KiB blocks; in 9.0 only through a restricted program, generally available in 9.1."
+  },
+  {
+    "id": "scsi-unmap",
+    "term": "TRIM/UNMAP (vSAN)",
+    "aliases": [
+      "Guest Trim/Unmap"
+    ],
+    "ro": "Comenzile prin care sistemul de operare din VM anunță ce blocuri a eliberat, ca vSAN să recupereze spațiul.",
+    "en": "The commands through which the guest operating system reports which blocks it freed, so vSAN can reclaim the space."
+  },
+  {
+    "id": "data-reduction-ratio",
+    "term": "Data reduction ratio",
+    "ro": "Raportul dintre spațiul logic (înainte) și cel fizic (după) deduplicare și compresie; 3x înseamnă 3 unități logice pe 1 unitate fizică.",
+    "en": "The ratio of logical space (before) to physical space (after) deduplication and compression; 3x means 3 logical units on 1 physical unit."
+  },
+  {
+    "id": "operations-reserve",
+    "term": "Operations reserve (vSAN)",
+    "ro": "Capacitate rezervată pentru operațiile interne vSAN (resync, rebalance, schimbări de politică); peste prag, vSAN poate să nu mai funcționeze corect.",
+    "en": "Capacity reserved for internal vSAN operations (resync, rebalance, policy changes); above the threshold vSAN might not operate properly."
+  },
+  {
+    "id": "stretched-cluster",
+    "term": "vSAN stretched cluster",
+    "ro": "Un singur cluster vSAN întins pe două site-uri de date, cu un witness pe un al treilea site; datele se oglindesc între site-uri, ca să supraviețuiască pierderii unui site întreg.",
+    "en": "A single vSAN cluster spread over two data sites, with a witness at a third site; data is mirrored between sites so it survives the loss of a whole site."
+  },
+  {
+    "id": "two-node-cluster",
+    "term": "vSAN two-node cluster",
+    "ro": "Cluster vSAN cu două hosturi de date în aceeași locație (de obicei o sucursală) și un witness la distanță.",
+    "en": "A vSAN cluster with two data hosts in the same location (usually a branch office) and a remote witness."
+  },
+  {
+    "id": "witness-host",
+    "term": "Witness host (vSAN)",
+    "aliases": [
+      "witness appliance"
+    ],
+    "ro": "Host ESXi (de obicei appliance virtual) care păstrează doar componentele witness, metadate pentru quorum; nu rulează VM-uri și nu face parte din clusterul pe care îl servește.",
+    "en": "An ESXi host (usually a virtual appliance) that holds only witness components, metadata for quorum; it runs no VMs and is not part of the cluster it serves."
+  },
+  {
+    "id": "preferred-site",
+    "term": "Preferred site (vSAN)",
+    "ro": "Site-ul de date care rămâne activ când se rupe legătura dintre site-uri; celălalt site e non-preferred (secondary).",
+    "en": "The data site that stays active when the link between sites breaks; the other site is non-preferred (secondary)."
+  },
+  {
+    "id": "site-read-locality",
+    "term": "Site read locality",
+    "ro": "Setare de cluster prin care citirile se servesc din copia de pe site-ul local al VM-ului, ca să nu treacă prin legătura dintre site-uri.",
+    "en": "A cluster setting by which reads are served from the copy on the VM local site, so they do not cross the link between sites."
+  },
+  {
+    "id": "adaptive-quorum",
+    "term": "Adaptive Quorum Control",
+    "ro": "Mecanism vSAN (din 7 U3) care, după căderea unui site, recalculează voturile ca site-ul rămas să supraviețuiască și pierderii ulterioare a witness-ului.",
+    "en": "A vSAN mechanism (from 7 U3) that, after a site fails, recounts votes so the remaining site also survives a later witness loss."
+  },
+  {
+    "id": "shared-witness",
+    "term": "Shared witness",
+    "ro": "Un singur witness care servește mai multe clustere vSAN cu două noduri (până la 64), introdus în vSAN 7 U1.",
+    "en": "A single witness serving several two-node vSAN clusters (up to 64), introduced in vSAN 7 U1."
+  },
+  {
+    "id": "evacuation-mode",
+    "term": "vSAN evacuation mode (maintenance mode)",
+    "aliases": [
+      "Ensure accessibility",
+      "Full data migration",
+      "No data migration"
+    ],
+    "ro": "Opțiunea aleasă când pui un host vSAN în maintenance mode: Ensure accessibility (implicit, mută doar cât să rămână obiectele accesibile), Full data migration (mută tot) sau No data migration (nu mută nimic).",
+    "en": "The option chosen when you put a vSAN host into maintenance mode: Ensure accessibility (default, moves only enough to keep objects accessible), Full data migration (moves everything) or No data migration (moves nothing)."
+  },
+  {
+    "id": "object-repair-timer",
+    "term": "Object Repair Timer",
+    "aliases": [
+      "ClomRepairDelay"
+    ],
+    "ro": "Timpul (implicit 60 de minute) cât așteaptă vSAN după căderea sau intrarea în mentenanță a unui host înainte să reconstruiască componentele lipsă pe alte hosturi.",
+    "en": "The time (60 minutes by default) vSAN waits after a host fails or enters maintenance before rebuilding missing components on other hosts."
+  },
+  {
+    "id": "resync",
+    "term": "Resync (vSAN)",
+    "ro": "Copierea datelor între hosturi ca obiectele să revină la politica lor: după o avarie, după mentenanță, la schimbări de politică sau la rebalance.",
+    "en": "Copying data between hosts so objects return to their policy: after a failure, after maintenance, on policy changes or on rebalance."
+  },
+  {
+    "id": "automatic-rebalance",
+    "term": "Automatic Rebalance",
+    "ro": "Setare vSAN (din 6.7 U3) care mută automat componente când diferența de ocupare dintre discuri trece de prag (implicit 30%).",
+    "en": "A vSAN setting (from 6.7 U3) that automatically moves components when the usage difference between disks exceeds the threshold (30% by default)."
+  },
+  {
+    "id": "skyline-health",
+    "term": "Skyline Health (vSAN)",
+    "ro": "Setul de verificări de sănătate vSAN din vCenter (Monitor > vSAN > Skyline Health), cu scor procentual și butonul Retest.",
+    "en": "The set of vSAN health checks in vCenter (Monitor > vSAN > Skyline Health), with a percentage score and the Retest button."
+  },
+  {
+    "id": "storage-operations",
+    "term": "Storage Operations (VCF Operations)",
+    "ro": "Vederea din VCF Operations (Infrastructure Operations > Storage Operations) care arată alertele, scorurile Skyline Health și performanța tuturor clusterelor vSAN și datastore-urilor.",
+    "en": "The VCF Operations view (Infrastructure Operations > Storage Operations) that shows alerts, Skyline Health scores and performance for every vSAN cluster and datastore."
+  },
+  {
+    "id": "cluster-shutdown",
+    "term": "vSAN Cluster Shutdown Wizard",
+    "ro": "Asistentul din vCenter (clic dreapta pe cluster > vSAN > Shutdown cluster) care oprește controlat un cluster vSAN și îl repornește cu Restart cluster.",
+    "en": "The vCenter wizard (right-click the cluster > vSAN > Shutdown cluster) that shuts a vSAN cluster down in an orderly way and brings it back with Restart cluster."
+  },
+  {
+    "id": "nsx-manager",
+    "term": "NSX Manager",
+    "ro": "Appliance-ul care adună management plane-ul, policy și central control plane-ul NSX; rulează singur (model Simple) sau într-un cluster de 3 noduri.",
+    "en": "The appliance that combines the NSX management plane, policy and central control plane; it runs alone (Simple model) or in a 3-node cluster."
+  },
+  {
+    "id": "management-plane",
+    "term": "Management plane (NSX)",
+    "ro": "Stratul care primește configurația (UI, API, interfață de programare) și o păstrează; în NSX rulează pe NSX Manager.",
+    "en": "The layer that takes the configuration (UI, API) and stores it; in NSX it runs on NSX Manager."
+  },
+  {
+    "id": "ccp",
+    "term": "Central Control Plane",
+    "abbr": "CCP",
+    "expansion": "Central Control Plane",
+    "ro": "Partea de control NSX care rulează pe nodurile NSX Manager și calculează starea rețelei (de exemplu ce TEP are fiecare VM) pe care o trimite hosturilor.",
+    "en": "The NSX control part that runs on the NSX Manager nodes and computes network state (for example which TEP each VM sits behind) that it pushes to hosts."
+  },
+  {
+    "id": "lcp",
+    "term": "Local Control Plane",
+    "abbr": "LCP",
+    "expansion": "Local Control Plane",
+    "ro": "Partea de control NSX care rulează ca daemoni pe fiecare transport node și programează data plane-ul local.",
+    "en": "The NSX control part that runs as daemons on each transport node and programs the local data plane."
+  },
+  {
+    "id": "data-plane",
+    "term": "Data plane (NSX)",
+    "ro": "Motoarele de forwarding de pe transport nodes (hosturi ESX, Edge-uri) care mută efectiv pachetele.",
+    "en": "The forwarding engines on transport nodes (ESX hosts, Edges) that actually move packets."
+  },
+  {
+    "id": "transport-node",
+    "term": "Transport node",
+    "ro": "Un host ESX sau un Edge pregătit pentru NSX; hosturile ESX au nevoie de un VDS configurat.",
+    "en": "An ESX host or Edge prepared for NSX; ESX hosts need a configured VDS."
+  },
+  {
+    "id": "nsx-cluster-vip",
+    "term": "NSX Manager cluster virtual IP",
+    "ro": "Adresa IP comună a clusterului NSX Manager, deținută de nodul lider; la căderea liderului trece pe noul lider. Nu e load balancer.",
+    "en": "The shared IP address of the NSX Manager cluster, owned by the leader node; when the leader fails it moves to the new leader. It is not a load balancer."
+  },
+  {
+    "id": "transit-gateway",
+    "term": "Transit Gateway (VCF 9)",
+    "ro": "Componenta de rețea din VCF 9 care leagă VPC-urile între ele și de serviciile externe, cu conectivitate centralizată sau distribuită.",
+    "en": "The VCF 9 network component that connects VPCs to each other and to external services, with centralized or distributed connectivity."
+  },
+  {
+    "id": "compute-manager",
+    "term": "Compute manager (NSX)",
+    "ro": "Aplicația care gestionează hosturile și VM-urile și pe care NSX o folosește ca sursă de inventar; NSX suportă vCenter.",
+    "en": "The application that manages hosts and VMs and that NSX uses as an inventory source; NSX supports vCenter."
+  },
+  {
+    "id": "transport-zone",
+    "term": "Transport zone",
+    "ro": "Colecția de transport nodes care pot vedea un anumit segment; definește până unde se întinde segmentul. Poate fi Overlay sau VLAN.",
+    "en": "The collection of transport nodes that can see a given segment; it defines how far the segment spans. It can be Overlay or VLAN."
+  },
+  {
+    "id": "uplink-profile",
+    "term": "Uplink profile",
+    "ro": "Profilul NSX care definește politica de teaming, uplink-urile active/standby, VLAN-ul de transport pentru TEP și MTU-ul pentru legăturile unui transport node.",
+    "en": "The NSX profile that defines the teaming policy, active/standby uplinks, the TEP transport VLAN and the MTU for a transport node’s links."
+  },
+  {
+    "id": "tnp",
+    "term": "Transport Node Profile",
+    "abbr": "TNP",
+    "expansion": "Transport Node Profile",
+    "ro": "Șablonul NSX aplicat unui cluster vSphere: transport zones, VDS, uplink profile, alocarea IP a TEP-urilor și maparea plăcilor fizice la uplink-uri.",
+    "en": "The NSX template applied to a vSphere cluster: transport zones, VDS, uplink profile, TEP IP assignment and mapping of physical NICs to uplinks."
+  },
+  {
+    "id": "bfd",
+    "term": "Bidirectional Forwarding Detection",
+    "abbr": "BFD",
+    "expansion": "Bidirectional Forwarding Detection",
+    "ro": "Protocol de detecție rapidă a căderilor; NSX îl folosește între TEP-uri ca să știe dacă un tunel e sus.",
+    "en": "A fast failure-detection protocol; NSX runs it between TEPs to know whether a tunnel is up."
+  },
+  {
+    "id": "multi-tep",
+    "term": "Multi-TEP",
+    "ro": "Mai multe TEP-uri pe același transport node (de exemplu vmk10 și vmk11), care cer o politică de teaming bazată pe sursă cu cel puțin două uplink-uri active.",
+    "en": "Several TEPs on the same transport node (for example vmk10 and vmk11), which need a source-based teaming policy with at least two active uplinks."
+  },
+  {
+    "id": "teaming-policy",
+    "term": "Teaming policy (NSX)",
+    "ro": "Regula din uplink profile care decide ce uplink duce traficul: Failover Order, Load Balance Source sau Load Balance Source MAC Address (plus LAG).",
+    "en": "The uplink profile rule that decides which uplink carries traffic: Failover Order, Load Balance Source or Load Balance Source MAC Address (plus LAG)."
+  },
+  {
+    "id": "named-teaming",
+    "term": "Named teaming policy",
+    "ro": "Politică de teaming suplimentară, cu nume, pe care o poți atașa unui segment VLAN ca să-i alegi uplink-ul; segmentele fără ea folosesc politica implicită.",
+    "en": "An additional, named teaming policy you can attach to a VLAN segment to choose its uplink; segments without one use the default policy."
+  },
+  {
+    "id": "segment",
+    "term": "Segment (NSX)",
+    "ro": "Rețeaua logică de nivel 2 din NSX (fostul logical switch); poate fi overlay (prin tuneluri) sau VLAN (legat de un VLAN fizic).",
+    "en": "The NSX logical layer 2 network (formerly logical switch); it can be overlay (through tunnels) or VLAN (tied to a physical VLAN)."
+  },
+  {
+    "id": "vni",
+    "term": "Virtual Network Identifier",
+    "abbr": "VNI",
+    "expansion": "Virtual Network Identifier",
+    "ro": "Numărul care identifică un segment overlay în antetul GENEVE; se alocă dintr-un VNI pool.",
+    "en": "The number that identifies an overlay segment in the GENEVE header; it is allocated from a VNI pool."
+  },
+  {
+    "id": "bum",
+    "term": "BUM traffic",
+    "abbr": "BUM",
+    "expansion": "Broadcast, Unknown unicast and Multicast",
+    "ro": "Traficul care trebuie trimis la mai mulți destinatari pe un segment: broadcast, unicast cu destinație necunoscută și multicast.",
+    "en": "Traffic that must reach several receivers on a segment: broadcast, unicast with an unknown destination, and multicast."
+  },
+  {
+    "id": "replication-mode",
+    "term": "Replication mode",
+    "ro": "Modul în care NSX copiază traficul BUM între TEP-uri: Hierarchical Two-Tier (implicit, cu replicatori în fiecare subrețea) sau Head (sursa trimite câte o copie fiecărui TEP).",
+    "en": "How NSX copies BUM traffic between TEPs: Hierarchical Two-Tier (default, with replicators in each subnet) or Head (the source sends a copy to every TEP)."
+  },
+  {
+    "id": "segment-profile",
+    "term": "Segment profile",
+    "ro": "Profil cu setări de nivel 2 aplicat unui segment sau port: QoS, IP Discovery, SpoofGuard, Segment Security, MAC Discovery. Profilele implicite nu se editează.",
+    "en": "A profile with layer 2 settings applied to a segment or port: QoS, IP Discovery, SpoofGuard, Segment Security, MAC Discovery. Default profiles cannot be edited."
+  },
+  {
+    "id": "spoofguard",
+    "term": "SpoofGuard",
+    "ro": "Funcția NSX care blochează traficul cu adrese IP sau MAC neautorizate pe un port, pe baza legăturilor IP-MAC cunoscute.",
+    "en": "The NSX feature that blocks traffic with unauthorized IP or MAC addresses on a port, based on known IP-to-MAC bindings."
+  },
+  {
+    "id": "ip-discovery",
+    "term": "IP Discovery",
+    "ro": "Profilul NSX care învață adresele IP și MAC ale VM-urilor (prin ARP/ND snooping, DHCP snooping, VM Tools) și le dă mai departe SpoofGuard-ului și firewall-ului.",
+    "en": "The NSX profile that learns VM IP and MAC addresses (through ARP/ND snooping, DHCP snooping, VM Tools) and feeds them to SpoofGuard and the firewall."
+  },
+  {
+    "id": "nsx-port-group",
+    "term": "NSX distributed port group",
+    "ro": "Felul în care un segment NSX apare în vCenter pe un VDS: un port group cu backing NSX, definit din NSX, nu din vCenter.",
+    "en": "How an NSX segment shows up in vCenter on a VDS: a port group with NSX backing, defined from NSX, not from vCenter."
+  },
+  {
+    "id": "edge-node",
+    "term": "NSX Edge node",
+    "ro": "Appliance-ul NSX (VM sau bare metal) care rulează serviciile centralizate: rutarea nord-sud spre rețeaua fizică, NAT, load balancer, VPN, firewall de gateway.",
+    "en": "The NSX appliance (VM or bare metal) that runs centralized services: north-south routing to the physical network, NAT, load balancer, VPN, gateway firewall."
+  },
+  {
+    "id": "edge-cluster",
+    "term": "NSX Edge cluster",
+    "ro": "Grup de Edge nodes de același tip care asigură redundanța serviciilor; un Edge aparține unui singur cluster, iar un cluster are cel mult 10 noduri.",
+    "en": "A group of Edge nodes of the same type that provides service redundancy; an Edge belongs to one cluster, and a cluster has at most 10 nodes."
+  },
+  {
+    "id": "service-router",
+    "term": "Service Router",
+    "abbr": "SR",
+    "expansion": "Service Router",
+    "ro": "Componenta unui gateway Tier-0 sau Tier-1 care rulează pe Edge nodes și duce serviciile centralizate (uplink-uri, NAT, firewall de gateway).",
+    "en": "The part of a Tier-0 or Tier-1 gateway that runs on Edge nodes and carries centralized services (uplinks, NAT, gateway firewall)."
+  },
+  {
+    "id": "distributed-router",
+    "term": "Distributed Router",
+    "abbr": "DR",
+    "expansion": "Distributed Router",
+    "ro": "Componenta unui gateway care rulează distribuit pe fiecare transport node și rutează local traficul est-vest.",
+    "en": "The part of a gateway that runs distributed on every transport node and routes east-west traffic locally."
+  },
+  {
+    "id": "dpdk",
+    "term": "Data Plane Development Kit",
+    "abbr": "DPDK",
+    "expansion": "Data Plane Development Kit",
+    "ro": "Bibliotecile de procesare rapidă a pachetelor folosite de data plane-ul Edge; cer CPU cu AES-NI și pagini mari de 1 GB.",
+    "en": "The fast packet-processing libraries used by the Edge data plane; they need a CPU with AES-NI and 1 GB huge pages."
+  },
+  {
+    "id": "edge-failure-domain",
+    "term": "Failure domain (Edge)",
+    "ro": "Grupare logică a Edge nodes dintr-un cluster (de exemplu pe rack) ca instanțele active și standby ale unui gateway să ajungă în grupuri diferite.",
+    "en": "A logical grouping of Edge nodes in a cluster (for example per rack) so that the active and standby instances of a gateway land in different groups."
+  },
+  {
+    "id": "edge-cluster-profile",
+    "term": "Edge cluster profile",
+    "ro": "Profilul care setează parametrii BFD între Edge-uri și pragul Stand By Relocation pentru un Edge cluster.",
+    "en": "The profile that sets BFD parameters between Edges and the Stand By Relocation threshold for an Edge cluster."
+  },
+  {
+    "id": "tier-0",
+    "term": "Tier-0 gateway",
+    "ro": "Gateway-ul NSX de sus, care leagă rețelele virtuale de routerele fizice (BGP, OSPF sau rute statice) și are la el Tier-1-urile.",
+    "en": "The top NSX gateway, which connects virtual networks to the physical routers (BGP, OSPF or static routes) and has the Tier-1s attached."
+  },
+  {
+    "id": "tier-1",
+    "term": "Tier-1 gateway",
+    "ro": "Gateway-ul NSX de jos, de care se leagă segmentele; e conectat la un Tier-0 și își anunță rețelele către el prin route advertisement.",
+    "en": "The lower NSX gateway, to which segments attach; it is connected to a Tier-0 and announces its networks to it through route advertisement."
+  },
+  {
+    "id": "ecmp",
+    "term": "Equal-Cost Multi-Path",
+    "abbr": "ECMP",
+    "expansion": "Equal-Cost Multi-Path",
+    "ro": "Folosirea simultană a mai multor drumuri de același cost spre o destinație, ca să împarți traficul.",
+    "en": "Using several equal-cost paths to a destination at the same time to share traffic."
+  },
+  {
+    "id": "route-advertisement",
+    "term": "Route advertisement (Tier-1)",
+    "ro": "Setarea unui Tier-1 care decide ce rețele (segmente conectate, NAT, rute statice, VIP-uri LB) anunță către Tier-0.",
+    "en": "The Tier-1 setting that decides which networks (connected segments, NAT, static routes, LB VIPs) it announces to the Tier-0."
+  },
+  {
+    "id": "route-redistribution",
+    "term": "Route redistribution (Tier-0)",
+    "ro": "Setarea unui Tier-0 care decide ce rute proprii și primite de la Tier-1 trimite mai departe în BGP sau OSPF.",
+    "en": "The Tier-0 setting that decides which of its own routes and those received from Tier-1s it passes on into BGP or OSPF."
+  },
+  {
+    "id": "transit-subnet",
+    "term": "Transit subnet (NSX)",
+    "ro": "Subrețelele interne create automat de NSX: 100.64.0.0/16 între Tier-0 și Tier-1, 169.254.0.0/24 între componentele aceluiași gateway.",
+    "en": "The internal subnets NSX creates automatically: 100.64.0.0/16 between Tier-0 and Tier-1, 169.254.0.0/24 between components of the same gateway."
+  },
+  {
+    "id": "graceful-restart",
+    "term": "BGP graceful restart",
+    "ro": "Mecanism prin care vecinii BGP păstrează rutele unui router care repornește; pe Tier-0 implicit e Helper Only.",
+    "en": "A mechanism by which BGP neighbors keep the routes of a restarting router; on a Tier-0 the default is Helper Only."
+  },
+  {
+    "id": "dnat",
+    "term": "Destination NAT",
+    "abbr": "DNAT",
+    "expansion": "Destination NAT",
+    "ro": "Regula NAT care schimbă adresa destinație a traficului care intră, de exemplu ca să publici un server intern.",
+    "en": "The NAT rule that rewrites the destination address of incoming traffic, for example to publish an internal server."
+  },
+  {
+    "id": "pat",
+    "term": "Port Address Translation",
+    "abbr": "PAT",
+    "expansion": "Port Address Translation",
+    "ro": "NAT care pune mai multe adrese interne în spatele unei singure adrese externe, diferențiate prin porturi.",
+    "en": "NAT that puts several internal addresses behind one external address, told apart by ports."
+  },
+  {
+    "id": "reflexive-nat",
+    "term": "Reflexive NAT",
+    "ro": "NAT fără stare (stateless) 1:1 care traduce sursa la ieșire și destinația la intrare; singurul tip de NAT pe un Tier-0 Active-Active.",
+    "en": "Stateless 1:1 NAT that translates the source outbound and the destination inbound; the only NAT type on an Active-Active Tier-0."
+  },
+  {
+    "id": "dhcp-relay",
+    "term": "DHCP relay",
+    "ro": "Funcția care trimite cererile DHCP ale VM-urilor la un server DHCP extern, în altă rețea.",
+    "en": "The function that forwards VM DHCP requests to an external DHCP server on another network."
+  },
+  {
+    "id": "ike",
+    "term": "Internet Key Exchange",
+    "abbr": "IKE",
+    "expansion": "Internet Key Exchange",
+    "ro": "Protocolul care negociază cheile și parametrii unui tunel IPsec; folosește UDP 500, sau UDP 4500 când e detectat NAT.",
+    "en": "The protocol that negotiates the keys and parameters of an IPsec tunnel; it uses UDP 500, or UDP 4500 when NAT is detected."
+  },
+  {
+    "id": "esp",
+    "term": "Encapsulating Security Payload",
+    "abbr": "ESP",
+    "expansion": "Encapsulating Security Payload",
+    "ro": "Protocolul IPsec care criptează traficul din tunel; rulează direct peste IP, cu numărul de protocol 50.",
+    "en": "The IPsec protocol that encrypts tunnel traffic; it runs directly over IP with protocol number 50."
+  },
+  {
+    "id": "vti",
+    "term": "Virtual Tunnel Interface",
+    "abbr": "VTI",
+    "expansion": "Virtual Tunnel Interface",
+    "ro": "Interfața virtuală a unui VPN route-based, prin care rutezi static sau cu BGP rețelele de la distanță.",
+    "en": "The virtual interface of a route-based VPN, through which you route remote networks statically or with BGP."
+  },
+  {
+    "id": "route-based-vpn",
+    "term": "Route-based VPN",
+    "ro": "VPN IPsec în care traficul intră în tunel pe baza tabelei de rutare (prin VTI), static sau cu BGP.",
+    "en": "An IPsec VPN where traffic enters the tunnel based on the routing table (through a VTI), statically or with BGP."
+  },
+  {
+    "id": "policy-based-vpn",
+    "term": "Policy-based VPN",
+    "ro": "VPN IPsec în care traficul intră în tunel dacă se potrivește perechii de subrețele locală și de la distanță din sesiune.",
+    "en": "An IPsec VPN where traffic enters the tunnel if it matches the session pair of local and remote subnets."
+  },
+  {
+    "id": "micro-segmentation",
+    "term": "Micro-segmentation",
+    "ro": "Modelul în care permiți între workload-uri doar comunicația strict necesară, cu reguli aplicate la fiecare VM, nu doar la marginea rețelei.",
+    "en": "The model where you allow only the strictly necessary communication between workloads, with rules enforced at each VM, not only at the network edge."
+  },
+  {
+    "id": "dfw-category",
+    "term": "DFW category",
+    "ro": "Grupele de politici DFW evaluate de la stânga la dreapta: Ethernet, Emergency, Infrastructure, Environment, Application, apoi regula implicită.",
+    "en": "The DFW policy groups evaluated left to right: Ethernet, Emergency, Infrastructure, Environment, Application, then the default rule."
+  },
+  {
+    "id": "applied-to",
+    "term": "Applied To",
+    "ro": "Câmpul unei politici sau reguli DFW care limitează pe ce workload-uri e programată regula; implicit DFW, adică toate.",
+    "en": "The DFW policy or rule field that limits which workloads the rule is programmed on; the default is DFW, meaning all."
+  },
+  {
+    "id": "exclusion-list",
+    "term": "DFW exclusion list",
+    "ro": "Lista grupurilor scutite de regulile DFW; NSX Manager și Edge-urile sunt excluse automat de sistem.",
+    "en": "The list of groups exempt from DFW rules; NSX Manager and Edges are excluded automatically by the system."
+  },
+  {
+    "id": "nsx-group",
+    "term": "Group (NSX)",
+    "ro": "Obiect NSX folosit ca sursă, destinație sau Applied To; membrii pot fi statici sau dinamici, de exemplu după tag-uri.",
+    "en": "An NSX object used as source, destination or Applied To; members can be static or dynamic, for example by tags."
+  },
+  {
+    "id": "nsx-tag",
+    "term": "Tag (NSX)",
+    "ro": "Etichetă pusă pe VM-uri, segmente sau porturi, folosită ca criteriu de apartenență la grupuri.",
+    "en": "A label placed on VMs, segments or ports, used as a group membership criterion."
+  },
+  {
+    "id": "vdefend",
+    "term": "vDefend Firewall",
+    "ro": "Licența de securitate Broadcom pentru firewall-ul NSX (distribuit și de gateway), separată de licența VCF de bază.",
+    "en": "The Broadcom security license for the NSX firewall (distributed and gateway), separate from the base VCF license."
+  },
+  {
+    "id": "traceflow",
+    "term": "Traceflow",
+    "ro": "Unealta NSX care injectează un pachet de test și arată fiecare componentă prin care trece sau unde e aruncat; VM-urile nu văd pachetul.",
+    "en": "The NSX tool that injects a test packet and shows every component it passes or where it is dropped; the VMs never see the packet."
+  },
+  {
+    "id": "live-traffic-analysis",
+    "term": "Live Traffic Analysis",
+    "ro": "Unealta NSX care urmărește și capturează trafic real pe un port sursă, pentru analiză.",
+    "en": "The NSX tool that traces and captures real traffic on a source port, for analysis."
+  },
+  {
+    "id": "support-bundle",
+    "term": "Support bundle",
+    "ro": "Arhiva cu loguri și configurație a unui nod NSX, cerută de suportul Broadcom când deschizi un caz.",
+    "en": "The archive of logs and configuration from an NSX node that Broadcom support asks for when you open a case."
+  },
+  {
+    "id": "pktcap-uw",
+    "term": "pktcap-uw",
+    "ro": "Unealta de captură de pachete din ESX, care poate captura în diferite puncte ale căii de date (vNIC, uplink).",
+    "en": "The ESX packet capture tool, which can capture at different points of the data path (vNIC, uplink)."
+  },
+  {
+    "id": "sftp",
+    "term": "SFTP",
+    "abbr": "SFTP",
+    "expansion": "SSH File Transfer Protocol",
+    "ro": "Protocolul de transfer de fișiere peste SSH; NSX Manager îl folosește ca să-și trimită backup-urile pe un server extern.",
+    "en": "The file transfer protocol over SSH; NSX Manager uses it to send its backups to an external server."
+  },
+  {
+    "id": "backup-passphrase",
+    "term": "Backup passphrase",
+    "ro": "Fraza secretă care criptează backup-ul NSX; fără ea backup-ul nu poate fi restaurat.",
+    "en": "The secret phrase that encrypts the NSX backup; without it the backup cannot be restored."
+  },
+  {
+    "id": "vcf-operations-networks",
+    "term": "VCF Operations for Networks",
+    "ro": "Produsul de vizibilitate și analiză a fluxurilor de rețea din VCF, fost Aria Operations for Networks și înainte vRealize Network Insight.",
+    "en": "The VCF network visibility and flow analytics product, formerly Aria Operations for Networks and before that vRealize Network Insight."
+  },
+  {
+    "id": "vcf-fleet",
+    "term": "VCF fleet",
+    "ro": "Colecția de instanțe VCF ale unei organizații, administrate de o singură VCF Operations și o singură VCF Automation.",
+    "en": "An organization's collection of VCF instances, managed by a single VCF Operations and a single VCF Automation."
+  },
+  {
+    "id": "vcf-instance",
+    "term": "VCF instance",
+    "ro": "O unitate VCF formată dintr-un management domain și, opțional, unul sau mai multe workload domains, cu propriul SDDC Manager.",
+    "en": "A VCF unit made of one management domain and optionally one or more workload domains, with its own SDDC Manager."
+  },
+  {
+    "id": "management-domain",
+    "term": "Management domain",
+    "ro": "Primul domeniu al unei instanțe VCF, un workload domain special care găzduiește componentele de management (vCenter, NSX Manager, SDDC Manager).",
+    "en": "The first domain of a VCF instance, a special workload domain that hosts the management components (vCenter, NSX Manager, SDDC Manager)."
+  },
+  {
+    "id": "workload-domain",
+    "term": "VI workload domain",
+    "ro": "Domeniu VCF pentru aplicații, cu propriul vCenter și un NSX dedicat sau partajat.",
+    "en": "A VCF domain for applications, with its own vCenter and a dedicated or shared NSX."
+  },
+  {
+    "id": "vcf-installer",
+    "term": "VCF Installer",
+    "ro": "Appliance-ul care face instalarea inițială (Day-0) a unei instanțe VCF 9 și înlocuiește Cloud Builder.",
+    "en": "The appliance that does the initial (Day-0) installation of a VCF 9 instance and replaces Cloud Builder."
+  },
+  {
+    "id": "sddc-manager",
+    "term": "SDDC Manager",
+    "ro": "Appliance-ul unei instanțe VCF care face lifecycle pentru componentele de bază (vCenter, ESX, NSX, vSAN) din instanța sa.",
+    "en": "The VCF instance appliance that handles lifecycle for the core components (vCenter, ESX, NSX, vSAN) in its instance."
+  },
+  {
+    "id": "fleet-management",
+    "term": "Fleet management",
+    "ro": "Funcțiile din VCF Operations pentru toată flota: lifecycle, certificate, parole, configurație, licențe; folosește un appliance Fleet Management înregistrat în VCF Operations.",
+    "en": "The fleet-wide functions in VCF Operations: lifecycle, certificates, passwords, configuration, licensing; it uses a Fleet Management appliance registered with VCF Operations."
+  },
+  {
+    "id": "vcf-automation",
+    "term": "VCF Automation",
+    "ro": "Componenta de self-service și infrastructure-as-code din VCF, o singură instalare per flotă; succesoarea Aria Automation.",
+    "en": "The VCF self-service and infrastructure-as-code component, one deployment per fleet; the successor of Aria Automation."
+  }
+]

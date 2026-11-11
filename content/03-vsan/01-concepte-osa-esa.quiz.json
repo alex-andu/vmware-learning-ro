@@ -1,0 +1,269 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Un client are servere noi cu 6 SSD-uri SATA certificate pentru vSAN OSA și vrea vSAN ESA. Ce îi spui?",
+        "en": "A customer has new servers with 6 SATA SSDs certified for vSAN OSA and wants vSAN ESA. What do you tell them?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Poate folosi ESA dacă pune SSD-urile în RAID 0 pe controller",
+            "en": "They can use ESA if they put the SSDs in RAID 0 on the controller"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. ESA nu acceptă dispozitive în spatele controllerelor RAID.",
+            "en": "Wrong. ESA does not accept devices behind RAID controllers."
+          }
+        },
+        {
+          "text": {
+            "ro": "Are nevoie de dispozitive NVMe certificate ESA; altfel rămâne pe OSA",
+            "en": "They need ESA-certified NVMe devices; otherwise they stay on OSA"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. ESA suportă doar NVMe certificate, fără SAS sau SATA.",
+            "en": "Correct. ESA supports only certified NVMe, with no SAS or SATA."
+          }
+        },
+        {
+          "text": {
+            "ro": "ESA merge cu orice SSD, doar mai încet",
+            "en": "ESA works with any SSD, just slower"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Nu e o chestiune de viteză: SATA nu e suportat în ESA.",
+            "en": "Wrong. It is not a matter of speed: SATA is not supported in ESA."
+          }
+        },
+        {
+          "text": {
+            "ro": "Activează ESA și vSAN folosește SSD-urile ca un cache",
+            "en": "Enable ESA and vSAN uses the SSDs as a cache"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. ESA nu are tier de cache.",
+            "en": "Wrong. ESA has no cache tier."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Pe un host OSA cu un singur disk group cade dispozitivul de cache. Ce se întâmplă?",
+        "en": "On an OSA host with a single disk group, the cache device fails. What happens?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Doar datele din cache se pierd; capacitatea rămâne disponibilă",
+            "en": "Only the cache data is lost; capacity stays available"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Fără cache, discurile de capacitate din grup devin inaccesibile.",
+            "en": "Wrong. Without the cache, the group capacity disks become unreachable."
+          }
+        },
+        {
+          "text": {
+            "ro": "Nimic, ESA preia automat",
+            "en": "Nothing, ESA takes over automatically"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Arhitectura nu se schimbă singură.",
+            "en": "Wrong. The architecture does not change by itself."
+          }
+        },
+        {
+          "text": {
+            "ro": "Hostul iese din cluster definitiv",
+            "en": "The host leaves the cluster permanently"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Hostul rămâne, dar disk group-ul e inaccesibil până la înlocuire.",
+            "en": "Wrong. The host stays, but the disk group is unreachable until replacement."
+          }
+        },
+        {
+          "text": {
+            "ro": "Tot disk group-ul devine inaccesibil, iar vSAN reconstruiește componentele în altă parte",
+            "en": "The whole disk group becomes unreachable, and vSAN rebuilds the components elsewhere"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. În OSA, căderea unui disc dintr-un grup poate face inaccesibile mai multe discuri; de aceea se recomandă mai multe disk groups.",
+            "en": "Correct. In OSA, a disk failure in a group can make several disks unreachable; that is why several disk groups are recommended."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Vrei să treci un cluster OSA de producție la ESA. Care e abordarea suportată?",
+        "en": "You want to move a production OSA cluster to ESA. Which approach is supported?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Construiești un cluster ESA nou și muți VM-urile cu Storage vMotion",
+            "en": "Build a new ESA cluster and move the VMs with Storage vMotion"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Nu există conversie pe loc; migrarea pe un cluster nou e metoda sigură (KB 432894).",
+            "en": "Correct. There is no in-place conversion; migrating to a new cluster is the safe method (KB 432894)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Schimbi arhitectura din setările clusterului",
+            "en": "Change the architecture in the cluster settings"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Conversia pe loc nu e suportată.",
+            "en": "Wrong. In-place conversion is not supported."
+          }
+        },
+        {
+          "text": {
+            "ro": "Faci upgrade la ESXi 9.0 și clusterul devine ESA",
+            "en": "Upgrade to ESXi 9.0 and the cluster becomes ESA"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Versiunea nu schimbă arhitectura.",
+            "en": "Wrong. The version does not change the architecture."
+          }
+        },
+        {
+          "text": {
+            "ro": "Adaugi un host ESA în clusterul OSA",
+            "en": "Add an ESA host to the OSA cluster"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. KB 432894 descrie doar un cluster ESA nou sau refolosirea hosturilor după ștergerea disk groups, nu amestecarea lor.",
+            "en": "Wrong. KB 432894 describes only a new ESA cluster or reusing hosts after deleting disk groups, not mixing them."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "Ai 3 hosturi vSAN ESA și vrei cea mai bună eficiență de spațiu cu FTT=1. Ce politică folosești?",
+        "en": "You have 3 vSAN ESA hosts and want the best space efficiency with FTT=1. Which policy do you use?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "RAID-1, pentru că RAID-5 cere minimum 4 hosturi",
+            "en": "RAID-1, because RAID-5 needs at least 4 hosts"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. În ESA, RAID-5 merge de la 3 hosturi, cu schema 2+1.",
+            "en": "Wrong. In ESA, RAID-5 works from 3 hosts, with the 2+1 layout."
+          }
+        },
+        {
+          "text": {
+            "ro": "RAID-6",
+            "en": "RAID-6"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. RAID-6 înseamnă FTT=2 și cere 6 hosturi.",
+            "en": "Wrong. RAID-6 means FTT=2 and needs 6 hosts."
+          }
+        },
+        {
+          "text": {
+            "ro": "RAID-5 în schema 2+1",
+            "en": "RAID-5 in the 2+1 layout"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. ESA suportă RAID-5 2+1 de la 3 hosturi, la performanța RAID-1.",
+            "en": "Correct. ESA supports RAID-5 2+1 from 3 hosts, at RAID-1 performance."
+          }
+        },
+        {
+          "text": {
+            "ro": "FTT=0, ca să nu pierzi spațiu",
+            "en": "FTT=0, so you waste no space"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. FTT=0 nu protejează la nicio cădere, iar cerința e FTT=1.",
+            "en": "Wrong. FTT=0 protects against no failure, and the requirement is FTT=1."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "Un client VVF are 4 hosturi cu câte 2 CPU de 16 core-uri. Câți TiB de vSAN are incluși?",
+        "en": "A VVF customer has 4 hosts, each with 2 CPUs of 16 cores. How many TiB of vSAN are included?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "128 TiB",
+            "en": "128 TiB"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Asta ar fi la VCF (1 TiB per core).",
+            "en": "Wrong. That would be VCF (1 TiB per core)."
+          }
+        },
+        {
+          "text": {
+            "ro": "64 TiB",
+            "en": "64 TiB"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Ai folosit 0,5 TiB per core.",
+            "en": "Wrong. You used 0.5 TiB per core."
+          }
+        },
+        {
+          "text": {
+            "ro": "16 TiB",
+            "en": "16 TiB"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Ai numărat doar un CPU pe host.",
+            "en": "Wrong. You counted only one CPU per host."
+          }
+        },
+        {
+          "text": {
+            "ro": "32 TiB",
+            "en": "32 TiB"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. 4 × 2 × 16 = 128 de core-uri × 0,25 TiB = 32 TiB.",
+            "en": "Correct. 4 × 2 × 16 = 128 cores × 0.25 TiB = 32 TiB."
+          }
+        }
+      ]
+    }
+  ]
+}

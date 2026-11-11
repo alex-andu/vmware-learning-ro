@@ -1,0 +1,156 @@
+{
+  "steps": [
+    {
+      "id": "sftp",
+      "title": {
+        "ro": "Configurează serverul de backup",
+        "en": "Configure the backup server"
+      },
+      "path": {
+        "ro": "NSX Manager > System > Backup & Restore > Edit (⚠ de verificat calea în 9.0)",
+        "en": "NSX Manager > System > Backup & Restore > Edit (⚠ to verify the path in 9.0)"
+      },
+      "action": {
+        "ro": "Introdu IP-ul sau FQDN-ul serverului SFTP, portul 22, utilizatorul, calea absolută a folderului și un passphrase puternic; acceptă amprenta SSH.",
+        "en": "Enter the SFTP server IP or FQDN, port 22, the user, the absolute folder path and a strong passphrase; accept the SSH fingerprint."
+      },
+      "why": {
+        "ro": "Fără server extern și passphrase nu există backup, iar fără passphrase un backup nu poate fi restaurat.",
+        "en": "Without an external server and a passphrase there is no backup, and without the passphrase a backup cannot be restored."
+      }
+    },
+    {
+      "id": "sched",
+      "title": {
+        "ro": "Programează backup-ul",
+        "en": "Schedule the backup"
+      },
+      "path": {
+        "ro": "Backup & Restore > Edit Schedule",
+        "en": "Backup & Restore > Edit Schedule"
+      },
+      "action": {
+        "ro": "Activează Recurring Backup cu frecvență Weekly sau Interval și bifează Detect NSX Configuration Change.",
+        "en": "Enable Recurring Backup with a Weekly or Interval frequency and tick Detect NSX Configuration Change."
+      },
+      "why": {
+        "ro": "Un backup automat după fiecare schimbare îți dă mereu o copie recentă.",
+        "en": "An automatic backup after every change always gives you a recent copy."
+      }
+    },
+    {
+      "id": "manual",
+      "title": {
+        "ro": "Rulează un backup manual",
+        "en": "Run a manual backup"
+      },
+      "path": {
+        "ro": "Backup & Restore > Start Backup",
+        "en": "Backup & Restore > Start Backup"
+      },
+      "action": {
+        "ro": "Urmărește progresul pentru Cluster, Node și Inventory, apoi verifică pe serverul SFTP că fișierele există.",
+        "en": "Watch the progress for Cluster, Node and Inventory, then check on the SFTP server that the files exist."
+      },
+      "why": {
+        "ro": "Un backup e bun doar dacă ai verificat că fișierele au ajuns pe server; așa faci înainte de orice upgrade.",
+        "en": "A backup is good only once you have checked that the files reached the server; this is what you do before any upgrade."
+      }
+    },
+    {
+      "id": "alarms",
+      "title": {
+        "ro": "Verifică alarmele",
+        "en": "Check the alarms"
+      },
+      "path": {
+        "ro": "NSX Manager > Home > Alarms",
+        "en": "NSX Manager > Home > Alarms"
+      },
+      "action": {
+        "ro": "Deschide alarmele active, notează event ID-ul uneia și citește acțiunea recomandată.",
+        "en": "Open the active alarms, note the event ID of one and read the recommended action."
+      },
+      "why": {
+        "ro": "Event ID-ul e cheia după care cauți articolul KB potrivit.",
+        "en": "The event ID is the key you search the right KB article with."
+      }
+    },
+    {
+      "id": "traceflow",
+      "title": {
+        "ro": "Urmărește un pachet cu Traceflow",
+        "en": "Follow a packet with Traceflow"
+      },
+      "path": {
+        "ro": "Plan & Troubleshoot > Traffic Analysis > Traceflow",
+        "en": "Plan & Troubleshoot > Traffic Analysis > Traceflow"
+      },
+      "action": {
+        "ro": "Trimite un pachet de la VM-ul web la VM-ul db pe portul permis, apoi pe un port blocat, și compară unde ajunge fiecare.",
+        "en": "Send a packet from the web VM to the db VM on the allowed port, then on a blocked port, and compare where each ends up."
+      },
+      "why": {
+        "ro": "Traceflow îți arată calea și componenta care aruncă pachetul, fără să atingi VM-urile.",
+        "en": "Traceflow shows the path and the component that drops the packet, without touching the VMs."
+      }
+    },
+    {
+      "id": "vmkping",
+      "title": {
+        "ro": "Testează tunelul dintre TEP-uri",
+        "en": "Test the tunnel between TEPs"
+      },
+      "path": {
+        "ro": "SSH pe un host ESX",
+        "en": "SSH to an ESX host"
+      },
+      "action": {
+        "ro": "Rulează vmkping ++netstack=vxlan -I vmkX <IP TEP remote> -d -s 1572 spre TEP-ul altui host (1572 plus 28 de octeți de antet fac 1600; ⚠ de verificat mărimea pentru MTU-ul tău).",
+        "en": "Run vmkping ++netstack=vxlan -I vmkX <remote TEP IP> -d -s 1572 to another host TEP (1572 plus 28 header bytes makes 1600; ⚠ to verify the size for your MTU)."
+      },
+      "why": {
+        "ro": "Opțiunea -d interzice fragmentarea, deci testul arată dacă rețeaua fizică duce MTU-ul cerut de overlay.",
+        "en": "The -d option forbids fragmentation, so the test shows whether the physical network carries the MTU the overlay needs."
+      }
+    },
+    {
+      "id": "pktcap",
+      "title": {
+        "ro": "Capturează pe host și oprește captura",
+        "en": "Capture on the host and stop it"
+      },
+      "path": {
+        "ro": "SSH pe hostul VM-ului web",
+        "en": "SSH to the web VM host"
+      },
+      "action": {
+        "ro": "Găsește switchport-ul cu nsxdp-cli vswitch instance list, rulează pktcap-uw --switchport <id> --capture VnicTx,VnicRx -o - | tcpdump-uw -r - -nne, oprește cu Ctrl+C și verifică cu lsof că nu a rămas nicio captură.",
+        "en": "Find the switchport with nsxdp-cli vswitch instance list, run pktcap-uw --switchport <id> --capture VnicTx,VnicRx -o - | tcpdump-uw -r - -nne, stop with Ctrl+C and check with lsof that no capture is left."
+      },
+      "why": {
+        "ro": "Captura arată traficul real la vNIC; o captură uitată pornită consumă resursele hostului.",
+        "en": "The capture shows the real traffic at the vNIC; a forgotten capture consumes host resources."
+      }
+    },
+    {
+      "id": "bundle",
+      "title": {
+        "ro": "Generează un support bundle din CLI",
+        "en": "Generate a support bundle from the CLI"
+      },
+      "path": {
+        "ro": "SSH ca admin pe NSX Manager",
+        "en": "SSH as admin to NSX Manager"
+      },
+      "action": {
+        "ro": "Rulează get support-bundle file nsx_support_bundle_manager1.tar log-age 1 și verifică fișierul cu get files.",
+        "en": "Run get support-bundle file nsx_support_bundle_manager1.tar log-age 1 and check the file with get files."
+      },
+      "why": {
+        "ro": "Când deschizi un caz, suportul cere bundle-uri de pe nodurile implicate; log-age limitează mărimea la logurile recente.",
+        "en": "When you open a case, support asks for bundles from the nodes involved; log-age limits the size to recent logs."
+      }
+    }
+  ]
+}

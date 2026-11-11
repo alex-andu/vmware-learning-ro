@@ -1,0 +1,137 @@
+{
+  "steps": [
+    {
+      "id": "fleet",
+      "title": {
+        "ro": "Identifică flota și instanța",
+        "en": "Identify the fleet and the instance"
+      },
+      "path": {
+        "ro": "VCF Operations > Fleet Management > Lifecycle > VCF Management > VCF Instances",
+        "en": "VCF Operations > Fleet Management > Lifecycle > VCF Management > VCF Instances"
+      },
+      "action": {
+        "ro": "Notează numele instanței, versiunea ei și componentele listate.",
+        "en": "Note the instance name, its version and the listed components."
+      },
+      "why": {
+        "ro": "Aici vezi că VCF Operations e la nivel de flotă și administrează instanțele de deasupra lor.",
+        "en": "Here you see that VCF Operations is fleet-level and manages the instances from above."
+      }
+    },
+    {
+      "id": "fmready",
+      "title": {
+        "ro": "Verifică înregistrarea Fleet Management",
+        "en": "Check the Fleet Management registration"
+      },
+      "path": {
+        "ro": "VCF Operations > Fleet Management > Lifecycle",
+        "en": "VCF Operations > Fleet Management > Lifecycle"
+      },
+      "action": {
+        "ro": "Dacă apare „Management Lifecycle is Not Ready”, notează mesajul și caută procedura de înregistrare a appliance-ului Fleet Management.",
+        "en": "If \"Management Lifecycle is Not Ready\" appears, note the message and look up the procedure to register the Fleet Management appliance."
+      },
+      "why": {
+        "ro": "Fără înregistrare nu ai lifecycle la nivel de flotă (KB 413792).",
+        "en": "Without registration you have no fleet-level lifecycle (KB 413792)."
+      }
+    },
+    {
+      "id": "mgmtvms",
+      "title": {
+        "ro": "Inventariază management domain",
+        "en": "Inventory the management domain"
+      },
+      "path": {
+        "ro": "vSphere Client > vCenter-ul de management > Hosts and Clusters",
+        "en": "vSphere Client > management vCenter > Hosts and Clusters"
+      },
+      "action": {
+        "ro": "Găsește VM-urile vCenter, NSX Manager, SDDC Manager, VCF Operations și colectorul, și notează pe ce rețea de management sunt.",
+        "en": "Find the vCenter, NSX Manager, SDDC Manager, VCF Operations and collector VMs, and note which management network they are on."
+      },
+      "why": {
+        "ro": "Așa vezi concret ce înseamnă „etajul tehnic” al instanței.",
+        "en": "This shows concretely what the instance \"technical floor\" means."
+      }
+    },
+    {
+      "id": "nsxnodes",
+      "title": {
+        "ro": "Verifică modelul de deployment",
+        "en": "Check the deployment model"
+      },
+      "path": {
+        "ro": "NSX Manager > System > Appliances",
+        "en": "NSX Manager > System > Appliances"
+      },
+      "action": {
+        "ro": "Numără nodurile NSX Manager: unul înseamnă modelul Simple, trei înseamnă High Availability.",
+        "en": "Count the NSX Manager nodes: one means the Simple model, three means High Availability."
+      },
+      "why": {
+        "ro": "Modelul ales decide cât de tolerant la avarii e managementul.",
+        "en": "The chosen model decides how fault tolerant the management plane is."
+      }
+    },
+    {
+      "id": "license",
+      "title": {
+        "ro": "Verifică licențele",
+        "en": "Check the licenses"
+      },
+      "path": {
+        "ro": "VCF Operations > License Management (⚠ de verificat calea)",
+        "en": "VCF Operations > License Management (⚠ to verify the path)"
+      },
+      "action": {
+        "ro": "Uită-te la licența VCF și la add-on-uri, de exemplu vDefend, și notează care folosesc fișier de licență și care cheie.",
+        "en": "Look at the VCF license and the add-ons, for example vDefend, and note which use a license file and which a key."
+      },
+      "why": {
+        "ro": "În VCF 9 licențierea trece prin VCF Operations, iar unele add-on-uri au încă chei clasice.",
+        "en": "In VCF 9 licensing goes through VCF Operations, and some add-ons still have classic keys."
+      }
+    },
+    {
+      "id": "plan",
+      "title": {
+        "ro": "Planifică un VI workload domain",
+        "en": "Plan a VI workload domain"
+      },
+      "path": {
+        "ro": "VCF Planning and Preparation Workbook",
+        "en": "VCF Planning and Preparation Workbook"
+      },
+      "action": {
+        "ro": "Completează FQDN-ul și IP-ul vCenter-ului noului domeniu pe rețeaua de management VM, plus hosturile și NSX-ul (dedicat sau partajat).",
+        "en": "Fill in the FQDN and IP of the new domain vCenter on the VM management network, plus the hosts and NSX (dedicated or shared)."
+      },
+      "why": {
+        "ro": "vCenter-ul în altă subrețea ar opri validarea (KB 429719).",
+        "en": "A vCenter on another subnet would stop validation (KB 429719)."
+      }
+    },
+    {
+      "id": "create",
+      "title": {
+        "ro": "Pornește wizard-ul de workload domain",
+        "en": "Start the workload domain wizard"
+      },
+      "path": {
+        "ro": "VCF Operations > Inventory (sau Fleet Management) > Add Workload Domain (⚠ de verificat calea)",
+        "en": "VCF Operations > Inventory (or Fleet Management) > Add Workload Domain (⚠ to verify the path)"
+      },
+      "action": {
+        "ro": "Parcurge wizard-ul până la validare cu datele din workbook; finalizează doar dacă ai hosturi libere.",
+        "en": "Go through the wizard up to validation with the workbook data; finish only if you have free hosts."
+      },
+      "why": {
+        "ro": "Workload domains noi se creează din VCF Operations, nu din VCF Installer.",
+        "en": "New workload domains are created from VCF Operations, not from VCF Installer."
+      }
+    }
+  ]
+}

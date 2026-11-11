@@ -1,0 +1,269 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Ping-ul între TEP-urile a două hosturi merge, dar tunelurile dintre ele sunt Down. Ce verifici întâi?",
+        "en": "Ping between the TEPs of two hosts works, but the tunnels between them are Down. What do you check first?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "MTU-ul din VM-urile de pe segment",
+            "en": "The MTU inside the VMs on the segment"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. MTU-ul din VM-uri afectează pachetele mari ale aplicațiilor, nu starea tunelurilor BFD.",
+            "en": "Wrong. The VM MTU affects large application packets, not the state of the BFD tunnels."
+          }
+        },
+        {
+          "text": {
+            "ro": "Licența NSX a clusterului",
+            "en": "The cluster NSX license"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Simptomul descris (ICMP trece, tunelurile nu) indică trafic UDP blocat, nu licențiere.",
+            "en": "Wrong. The symptom (ICMP passes, tunnels do not) points to blocked UDP traffic, not licensing."
+          }
+        },
+        {
+          "text": {
+            "ro": "Dacă transport zone-ul e de tip VLAN",
+            "en": "Whether the transport zone is VLAN type"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Hosturile au deja tuneluri, deci sunt într-o transport zone Overlay.",
+            "en": "Wrong. The hosts already have tunnels, so they are in an Overlay transport zone."
+          }
+        },
+        {
+          "text": {
+            "ro": "Că UDP 6081, 3784 și 4784 sunt permise în ambele sensuri între subrețelele TEP",
+            "en": "That UDP 6081, 3784 and 4784 are allowed both ways between the TEP subnets"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. GENEVE și BFD folosesc aceste porturi UDP; dacă sunt blocate, ICMP poate trece și tunelurile rămân Down.",
+            "en": "Correct. GENEVE and BFD use these UDP ports; if they are blocked, ICMP can pass while the tunnels stay Down."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Un host ESX cu VDS 8 e transport node NSX. Unde setezi MTU-ul pentru traficul overlay?",
+        "en": "An ESX host on VDS 8 is an NSX transport node. Where do you set the MTU for overlay traffic?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "În câmpul MTU din uplink profile",
+            "en": "In the MTU field of the uplink profile"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Pentru hosturile cu VDS câmpul MTU din uplink profile nu se folosește.",
+            "en": "Wrong. For hosts on VDS the uplink profile MTU field is not used."
+          }
+        },
+        {
+          "text": {
+            "ro": "Pe VDS, în vCenter",
+            "en": "On the VDS, in vCenter"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Pentru un vSphere VDS, MTU-ul se configurează pe VDS în vCenter.",
+            "en": "Correct. For a vSphere VDS, the MTU is configured on the VDS in vCenter."
+          }
+        },
+        {
+          "text": {
+            "ro": "Pe fiecare interfață vmk10 din NSX Manager",
+            "en": "On each vmk10 interface from NSX Manager"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. TEP-urile moștenesc MTU-ul din configurația switch-ului, nu se editează una câte una din NSX.",
+            "en": "Wrong. TEPs inherit the MTU from the switch configuration; they are not edited one by one from NSX."
+          }
+        },
+        {
+          "text": {
+            "ro": "În setările de rețea ale fiecărei VM",
+            "en": "In the network settings of each VM"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. MTU-ul din VM-uri trebuie să fie mai mic decât al TEP-ului; nu el transportă overlay-ul.",
+            "en": "Wrong. The VM MTU must be lower than the TEP MTU; it does not carry the overlay."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Hosturile unui cluster au un singur TEP (vmk10) și vrei două. Ce schimbi?",
+        "en": "The hosts of a cluster have a single TEP (vmk10) and you want two. What do you change?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Adaugi a doua transport zone Overlay",
+            "en": "You add a second Overlay transport zone"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Numărul de TEP-uri vine din uplink profile, nu din numărul de transport zones.",
+            "en": "Wrong. The number of TEPs comes from the uplink profile, not from the number of transport zones."
+          }
+        },
+        {
+          "text": {
+            "ro": "Treci uplink profile-ul pe Failover Order cu un uplink standby",
+            "en": "You switch the uplink profile to Failover Order with a standby uplink"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Activ/standby produce exact un TEP.",
+            "en": "Wrong. Active/standby produces exactly one TEP."
+          }
+        },
+        {
+          "text": {
+            "ro": "Pui în uplink profile o politică bazată pe sursă cu două uplink-uri active",
+            "en": "You set a source-based policy with two active uplinks in the uplink profile"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Două TEP-uri cer teaming bazat pe sursă cu două uplink-uri active pentru overlay.",
+            "en": "Correct. Two TEPs need source-based teaming with two active uplinks for overlay."
+          }
+        },
+        {
+          "text": {
+            "ro": "Creezi manual vmk11 în vCenter pe fiecare host",
+            "en": "You create vmk11 manually in vCenter on each host"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. TEP-urile le creează NSX automat din TNP; un vmk adăugat de mână nu devine TEP.",
+            "en": "Wrong. NSX creates TEPs automatically from the TNP; a manually added vmk does not become a TEP."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "După un import brownfield în VCF 9, hosturile apar doar în transport zone VLAN, fără TEP-uri. Ce e adevărat?",
+        "en": "After a brownfield import into VCF 9, hosts show only in the VLAN transport zone, without TEPs. What is true?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "E comportament prin design; editezi TNP-ul ca să adaugi overlay-ul",
+            "en": "It is by design; you edit the TNP to add the overlay"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. KB 444225 descrie situația ca fiind prin design și cere editarea TNP-ului din NSX Manager.",
+            "en": "Correct. KB 444225 describes it as by design and asks you to edit the TNP from NSX Manager."
+          }
+        },
+        {
+          "text": {
+            "ro": "Importul a eșuat și trebuie refăcut",
+            "en": "The import failed and must be redone"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Importul e complet; overlay-ul se adaugă ulterior.",
+            "en": "Wrong. The import is complete; overlay is added afterwards."
+          }
+        },
+        {
+          "text": {
+            "ro": "Trebuie reinstalat ESX pe hosturi",
+            "en": "ESX must be reinstalled on the hosts"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Nu e nevoie de reinstalare; problema se rezolvă din configurația NSX.",
+            "en": "Wrong. No reinstall is needed; it is solved from the NSX configuration."
+          }
+        },
+        {
+          "text": {
+            "ro": "Hosturile trebuie trecute pe N-VDS",
+            "en": "The hosts must be moved to N-VDS"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. N-VDS pe ESX nu mai există; hosturile folosesc VDS.",
+            "en": "Wrong. N-VDS on ESX no longer exists; hosts use VDS."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "Ce condiție trebuie îndeplinită înainte să aplici un Transport Node Profile?",
+        "en": "Which condition must be met before you apply a Transport Node Profile?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Hosturile sunt standalone, în afara oricărui cluster",
+            "en": "The hosts are standalone, outside any cluster"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. TNP-ul se aplică pe un cluster vCenter și nu pregătește hosturi standalone.",
+            "en": "Wrong. A TNP is applied to a vCenter cluster and does not prepare standalone hosts."
+          }
+        },
+        {
+          "text": {
+            "ro": "Hosturile au N-VDS configurat",
+            "en": "The hosts have N-VDS configured"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Cerința e un VDS 7.0 sau mai nou.",
+            "en": "Wrong. The requirement is a VDS 7.0 or later."
+          }
+        },
+        {
+          "text": {
+            "ro": "Underlay-ul are MTU 1500",
+            "en": "The underlay has MTU 1500"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. 1500 e prea mic pentru GENEVE; minimul e 1600.",
+            "en": "Wrong. 1500 is too small for GENEVE; the minimum is 1600."
+          }
+        },
+        {
+          "text": {
+            "ro": "Există un IP pool pentru TEP-uri sau un server DHCP",
+            "en": "There is an IP pool for the TEPs or a DHCP server"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. TEP-urile au nevoie de adrese, deci înainte trebuie să existe un IP pool sau DHCP.",
+            "en": "Correct. TEPs need addresses, so an IP pool or DHCP must exist first."
+          }
+        }
+      ]
+    }
+  ]
+}

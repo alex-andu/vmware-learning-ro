@@ -1,0 +1,269 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Vrei să adaugi un fișier OVA (Open Virtual Appliance) nou, astfel încât să ajungă și în biblioteca abonată dintr-un alt vCenter. Unde îl imporți?",
+        "en": "You want to add a new OVA (Open Virtual Appliance) file so that it also reaches the subscribed library in another vCenter. Where do you import it?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Direct în biblioteca abonată",
+            "en": "Directly into the subscribed library"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. O bibliotecă abonată nu acceptă importuri; ea doar se sincronizează.",
+            "en": "Wrong. A subscribed library accepts no imports; it only synchronizes."
+          }
+        },
+        {
+          "text": {
+            "ro": "În inventarul VMs and Templates al vCenter-ului abonat",
+            "en": "Into the VMs and Templates inventory of the subscriber vCenter"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Inventarul abonatului nu e sursa bibliotecii publicate.",
+            "en": "Wrong. The subscriber's inventory is not the source of the published library."
+          }
+        },
+        {
+          "text": {
+            "ro": "În ambele biblioteci, separat",
+            "en": "Into both libraries, separately"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. În biblioteca abonată nu poți importa.",
+            "en": "Wrong. You cannot import into the subscribed library."
+          }
+        },
+        {
+          "text": {
+            "ro": "În biblioteca locală publicată; abonatul îl aduce apoi prin sincronizare",
+            "en": "Into the published local library; the subscriber then brings it in by synchronizing"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Importul se face în biblioteca locală, iar OVF-urile ajung la abonat prin sincronizare (documentația vSphere 8).",
+            "en": "Correct. You import into the local library, and OVFs reach the subscriber through synchronization (vSphere 8 docs)."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Ai făcut check-out pe un VM template. Un coleg vrea să facă deploy din același template chiar acum. Ce se întâmplă?",
+        "en": "You checked out a VM template. A colleague wants to deploy from the same template right now. What happens?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Deploy-ul merge, din ultima versiune făcută check-in",
+            "en": "The deploy works, from the latest checked-in version"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. În timpul check-out-ului, ceilalți pot face deploy din ultima versiune (documentația vSphere 8).",
+            "en": "Correct. During check-out, others can deploy from the latest version (vSphere 8 docs)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Deploy-ul e blocat până faci check-in",
+            "en": "The deploy is blocked until you check in"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Doar un al doilea check-out e blocat, nu deploy-ul.",
+            "en": "Wrong. Only a second check-out is blocked, not deploying."
+          }
+        },
+        {
+          "text": {
+            "ro": "Deploy-ul include modificările tale nesalvate",
+            "en": "The deploy includes your unsaved changes"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Modificările intră doar după check-in, ca versiune nouă.",
+            "en": "Wrong. Changes go in only after check-in, as a new version."
+          }
+        },
+        {
+          "text": {
+            "ro": "Deploy-ul merge doar dacă VM-ul scos e oprit",
+            "en": "The deploy works only if the checked-out VM is powered off"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Starea VM-ului scos contează doar la check-in.",
+            "en": "Wrong. The checked-out VM's power state matters only at check-in."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Două vCenter-e în domenii SSO (Single Sign-On) separate, fără ELM (Enhanced Linked Mode) sau Hybrid Linked Mode. Biblioteca abonată primește OVF-urile, dar nu și VM templates. De ce?",
+        "en": "Two vCenters in separate SSO (Single Sign-On) domains, without ELM (Enhanced Linked Mode) or Hybrid Linked Mode. The subscribed library receives the OVFs, but not the VM templates. Why?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "VM templates nu se pot pune deloc în content library",
+            "en": "VM templates cannot be put in a content library at all"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Se pot pune, de la 7.0 U1.",
+            "en": "Wrong. They can, since 7.0 U1."
+          }
+        },
+        {
+          "text": {
+            "ro": "Abonarea a fost creată cu Download only when needed",
+            "en": "The subscription was created with Download only when needed"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Opțiunea asta privește descărcarea conținutului, nu distribuirea VM templates.",
+            "en": "Wrong. That option is about downloading content, not about distributing VM templates."
+          }
+        },
+        {
+          "text": {
+            "ro": "Distribuirea VM templates cere ELM sau Hybrid Linked Mode între vCenter-e",
+            "en": "Distributing VM templates needs ELM or Hybrid Linked Mode between the vCenters"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Documentația și KB 414494 cer încredere între vCenter-e pentru VM templates.",
+            "en": "Correct. The documentation and KB 414494 require trust between the vCenters for VM templates."
+          }
+        },
+        {
+          "text": {
+            "ro": "Biblioteca stă pe un datastore VMFS (Virtual Machine File System)",
+            "en": "The library is on a VMFS (Virtual Machine File System) datastore"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. VMFS e permis; restricția privește NFS și SMB.",
+            "en": "Wrong. VMFS is allowed; the restriction concerns NFS and SMB."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "Vrei să exporți pe laptop un template din content library ca să-l duci într-un lab izolat. Ce tip de articol poți exporta?",
+        "en": "You want to export a template from a content library to your laptop to take it to an isolated lab. Which item type can you export?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Doar VM Template",
+            "en": "Only VM Template"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. VM templates nu se pot exporta, actualiza sau clona ca articol.",
+            "en": "Wrong. VM templates cannot be exported, updated or cloned as items."
+          }
+        },
+        {
+          "text": {
+            "ro": "OVF Template",
+            "en": "OVF Template"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Export, update și clone item merg doar pentru OVF templates (documentația vSphere 8).",
+            "en": "Correct. Export, update and clone item work only for OVF templates (vSphere 8 docs)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Niciun template, doar fișierele din Other Types",
+            "en": "No template, only files under Other Types"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. OVF templates se pot exporta.",
+            "en": "Wrong. OVF templates can be exported."
+          }
+        },
+        {
+          "text": {
+            "ro": "Orice articol dintr-o bibliotecă abonată",
+            "en": "Any item in a subscribed library"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Tipul de bibliotecă nu face exportabil un VM template.",
+            "en": "Wrong. The library type does not make a VM template exportable."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "Ai reinstalat vCenter și ai atașat baza de date veche. Deploy-urile cu o customization specification pentru Windows eșuează la parola de administrator. De ce?",
+        "en": "You reinstalled vCenter and attached the old database. Deploys with a Windows customization specification fail on the administrator password. Why?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Specificațiile se păstrează pe datastore și s-au pierdut",
+            "en": "Specifications are kept on a datastore and were lost"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Specificațiile stau în baza de date vCenter.",
+            "en": "Wrong. Specifications live in the vCenter database."
+          }
+        },
+        {
+          "text": {
+            "ro": "Windows nu mai suportă Sysprep",
+            "en": "Windows no longer supports Sysprep"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Customization pentru Windows folosește Sysprep.",
+            "en": "Wrong. Windows customization uses Sysprep."
+          }
+        },
+        {
+          "text": {
+            "ro": "VMware Tools trebuie reinstalat în template",
+            "en": "VMware Tools must be reinstalled in the template"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Problema e la parola criptată, nu la VMware Tools.",
+            "en": "Wrong. The issue is the encrypted password, not VMware Tools."
+          }
+        },
+        {
+          "text": {
+            "ro": "Parolele sunt criptate cu un certificat unic pentru vechiul vCenter și trebuie introduse din nou",
+            "en": "Passwords are encrypted with a certificate unique to the old vCenter and must be entered again"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. După reinstalare, parolele criptate devin invalide și le reintroduci (documentația vSphere 8).",
+            "en": "Correct. After a reinstall, the encrypted passwords become invalid and you re-enter them (vSphere 8 docs)."
+          }
+        }
+      ]
+    }
+  ]
+}

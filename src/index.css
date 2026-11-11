@@ -1,0 +1,62 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Light theme tokens */
+:root {
+  --bg: #f4f5f7;
+  --fg: #1d2329;
+  --panel: #ffffff;
+  --sidebar: #ffffff;
+  --header: #1d4f91;
+  --border: #d0d5db;
+  --hover: #e8ecf1;
+  --muted: #56606b;
+  --accent: #0b6dc4;
+  --track: #d9dee4;
+  color-scheme: light;
+}
+
+/* Dark theme (default), inspired by vSphere Client: dark grey, blue accent */
+.dark {
+  --bg: #1b1f23;
+  --fg: #e3e6e9;
+  --panel: #252a30;
+  --sidebar: #21262b;
+  --header: #12161a;
+  --border: #39414a;
+  --hover: #2e353d;
+  --muted: #a3acb6;
+  --accent: #4aa3f0;
+  --track: #39414a;
+  color-scheme: dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+@layer components {
+  .card {
+    @apply rounded-md border border-[var(--border)] bg-[var(--panel)] p-4;
+  }
+  .btn {
+    @apply rounded-md border border-[var(--accent)] bg-[var(--accent)] px-3 py-1.5 text-sm font-medium text-white hover:brightness-110 disabled:opacity-50;
+  }
+  .btn-done {
+    @apply border-emerald-600 bg-emerald-600;
+  }
+  .tag {
+    @apply rounded border border-[var(--border)] px-2 py-0.5;
+  }
+  .glossary-link {
+    @apply underline decoration-dotted underline-offset-2;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}

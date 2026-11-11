@@ -1,0 +1,269 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Ai adăugat Active Directory ca sursă de identitate. Un utilizator nou din AD primește mesaj de eroare la login în vSphere Client. Care e cauza cea mai probabilă?",
+        "en": "You added Active Directory as an identity source. A new AD user gets an error when logging in to the vSphere Client. What is the most likely cause?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Parola lui din AD a expirat",
+            "en": "Their AD password has expired"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: e posibil, dar nu e cauza care decurge din configurarea descrisă.",
+            "en": "Wrong: possible, but not the cause that follows from the setup described."
+          }
+        },
+        {
+          "text": {
+            "ro": "Trebuie repornit serviciul SSO după orice utilizator nou",
+            "en": "The SSO service must restart after any new user"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: utilizatorii noi nu cer repornirea serviciilor.",
+            "en": "Wrong: new users don't require restarting services."
+          }
+        },
+        {
+          "text": {
+            "ro": "Nu are nicio permisiune, deci are No access; îi trebuie cel puțin Read-only",
+            "en": "They have no permission, so they have No access; they need at least Read-only"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect: documentația spune că utilizatorii noi au No access și au nevoie de cel puțin Read-only ca să se autentifice.",
+            "en": "Correct: the docs say new users have No access and need at least Read-only to log in."
+          }
+        },
+        {
+          "text": {
+            "ro": "Utilizatorii din AD nu pot intra niciodată în vCenter",
+            "en": "AD users can never log in to vCenter"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: AD prin LDAP/LDAPS e o sursă de identitate suportată.",
+            "en": "Wrong: AD over LDAP/LDAPS is a supported identity source."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Utilizatorul Ana nu are permisiuni proprii. E în grupul A (rol: pornire VM) și în grupul B (rol: snapshot), ambele cu permisiuni pe același folder, cu propagare. Ce poate face pe un VM din folder?",
+        "en": "User Ana has no permissions of her own. She is in group A (role: power on VM) and group B (role: snapshot), both with permissions on the same folder, with propagation. What can she do on a VM in the folder?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Doar ce permite rolul mai restrictiv",
+            "en": "Only what the more restrictive role allows"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: vSphere nu alege rolul cel mai restrictiv între grupuri.",
+            "en": "Wrong: vSphere does not pick the most restrictive role between groups."
+          }
+        },
+        {
+          "text": {
+            "ro": "Să pornească VM-ul și să facă snapshot",
+            "en": "Power on the VM and take snapshots"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect: fără permisiune proprie, primește reuniunea privilegiilor rolurilor grupurilor.",
+            "en": "Correct: without her own permission, she gets the union of the group roles' privileges."
+          }
+        },
+        {
+          "text": {
+            "ro": "Nimic, pentru că rolurile se anulează",
+            "en": "Nothing, because the roles cancel out"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: rolurile nu se anulează între ele.",
+            "en": "Wrong: roles don't cancel each other."
+          }
+        },
+        {
+          "text": {
+            "ro": "Doar ce permite grupul adăugat ultimul",
+            "en": "Only what the most recently added group allows"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: ordinea adăugării nu contează.",
+            "en": "Wrong: the order of adding doesn't matter."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Grupul Ops are Administrator pe clusterul Prod, cu propagare. Mihai, membru Ops, primește direct pe VM-ul DB01 din cluster rolul Read-only. Ce poate face Mihai pe DB01?",
+        "en": "The Ops group has Administrator on the Prod cluster, with propagation. Mihai, an Ops member, is given Read-only directly on the DB01 VM in the cluster. What can Mihai do on DB01?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Totul, pentru că Administrator e mai puternic",
+            "en": "Everything, because Administrator is stronger"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: puterea rolului nu contează; contează unde și cui e pusă permisiunea.",
+            "en": "Wrong: role strength doesn't matter; where and to whom the permission is set does."
+          }
+        },
+        {
+          "text": {
+            "ro": "Reuniunea: Administrator plus Read-only",
+            "en": "The union: Administrator plus Read-only"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: reuniunea se aplică doar între grupuri, când utilizatorul nu are permisiune proprie.",
+            "en": "Wrong: the union applies only between groups, when the user has no permission of their own."
+          }
+        },
+        {
+          "text": {
+            "ro": "Nimic, nici nu vede VM-ul",
+            "en": "Nothing, he can't even see the VM"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: Read-only îi permite să vadă VM-ul.",
+            "en": "Wrong: Read-only lets him see the VM."
+          }
+        },
+        {
+          "text": {
+            "ro": "Doar să vadă VM-ul (Read-only)",
+            "en": "Only view the VM (Read-only)"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect: permisiunea pusă direct pe copil suprascrie ce se propagă de la părinte, iar permisiunea proprie a utilizatorului bate grupul.",
+            "en": "Correct: a permission set directly on the child overrides what propagates from the parent, and the user's own permission beats the group."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "vCenter 8.0 U3 folosește Integrated Windows Authentication și trebuie dus pe vSphere 9.0. Ce faci înainte de upgrade?",
+        "en": "vCenter 8.0 U3 uses Integrated Windows Authentication and must move to vSphere 9.0. What do you do before the upgrade?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Configurezi AD prin LDAPS sau federare, apoi scoți VCSA din domeniul AD",
+            "en": "Configure AD over LDAPS or federation, then remove the VCSA from the AD domain"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect: IWA e eliminat în 9.0; KB 314324 cere noua sursă de identitate și scoaterea appliance-ului din domeniu, altfel pre-check-ul eșuează.",
+            "en": "Correct: IWA is removed in 9.0; KB 314324 requires the new identity source and removing the appliance from the domain, otherwise the pre-check fails."
+          }
+        },
+        {
+          "text": {
+            "ro": "Nimic, IWA se convertește automat la upgrade",
+            "en": "Nothing, IWA converts automatically during the upgrade"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: nu există conversie automată; pre-check-ul eșuează.",
+            "en": "Wrong: there is no automatic conversion; the pre-check fails."
+          }
+        },
+        {
+          "text": {
+            "ro": "Treci pe conturi locale vsphere.local pentru toți utilizatorii",
+            "en": "Move all users to local vsphere.local accounts"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: ar funcționa tehnic, dar pierzi integrarea cu AD; soluția documentată e LDAPS sau federare.",
+            "en": "Wrong: it would technically work, but you lose AD integration; the documented solution is LDAPS or federation."
+          }
+        },
+        {
+          "text": {
+            "ro": "Activezi Enhanced Linked Mode",
+            "en": "Enable Enhanced Linked Mode"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: ELM nu are legătură cu sursa de identitate IWA.",
+            "en": "Wrong: ELM has nothing to do with the IWA identity source."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "Dai unui grup rolul Virtual machine user pe folderul Web, fără să bifezi „Propagate to children”. Ce primesc membrii grupului?",
+        "en": "You give a group the Virtual machine user role on the Web folder, without ticking \"Propagate to children\". What do the group members get?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Rolul pe toate VM-urile din folder",
+            "en": "The role on every VM in the folder"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: fără propagare, VM-urile din folder nu moștenesc permisiunea.",
+            "en": "Wrong: without propagation, the VMs in the folder don't inherit the permission."
+          }
+        },
+        {
+          "text": {
+            "ro": "Rolul pe folder și pe tot datacenter-ul",
+            "en": "The role on the folder and the whole datacenter"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: permisiunile nu urcă spre părinte.",
+            "en": "Wrong: permissions never flow up to the parent."
+          }
+        },
+        {
+          "text": {
+            "ro": "Rolul doar pe obiectul folder, nu și pe VM-urile din el",
+            "en": "The role only on the folder object, not on the VMs in it"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect: propagarea e dezactivată implicit, deci permisiunea rămâne doar pe folder.",
+            "en": "Correct: propagation is off by default, so the permission stays on the folder only."
+          }
+        },
+        {
+          "text": {
+            "ro": "Nimic, permisiunea e respinsă fără propagare",
+            "en": "Nothing, the permission is rejected without propagation"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit: permisiunea e validă, doar că se aplică numai folderului.",
+            "en": "Wrong: the permission is valid, it just applies only to the folder."
+          }
+        }
+      ]
+    }
+  ]
+}

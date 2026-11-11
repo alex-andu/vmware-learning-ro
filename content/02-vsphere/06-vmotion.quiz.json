@@ -1,0 +1,269 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Hostul are vMotion pe o placă de 10 GbE. Câte vMotion pot rula simultan pe rețeaua acestui host (ESXi 8.0)?",
+        "en": "The host has vMotion on a 10 GbE adapter. How many vMotions can run at once on this host's network (ESXi 8.0)?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "4",
+            "en": "4"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. 4 e limita pentru o rețea de 1 GbE.",
+            "en": "Wrong. 4 is the limit for a 1 GbE network."
+          }
+        },
+        {
+          "text": {
+            "ro": "2",
+            "en": "2"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. 2 e limita pentru Storage vMotion simultane pe un host.",
+            "en": "Wrong. 2 is the limit for concurrent Storage vMotions on a host."
+          }
+        },
+        {
+          "text": {
+            "ro": "128",
+            "en": "128"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. 128 e costul maxim al unui datastore, nu numărul de vMotion pe rețea.",
+            "en": "Wrong. 128 is a datastore's max cost, not the number of vMotions on the network."
+          }
+        },
+        {
+          "text": {
+            "ro": "8",
+            "en": "8"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. La 10 GbE costul maxim de rețea e 8, iar un vMotion costă 1 (documentația vSphere 8).",
+            "en": "Correct. On 10 GbE the network max cost is 8, and a vMotion costs 1 (vSphere 8 docs)."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Ai ridicat modul EVC (Enhanced vMotion Compatibility) al clusterului. Un VM a fost repornit din sistemul de operare, dar tot nu vede funcțiile noi de CPU (Central Processing Unit). De ce?",
+        "en": "You raised the cluster's EVC (Enhanced vMotion Compatibility) mode. A VM was restarted from the guest OS but still does not see the new CPU (Central Processing Unit) features. Why?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Modul EVC nu se poate ridica cu VM-uri pornite",
+            "en": "The EVC mode cannot be raised with VMs powered on"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Ridicarea e permisă cu VM-urile pornite; doar coborârea cere oprirea lor.",
+            "en": "Wrong. Raising is allowed with VMs powered on; only lowering requires powering them off."
+          }
+        },
+        {
+          "text": {
+            "ro": "VM-ul are nevoie de un power cycle complet, nu de un reboot din sistemul de operare",
+            "en": "The VM needs a full power cycle, not a reboot from the guest OS"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Funcțiile noi apar abia după un power cycle complet al VM-ului (documentația vSphere 8).",
+            "en": "Correct. The new features appear only after a full power cycle of the VM (vSphere 8 docs)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Trebuie făcut întâi un vMotion pe alt host",
+            "en": "A vMotion to another host must be done first"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. vMotion nu schimbă setul de funcții CPU al unui VM pornit.",
+            "en": "Wrong. vMotion does not change the CPU feature set of a running VM."
+          }
+        },
+        {
+          "text": {
+            "ro": "Hostul trebuie scos din cluster și adăugat din nou",
+            "en": "The host must be removed from the cluster and added again"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Nu e nevoie; problema ține de VM, nu de host.",
+            "en": "Wrong. Not needed; the issue is on the VM, not the host."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Un VM necriptat are encrypted vMotion setat pe Required. Hostul destinație nu suportă encrypted vMotion. Ce se întâmplă?",
+        "en": "An unencrypted VM has encrypted vMotion set to Required. The destination host does not support encrypted vMotion. What happens?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Migrarea se face necriptat, cu un avertisment",
+            "en": "The migration runs unencrypted, with a warning"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Așa ar fi la Opportunistic, nu la Required.",
+            "en": "Wrong. That would be Opportunistic, not Required."
+          }
+        },
+        {
+          "text": {
+            "ro": "VM-ul este criptat automat înainte de migrare",
+            "en": "The VM is encrypted automatically before migrating"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Modul de vMotion nu criptează VM-ul; criptarea VM-ului e o setare separată.",
+            "en": "Wrong. The vMotion mode does not encrypt the VM; VM encryption is a separate setting."
+          }
+        },
+        {
+          "text": {
+            "ro": "Migrarea este blocată",
+            "en": "The migration is blocked"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Required permite doar encrypted vMotion; dacă un host nu îl suportă, migrarea nu e permisă (documentația vSphere 8).",
+            "en": "Correct. Required allows only encrypted vMotion; if a host does not support it, the migration is not allowed (vSphere 8 docs)."
+          }
+        },
+        {
+          "text": {
+            "ro": "vCenter alege automat alt host destinație",
+            "en": "vCenter automatically picks another destination host"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Pentru o migrare manuală, vCenter nu schimbă destinația aleasă de tine.",
+            "en": "Wrong. For a manual migration, vCenter does not change the destination you chose."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "Trebuie să muți un VM pornit într-un vCenter dintr-un alt domeniu SSO (Single Sign-On), fără Enhanced Linked Mode. Ce folosești?",
+        "en": "You must move a powered-on VM into a vCenter in another SSO (Single Sign-On) domain, without Enhanced Linked Mode. What do you use?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Advanced Cross vCenter vMotion, prin Import VMs sau Export VMs",
+            "en": "Advanced Cross vCenter vMotion, through Import VMs or Export VMs"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. De la vCenter 7.0 U1c, Advanced Cross vCenter vMotion lucrează fără ELM și între domenii SSO diferite (documentația vSphere 8).",
+            "en": "Correct. From vCenter 7.0 U1c, Advanced Cross vCenter vMotion works without ELM and across different SSO domains (vSphere 8 docs)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Storage vMotion",
+            "en": "Storage vMotion"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Storage vMotion schimbă doar datastore-ul, pe același host.",
+            "en": "Wrong. Storage vMotion only changes the datastore, on the same host."
+          }
+        },
+        {
+          "text": {
+            "ro": "Un vMotion obișnuit în același cluster",
+            "en": "A regular vMotion within the same cluster"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Ținta e în alt vCenter, deci nu e în același cluster.",
+            "en": "Wrong. The target is in another vCenter, so it is not in the same cluster."
+          }
+        },
+        {
+          "text": {
+            "ro": "Per-VM EVC",
+            "en": "Per-VM EVC"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Per-VM EVC rezolvă compatibilitatea CPU, nu mutarea între domenii SSO.",
+            "en": "Wrong. Per-VM EVC solves CPU compatibility, not moving between SSO domains."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "Un VM pornit are un RDM (Raw Device Mapping) în modul fizic. Ce poți face cu Storage vMotion?",
+        "en": "A powered-on VM has a physical-mode RDM (Raw Device Mapping). What can you do with Storage vMotion?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Să convertești RDM-ul într-un disc thin",
+            "en": "Convert the RDM into a thin disk"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Conversia e posibilă doar la RDM în modul virtual; la cel fizic, datele trec în VMDK numai prin cold migration.",
+            "en": "Wrong. Conversion is possible only for virtual-mode RDMs; for physical ones, data moves to a VMDK only through cold migration."
+          }
+        },
+        {
+          "text": {
+            "ro": "Să muți și LUN-ul (Logical Unit Number) pe alt datastore",
+            "en": "Move the LUN (Logical Unit Number) itself to another datastore"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. LUN-ul brut nu se mută; se poate muta doar fișierul de mapare.",
+            "en": "Wrong. The raw LUN does not move; only the mapping file can be moved."
+          }
+        },
+        {
+          "text": {
+            "ro": "Nimic, Storage vMotion nu acceptă RDM",
+            "en": "Nothing, Storage vMotion does not accept RDMs"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Storage vMotion acceptă discuri persistente sau RDM.",
+            "en": "Wrong. Storage vMotion accepts persistent disks or RDMs."
+          }
+        },
+        {
+          "text": {
+            "ro": "Să muți doar fișierul de mapare",
+            "en": "Move only the mapping file"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. La RDM în modul fizic, Storage vMotion mută doar fișierul de mapare (documentația vSphere 8, KB 337539).",
+            "en": "Correct. For a physical-mode RDM, Storage vMotion moves only the mapping file (vSphere 8 docs, KB 337539)."
+          }
+        }
+      ]
+    }
+  ]
+}
