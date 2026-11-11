@@ -1139,5 +1139,69 @@
     "term": "VCF Operations",
     "ro": "Platforma de operare și monitorizare din VCF/VVF 9, prin care se administrează și licențele.",
     "en": "The VCF/VVF 9 operations and monitoring platform, also used to manage licenses."
+  },
+  {
+    "id": "pvlan",
+    "term": "PVLAN",
+    "abbr": "PVLAN",
+    "expansion": "Private VLAN",
+    "ro": "Împarte un VLAN principal în VLAN-uri secundare (isolated, community) ca porturile din același subnet să nu comunice liber între ele. Se configurează pe VDS.",
+    "en": "Splits a primary VLAN into secondary VLANs (isolated, community) so ports in the same subnet cannot talk freely to each other. Configured on a VDS."
+  },
+  {
+    "id": "lag",
+    "term": "LAG",
+    "abbr": "LAG",
+    "expansion": "Link Aggregation Group",
+    "ro": "Grup de plăci de rețea fizice agregate dinamic prin LACP într-o singură legătură logică, pe un VDS.",
+    "en": "A group of physical NICs aggregated dynamically through LACP into one logical link, on a VDS."
+  },
+  {
+    "id": "lbt",
+    "term": "LBT",
+    "abbr": "LBT",
+    "expansion": "Load-Based Teaming",
+    "ro": "Politica „Route Based on Physical NIC Load”: mută portul cel mai încărcat pe alt uplink când un uplink trece de 75% în 30 de secunde. Doar pe VDS.",
+    "en": "The \"Route Based on Physical NIC Load\" policy: moves the busiest port to another uplink when an uplink exceeds 75% over 30 seconds. VDS only."
+  },
+  {
+    "id": "ipfix",
+    "term": "IPFIX",
+    "abbr": "IPFIX",
+    "expansion": "IP Flow Information Export",
+    "ro": "Standardul de export al fluxurilor de trafic (NetFlow versiunea 10) către un colector extern.",
+    "en": "The standard for exporting traffic flow records (NetFlow version 10) to an external collector."
+  },
+  {
+    "id": "dpu",
+    "term": "DPU",
+    "abbr": "DPU",
+    "expansion": "Data Processing Unit",
+    "ro": "Placă de rețea cu procesor propriu, care poate prelua (offload) funcții ale switch-ului virtual.",
+    "en": "A network card with its own processor that can offload virtual switch functions."
+  },
+  {
+    "id": "ephemeral-binding",
+    "term": "Ephemeral port binding",
+    "aliases": [
+      "ephemeral"
+    ],
+    "ro": "Mod de alocare a porturilor pe VDS în care hostul creează portul la pornirea VM-ului, fără vCenter. Folosit pentru recuperare, de exemplu pentru VM-ul vCenter.",
+    "en": "A VDS port allocation mode where the host creates the port when the VM powers on, without vCenter. Used for recovery, for example for the vCenter VM."
+  },
+  {
+    "id": "health-check",
+    "term": "VDS health check",
+    "aliases": [
+      "health check"
+    ],
+    "ro": "Verificare periodică (implicit la 1 minut) a potrivirii VLAN, MTU și teaming dintre VDS și switch-ul fizic.",
+    "en": "A periodic check (every 1 minute by default) that VLAN, MTU and teaming match between the VDS and the physical switch."
+  },
+  {
+    "id": "port-mirroring",
+    "term": "Port mirroring",
+    "ro": "Copierea traficului unor porturi spre alt port sau spre un agent la distanță, pentru analiză. Se configurează pe VDS.",
+    "en": "Copying traffic from some ports to another port or a remote agent, for analysis. Configured on a VDS."
   }
 ]

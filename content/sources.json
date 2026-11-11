@@ -29,7 +29,8 @@
       "01-fundamente/08-stocare-esxi",
       "02-vsphere/01-vcenter",
       "02-vsphere/02-identitate-rbac",
-      "02-vsphere/03-licente-certificate"
+      "02-vsphere/03-licente-certificate",
+      "02-vsphere/04-vds"
     ]
   },
   {
@@ -550,7 +551,8 @@
       "01-fundamente/08-stocare-esxi",
       "02-vsphere/01-vcenter",
       "02-vsphere/02-identitate-rbac",
-      "02-vsphere/03-licente-certificate"
+      "02-vsphere/03-licente-certificate",
+      "02-vsphere/04-vds"
     ]
   },
   {
@@ -1274,7 +1276,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "01-fundamente/07-retea-esxi"
+      "01-fundamente/07-retea-esxi",
+      "02-vsphere/04-vds"
     ]
   },
   {
@@ -1296,7 +1299,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "01-fundamente/07-retea-esxi"
+      "01-fundamente/07-retea-esxi",
+      "02-vsphere/04-vds"
     ]
   },
   {
@@ -1329,7 +1333,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "01-fundamente/07-retea-esxi"
+      "01-fundamente/07-retea-esxi",
+      "02-vsphere/04-vds"
     ]
   },
   {
@@ -1850,6 +1855,226 @@
     "read": true,
     "usedBy": [
       "02-vsphere/03-licente-certificate"
+    ]
+  },
+  {
+    "id": "S165",
+    "title": "vSphere 8 Networking: vSphere Distributed Switch architecture (management plane, host proxy switch, uplink port groups)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-networking/GUID-375B45C7-684C-4C51-BA3C-70E48DFABF04.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/04-vds"
+    ]
+  },
+  {
+    "id": "S166",
+    "title": "vSphere 8 Networking: Create a vSphere Distributed Switch (versions, network offloads, uplinks, NIOC)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-networking/GUID-D21B3241-0AC9-437C-80B1-0C8043CC1D7D.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/04-vds"
+    ]
+  },
+  {
+    "id": "S167",
+    "title": "KB 416520: VDS improvements and features per version",
+    "url": "https://knowledge.broadcom.com/external/article/416520/vds-improvements-and-features-per-versio.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/04-vds"
+    ]
+  },
+  {
+    "id": "S168",
+    "title": "vSphere 8 Networking: Upgrade a vSphere Distributed Switch to a later version",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-networking/GUID-330A0689-574A-4589-9462-14CA03F3F2F4.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/04-vds"
+    ]
+  },
+  {
+    "id": "S169",
+    "title": "KB 413452: Upgrade vSphere Distributed Switch prerequisites, validation checks and process",
+    "url": "https://knowledge.broadcom.com/external/article/413452/upgrade-vsphere-distributed-switch-prere.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/04-vds"
+    ]
+  },
+  {
+    "id": "S170",
+    "title": "KB 324492: Static (non-ephemeral) or ephemeral port binding on a vSphere Distributed Switch",
+    "url": "https://knowledge.broadcom.com/external/article/324492/static-nonephemeral-or-ephemeral-port-bi.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/04-vds"
+    ]
+  },
+  {
+    "id": "S171",
+    "title": "KB 426300: Moving vCenter Server to an ephemeral port group on a vSphere Distributed Switch",
+    "url": "https://knowledge.broadcom.com/external/article/426300/moving-vcenter-server-to-an-ephemeral-po.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/04-vds"
+    ]
+  },
+  {
+    "id": "S172",
+    "title": "KB 318719: vCenter network connectivity lost - recover vCenter network when connected to a distributed switch",
+    "url": "https://knowledge.broadcom.com/external/article/318719/vcenter-network-connectivity-lost-recov.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/04-vds"
+    ]
+  },
+  {
+    "id": "S173",
+    "title": "vSphere 8 Networking: Load balancing algorithms (Route Based on Physical NIC Load)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-networking/GUID-959E1CFE-2AE4-4A67-B4D4-2D2E13765715.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/04-vds"
+    ]
+  },
+  {
+    "id": "S174",
+    "title": "KB 452506: Expected behavior for Load-Based Teaming (LBT) port reassignment",
+    "url": "https://knowledge.broadcom.com/external/article/452506/expected-behavior-for-loadbased-teaming.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/04-vds"
+    ]
+  },
+  {
+    "id": "S175",
+    "title": "vSphere 8 Networking: LACP support on a vSphere Distributed Switch",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-networking/GUID-0D1EF5B4-7581-480B-B99D-5714B42CD7A9.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/04-vds"
+    ]
+  },
+  {
+    "id": "S176",
+    "title": "vSphere 8 Networking: Allocate bandwidth for system traffic (Network I/O Control v3)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-networking/GUID-26AAAFA4-BFD3-4D72-AEC8-55F4CF439DC0.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/04-vds"
+    ]
+  },
+  {
+    "id": "S177",
+    "title": "vSphere 8 Networking: Bandwidth allocation for virtual machine traffic (Network I/O Control v3, network resource pools)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-networking/GUID-29A96AB2-AEBF-420E-BDD6-48921CD687FF.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/04-vds"
+    ]
+  },
+  {
+    "id": "S178",
+    "title": "vSphere 8 Networking: Private VLANs on a vSphere Distributed Switch",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-networking/GUID-A9287D46-FDE0-4D64-9348-3905FEAC7FAE.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/04-vds"
+    ]
+  },
+  {
+    "id": "S179",
+    "title": "vSphere 8 Networking: Port mirroring session types",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-networking/GUID-68B5DD45-DD3F-4E9B-A6CD-BE97026A846A.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/04-vds"
+    ]
+  },
+  {
+    "id": "S180",
+    "title": "KB 433680: What is NetFlow/IPFIX and how to enable it on a vSphere distributed switch",
+    "url": "https://knowledge.broadcom.com/external/article/433680/what-is-netflowipfix-and-how-can-i-enabl.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/04-vds"
+    ]
+  },
+  {
+    "id": "S181",
+    "title": "vSphere 8 Networking: vSphere Distributed Switch health check",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-networking/GUID-4A6C1E1C-8577-4AE6-8459-EEB942779A82.html",
+    "type": "official",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/04-vds"
+    ]
+  },
+  {
+    "id": "S182",
+    "title": "KB 315270: vSphere Distributed Switch health check reports VLANs not supported with IP hash",
+    "url": "https://knowledge.broadcom.com/external/article/315270/vsphere-distributed-switch-health-check.html",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/04-vds"
+    ]
+  },
+  {
+    "id": "S183",
+    "title": "KB 338595: Exporting, importing and restoring Distributed Switch configurations",
+    "url": "https://knowledge.broadcom.com/external/article/338595",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/04-vds"
+    ]
+  },
+  {
+    "id": "S184",
+    "title": "KB 427273: Best practices for migrating ESXi hosts between vSS and vDS in production",
+    "url": "https://knowledge.broadcom.com/external/article/427273",
+    "type": "kb",
+    "accessed": "2026-11-10",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/04-vds"
     ]
   }
 ]

@@ -1,0 +1,269 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "vCenter este oprit pentru o oră. Ce se întâmplă cu VM-urile (VM, Virtual Machine) conectate la un port group static de pe VDS (vSphere Distributed Switch)?",
+        "en": "vCenter is powered off for an hour. What happens to VMs (VM, Virtual Machine) connected to a static port group on a VDS (vSphere Distributed Switch)?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Toate VM-urile pierd rețeaua până revine vCenter",
+            "en": "All VMs lose the network until vCenter is back"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Data plane-ul e pe hosturi; traficul nu e afectat de căderea vCenter (KB 324492).",
+            "en": "Wrong. The data plane is on the hosts; traffic is not affected by a vCenter outage (KB 324492)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Hosturile trec automat VM-urile pe un VSS (vSphere Standard Switch)",
+            "en": "Hosts automatically move VMs to a VSS (vSphere Standard Switch)"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Nu există o mutare automată; VSS-ul temporar e un pas manual de recuperare (KB 318719).",
+            "en": "Wrong. There is no automatic move; a temporary VSS is a manual recovery step (KB 318719)."
+          }
+        },
+        {
+          "text": {
+            "ro": "VM-urile pornite au rețea, dar nu poți porni sau reconfigura VM-uri pe acel port group",
+            "en": "Running VMs keep the network, but you cannot power on or reconfigure VMs on that port group"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. La binding static doar vCenter poate aloca porturi, deci operațiile noi așteaptă vCenter; traficul existent merge (KB 324492).",
+            "en": "Correct. With static binding only vCenter can allocate ports, so new operations wait for vCenter; existing traffic flows (KB 324492)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Port group-ul trece singur pe binding ephemeral",
+            "en": "The port group switches itself to ephemeral binding"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Tipul de binding al unui port group static nu se poate schimba deloc; creezi un port group nou (KB 324492).",
+            "en": "Wrong. A static port group's binding type cannot be changed at all; you create a new port group (KB 324492)."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Hosturile au plăci de 10 GbE. Care este suma maximă a rezervărilor NIOC (Network I/O Control) v3 pentru system traffic pe o placă?",
+        "en": "The hosts have 10 GbE adapters. What is the maximum total of NIOC (Network I/O Control) v3 reservations for system traffic on one adapter?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "7,5 Gbps",
+            "en": "7.5 Gbps"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Suma rezervărilor nu poate trece de 75% din capacitatea celei mai lente plăci: 75% din 10 Gbps = 7,5 Gbps (documentația vSphere 8 Networking).",
+            "en": "Correct. Total reservations cannot exceed 75% of the slowest adapter's capacity: 75% of 10 Gbps = 7.5 Gbps (vSphere 8 Networking docs)."
+          }
+        },
+        {
+          "text": {
+            "ro": "10 Gbps",
+            "en": "10 Gbps"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Nu poți rezerva toată placa; limita e 75%.",
+            "en": "Wrong. You cannot reserve the whole adapter; the cap is 75%."
+          }
+        },
+        {
+          "text": {
+            "ro": "5 Gbps",
+            "en": "5 Gbps"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. 5 Gbps ar fi 50%; limita documentată e 75%.",
+            "en": "Wrong. 5 Gbps would be 50%; the documented cap is 75%."
+          }
+        },
+        {
+          "text": {
+            "ro": "Nu există limită, doar shares",
+            "en": "There is no cap, only shares"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Shares stabilesc prioritatea relativă, dar rezervările au limita de 75%.",
+            "en": "Wrong. Shares set relative priority, but reservations have the 75% cap."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Vrei să copiezi traficul unui VM de pe hostul A spre un analizor aflat în alt subnet, printr-un tunel IP (Internet Protocol). Ce tip de sesiune de port mirroring alegi?",
+        "en": "You want to copy a VM's traffic on host A to an analyzer in another subnet, through an IP (Internet Protocol) tunnel. Which port mirroring session type do you choose?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Distributed Port Mirroring",
+            "en": "Distributed Port Mirroring"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Acest tip funcționează doar între porturi de pe același host.",
+            "en": "Wrong. This type only works between ports on the same host."
+          }
+        },
+        {
+          "text": {
+            "ro": "Remote Mirroring Destination",
+            "en": "Remote Mirroring Destination"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Acesta aduce trafic dintr-un set de VLAN-uri (VLAN, Virtual Local Area Network) spre porturi distribuite, adică direcția inversă.",
+            "en": "Wrong. This brings traffic from a set of VLANs (VLAN, Virtual Local Area Network) to distributed ports, the opposite direction."
+          }
+        },
+        {
+          "text": {
+            "ro": "NetFlow cu IPFIX (IP Flow Information Export)",
+            "en": "NetFlow with IPFIX (IP Flow Information Export)"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. NetFlow exportă statistici despre fluxuri, nu copii ale pachetelor pentru analiză completă.",
+            "en": "Wrong. NetFlow exports flow statistics, not copies of packets for full analysis."
+          }
+        },
+        {
+          "text": {
+            "ro": "Encapsulated Remote Mirroring (L3) Source",
+            "en": "Encapsulated Remote Mirroring (L3) Source"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Acest tip trimite traficul porturilor spre IP-ul unui agent la distanță, printr-un tunel IP (documentația vSphere 8 Networking).",
+            "en": "Correct. This type sends the ports' traffic to a remote agent's IP through an IP tunnel (vSphere 8 Networking docs)."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "Ce politică de load balancing mută portul cel mai încărcat pe alt uplink când un uplink trece de 75% și nu cere schimbări pe switch-ul fizic?",
+        "en": "Which load balancing policy moves the busiest port to another uplink when an uplink exceeds 75% and needs no change on the physical switch?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Route Based on IP Hash",
+            "en": "Route Based on IP Hash"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. IP hash cere EtherChannel pe switch-ul fizic și nu ține cont de încărcare.",
+            "en": "Wrong. IP hash requires EtherChannel on the physical switch and ignores load."
+          }
+        },
+        {
+          "text": {
+            "ro": "Route Based on Physical NIC Load (LBT, Load-Based Teaming)",
+            "en": "Route Based on Physical NIC Load (LBT, Load-Based Teaming)"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. LBT verifică uplink-urile la 30 de secunde și mută portul cu cel mai mult trafic peste pragul de 75%; există doar pe VDS (documentația vSphere 8).",
+            "en": "Correct. LBT checks uplinks every 30 seconds and moves the busiest port above the 75% threshold; it exists only on a VDS (vSphere 8 docs)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Use Explicit Failover Order",
+            "en": "Use Explicit Failover Order"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Ordinea explicită folosește mereu primul uplink activ; nu echilibrează după încărcare.",
+            "en": "Wrong. Explicit order always uses the first active uplink; it does not balance by load."
+          }
+        },
+        {
+          "text": {
+            "ro": "LACP (Link Aggregation Control Protocol) cu un LAG",
+            "en": "LACP (Link Aggregation Control Protocol) with a LAG"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. LACP cere port channel configurat pe switch-ul fizic, cu același hashing.",
+            "en": "Wrong. LACP requires a port channel configured on the physical switch, with matching hashing."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "Vrei să faci upgrade unui VDS de la 7.0.3 la 8.0.0. Ce trebuie făcut înainte?",
+        "en": "You want to upgrade a VDS from 7.0.3 to 8.0.0. What must be done first?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Toate VM-urile se mută pe un VSS",
+            "en": "All VMs are moved to a VSS"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Documentația nu cere mutarea VM-urilor; upgrade-ul se face pe loc.",
+            "en": "Wrong. The documentation does not require moving VMs; the upgrade is done in place."
+          }
+        },
+        {
+          "text": {
+            "ro": "Se activează health check pe toate port groups",
+            "en": "Health check is enabled on every port group"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Health check ajută la diagnostic, dar nu e o condiție a upgrade-ului.",
+            "en": "Wrong. Health check helps diagnosis but is not an upgrade prerequisite."
+          }
+        },
+        {
+          "text": {
+            "ro": "vCenter și toate hosturile conectate ajung la versiunea 8.0, iar configurația VDS se exportă",
+            "en": "vCenter and all connected hosts reach version 8.0, and the VDS configuration is exported"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Documentația cere vCenter și hosturi la 8.0 și recomandă exportul configurației ca să o poți reface dacă upgrade-ul eșuează.",
+            "en": "Correct. The documentation requires vCenter and hosts at 8.0 and recommends exporting the configuration so you can rebuild it if the upgrade fails."
+          }
+        },
+        {
+          "text": {
+            "ro": "Se dezactivează NIOC pe VDS",
+            "en": "NIOC is disabled on the VDS"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. NIOC nu trebuie dezactivat; doar offload-ul pe DPU (Data Processing Unit) îl dezactivează.",
+            "en": "Wrong. NIOC does not need to be disabled; only DPU (Data Processing Unit) offload disables it."
+          }
+        }
+      ]
+    }
+  ]
+}
