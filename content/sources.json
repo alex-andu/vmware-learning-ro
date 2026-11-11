@@ -38,7 +38,8 @@
       "02-vsphere/09-content-library",
       "02-vsphere/10-securitate",
       "02-vsphere/11-backup",
-      "02-vsphere/12-monitorizare"
+      "02-vsphere/12-monitorizare",
+      "02-vsphere/13-lifecycle"
     ]
   },
   {
@@ -569,7 +570,8 @@
       "02-vsphere/09-content-library",
       "02-vsphere/10-securitate",
       "02-vsphere/11-backup",
-      "02-vsphere/12-monitorizare"
+      "02-vsphere/12-monitorizare",
+      "02-vsphere/13-lifecycle"
     ]
   },
   {
@@ -2906,7 +2908,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "02-vsphere/08-ha-ft"
+      "02-vsphere/08-ha-ft",
+      "02-vsphere/13-lifecycle"
     ]
   },
   {
@@ -3668,6 +3671,171 @@
     "read": true,
     "usedBy": [
       "02-vsphere/12-monitorizare"
+    ]
+  },
+  {
+    "id": "S326",
+    "title": "vSphere 8 Lifecycle Manager: Elements of an image (base image, vendor add-on, firmware and drivers add-on, components)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-lifecycle-manager/GUID-9A20C2DA-F45F-4C9B-9D17-A89BCB62E6EF.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/13-lifecycle"
+    ]
+  },
+  {
+    "id": "S327",
+    "title": "vSphere 8 Lifecycle Manager: Working with images (edit, validate, export ISO/ZIP/JSON, import)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-lifecycle-manager/GUID-CBCAC2B6-7C30-4103-89C5-C53FEEA59D0A.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/13-lifecycle"
+    ]
+  },
+  {
+    "id": "S328",
+    "title": "vSphere 8 Lifecycle Manager: Firmware updates with images and hardware support managers",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-lifecycle-manager/GUID-34AF5B19-FC80-4915-8358-D5FCC8A8E69E.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/13-lifecycle"
+    ]
+  },
+  {
+    "id": "S329",
+    "title": "KB 379388: Managing ESX host lifecycle operations with vSphere Lifecycle Manager images (baselines removed in 9.0)",
+    "url": "https://knowledge.broadcom.com/external/article/379388",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/13-lifecycle"
+    ]
+  },
+  {
+    "id": "S330",
+    "title": "KB 320562: vLCM image compliance check fails, host not compatible or downgrade of manually added components",
+    "url": "https://knowledge.broadcom.com/external/article/320562",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/13-lifecycle"
+    ]
+  },
+  {
+    "id": "S331",
+    "title": "KB 390098: VCF authenticated downloads configuration update instructions (download tokens)",
+    "url": "https://knowledge.broadcom.com/external/article/390098/vcf-authenticated-downloads-configuratio.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/13-lifecycle"
+    ]
+  },
+  {
+    "id": "S332",
+    "title": "KB 446635: Managing parallel remediation for ESXi hosts in vSphere Lifecycle Manager",
+    "url": "https://knowledge.broadcom.com/external/article/446635/managing-parallel-remediation-for-esxi-h.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/13-lifecycle"
+    ]
+  },
+  {
+    "id": "S333",
+    "title": "vSphere 8 Lifecycle Manager: Remediation options (Quick Boot, health checks, parallel remediation)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-lifecycle-manager/GUID-1F3539F9-37B7-4220-97D6-013B42425F5C.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/13-lifecycle"
+    ]
+  },
+  {
+    "id": "S334",
+    "title": "KB 392913: Updating VMware Tools on clusters or virtual machines using vSphere Lifecycle Manager",
+    "url": "https://knowledge.broadcom.com/external/article/392913/updating-vmware-tools-for-esxi-clusters.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/13-lifecycle"
+    ]
+  },
+  {
+    "id": "S335",
+    "title": "KB 315390: Upgrading a virtual machine to the latest hardware version",
+    "url": "https://knowledge.broadcom.com/external/article/315390/upgrading-a-virtual-machine-to-the-lates.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/13-lifecycle"
+    ]
+  },
+  {
+    "id": "S336",
+    "title": "vSphere 8 Lifecycle Manager: Hardware compatibility check for vSAN clusters that use images",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-lifecycle-manager/GUID-D6DEF92E-7518-4E39-A5DB-AFC26F3A84C6.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/13-lifecycle"
+    ]
+  },
+  {
+    "id": "S337",
+    "title": "KB 312153: Understanding ESXi Quick Boot compatibility",
+    "url": "https://knowledge.broadcom.com/external/article/312153/understanding-esxi-quick-boot-compatibil.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/13-lifecycle"
+    ]
+  },
+  {
+    "id": "S338",
+    "title": "vSphere 8 Lifecycle Manager: Hardware compatibility lists (VCG and vSAN HCL)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-lifecycle-manager/GUID-8883AEB4-F740-4B6B-8A44-55AA999B4089.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/13-lifecycle"
+    ]
+  },
+  {
+    "id": "S339",
+    "title": "vSphere 8 Lifecycle Manager: Compliance states for clusters that use images",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-lifecycle-manager/GUID-D4CE90CD-A607-4F35-80A9-47FDA76E0881.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/13-lifecycle"
+    ]
+  },
+  {
+    "id": "S340",
+    "title": "KB 390634: Update sequence for VCF 9.0 and compatible VMware products",
+    "url": "https://knowledge.broadcom.com/external/article/390634/update-sequence-for-vcf-90-and-compatibl.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/13-lifecycle"
     ]
   }
 ]

@@ -1569,5 +1569,67 @@
     "term": "Symptom (VCF Operations)",
     "ro": "Condiție pe o metrică, proprietate sau eveniment (de exemplu CPU peste 80%); una sau mai multe simptome formează o alert definition.",
     "en": "A condition on a metric, property or event (for example CPU above 80%); one or more symptoms make up an alert definition."
+  },
+  {
+    "id": "vib",
+    "term": "VIB",
+    "abbr": "VIB",
+    "expansion": "vSphere Installation Bundle",
+    "ro": "Pachetul de software instalabil pe ESXi (driver, agent, plugin); componentele unei imagini vLCM sunt formate din VIB-uri.",
+    "en": "The installable software package for ESXi (driver, agent, plugin); the components of a vLCM image are made of VIBs."
+  },
+  {
+    "id": "vum",
+    "term": "VUM",
+    "abbr": "VUM",
+    "expansion": "vSphere Update Manager",
+    "ro": "Vechiul mod de patch-uire prin baselines; în vSphere 9 nu mai poate gestiona hosturi 9.x.",
+    "en": "The older patching method based on baselines; in vSphere 9 it can no longer manage 9.x hosts."
+  },
+  {
+    "id": "hcl",
+    "term": "HCL",
+    "abbr": "HCL",
+    "expansion": "Hardware Compatibility List",
+    "ro": "Lista de hardware certificat; vLCM verifică clusterele vSAN față de vSAN HCL.",
+    "en": "The list of certified hardware; vLCM checks vSAN clusters against the vSAN HCL."
+  },
+  {
+    "id": "vcg",
+    "term": "VCG",
+    "abbr": "VCG",
+    "expansion": "VMware Compatibility Guide",
+    "ro": "Ghidul Broadcom cu serverele și dispozitivele certificate pentru fiecare versiune vSphere.",
+    "en": "The Broadcom guide listing servers and devices certified for each vSphere release."
+  },
+  {
+    "id": "rdu",
+    "term": "RDU",
+    "abbr": "RDU",
+    "expansion": "Reduced Downtime Update",
+    "ro": "Metoda recomandată în vCenter 9.0 pentru upgrade și patch: se pregătește un appliance nou în paralel, apoi se face comutarea.",
+    "en": "The recommended vCenter 9.0 method for upgrades and patches: a new appliance is prepared in parallel, then a switchover happens."
+  },
+  {
+    "id": "vlcm-image",
+    "term": "Image (vLCM)",
+    "aliases": [
+      "imagine vLCM",
+      "cluster image"
+    ],
+    "ro": "Starea dorită a software-ului pe hosturile unui cluster: base image ESXi obligatoriu, plus opțional vendor add-on, firmware and drivers add-on și componente.",
+    "en": "The desired software state of a cluster's hosts: a mandatory ESXi base image, plus optional vendor add-on, firmware and drivers add-on and components."
+  },
+  {
+    "id": "quick-boot",
+    "term": "Quick Boot",
+    "ro": "Repornire a ESXi care sare peste inițializarea firmware-ului și a dispozitivelor, ca upgrade-ul să dureze mai puțin; cere platformă compatibilă.",
+    "en": "An ESXi restart that skips firmware and device initialization so upgrades take less time; it needs a compatible platform."
+  },
+  {
+    "id": "live-patch",
+    "term": "Live Patch",
+    "ro": "Aplicarea unor patch-uri ESXi fără maintenance mode și fără repornirea hostului; în 9.0 acoperă mai multe părți din imagine.",
+    "en": "Applying some ESXi patches without maintenance mode or a host reboot; in 9.0 it covers more of the image."
   }
 ]
