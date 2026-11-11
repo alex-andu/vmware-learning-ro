@@ -1421,5 +1421,61 @@
     ],
     "ro": "Set de setări salvate în vCenter (nume, rețea, domeniu, licență) aplicat sistemului de operare la clonare sau deploy, ca VM-urile noi să nu fie identice.",
     "en": "A set of settings saved in vCenter (name, network, domain, licence) applied to the guest OS at clone or deploy time, so new VMs are not identical."
+  },
+  {
+    "id": "kms",
+    "term": "KMS",
+    "abbr": "KMS",
+    "expansion": "Key Management Server",
+    "ro": "Server extern de chei pe care vCenter îl folosește prin KMIP pentru Standard Key Provider.",
+    "en": "An external key server that vCenter uses through KMIP for the Standard Key Provider."
+  },
+  {
+    "id": "kmip",
+    "term": "KMIP",
+    "abbr": "KMIP",
+    "expansion": "Key Management Interoperability Protocol",
+    "ro": "Protocolul standard prin care vCenter cere chei de la un server de chei.",
+    "en": "The standard protocol vCenter uses to request keys from a key server."
+  },
+  {
+    "id": "tpm",
+    "term": "TPM",
+    "abbr": "TPM",
+    "expansion": "Trusted Platform Module",
+    "ro": "Cip criptografic. Pe host (TPM 2.0) atestă că ESXi a pornit cu software semnat; vTPM e varianta software pentru VM-uri.",
+    "en": "A cryptographic chip. On a host (TPM 2.0) it attests that ESXi booted signed software; vTPM is the software version for VMs."
+  },
+  {
+    "id": "kek",
+    "term": "KEK",
+    "abbr": "KEK",
+    "expansion": "Key Encryption Key",
+    "ro": "Cheia de la key provider care criptează cheile interne (DEK) ale VM-ului.",
+    "en": "The key from the key provider that encrypts the VM's internal keys (DEK)."
+  },
+  {
+    "id": "dek",
+    "term": "DEK",
+    "abbr": "DEK",
+    "expansion": "Data Encryption Key",
+    "ro": "Cheia internă cu care ESXi criptează efectiv fișierele și discurile VM-ului; e păstrată criptată cu KEK.",
+    "en": "The internal key ESXi uses to actually encrypt the VM's files and disks; it is stored encrypted with the KEK."
+  },
+  {
+    "id": "nkp",
+    "term": "NKP",
+    "abbr": "NKP",
+    "expansion": "Native Key Provider",
+    "ro": "Key provider integrat în vCenter (de la 7.0 U2), fără server extern de chei; trebuie salvat (backup) înainte de folosire.",
+    "en": "A key provider built into vCenter (since 7.0 U2), with no external key server; it must be backed up before use."
+  },
+  {
+    "id": "vbs",
+    "term": "VBS",
+    "abbr": "VBS",
+    "expansion": "Virtualization-Based Security",
+    "ro": "Funcție Windows care izolează părți sensibile ale sistemului într-o zonă protejată de hypervisor; în vSphere cere EFI și hardware virtual 14+ (Intel).",
+    "en": "A Windows feature that isolates sensitive parts of the system in a hypervisor-protected area; in vSphere it needs EFI and virtual hardware 14+ (Intel)."
   }
 ]

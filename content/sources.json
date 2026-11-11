@@ -35,7 +35,8 @@
       "02-vsphere/06-vmotion",
       "02-vsphere/07-drs",
       "02-vsphere/08-ha-ft",
-      "02-vsphere/09-content-library"
+      "02-vsphere/09-content-library",
+      "02-vsphere/10-securitate"
     ]
   },
   {
@@ -562,7 +563,8 @@
       "02-vsphere/06-vmotion",
       "02-vsphere/07-drs",
       "02-vsphere/08-ha-ft",
-      "02-vsphere/09-content-library"
+      "02-vsphere/09-content-library",
+      "02-vsphere/10-securitate"
     ]
   },
   {
@@ -2283,7 +2285,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "02-vsphere/06-vmotion"
+      "02-vsphere/06-vmotion",
+      "02-vsphere/10-securitate"
     ]
   },
   {
@@ -2827,7 +2830,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "02-vsphere/08-ha-ft"
+      "02-vsphere/08-ha-ft",
+      "02-vsphere/10-securitate"
     ]
   },
   {
@@ -3103,6 +3107,193 @@
     "read": true,
     "usedBy": [
       "02-vsphere/09-content-library"
+    ]
+  },
+  {
+    "id": "S276",
+    "title": "vSphere 8 Security: Key providers overview (Standard, Trusted, Native)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-security/GUID-9035D542-B76B-4244-966D-2A8D92ABF54C.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/10-securitate"
+    ]
+  },
+  {
+    "id": "S277",
+    "title": "vSphere 8 Security: vSphere Native Key Provider overview",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-security/GUID-54B9FBA2-FDB1-400B-A6AE-81BF3AC9DF97.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/10-securitate"
+    ]
+  },
+  {
+    "id": "S278",
+    "title": "VMware: vSphere Native Key Provider (NKP) questions and answers",
+    "url": "https://www.vmware.com/docs/vsphere-native-key-provider-nkp-questions-answers",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/10-securitate"
+    ]
+  },
+  {
+    "id": "S279",
+    "title": "vSphere 8 Security: Virtual machine encryption components and host encryption mode",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-security/GUID-17568345-E59E-43A8-A811-92F8BE9C7719.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/10-securitate"
+    ]
+  },
+  {
+    "id": "S280",
+    "title": "vSphere 8 Security: Cryptographic operations privileges",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-security/GUID-660CCB35-847F-46B3-81CA-10DDDB9D7AA9.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/10-securitate"
+    ]
+  },
+  {
+    "id": "S281",
+    "title": "VMware vSphere VM Encryption programming guide: How VM encryption protects a datacenter (KEK, DEK, encrypted files)",
+    "url": "https://vdc-download.vmware.com/vmwb-repository/dcr-public/dcde9f41-d477-4b57-8252-d7df7ffaa189/69d96707-3de4-4901-b5ad-30fdb6397d9a/doc/PG_VM_Encryption.14.2.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/10-securitate"
+    ]
+  },
+  {
+    "id": "S282",
+    "title": "vSphere 8 Security: Virtual machine encryption interoperability",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-security/GUID-C0AF1F3A-67B4-41A6-A933-7E52A3603D9D.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/10-securitate"
+    ]
+  },
+  {
+    "id": "S283",
+    "title": "vSphere 8 Security: Virtual machine encryption caveats (locked state, OVF export)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-security/GUID-AE7BECB0-1BBC-4123-AAA9-A07EB8D458DF.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/10-securitate"
+    ]
+  },
+  {
+    "id": "S284",
+    "title": "vSphere 8 Security: Virtual Trusted Platform Module overview",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-security/GUID-6F811A7A-D58B-47B4-84B4-73391D55C268.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/10-securitate"
+    ]
+  },
+  {
+    "id": "S285",
+    "title": "KB 413610: vTPM option missing when adding a new device to VMs in vSphere",
+    "url": "https://knowledge.broadcom.com/external/article/413610/vtpm-option-missing-when-adding-a-new-de.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/10-securitate"
+    ]
+  },
+  {
+    "id": "S286",
+    "title": "KB 377302: Windows 11 or Windows Server VM fails to boot with \"The virtual machine must be encrypted.\"",
+    "url": "https://knowledge.broadcom.com/external/article/377302/windows-11-or-windows-server-virtual-mac.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/10-securitate"
+    ]
+  },
+  {
+    "id": "S287",
+    "title": "vSphere 8 Security: UEFI Secure Boot for virtual machines",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-security/GUID-898217D4-689D-4EB5-866C-888353FE241C.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/10-securitate"
+    ]
+  },
+  {
+    "id": "S288",
+    "title": "KB 377377: Enable or disable UEFI Secure Boot for a virtual machine",
+    "url": "https://knowledge.broadcom.com/external/article/377377/enable-or-disable-uefi-secure-boot-for-a.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/10-securitate"
+    ]
+  },
+  {
+    "id": "S289",
+    "title": "vSphere 8 Security: Virtualization-based security (VBS) best practices and requirements",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-security/GUID-8361F64B-DE1D-4FF1-A9FC-4DDE7056DC23.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/10-securitate"
+    ]
+  },
+  {
+    "id": "S290",
+    "title": "vSphere 8 Security: Securing ESXi hosts with Trusted Platform Module (attestation)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-security/GUID-10F7022C-DBE1-47A2-BD86-3840C6955057.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/10-securitate"
+    ]
+  },
+  {
+    "id": "S291",
+    "title": "KB 369525: \"Host TPM attestation alarm\" in vSphere Client for ESXi hosts",
+    "url": "https://knowledge.broadcom.com/external/article/369525/host-tpm-attestation-alarm-in-vsphere-cl.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/10-securitate"
+    ]
+  },
+  {
+    "id": "S292",
+    "title": "KB 413118: Unable to enable VM encryption, \"License not available to perform the operation\"",
+    "url": "https://knowledge.broadcom.com/external/article/413118",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/10-securitate"
     ]
   }
 ]
