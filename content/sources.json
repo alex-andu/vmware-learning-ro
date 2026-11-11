@@ -68,7 +68,8 @@
       "03-vsan/05-stretched",
       "03-vsan/06-operare",
       "04-nsx/01-sdn-arhitectura",
-      "04-nsx/02-transport"
+      "04-nsx/02-transport",
+      "04-nsx/03-segmente"
     ]
   },
   {
@@ -602,7 +603,8 @@
     "usedBy": [
       "content/modules.json",
       "04-nsx/01-sdn-arhitectura",
-      "04-nsx/02-transport"
+      "04-nsx/02-transport",
+      "04-nsx/03-segmente"
     ]
   },
   {
@@ -4965,7 +4967,8 @@
     "read": true,
     "usedBy": [
       "04-nsx/01-sdn-arhitectura",
-      "04-nsx/02-transport"
+      "04-nsx/02-transport",
+      "04-nsx/03-segmente"
     ]
   },
   {
@@ -5163,7 +5166,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "04-nsx/02-transport"
+      "04-nsx/02-transport",
+      "04-nsx/03-segmente"
     ]
   },
   {
@@ -5196,7 +5200,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "04-nsx/02-transport"
+      "04-nsx/02-transport",
+      "04-nsx/03-segmente"
     ]
   },
   {
@@ -5241,6 +5246,182 @@
     "read": true,
     "usedBy": [
       "04-nsx/02-transport"
+    ]
+  },
+  {
+    "id": "S465",
+    "title": "NSX 4.1 Administration Guide: Add a Segment",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.1/administration/GUID-D018DB03-0C07-4980-887D-AF3B3E93EF63.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/03-segmente"
+    ]
+  },
+  {
+    "id": "S466",
+    "title": "NSX 4.1 Administration Guide: Segments (VLAN-backed and overlay-backed, VNI)",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.1/administration/GUID-316E5027-E588-455C-88AD-A7DA930A4F0B.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/03-segmente"
+    ]
+  },
+  {
+    "id": "S467",
+    "title": "NSX 4.0 Administration Guide: BUM replication modes (Hierarchical Two-Tier and Head)",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.0/administration/GUID-C3BCEE09-B361-41C0-8FA3-46412D08BCF8.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/03-segmente"
+    ]
+  },
+  {
+    "id": "S468",
+    "title": "NSX REST API 9.1.0: VNI Pools (fabric pool management)",
+    "url": "https://developer.broadcom.com/xapis/nsx-t-data-center-rest-api/9.1.0/system_fabric_pool_management_vni_pools.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/03-segmente"
+    ]
+  },
+  {
+    "id": "S469",
+    "title": "NSX 4.1 Administration Guide: Segment Profiles",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.1/administration/GUID-93112326-FE2F-4521-9282-505FF67DDC23.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/03-segmente"
+    ]
+  },
+  {
+    "id": "S470",
+    "title": "KB 441325: NSX Segment Profiles: Editing or modifying system default profiles",
+    "url": "https://knowledge.broadcom.com/external/article/441325/nsx-segment-profiles-editing-or-modifying-system-default-profiles.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/03-segmente"
+    ]
+  },
+  {
+    "id": "S471",
+    "title": "KB 431548: Configuration Guide for \"ARP Binding Limit\" in VMware NSX",
+    "url": "https://knowledge.broadcom.com/external/article/431548/configuration-guide-for-arp-binding-limi.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/03-segmente"
+    ]
+  },
+  {
+    "id": "S472",
+    "title": "NSX 4.0 Administration Guide: Understanding IP Discovery Segment Profile",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.0/administration/GUID-F481E554-F39D-4091-BA19-0D9F585F97F1.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/03-segmente"
+    ]
+  },
+  {
+    "id": "S473",
+    "title": "NSX 4.1 Administration Guide: Understanding MAC Discovery Segment Profile",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.1/administration/GUID-C24D09FC-E213-4920-BD12-60063AC3B08E.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/03-segmente"
+    ]
+  },
+  {
+    "id": "S474",
+    "title": "NSX 4.1 Administration Guide: Create a MAC Discovery Segment Profile",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.1/administration/GUID-8CC828C0-323F-4050-A3A8-7C87987A4204.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/03-segmente"
+    ]
+  },
+  {
+    "id": "S475",
+    "title": "KB 390855: MAC learning not working on NSX segment",
+    "url": "https://knowledge.broadcom.com/external/article/390855/mac-learning-not-working-on-nsx-segment.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/03-segmente"
+    ]
+  },
+  {
+    "id": "S476",
+    "title": "KB 386030: VMs connected to overlay segments have connectivity issues (CDO mode, replication mode)",
+    "url": "https://knowledge.broadcom.com/external/article/386030/vms-connected-to-overlay-segments-have-c.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/03-segmente"
+    ]
+  },
+  {
+    "id": "S477",
+    "title": "KB 320145: NSX-T on VDS",
+    "url": "https://knowledge.broadcom.com/external/article/320145/nsxt-on-vds.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/03-segmente"
+    ]
+  },
+  {
+    "id": "S478",
+    "title": "KB 392325: NSX portgroups are not exported during a vDS backup",
+    "url": "https://knowledge.broadcom.com/external/article/392325/nsx-portgroups-are-not-exported-during-a.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/03-segmente"
+    ]
+  },
+  {
+    "id": "S479",
+    "title": "KB 374217: Newly Created NSX Segments Fail to Show Up in the vCenter Network Inventory",
+    "url": "https://knowledge.broadcom.com/external/article/374217/newly-created-nsx-segments-fail-to-show.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/03-segmente"
+    ]
+  },
+  {
+    "id": "S480",
+    "title": "KB 447371: Segment created in NSX is not working (segment creation steps, VCF 9.0)",
+    "url": "https://knowledge.broadcom.com/external/article/447371/segment-created-in-nsx-is-not-working.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/03-segmente"
     ]
   }
 ]

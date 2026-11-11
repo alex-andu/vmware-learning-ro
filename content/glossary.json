@@ -2062,5 +2062,57 @@
     "term": "Named teaming policy",
     "ro": "Politică de teaming suplimentară, cu nume, pe care o poți atașa unui segment VLAN ca să-i alegi uplink-ul; segmentele fără ea folosesc politica implicită.",
     "en": "An additional, named teaming policy you can attach to a VLAN segment to choose its uplink; segments without one use the default policy."
+  },
+  {
+    "id": "segment",
+    "term": "Segment (NSX)",
+    "ro": "Rețeaua logică de nivel 2 din NSX (fostul logical switch); poate fi overlay (prin tuneluri) sau VLAN (legat de un VLAN fizic).",
+    "en": "The NSX logical layer 2 network (formerly logical switch); it can be overlay (through tunnels) or VLAN (tied to a physical VLAN)."
+  },
+  {
+    "id": "vni",
+    "term": "Virtual Network Identifier",
+    "abbr": "VNI",
+    "expansion": "Virtual Network Identifier",
+    "ro": "Numărul care identifică un segment overlay în antetul GENEVE; se alocă dintr-un VNI pool.",
+    "en": "The number that identifies an overlay segment in the GENEVE header; it is allocated from a VNI pool."
+  },
+  {
+    "id": "bum",
+    "term": "BUM traffic",
+    "abbr": "BUM",
+    "expansion": "Broadcast, Unknown unicast and Multicast",
+    "ro": "Traficul care trebuie trimis la mai mulți destinatari pe un segment: broadcast, unicast cu destinație necunoscută și multicast.",
+    "en": "Traffic that must reach several receivers on a segment: broadcast, unicast with an unknown destination, and multicast."
+  },
+  {
+    "id": "replication-mode",
+    "term": "Replication mode",
+    "ro": "Modul în care NSX copiază traficul BUM între TEP-uri: Hierarchical Two-Tier (implicit, cu replicatori în fiecare subrețea) sau Head (sursa trimite câte o copie fiecărui TEP).",
+    "en": "How NSX copies BUM traffic between TEPs: Hierarchical Two-Tier (default, with replicators in each subnet) or Head (the source sends a copy to every TEP)."
+  },
+  {
+    "id": "segment-profile",
+    "term": "Segment profile",
+    "ro": "Profil cu setări de nivel 2 aplicat unui segment sau port: QoS, IP Discovery, SpoofGuard, Segment Security, MAC Discovery. Profilele implicite nu se editează.",
+    "en": "A profile with layer 2 settings applied to a segment or port: QoS, IP Discovery, SpoofGuard, Segment Security, MAC Discovery. Default profiles cannot be edited."
+  },
+  {
+    "id": "spoofguard",
+    "term": "SpoofGuard",
+    "ro": "Funcția NSX care blochează traficul cu adrese IP sau MAC neautorizate pe un port, pe baza legăturilor IP-MAC cunoscute.",
+    "en": "The NSX feature that blocks traffic with unauthorized IP or MAC addresses on a port, based on known IP-to-MAC bindings."
+  },
+  {
+    "id": "ip-discovery",
+    "term": "IP Discovery",
+    "ro": "Profilul NSX care învață adresele IP și MAC ale VM-urilor (prin ARP/ND snooping, DHCP snooping, VM Tools) și le dă mai departe SpoofGuard-ului și firewall-ului.",
+    "en": "The NSX profile that learns VM IP and MAC addresses (through ARP/ND snooping, DHCP snooping, VM Tools) and feeds them to SpoofGuard and the firewall."
+  },
+  {
+    "id": "nsx-port-group",
+    "term": "NSX distributed port group",
+    "ro": "Felul în care un segment NSX apare în vCenter pe un VDS: un port group cu backing NSX, definit din NSX, nu din vCenter.",
+    "en": "How an NSX segment shows up in vCenter on a VDS: a port group with NSX backing, defined from NSX, not from vCenter."
   }
 ]
