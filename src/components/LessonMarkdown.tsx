@@ -1,11 +1,11 @@
 import { createContext, useContext, useMemo, type ReactNode } from 'react';
 import Markdown, { type Components } from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import remarkDirective from 'remark-directive';
 import { Link } from 'react-router-dom';
 import { glossary, getLab, getQuiz } from '../lib/content';
 import { remarkGlossaryLinks, remarkSections } from '../lib/remark';
 import { Mermaid } from './Mermaid';
+import { remarkPluginsBase, rehypePluginsBase } from './Md';
 import { SectionBox, isSectionType } from './sections';
 import { LabChecklist } from './LabChecklist';
 import { QuizView } from './QuizView';
@@ -88,7 +88,11 @@ export function LessonMarkdown({ lessonKey, body, footer }: { lessonKey: string;
   return (
     <LessonCtx.Provider value={ctx}>
     <div className="prose max-w-none dark:prose-invert prose-headings:scroll-mt-20 prose-a:text-[var(--accent)] prose-code:before:content-none prose-code:after:content-none [&_blockquote_p]:before:content-none [&_blockquote_p]:after:content-none">
-      <Markdown remarkPlugins={[remarkGfm, remarkDirective, remarkSections, glossaryPlugin]} components={components}>
+      <Markdown
+        remarkPlugins={[...remarkPluginsBase, remarkDirective, remarkSections, glossaryPlugin]}
+        rehypePlugins={rehypePluginsBase as never}
+        components={components}
+      >
         {body}
       </Markdown>
     </div>

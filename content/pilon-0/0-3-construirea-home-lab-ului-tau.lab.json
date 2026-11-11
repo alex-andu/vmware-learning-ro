@@ -1,0 +1,40 @@
+{
+  "steps": [
+    {
+      "id": "pas-1",
+      "title": {
+        "ro": "Dezactivarea `Hyper-V / VBS` în Windows (Pentru Performanță Nativă `VT-x / AMD-V`)"
+      },
+      "action": {
+        "ro": "1. Pe PC-ul tău cu Windows 10/11, deschide **Command Prompt** sau **PowerShell** cu drepturi de **Administrator** (*Right-click $\\rightarrow$ Run as administrator*).\n2. Rulează această comandă pentru a opri preluarea procesorului de către hypervisorul din Windows:\n   ```powershell\n   bcdedit /set hypervisorlaunchtype off\n   ```\n3. Deschide **Windows Security** $\\rightarrow$ **Device Security** $\\rightarrow$ la secțiunea **Core isolation**, dă click pe *Core isolation details* și comută **Memory integrity** pe **`Off`**.\n4. Dă un **Restart** la PC.\n\n* **EXPLICAREA PROFESORULUI (DE CE facem asta?):**\n  * Fără acest pas, Windows 11 ține pornit în fundal propriul său Hypervisor de Tip 1 (`Hyper-V`) în `Ring -1`. Când pornești VMware Workstation peste el, Workstation este forțat să folosească un API lent de traducere numit `WHP` (*Windows Hypervisor Platform*), care nu expune corect contoarele hardware de performanță și încetinește mașinile noastre `Nested ESXi` cu până la $50 - 70\\%$. Prin oprirea lui `hypervisorlaunchtype`, îi dăm lui VMware Workstation acces **100% direct și nativ la siliciul procesorului (`VT-x` / `AMD-V`)**!"
+      }
+    },
+    {
+      "id": "pas-2",
+      "title": {
+        "ro": "Configurarea Switch-ului Virtual Central (`VMnet2`) în VMware Workstation Pro"
+      },
+      "action": {
+        "ro": "1. Deschide **VMware Workstation Pro**, mergi în meniul de sus la **Edit** $\\rightarrow$ **Virtual Network Editor**.\n2. Apasă pe butonul **Change Settings** (în colțul din dreapta-jos, cu scutul de Administrator).\n3. Apasă pe **Add Network...**, alege din listă **`VMnet2`** și apasă **OK**.\n4. Cu **`VMnet2`** selectat în listă, configurează jos următoarele opțiuni exacte:\n   * Bifează opțiunea: **`Host-only (connect VMs internally in a private network)`**.\n   * **BIFEAZĂ** căsuța: **`Connect a host virtual adapter to this network`** *(Aceasta creează o placă de rețea virtuală în Windows-ul tău, ca să poți deschide Chrome/Edge de pe PC-ul tău și să intri direct pe interfața web a serverelor ESXi și vCenter!)*.\n   * **DEBIFEAZĂ** căsuța: **`Use local DHCP service to distribute IP address to VMs`** *(În Data Centerul nostru nu vrem ca Workstation să arunce IP-uri la întâmplare; noi vom seta IP-urile static sau din propriul nostru server!).*\n   * La **Subnet IP**, scrie: **`192.168.10.0`** și la **Subnet mask**: **`255.255.255.0`**.\n   * Apasă pe **Apply** și **OK**.\n5. **Verificare în Windows:** Deschide un terminal în Windows și scrie `ipconfig`. Vei vedea că a apărut adaptorul `Ethernet adapter VMware Network Adapter VMnet2` cu adresa IP **`192.168.10.1`**!\n   * *(Notă importantă: Dacă folosim un router virtual `pfSense` pe IP-ul `192.168.10.1`, intră în `Control Panel -> Network Connections` în Windows, dă click-dreapta pe `VMware Network Adapter VMnet2 -> Properties -> IPv4` și schimbă IP-ul PC-ului tău în **`192.168.10.250`**, lăsând IP-ul `.1` liber pentru routerul `pfSense`! Dacă nu vrei încă să instalezi `pfSense` în Pilonul 1, poți lăsa PC-ul tău pe `.1`!).*\n\n* **EXPLICAREA PROFESORULUI (DE CE facem asta?):**\n  * Am creat echivalentul unui switch fizic Cisco dedicat în care ne-am băgat și laptopul nostru (pe IP-ul `.250` sau `.1`). Orice mașină virtuală conectată la `VMnet2` va fi complet izolată de routerul tău Wi-Fi de acasă, dar va răspunde instantaneu când deschizi browserul pe PC-ul tău și tastezi `https://192.168.10.51`!"
+      }
+    },
+    {
+      "id": "pas-3",
+      "title": {
+        "ro": "Aplicarea Optimizării de Memorie (Trucul lui William Lam pentru SSD)"
+      },
+      "action": {
+        "ro": "1. Închide VMware Workstation Pro.\n2. Deschide **Notepad** ca **Administrator** și deschide fișierul:\n   `C:\\ProgramData\\VMware\\VMware Workstation\\settings.ini` *(sau `config.ini`)*\n3. Adaugă la finalul fișierului următoarele două linii și salvează:\n   ```ini\n   mainMem.useNamedFile = \"FALSE\"\n   MemTrimRate = \"0\"\n   ```\n\n* **EXPLICAREA PROFESORULUI (Ce fac aceste două linii în spate?):**\n  * `mainMem.useNamedFile = \"FALSE\"` împiedică VMware Workstation să scrie pe SSD un fișier `.vmem` egal cu memoria RAM a fiecărui server ESXi pornit (economisind zeci de GB de scrieri pe SSD la fiecare pornire!).\n  * `MemTrimRate = \"0\"` îi interzice lui Workstation să fure memoria RAM alocată mașinilor virtuale și să o mute pe discul Windows-ului, menținând laboratorul rapid și fluid."
+      }
+    },
+    {
+      "id": "pas-4",
+      "title": {
+        "ro": "Pregătirea Serviciilor Critice `DNS` (`A` + `PTR`) și `NTP` pentru Domeniul `lab.local`"
+      },
+      "action": {
+        "ro": "Pentru ca `vCenter Server` (în Pilonul 2) și `VCF` (în Pilonul 6) să se instaleze fără erori, avem două variante pentru a oferi `DNS` și `NTP` pe IP-ul **`192.168.10.2`**:\n\n* **Varianta A (Clasă Enterprise – Windows Server Domain Controller `dc01.lab.local`):**\n  1. Creezi o mașină virtuală în VMware Workstation (**2 vCPU, 2-4 GB RAM, 40 GB Disk Thin, placă de rețea în `VMnet2`**) și instalezi *Windows Server 2022 / 2025 Evaluation* (gratuit 180 de zile, cu posibilitate de `slmgr -rearm` de 6 ori = 3 ani).\n  2. Îi setezi IP-ul static **`192.168.10.2`**, Masca `255.255.255.0`, DNS `127.0.0.1`.\n  3. Din *Server Manager $\\rightarrow$ Add Roles and Features*, instalezi rolurile **Active Directory Domain Services (`AD DS`)** și **DNS Server**, apoi promovezi serverul ca Domain Controller pentru o pădure nouă numită **`lab.local`**.\n  4. Deschizi consola **DNS Manager** (`dnsmgmt.msc`):\n     * Mergi la **Reverse Lookup Zones** $\\rightarrow$ Click-dreapta $\\rightarrow$ **New Zone...** $\\rightarrow$ *Primary Zone* $\\rightarrow$ *IPv4 Reverse Lookup Zone* $\\rightarrow$ la Network ID scrii **`192.168.10`** $\\rightarrow$ Finish! *(Acest pas este cel pe care îl uită $80\\%$ dintre administratori și din cauza căruia le pică instalarea vCenter-ului la $80\\%$!).*\n     * Mergi la **Forward Lookup Zones $\\rightarrow$ `lab.local`** $\\rightarrow$ Click-dreapta $\\rightarrow$ **New Host (A or AAAA)...**\n     * Bifează căsuța critică **`Create associated pointer (PTR) record`** și adaugă următoarele 4 înregistrări:\n       * Name: `esxi01` | IP: `192.168.10.51`\n       * Name: `esxi02` | IP: `192.168.10.52`\n       * Name: `esxi03` | IP: `192.168.10.53`\n       * Name: `vcsa01` | IP: `192.168.10.10`\n\n* **Varianta B (Ultra-Lightweight – Server Linux Alpine/Ubuntu cu doar `256 MB RAM` folosind `dnsmasq` și `chrony`):**\n  * Dacă vrei să economisești fiecare megabyte de RAM pe PC-ul tău, în loc de un Windows Server de $2-4\\text{ GB RAM}$, poți crea un mic VM Linux cu doar **`256 MB RAM`** pe IP-ul `192.168.10.2`, în care pui în fișierul `/etc/hosts` cele 4 linii (`192.168.10.51 esxi01.lab.local esxi01` etc.) și pornești serviciul **`dnsmasq`** (care creează automat atât înregistrările Forward `A`, cât și cele Reverse `PTR` din `/etc/hosts`!).\n\n* **Testul de Validare (Cum verifici că DNS-ul tău e pregătit 100% pentru VMware):**\n  Deschide Command Prompt și rulează ambele comenzi `nslookup`:\n  ```cmd\n  nslookup vcsa01.lab.local 192.168.10.2\n  nslookup 192.168.10.10 192.168.10.2\n  ```\n  Dacă prima comandă îți răspunde cu **`192.168.10.10`**, iar a doua comandă îți răspunde înapoi cu **`vcsa01.lab.local`**, fundația ta de Data Center este **perfectă**!"
+      }
+    }
+  ]
+}

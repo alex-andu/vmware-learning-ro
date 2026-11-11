@@ -24,16 +24,34 @@ export function ModulePage() {
         <AbbrText text={loc(m.title, L)} />
       </h1>
       <ProgressBar value={done} max={keys.length} />
-      <dl className="card my-4 grid gap-2 text-sm">
-        <dt className="font-semibold">{t('competency')}</dt>
-        <dd className="text-[var(--muted)]">
-          <AbbrText text={loc(m.competency, L)} />
-        </dd>
-        <dt className="font-semibold">{t('labTitle')}</dt>
-        <dd className="text-[var(--muted)]">
-          <AbbrText text={loc(m.labTitle, L)} />
-        </dd>
-      </dl>
+      {(m.target || m.competency || m.labTitle) && (
+        <dl className="card my-4 grid gap-2 text-sm">
+          {m.target && (
+            <>
+              <dt className="font-semibold">{t('objective')}</dt>
+              <dd className="text-[var(--muted)]">
+                <AbbrText text={loc(m.target, L)} />
+              </dd>
+            </>
+          )}
+          {m.competency && (
+            <>
+              <dt className="font-semibold">{t('competency')}</dt>
+              <dd className="text-[var(--muted)]">
+                <AbbrText text={loc(m.competency, L)} />
+              </dd>
+            </>
+          )}
+          {m.labTitle && (
+            <>
+              <dt className="font-semibold">{t('labTitle')}</dt>
+              <dd className="text-[var(--muted)]">
+                <AbbrText text={loc(m.labTitle, L)} />
+              </dd>
+            </>
+          )}
+        </dl>
+      )}
       <ol className="space-y-2">
         {m.chapters.map((c, i) => {
           const key = `${m.id}/${c.id}`;
@@ -51,6 +69,9 @@ export function ModulePage() {
                   {!lesson && <span className="ml-2 text-xs font-normal text-[var(--muted)]">({t('planned')})</span>}
                 </span>
                 {lesson && <span className="block text-sm text-[var(--muted)]">{lesson.doc.meta.summary}</span>}
+                {!lesson && (c.topics?.length ?? 0) > 0 && (
+                  <span className="mt-1 block text-sm text-[var(--muted)]">{c.topics!.join(' · ')}</span>
+                )}
                 {c.exam.length > 0 && (
                   <span className="mt-1 flex flex-wrap gap-1">
                     {c.exam.map((e) => (

@@ -1,0 +1,179 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Un arhitect VMware proiectează rețeaua fizică pentru un cluster vSphere 8 care va utiliza **VMware NSX** (cu încapsulare **GENEVE** pe interfețele **TEP**) și stocare **iSCSI**. Fiecare server ESXi are 2 porturi fizice de $25\\text{ Gbps}$ conectate la switch-ul fizic, pe care vor circula 6 VLAN-uri diferite. Cum trebuie configurate porturile switch-ului fizic și switch-ul virtual din ESXi pentru mașinile virtuale obișnuite?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Porturile switch-ului fizic în mod `Access (Untagged)` cu `MTU 1500`; în ESXi se folosește `EST (VLAN ID 0)`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Porturile switch-ului fizic în mod `IEEE 802.1Q Trunk` cu `Spanning Tree PortFast Trunk` și `MTU 9000` (minim `1600` pentru GENEVE); în ESXi se folosește `VST (Virtual Switch Tagging)` cu `VLAN ID` între `1` și `4094` pe fiecare Port Group."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (`IEEE 802.1Q Trunk` + `PortFast Trunk` + `MTU 9000` + `VST VLAN 1-4094`)**\n\n* *Explicație:* Pentru a transporta mai multe VLAN-uri pe aceleași cabluri fizice, portul switch-ului fizic trebuie să fie **Trunk (`802.1Q`)**, cu **PortFast Trunk** activat (pentru a evita blocarea de $30-50\\text{s}$ din Spanning Tree) și cu **MTU mărit** (minim `1600` pentru NSX GENEVE, ideal `9000` pentru iSCSI și NSX). În ESXi, modul standard în care `vSwitch`-ul se ocupă de etichete este **VST (`VLAN 1-4094`)**."
+          }
+        },
+        {
+          "text": {
+            "ro": "Porturile switch-ului fizic în mod `Fibre Channel Zoning` pe portul `UDP 6081`; în ESXi se setează `VLAN ID 4095` pe toate Port Group-urile."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Porturile switch-ului fizic în mod `IEEE 802.1Q Trunk` cu `MTU` blocat la `1472 Bytes` pentru a evita fragmentarea cadrelor GENEVE."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Un inginer de stocare configurează un server cu **4 discuri SSD NVMe de câte $4\\text{ TB}$ fiecare** (total brut = $16\\text{ TB}$) într-o matrice **RAID 5**. Care este capacitatea utilă (*Usable Capacity*), câte discuri fizice pot ceda simultan fără pierdere de date și care este penalizarea la scriere (*Write Penalty*) a arhitecturii RAID 5?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "$8\\text{ TB}$ capacitate utilă; tolerează căderea a 2 discuri; Write Penalty = 2."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "$12\\text{ TB}$ capacitate utilă; tolerează căderea unui singur disc; Write Penalty = 4."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B ($12\\text{ TB}$ capacitate utilă; tolerează căderea unui singur disc; Write Penalty = 4)**\n\n* *Explicație:* **RAID 5** folosește paritate simplă distribuită, consumând capacitatea echivalentă a **unui singur disc** pentru paritate: din $4 \\times 4\\text{ TB} = 16\\text{ TB}$ brut, rămân $(4-1) \\times 4\\text{ TB} = \\mathbf{12\\text{ TB}}$ **utili** ($75\\%$). Poate supraviețui arderii unui singur disc, iar la fiecare scriere face 2 citiri + 2 scrieri (**Write Penalty = 4**)."
+          }
+        },
+        {
+          "text": {
+            "ro": "$16\\text{ TB}$ capacitate utilă; nu tolerează căderea niciunui disc; Write Penalty = 1."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "$12\\text{ TB}$ capacitate utilă; tolerează căderea a 2 discuri; Write Penalty = 6."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Un administrator VMware dorește să conecteze o mașină virtuală (care rulează un firewall virtual pfSense) la un Port Group de pe un *vSphere Standard Switch (`vSS`)*, astfel încât mașina virtuală să primească direct cadrele Ethernet cu eticheta **IEEE 802.1Q** intactă și să își gestioneze singură 10 VLAN-uri diferite (**VGT - Virtual Guest Tagging**). Ce `VLAN ID` trebuie configurat pe acel Port Group în ESXi?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "`VLAN ID: 0`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`VLAN ID: 1`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`VLAN ID: 4094`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`VLAN ID: 4095`"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: D (`VLAN ID: 4095`)**\n\n* *Explicație:* În VMware vSphere Standard Switch (`vSS`), ID-ul rezervat **`4095`** activează modul **VGT (`Virtual Guest Tagging`)**, permițând cadrelor etichetate `802.1Q` să treacă nemodificate prin `vSwitch` direct către placa de rețea a mașinii virtuale. (`0` este pentru EST, iar `1-4094` pentru VST)."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "Care dintre următoarele afirmații compară corect protocoalele de stocare **Fibre Channel (`FC`)**, **iSCSI** și **NFS** în VMware ESXi?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "`FC` și `iSCSI` sunt protocoale la nivel de bloc (*Block-level*) care prezintă un `LUN` brut pe care ESXi îl formatează cu sistemul de fișiere de cluster `VMFS-6` (folosind adresare `WWN` pentru FC și respectiv `IQN` + `TCP port 3260` pentru iSCSI), în timp ce `NFS` este un protocol la nivel de fișier (*File-level* pe `TCP/UDP port 2049`) care montează un folder deja formatat de serverul `NAS`, fără a folosi `VMFS`."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: A (`FC` și `iSCSI` = Block LUN + `VMFS-6`; `NFS` = File Share fără `VMFS`)**\n\n* *Explicație:* Atât Fibre Channel, cât și iSCSI oferă stocare la nivel de bloc (`LUN`) pe care ESXi o formatează cu `VMFS-6`. NFS oferă stocare la nivel de fișier peste TCP/IP (port 2049), fără VMFS. Toate trei (`FC`, `iSCSI` și `NFS`) sunt tipuri de *Shared Storage* care suportă pe deplin `vMotion`, `vSphere HA` și `DRS`!"
+          }
+        },
+        {
+          "text": {
+            "ro": "`iSCSI` și `NFS` formatează ambele discurile cu `VMFS-6`, în timp ce `Fibre Channel` folosește sistemul de fișiere `NTFS`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`NFS` necesită plăci dedicate `FC HBA` și configurare de `Zoning`, în timp ce `iSCSI` folosește portul `UDP 123`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Doar `Fibre Channel` suportă funcțiile `vSphere vMotion` și `vSphere HA`, în timp ce pe `iSCSI` și `NFS` mașinile virtuale nu pot fi migrate live."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "Un administrator încearcă să monteze un export **NFS v3** de pe un server NAS Linux pe trei host-uri ESXi. Montarea reușește, dar în momentul în care încearcă să creeze o mașină virtuală pe noul datastore NFS, primește eroarea `Cannot create file / Permission Denied`. De asemenea, la verificarea cu `vmkping` a conexiunii Jumbo Frames (`MTU 9000`) pe interfața `vmk1`, comanda `vmkping -I vmk1 -d -s 9000 10.10.20.10` eșuează. Care sunt cele două acțiuni corecte pe care trebuie să le întreprindă?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Să formateze datastore-ul NFS cu `VMFS-6` și să ruleze `vmkping` fără parametrul `-I`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Să activeze opțiunea `no_root_squash` pe exportul NFS al serverului NAS (pentru a permite utilizatorului `root` din ESXi să scrie fișiere) și să folosească dimensiunea de payload `-s 8972` în comanda `vmkping` (deoarece $8972 + 20\\text{ B IP} + 8\\text{ B ICMP} = 9000\\text{ Bytes}$)."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (`no_root_squash` pe NAS + `-s 8972` la `vmkping`)**\n\n* *Explicație:* Eroarea `Permission Denied` pe NFS apare deoarece NAS-ul are activat implicit `root_squash` (care blochează contul `root` folosit de kernelul ESXi); activarea **`no_root_squash`** rezolvă problema. Iar la testul `vmkping`, `-s 9000` produce un pachet total de $9028\\text{ Bytes}$ (care depășește $\\text{MTU } 9000$); valoarea corectă a payload-ului este **`8972`** ($8972 + 28 = 9000$)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Să schimbe portul NFS din `2049` în `3260` și să seteze `MTU` la `1472` pe switch-ul fizic."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Să oprească serviciul `NTP` pe serverele ESXi și să șteargă înregistrările `PTR` din serverul DNS."
+          },
+          "correct": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Un administrator VMware vrea să mărească dimensiunea discului virtual (`Hard disk 1`) al unei mașini virtuale de la $100\\text{ GB}$ la $200\\text{ GB}$, dar constată că în fereastra *Edit Settings* câmpul pentru dimensiunea discului este inactiv (Greyed out), chiar și după ce a oprit mașina virtuală. Care este cauza cea mai probabilă?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Mașina virtuală folosește adaptorul de rețea `VMXNET3`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Mașina virtuală are unul sau mai multe Snapshot-uri active (sau necesită consolidarea discurilor)."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (Mașina virtuală are Snapshot-uri active)**\n\n* *Explicație:* Cât timp există un fișier delta atașat unui disc virtual, extinderea capacității discului este interzisă pentru a nu altera maparea sectoarelor față de discul părinte înghețat în mod `Read-Only`."
+          }
+        },
+        {
+          "text": {
+            "ro": "Serviciul `vSphere HA` este activat pe cluster."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Discul a fost creat în format *Thick Provision Lazy Zeroed*."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "O mașină virtuală are următorul lanț liniar de snapshot-uri:\n`Discul de Bază` $\\rightarrow$ `Snapshot A` $\\rightarrow$ `Snapshot B` $\\rightarrow$ `Snapshot C` $\\leftarrow$ *(You are here / Starea curentă)*.\nDacă administratorul deschide *Snapshot Manager*, selectează **doar `Snapshot B`** și apasă pe butonul **`Delete`**, ce se întâmplă cu blocurile de date modificate care erau stocate în fișierul delta al lui `Snapshot B`?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Sunt șterse definitiv și mașina virtuală pierde toate modificările făcute între `Snapshot A` și `Snapshot B`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Sunt comasate (scrise) înainte, în interiorul lui `Snapshot C`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Sunt comasate (scrise) înapoi în părintele său direct, adică în fișierul delta al lui `Snapshot A`, după care fișierul lui `Snapshot B` este șters."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: C (Sunt comasate înapoi în părintele său direct, `Snapshot A`)**\n\n* *Explicație:* Operațiunea *Delete* pe un singur snapshot din mijlocul lanțului execută întotdeauna un *Upward Merge*: datele din `Snapshot B` sunt scrise în părintele său (`Snapshot A`), iar `Snapshot C` își schimbă `parentCID`-ul pentru a arăta direct către `Snapshot A`."
+          }
+        },
+        {
+          "text": {
+            "ro": "Sunt comasate direct în `Discul de Bază`, sărind peste `Snapshot A`."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Conform recomandărilor oficiale de arhitectură și suport VMware (**KB 1025279**), care este numărul maxim suportat de snapshot-uri într-un lanț și care este durata maximă recomandată pentru păstrarea unui snapshot pe o mașină virtuală de producție?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Maximum 32 de snapshot-uri în lanț; nu se recomandă păstrarea unui snapshot mai mult de 24 – 72 de ore."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: A (Maximum 32 în lanț; recomandat maximum 24 – 72 de ore)**\n\n* *Explicație:* Acestea sunt cifrele exacte din **VMware KB 1025279** (*Best practices for using snapshots in the vSphere environment*), testate frecvent la examenul VCP-DCV."
+          }
+        },
+        {
+          "text": {
+            "ro": "Maximum 100 de snapshot-uri în lanț; durata recomandată este de 30 de zile (ca înlocuitor pentru backup-ul lunar)."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Maximum 4 snapshot-uri în lanț; durata maximă este de 7 zile."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Nu există nicio limită de număr sau de timp pe datastore-urile `VMFS-6`."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "Ce format intern de disc diferențial (Delta Disk) folosește automat `VMware ESXi` atunci când creează un Snapshot pe un datastore formatat cu **`VMFS-6`**, și care este dimensiunea blocului său de alocare?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "`VMFSsparse` (`-delta.vmdk`) cu blocuri de $512\\text{ Bytes}$, limitat la discuri de $2\\text{ TB}$."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`SEsparse` (*Space-Efficient Sparse*, `-sesparse.vmdk`) cu blocuri de $4\\text{ KB}$, suportând discuri de până la $62\\text{ TB}$ și recuperare de spațiu (`UNMAP`)."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (`SEsparse` cu blocuri de $4\\text{ KB}$)**\n\n* *Explicație:* Pe `VMFS-6`, formatul `SEsparse` (`-sesparse.vmdk`) este formatul implicit pentru toate snapshot-urile, înlocuind vechiul `VMFSsparse` (`-delta.vmdk`) de pe `VMFS-5`."
+          }
+        },
+        {
+          "text": {
+            "ro": "`NFS-Lock` cu blocuri de $64\\text{ KB}$."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`Raw Device Mapping (RDM)` în mod fizic."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "În timpul nopții, o soluție de backup bazată pe `VADP` a creat un snapshot pe o mașină virtuală de producție. La finalul backup-ului, ștergerea snapshot-ului a eșuat parțial: în *Snapshot Manager* nu mai apare niciun snapshot, dar pe Datastore există încă fișiere `-000001-sesparse.vmdk`, iar în vCenter apare avertismentul **`Virtual machine disks consolidation is needed`**. Ce acțiune trebuie să execute administratorul?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Să șteargă manual fișierele `-000001-sesparse.vmdk` din linia de comandă folosind comanda `rm` în SSH."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Să folosească opțiunea `Snapshots -> Consolidate` din meniul mașinii virtuale (după ce s-a asigurat că niciun Backup Proxy nu mai ține discul blocat prin HotAdd)."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (Opțiunea `Snapshots -> Consolidate`)**\n\n* *Explicație:* **Atenție la varianta A:** Dacă ai șterge manual cu `rm` fișierul `-000001-sesparse.vmdk` în timp ce mașina rulează pe el, **ai șterge toate datele scrise de mașină de la momentul backup-ului până acum și ai corupe definitiv mașina virtuală!** Singura cale corectă este funcția **`Consolidate`**, care varsă blocurile din `-000001` înapoi în `-flat.vmdk` înainte de a curăța fișierele delta."
+          }
+        },
+        {
+          "text": {
+            "ro": "Să formateze Datastore-ul cu `VMFS-6`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Să convertească mașina virtuală în Template."
+          },
+          "correct": false
+        }
+      ]
+    }
+  ]
+}

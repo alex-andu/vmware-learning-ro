@@ -32,7 +32,7 @@ export function CurriculumPage() {
     loc(m.target, L),
     loc(m.competency, L),
     loc(m.labTitle, L),
-    ...m.chapters.flatMap((c) => [loc(c.title, L), loc(c.examNote, L)]),
+    ...m.chapters.flatMap((c) => [loc(c.title, L), loc(c.examNote, L), ...(c.topics ?? [])]),
     ...EXAMS.map((e) => loc(e.name, L)),
   ]);
 
@@ -68,24 +68,30 @@ export function CurriculumPage() {
               <AbbrText text={loc(m.target, L)} />
             </p>
           )}
-          <dl className="mb-4 grid gap-3 text-sm sm:grid-cols-2">
-            <div className="rounded border border-[var(--border)] p-3">
-              <dt className="mb-1 flex items-center gap-1 font-semibold">
-                <Target size={16} aria-hidden="true" /> {t('competency')}
-              </dt>
-              <dd>
-                <AbbrText text={loc(m.competency, L)} />
-              </dd>
-            </div>
-            <div className="rounded border border-[var(--border)] p-3">
-              <dt className="mb-1 flex items-center gap-1 font-semibold">
-                <FlaskConical size={16} aria-hidden="true" /> {t('labTitle')}
-              </dt>
-              <dd>
-                <AbbrText text={loc(m.labTitle, L)} />
-              </dd>
-            </div>
-          </dl>
+          {(m.competency || m.labTitle) && (
+            <dl className="mb-4 grid gap-3 text-sm sm:grid-cols-2">
+              {m.competency && (
+                <div className="rounded border border-[var(--border)] p-3">
+                  <dt className="mb-1 flex items-center gap-1 font-semibold">
+                    <Target size={16} aria-hidden="true" /> {t('competency')}
+                  </dt>
+                  <dd>
+                    <AbbrText text={loc(m.competency, L)} />
+                  </dd>
+                </div>
+              )}
+              {m.labTitle && (
+                <div className="rounded border border-[var(--border)] p-3">
+                  <dt className="mb-1 flex items-center gap-1 font-semibold">
+                    <FlaskConical size={16} aria-hidden="true" /> {t('labTitle')}
+                  </dt>
+                  <dd>
+                    <AbbrText text={loc(m.labTitle, L)} />
+                  </dd>
+                </div>
+              )}
+            </dl>
+          )}
           <ol className="space-y-2">
             {m.chapters.map((c, i) => {
               const key = `${m.id}/${c.id}`;
@@ -119,6 +125,15 @@ export function CurriculumPage() {
                           <ExamBadge key={e} code={e} />
                         ))}
                       </span>
+                    )}
+                    {(c.topics?.length ?? 0) > 0 && (
+                      <ul className="mt-1 list-disc space-y-0.5 pl-4 text-xs text-[var(--muted)]">
+                        {c.topics!.map((x) => (
+                          <li key={x}>
+                            <AbbrText text={x} />
+                          </li>
+                        ))}
+                      </ul>
                     )}
                     {c.examNote && (
                       <p className="mt-1 text-xs text-[var(--muted)]">

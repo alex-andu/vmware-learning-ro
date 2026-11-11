@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "id": "pas-1",
+      "title": {
+        "ro": "Stăpânirea Interfeței `esxtop` în CLI"
+      },
+      "action": {
+        "ro": "1. Asigură-te că mașina virtuală `web01` este pornită (**Powered On**).\n2. Conectează-te prin `SSH` la `root@192.168.10.51` (și mărește fereastra terminalului pe tot ecranul, deoarece `esxtop` afișează multe coloane!).\n3. Tastează comanda:\n   ```bash\n   esxtop\n   ```\n4. **Setează viteza de actualizare la 2 secunde:** Apasă tasta **`s`**, scrie cifra **`2`** și apasă **`Enter`**.\n5. **Filtrează ecranul ca să vezi doar Mașinile Virtuale (fără procesele interne ale sistemului):**\n   * Apasă tasta **`V`** (majusculă: **`Shift + v`**)! Observă cum toate procesele interne (`system`, `helper`, `hostd`) au dispărut și pe ecran a rămas **exclusiv rândul mașinii tale virtuale `web01`**!\n6. **Extinde rândul mașinii `web01` ca să îi vezi fiecare nucleu `vCPU` individual:**\n   * Uită-te în prima coloană din stânga (`ID` sau `GID`) și vezi ce număr are `web01` (de exemplu `3421`).\n   * Apasă tasta **`e`** (*Expand*), tastează numărul `ID`-ului lui `web01` și apasă **`Enter`**. Acum vezi separat `vmx`, `vmm0:web01` (`vCPU 0`) și `vmm1:web01` (`vCPU 1`), împreună cu valorile lor pentru **`%USED`**, **`%RDY`**, **`%CSTP`** și **`%MLMTD`**!"
+      }
+    },
+    {
+      "id": "pas-2",
+      "title": {
+        "ro": "Simularea unei Gâtuiri de Procesor (`%MLMTD`) și Observarea în Timp Real"
+      },
+      "action": {
+        "ro": "1. În timp ce `esxtop` rulează în fereastra de `SSH` pe ecranul de CPU (tasta `c`), deschide în paralel consola mașinii virtuale `web01` și generează încărcare pe procesor (în Linux poți rula comanda `yes > /dev/null &` sau `dd if=/dev/zero of=/dev/null &`).\n2. Observă în `esxtop` cum coloana **`%USED`** a mașinii `web01` sare spre $100\\%$, dar **`%MLMTD`** este **`0.00%`**.\n3. Acum, fără să oprești mașina, mergi în browserul web (`Host Client`), dă click-dreapta pe `web01` $\\rightarrow$ **Edit Settings** $\\rightarrow$ deschide săgeata de la **CPU** și la **Limit** scrie **`200` MHz**, apoi apasă **Save**!\n4. Uită-te imediat în fereastra `esxtop`!\n   * Vei vedea cum **`%USED`** este tăiat brusc la câțiva la sută, iar coloana **`%MLMTD` (`Max Limited`) sare la peste $80\\% - 90\\%$**!\n   * *Ce tocmai ai demonstrat:* Ai văzut exact cum arată în `esxtop` o mașină virtuală strangulată de o limită de CPU pusă greșit!\n5. Intră înapoi în *Edit Settings* pe `web01`, pune *CPU Limit* înapoi pe **Unlimited** (și oprește comanda `yes`/`dd` cu `killall yes dd`)."
+      }
+    },
+    {
+      "id": "pas-3",
+      "title": {
+        "ro": "Simularea Presiunii pe Memorie (`MCTLSZ` & `SWCUR`) pe Ecranul `m`"
+      },
+      "action": {
+        "ro": "1. În fereastra `esxtop`, apasă tasta **`m`** (mic) pentru a comuta pe ecranul de **Memory**, apoi apasă **`Shift + v`** ca să afișezi doar mașina virtuală `web01`.\n2. Dacă nu vezi coloanele de Ballooning și Swap, apasă tasta **`f`** (*Fields*), asigură-te că literele **`J` (`MCTL`)** și **`K` (`SWAP`)** sunt marcate cu steluță `*` și apasă **`Enter`**.\n3. Mergi în browser pe `web01` $\\rightarrow$ **Edit Settings** $\\rightarrow$ deschide săgeata de la **Memory** (care are $2048\\text{ MB}$ alocați) și pune-i o **Limită (`Limit`) de doar `256` MB**, apoi apasă **Save**!\n4. Privește în `esxtop` (ecranul `m`) ce face `VMkernel`-ul în secunda următoare:\n   * Coloana **`MCTLSZ` (Balloon Size)** începe să crească rapid pe măsură ce driverul `vmmemctl` umflă balonul în interiorul mașinii virtuale!\n   * Dacă balonul nu poate lua suficientă memorie, vei vedea cum coloanele **`SWCUR`** și **`SWW/s`** cresc de la `0`, arătând că ESXi mută memoria mașinii `web01` în fișierul `.vswp` de pe disc!\n5. Pune *Memory Limit* înapoi pe **Unlimited** în *Edit Settings*, apoi apasă tasta **`q`** în terminal pentru a ieși din `esxtop`."
+      }
+    }
+  ]
+}

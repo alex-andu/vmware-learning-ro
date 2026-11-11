@@ -7,6 +7,9 @@ export interface Chapter {
   title: Localized;
   exam: string[];
   examNote?: Localized;
+  /** Sub-topics from Alex's table of contents (cuprins.md). */
+  topics?: string[];
+  number?: string;
 }
 
 export interface ModuleMeta {
@@ -14,8 +17,8 @@ export interface ModuleMeta {
   order: number;
   title: Localized;
   target?: Localized;
-  competency: Localized;
-  labTitle: Localized;
+  competency?: Localized;
+  labTitle?: Localized;
   chapters: Chapter[];
 }
 
@@ -32,6 +35,8 @@ export interface LessonFrontmatter {
   updated?: string;
   examSummaryEn?: string;
   glossaryTerms?: string[];
+  /** 'alex' = text written by Alex and imported unchanged with scripts/import-alex.mjs */
+  origin?: string;
 }
 
 export interface LessonDoc {
@@ -46,7 +51,7 @@ export interface LabStep {
   title: Localized;
   path?: Localized;
   action: Localized;
-  why: Localized;
+  why?: Localized;
 }
 
 export interface LabChecklist {
@@ -56,7 +61,7 @@ export interface LabChecklist {
 export interface QuizOption {
   text: Localized;
   correct: boolean;
-  explanation: Localized;
+  explanation?: Localized;
 }
 
 export interface QuizQuestion {

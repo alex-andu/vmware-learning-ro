@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "id": "pas-1",
+      "title": {
+        "ro": "Crearea unei Mașini Virtuale la Standard Enterprise în VMware Host Client"
+      },
+      "action": {
+        "ro": "1. Deschide browserul și autentifică-te pe **`https://192.168.10.51/ui`** cu utilizatorul `root`.\n2. În meniul din stânga, dă click-dreapta pe **Virtual Machines** $\\rightarrow$ **Create / Register VM** $\\rightarrow$ alege **Create a new virtual machine** $\\rightarrow$ **Next**.\n3. **Select a name and guest OS:**\n   * **Name:** `web01`\n   * **Compatibility:** `ESXi 8.0 U2 virtual machine` (Hardware Version 21).\n   * **Guest OS family:** `Linux` (sau `Windows`, în funcție de imaginea `.iso` pe care o ai la îndemână; pentru un test ultra-rapid în homelab îți recomand *Ubuntu Server 24.04 ISO* sau *Alpine Linux Standard ISO* care are doar $200\\text{ MB}$!).\n4. **Select storage:** Selectează `datastore1` $\\rightarrow$ **Next**.\n5. **Customize settings (Aici aplicăm ingineria învățată azi!):**\n   * **CPU:** `2 vCPU`.\n   * **Memory:** `2048 MB` ($2\\text{ GB}$). Lasă *Reservation* pe `0 MB` (ca să vedem cum se creează fișierul `.vswp` de $2\\text{ GB}$ pe disc!).\n   * **Hard disk 1:** Setează `16 GB`, deschide săgeata din stânga lui *Hard disk 1* și la **Disk Provisioning** bifează obligatoriu **`Thin provisioned`**!\n   * **SCSI Controller 0:** Deschide săgeata și schimbă-l din *LSI Logic* în **`VMware Paravirtual`**!\n   * **Network Adapter 1:** Deschide săgeata și asigură-te că la **Adapter Type** este selectat **`VMXNET 3`**!\n   * **CD/DVD Drive 1:** Selectează *Datastore ISO file*, încarcă imaginea ta `.iso` pe Datastore și bifează căsuța **Connected**.\n   * Mergi sus în tab-ul **VM Options** $\\rightarrow$ deschide **Boot Options** $\\rightarrow$ verifică faptul că la **Firmware** este selectat **`EFI` (UEFI)**.\n6. Apasă **Next** $\\rightarrow$ **Finish**! **(Dar NU apăsa încă pe Power On!)**\n\n* **EXPLICAREA PROFESORULUI (DE CE nu am apăsat încă pe Power On?):**\n  * Vreau să observi în Pasul 2 ce fișiere există pe disc atunci când mașina virtuală este **oprită (`Powered Off`)**, și apoi să vezi ce fișiere apar magic în secunda în care apăsăm pe **Power On**!"
+      }
+    },
+    {
+      "id": "pas-2",
+      "title": {
+        "ro": "Inspecția Chirurgicală prin `SSH` (Înainte și După Power On)"
+      },
+      "action": {
+        "ro": "1. În interfața web a lui `esxi01`, dă click-dreapta pe **Host** (în stânga sus) $\\rightarrow$ **Services** $\\rightarrow$ **Enable Secure Shell (SSH)**.\n2. Deschide terminalul din Windows (PowerShell / Command Prompt sau PuTTY) și conectează-te la serverul tău ESXi:\n   ```bash\n   ssh root@192.168.10.51\n   ```\n3. Navighează în folderul mașinii virtuale `web01` de pe Datastore și listează toate fișierele cu dimensiunile lor reale:\n   ```bash\n   cd /vmfs/volumes/datastore1/web01\n   ls -lah\n   ```\n   * **Ce observi acum (cu mașina oprită):**\n     * Vezi **DOUĂ** fișiere `.vmdk`: `web01.vmdk` (care are doar `~500 Bytes`!) și `web01-flat.vmdk` (care arată `16.0G`, dar dacă rulezi comanda `du -h web01-flat.vmdk` vei vedea că ocupă fizic **`0 Bytes`** pe SSD deoarece este *Thin Provisioned*!).\n     * Observă că **NU există niciun fișier `.vswp` și niciun `vmware.log`** (pentru că mașina nu a fost pornită niciodată)!\n4. Citește cu ochii tăi ce scrie în interiorul etichetei `web01.vmdk` și în `web01.vmx`:\n   ```bash\n   cat web01.vmdk\n   ```\n   * Uită-te la linia `# Extent description`: scrie clar `RW 33554432 VMFS \"web01-flat.vmdk\"`, iar jos scrie `ddb.adapterType = \"pvscsi\"`.\n5. **Acum, lasă fereastra de SSH deschisă, mergi în browser și apasă pe `Power On` pentru mașina `web01`!**\n6. Revino în fereastra de SSH și rulează din nou:\n   ```bash\n   ls -lah\n   ```\n   * **BOOM! Uită-te ce a apărut instantaneu în folder:**\n     * A apărut fișierul **`web01-<id>.vswp`** în valoare de **exact `2.0G`** (egal cu cei $2048\\text{ MB RAM}$ alocați mașinii!).\n     * A apărut fișierul **`vmx-web01-<id>.vswp`** (pentru procesul `VMX`).\n     * Au apărut **`web01.nvram`** și **`vmware.log`**!"
+      }
+    },
+    {
+      "id": "pas-3",
+      "title": {
+        "ro": "Exercițiul de Supraviețuire – Simularea unui Dezastru și Recuperarea Fișierului `.vmx`"
+      },
+      "action": {
+        "ro": "Hai să simulăm ce pățește un admin în producție și cum îl salvezi:\n1. Oprește mașina virtuală `web01` din interfața web (**Power Off**).\n2. În consola `SSH`, șterge (sau mută) intenționat fișierul de configurare `web01.vmx`:\n   ```bash\n   rm web01.vmx\n   ```\n3. Încearcă acum să pornești mașina `web01` din interfața web. **Eroare! Mașina este stricată și nu mai poate porni!**\n4. **Cum reconstruim fișierul `web01.vmx` direct din jurnalul `vmware.log` (Truc de Senior VCDX – VMware KB 1023880):**\n   * Știai că de fiecare dată când o mașină virtuală pornește, ESXi copiază **întregul conținut al fișierului `.vmx` în primele linii din `vmware.log`** (după cuvântul `DICT --- CONFIGURATION`)?!\n   * Rulează această comandă magică în `SSH` care extrage configurația din `vmware.log` și îți recreează pe loc fișierul `web01.vmx`:\n     ```bash\n     sed -n '/--- CONFIGURATION/,/---/p' vmware.log | grep -v \"CONFIGURATION\" | grep -v -- \"---\" | awk -F \"DICT \" '{print $2}' | sed 's/= \\(.*\\)/= \"\\1\"/' > web01.vmx\n     ```\n   * Sau verifică vizual liniile din jurnal cu: `less vmware.log` (vei vedea toată configurația mașinii acolo!).\n5. Apasă din nou **Power On** în browser — mașina virtuală `web01` a înviat din morți fără să fi pierdut nicio secundă de muncă!"
+      }
+    }
+  ]
+}

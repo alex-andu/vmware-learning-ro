@@ -1,0 +1,179 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Un administrator VMware configurează un server fizic nou (Dual-Socket, fiecare procesor având 20 de nuclee fizice și 256 GB RAM local) pe care urmează să fie instalat VMware ESXi 8.0. În BIOS, opțiunea Hyper-Threading este activată. Câte procesoare logice (Logical Processors) va raporta interfața ESXi după instalare și câte noduri NUMA fizice există în acest server?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "40 Logical Processors și 1 NUMA Node"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "80 Logical Processors și 2 NUMA Nodes"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (80 Logical Processors și 2 NUMA Nodes)**\n\n* *De ce B este corect:* Serverul este Dual-Socket (2 procesoare fizice), deci are **2 NUMA Nodes** (câte unul pentru fiecare socket și banca lui de memorie). Având $2 \\text{ sockets} \\times 20 \\text{ cores} = 40 \\text{ physical cores}$. Cu Hyper-Threading activat, fiecare nucleu fizic expune 2 fire de execuție: $40 \\times 2 = 80 \\text{ Logical Processors}$.\n   * *De ce A, C, D sunt greșite:* A și C ignoră efectul Hyper-Threading-ului asupra numărului de procesoare logice; D presupune greșit 4 noduri NUMA pe un sistem standard dual-socket."
+          }
+        },
+        {
+          "text": {
+            "ro": "40 Logical Processors și 2 NUMA Nodes"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "80 Logical Processors și 4 NUMA Nodes"
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Un server fizic ESXi aflat într-un centru de date la distanță a suferit o eroare critică de hardware și s-a oprit complet (Powered Off). Administratorul trebuie să pornească serverul de la distanță, să verifice jurnalele de senzori hardware ai plăcii de bază și să monteze o imagine ISO de diagnosticare direct de pe laptopul său înainte ca sistemul de operare să booteze. Ce tehnologie îi permite să facă acest lucru?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "VMware vSphere Web Client conectat pe portul 443 la IP-ul de management al ESXi-ului"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "O sesiune SSH către procesul VMkernel al host-ului ESXi"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Consola Out-of-Band Management (precum HPE iLO sau Dell iDRAC) conectată pe rețeaua dedicată de management BMC"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: C (Consola Out-of-Band Management - HPE iLO / Dell iDRAC)**\n\n* *De ce C este corect:* Doar cipul BMC (iLO/iDRAC) rămâne alimentat din curentul de standby și are acces direct la butonul de Power, senzorii fizici și Virtual Media chiar și când serverul principal și ESXi-ul sunt complet oprite.\n   * *De ce A, B, D sunt greșite:* Dacă serverul fizic este *Powered Off*, ESXi nu rulează, deci nu răspunde nici pe HTTPS (A), nici pe SSH (B), iar VMware Tools (D) rulează în interiorul unui Guest OS."
+          }
+        },
+        {
+          "text": {
+            "ro": "VMware Tools instalat în mașina virtuală de management"
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Care dintre următoarele afirmații descrie corect arhitectura hypervisorului VMware ESXi?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Este un Hypervisor de Tip 2 care folosește un nucleu Red Hat Enterprise Linux modificat pentru a porni serviciile de virtualizare."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Este un Hypervisor de Tip 1 (Bare-Metal) al cărui nucleu proprietar, numit VMkernel, rulează direct pe hardware-ul fizic al serverului fără un sistem de operare subiacent."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (Hypervisor de Tip 1 cu nucleu proprietar VMkernel)**\n\n* *De ce B este corect:* ESXi este un hypervisor nativ (Type 1) care rulează direct pe fier, iar nucleul său este **VMkernel**.\n   * *De ce A, C, D sunt greșite:* A este o capcană clasică (ESXi nu conține Linux; doar vechiul ESX 4.0 avea Service Console bazat pe Red Hat); C descrie un hypervisor de Tip 2; D este fals (ESXi funcționează complet izolat de internet / air-gapped)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Este o aplicație care se instalează peste Windows Server pentru a permite migrarea live a mașinilor virtuale."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Este un Hypervisor de Tip 1 care necesită obligatoriu conexiune la internet și un cont Broadcom activ pentru a putea porni mașinile virtuale locale."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "O aplicație de baze de date cu cerințe stricte de latență scăzută la memorie este instalată într-o mașină virtuală pe un server ESXi Dual-Socket. Fiecare socket fizic are 16 nuclee fizice și 128 GB RAM atașați local. Care dintre următoarele configurații ale mașinii virtuale va garanta că aceasta NU va suferi penalități de performanță cauzate de accesul la memoria de la distanță (Remote NUMA Memory Access)?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "24 vCPU și 96 GB RAM"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "12 vCPU și 192 GB RAM"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "12 vCPU și 96 GB RAM"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: C (12 vCPU și 96 GB RAM)**\n\n* *De ce C este corect:* Un singur nod NUMA are 16 nuclee fizice și 128 GB RAM. Configurația de **12 vCPU și 96 GB RAM** se încadrează simultan atât sub limita de nuclee ($12 < 16$), cât și sub limita de memorie ($96\\text{ GB} < 128\\text{ GB}$) a unui singur socket fizic.\n   * *De ce A, B, D sunt greșite:* A depășește numărul de nuclee ale unui singur socket ($24 > 16$); B depășește memoria locală a unui singur socket ($192\\text{ GB} > 128\\text{ GB}$); D ocupă ambele socket-uri complet."
+          }
+        },
+        {
+          "text": {
+            "ro": "32 vCPU și 256 GB RAM"
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "În timpul instalării VMware ESXi 8.0 pe o stație de lucru asamblată local pentru un laborator de studiu, instalatorul se oprește cu eroarea *„No Network Adapters were detected”*, deși cablul de rețea este conectat și funcționează perfect în Windows 11 pe același PC. Care este cauza cea mai probabilă?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Memoria RAM a calculatorului nu este de tip ECC (Error-Correcting Code)."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Funcția Intel VT-x / AMD-V este dezactivată în BIOS."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Placa de rețea de pe placa de bază este un model consumer (ex: Realtek) care nu se află pe lista oficială VMware Compatibility Guide (HCL), iar ESXi nu conține drivere native pentru ea."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: C (Placa de rețea nu este pe VMware HCL)**\n\n* *De ce C este corect:* ESXi include doar drivere pentru echipamente enterprise validate pe VMware HCL. Plăcile de rețea onboard consumer (Realtek) nu au driver inclus în imaginea ISO standard ESXi.\n   * *De ce A, B, D sunt greșite:* ESXi se poate instala și pe memorie Non-ECC în homelab (A) și fără iDRAC (D), iar lipsa VT-x (B) ar genera un avertisment legat de CPU, nu de Network Adapters."
+          }
+        },
+        {
+          "text": {
+            "ro": "Serverul nu are configurată o interfață Out-of-Band (iDRAC/iLO)."
+          },
+          "correct": false
+        }
+      ]
+    }
+  ]
+}

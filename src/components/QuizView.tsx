@@ -4,6 +4,7 @@ import { loc } from '../lib/content';
 import { useStore } from '../lib/storage';
 import { useT } from '../lib/i18n';
 import type { Quiz } from '../lib/types';
+import { Md } from './Md';
 
 export function QuizView({ lessonKey, quiz }: { lessonKey: string; quiz: Quiz }) {
   const { state, update } = useStore();
@@ -77,7 +78,9 @@ export function QuizView({ lessonKey, quiz }: { lessonKey: string; quiz: Quiz })
             <p className="mb-1 text-xs uppercase tracking-wide text-[var(--muted)]">
               {t('question')} {idx + 1} {t('of')} {questions.length}
             </p>
-            <p className="mb-3 font-medium">{loc(q.question, state.lang)}</p>
+            <div className="prose prose-sm mb-3 max-w-none font-medium dark:prose-invert">
+              <Md>{loc(q.question, state.lang)}</Md>
+            </div>
             <ul className="space-y-2" role="list">
               {q.options.map((o, i) => {
                 const show = picked !== null;
@@ -98,20 +101,31 @@ export function QuizView({ lessonKey, quiz }: { lessonKey: string; quiz: Quiz })
                     >
                       <span className="flex items-start gap-2">
                         <span className="font-mono font-semibold">{String.fromCharCode(65 + i)}.</span>
-                        <span className="flex-1">{loc(o.text, state.lang)}</span>
+                        <span className="flex-1">
+                          <Md inline>{loc(o.text, state.lang)}</Md>
+                        </span>
                         {show && o.correct && <CheckCircle2 size={18} className="text-emerald-500" aria-label={t('correct')} />}
                         {show && !o.correct && i === picked && (
                           <XCircle size={18} className="text-red-500" aria-label={t('wrong')} />
                         )}
                       </span>
-                      {show && (
-                        <span className="mt-1 block pl-6 text-xs text-[var(--muted)]">{loc(o.explanation, state.lang)}</span>
-                      )}
                     </button>
                   </li>
                 );
               })}
             </ul>
+            {picked !== null &&
+              q.options
+                .filter((o, i) => o.explanation && (o.correct || i === picked))
+                .map((o, i) => (
+                  <div
+                    key={i}
+                    data-testid="quiz-explanation"
+                    className={`prose prose-sm mt-3 max-w-none rounded-md border-l-4 px-3 py-2 dark:prose-invert ${o.correct ? 'border-emerald-500 bg-emerald-500/5' : 'border-red-500 bg-red-500/5'}`}
+                  >
+                    <Md>{loc(o.explanation, state.lang)}</Md>
+                  </div>
+                ))}
             {picked !== null && (
               <button className="btn mt-3" onClick={next}>
                 {idx + 1 < questions.length ? t('next') : t('finish')}

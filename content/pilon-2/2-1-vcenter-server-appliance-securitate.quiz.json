@@ -1,0 +1,179 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Un administrator VMware încearcă să configureze backup-ul nativ bazat pe fișiere (*File-Based Backup*) al aparatului `vCenter Server Appliance (VCSA 8.0)`, să îi verifice utilizarea spațiului pe partițiile interne de disc și să îi modifice serverele `NTP`. Pe ce port și în ce interfață web trebuie să se conecteze pentru a efectua aceste operațiuni?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "În `vSphere Client` pe portul `TCP 443`, autentificându-se cu `administrator@vsphere.local`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "În `VAMI` (*vCenter Server Appliance Management Interface*) pe portul `TCP 5480`, autentificându-se cu `root`"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (În `VAMI` pe portul `TCP 5480` cu `root`)**\n\n* *Explicație:* Interfața `VAMI` (`:5480`) este dedicată administrării la nivel de sistem de operare/aparat a `VCSA`-ului (monitorizare discuri LVM, rețea, NTP, patching și File-Based Backup)."
+          }
+        },
+        {
+          "text": {
+            "ro": "În `DCUI` pe portul `UDP 902`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "În `VMware Host Client` pe portul `TCP 8080`"
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Ce se întâmplă cu mașinile virtuale de producție care rulează pe un cluster de 8 servere ESXi (cu `vSphere HA` și `vSphere DRS` activate) în momentul în care mașina virtuală `vCenter Server Appliance (VCSA)` este oprită (*Powered Off*) timp de 30 de minute pentru un upgrade de memorie?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Toate mașinile virtuale de producție sunt puse automat în starea *Suspended* până când vCenter-ul revine online."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Mașinile virtuale continuă să ruleze normal pe host-urile ESXi, dar serviciul `vSphere HA` se dezactivează complet și nu mai poate reporni mașinile dacă pică un host ESXi în acele 30 de minute."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Mașinile virtuale continuă să ruleze fără nicio întrerupere, și chiar și `vSphere HA` rămâne 100% funcțional (deoarece agenții `fdm` comunică direct între host-uri); doar interfața centrală `vSphere Client`, inițierea de `vMotion` și balansarea automată `DRS` sunt indisponibile temporar."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: C (Mașinile virtuale și `vSphere HA` continuă să funcționeze normal)**\n\n* *Explicație:* `vCenter Server` este doar planul de management (*Management Plane*). Mașinile virtuale rulează pe host-urile ESXi, iar `vSphere HA` funcționează autonom prin agenții `fdm` de pe host-uri fără a depinde de `vpxd`."
+          }
+        },
+        {
+          "text": {
+            "ro": "Host-urile ESXi își dau automat restart pentru a căuta un alt vCenter Server."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Un utilizator numit `andrei@lab.local` este membru în două grupuri Active Directory: grupul **`Backup-Operators`** și grupul **`Junior-Admins`**.\nPe folderul de mașini virtuale **`Folder-ERP`**, administratorul vCenter a configurat următoarele două permisiuni:\n* Grupul `Backup-Operators` a primit rolul **`Administrator`**.\n* Grupul `Junior-Admins` a primit rolul **`No Access`**.\nCare va fi nivelul efectiv de acces al utilizatorului `andrei@lab.local` asupra folderului **`Folder-ERP`**?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "`No Access` (nu va vedea deloc folderul, deoarece `No Access` suprascrie orice alt rol pe același obiect)."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`Read-Only` (sistemul face media între cele două roluri)."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`Administrator` (deoarece atunci când un utilizator aparține mai multor grupuri care au permisiuni atribuite pe **același obiect**, privilegiile grupurilor se reunesc/adună)."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: C (`Administrator`)**\n\n* *Explicație:* Conform **Regulii #3 și #4 din documentația oficială vSphere Security**, când un utilizator primește permisiuni din două grupuri diferite pe **exact același obiect**, privilegiile se cumulează (*Union of privileges*). Reuniunea dintre toate privilegiile (`Administrator`) și zero privilegii (`No Access`) rezultă în `Administrator`!"
+          }
+        },
+        {
+          "text": {
+            "ro": "Contul lui `andrei@lab.local` va fi blocat în `vSphere SSO`."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "Pe de altă parte, în același scenariu, grupul **`Junior-Admins`** primește rolul **`Administrator`** (cu opțiunea *Propagate to children* bifată) la nivelul întregului **`Datacenter`**. Mai jos în ierarhie, direct pe mașina virtuală **`VM-Salarii`**, administratorul adaugă o permisiune pentru același grup **`Junior-Admins`** cu rolul **`No Access`**. Ce acces vor avea membrii grupului `Junior-Admins` asupra mașinii `VM-Salarii`?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "`Administrator`, deoarece permisiunea de pe obiectul părinte (`Datacenter`) are prioritate față de obiectul copil."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`No Access`, deoarece o permisiune definită explicit pe un obiect copil (`VM-Salarii`) suprascrie întotdeauna (*Overrides*) permisiunea moștenită de la un obiect părinte (`Datacenter`)."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (`No Access`)**\n\n* *Explicație:* Conform **Regulii #1**, o permisiune aplicată direct pe un obiect copil (`VM-Salarii`) suprascrie întotdeauna permisiunea moștenită de la părinte (`Datacenter`), indiferent dacă rolul de pe copil este mai restrictiv sau mai permisiv."
+          }
+        },
+        {
+          "text": {
+            "ro": "`Read-Only`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Vor putea vedea mașina, dar nu o vor putea opri."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "Care este serviciul intern din arhitectura `vSphere Single Sign-On (SSO)` care validează credențialele utilizatorului în raport cu o sursă de identitate (*Identity Source*, precum `vsphere.local` sau `Active Directory over LDAPS`) și emite jetoane criptografice **`SAML 2.0`**?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "`VMCA` (*VMware Certificate Authority*)"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`STS` (*Security Token Service*)"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (`STS` – *Security Token Service*)**\n\n* *Explicație:* `STS` este serviciul central din `vSphere SSO` care emite tichetele `SAML 2.0`. `VMCA` (A) se ocupă de certificatele SSL/TLS ale serverelor, `vpxa` (C) este agentul vCenter de pe ESXi, iar `fdm` (D) este agentul HA."
+          }
+        },
+        {
+          "text": {
+            "ro": "`vpxa` (*vCenter Agent*)"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`fdm` (*Fault Domain Manager*)"
+          },
+          "correct": false
+        }
+      ]
+    }
+  ]
+}

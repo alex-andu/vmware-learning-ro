@@ -1,0 +1,40 @@
+{
+  "steps": [
+    {
+      "id": "pas-1",
+      "title": {
+        "ro": "Observarea Stării Inițiale (Înainte de Snapshot)"
+      },
+      "action": {
+        "ro": "1. Conectează-te prin `SSH` la `esxi01` (`ssh root@192.168.10.51`) și intră în folderul mașinii virtuale `web01`:\n   ```bash\n   cd /vmfs/volumes/datastore1/web01\n   ls -lah\n   ```\n2. Verifică la ce fișier `.vmdk` este conectată acum mașina virtuală în fișierul ei `.vmx`, și care este codul `CID` al discului de bază:\n   ```bash\n   grep \".fileName\" web01.vmx\n   cat web01.vmdk\n   ```\n   * **Observă rezultatul:** În `web01.vmx` scrie **`scsi0:0.fileName = \"web01.vmdk\"`**, iar în `web01.vmdk` vezi un `CID=<cod_hex>` și **`parentCID=ffffffff`** (codul `ffffffff` înseamnă: *„Eu sunt discul rădăcină original, nu am niciun părinte!”*)."
+      }
+    },
+    {
+      "id": "pas-2",
+      "title": {
+        "ro": "Crearea `Snapshot 1` (Cu Memorie) și Inspecția Fișierelor `-000001`"
+      },
+      "action": {
+        "ro": "1. În interfața web (**VMware Host Client**), cu mașina `web01` pornită, dă click-dreapta pe `web01` $\\rightarrow$ **Snapshots** $\\rightarrow$ **Take snapshot**.\n   * **Name:** `Snap1-Inainte-De-Update`\n   * Lasă **BIFATĂ** opțiunea `Snapshot the virtual machine's memory`.\n   * Apasă pe **Take snapshot**.\n2. Revino în fereastra de `SSH` și rulează din nou:\n   ```bash\n   ls -lah\n   grep \".fileName\" web01.vmx\n   cat web01-000001.vmdk\n   ```\n   * **EXPLICAREA PROFESORULUI (Uită-te la magia care s-a întâmplat în spate!):**\n     * În `web01.vmx`, linia s-a schimbat automat în: **`scsi0:0.fileName = \"web01-000001.vmdk\"`**! Mașina virtuală nu mai scrie în `web01.vmdk`, ci în `-000001`!\n     * Au apărut pe disc: **`web01-000001.vmdk`** (descriptorul text), **`web01-000001-sesparse.vmdk`** (discul diferențial `SEsparse` pe `VMFS-6`!) și **`web01-Snapshot1.vmsn`** (care are $2\\text{ GB}$, deoarece conține fotografia memoriei RAM!).\n     * În interiorul lui `web01-000001.vmdk`, uită-te la linia **`parentCID`**: este **identică** cu `CID`-ul pe care l-ai văzut la Pasul 1 în `web01.vmdk`, iar la `parentFileNameHint` scrie `\"web01.vmdk\"`!"
+      }
+    },
+    {
+      "id": "pas-3",
+      "title": {
+        "ro": "Crearea `Snapshot 2` (Fără Memorie) și Testarea Restricțiilor din GUI"
+      },
+      "action": {
+        "ro": "1. În interfața web, dă din nou click-dreapta pe `web01` $\\rightarrow$ **Snapshots** $\\rightarrow$ **Take snapshot**.\n   * **Name:** `Snap2-Fara-RAM`\n   * **DEBIFEAZĂ** opțiunea `Snapshot the virtual machine's memory` și apasă **Take snapshot** (observă că s-a creat instantaneu, în mai puțin de o secundă!).\n2. În `SSH`, rulează `ls -lah` și `cat web01-000002.vmdk`:\n   * Vezi acum că a apărut **`web01-000002-sesparse.vmdk`**, al cărui părinte (`parentFileNameHint`) este **`\"web01-000001.vmdk\"`**!\n   * Iar fișierul `web01-Snapshot2.vmsn` are doar câțiva kilobyți (pentru că nu am inclus memoria RAM)!\n3. **Testul Capcanei de Examen:** În interfața web, dă click-dreapta pe `web01` $\\rightarrow$ **Edit Settings** și încearcă să schimbi dimensiunea lui **Hard disk 1** din `16 GB` în `20 GB`.\n   * **Observă:** Căsuța este **blocată (Greyed out)**! Acum ai văzut cu ochii tăi de ce nu poți mări un disc cât timp există un snapshot activ!"
+      }
+    },
+    {
+      "id": "pas-4",
+      "title": {
+        "ro": "Consolidarea (`Delete All`) și Verificarea Curățeniei pe Disc"
+      },
+      "action": {
+        "ro": "1. Dă click-dreapta pe `web01` $\\rightarrow$ **Snapshots** $\\rightarrow$ **Manage snapshots** $\\rightarrow$ apasă pe **`Delete all`** și confirmă.\n2. Rulează în `SSH`:\n   ```bash\n   ls -lah\n   grep \".fileName\" web01.vmx\n   ```\n   * **Validare:** Toate fișierele `-000001`, `-000002` și `.vmsn` au fost comasate în `web01-flat.vmdk` și șterse automat de pe disc, iar în `web01.vmx` discul activ este din nou **`web01.vmdk`**! Dacă intri acum în *Edit Settings*, căsuța de mărire a discului este din nou deblocată!"
+      }
+    }
+  ]
+}

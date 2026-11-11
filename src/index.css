@@ -60,3 +60,24 @@ body {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
+
+/* Long code, tables and formulas in Alex's chapters scroll inside their box on phones. */
+.prose pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25rem 0;
+}
+.prose :where(li, td, th, p) {
+  overflow-wrap: anywhere;
+}
+.prose .katex {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  vertical-align: bottom;
+}

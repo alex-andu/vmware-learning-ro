@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "id": "pas-1",
+      "title": {
+        "ro": "Inspectarea Arhitecturii Fizice a PC-ului tău (Sockets, Cores, Logical Processors)"
+      },
+      "action": {
+        "ro": "1. Pe PC-ul tău cu Windows, apasă combinația de taste **`Ctrl + Shift + Esc`** pentru a deschide **Task Manager**.\n2. Dă click pe tab-ul **Performance** (în stânga) și selectează **CPU**.\n3. Uită-te în colțul din dreapta-jos la următoarele 4 valori și notează-ți-le:\n   * **Sockets:** (De obicei `1` pe un PC/Laptop).\n   * **Cores:** (Numărul de nuclee fizice reale, ex: `6`, `8`, `12`, `16`).\n   * **Logical processors:** (Numărul de fire de execuție văzute de sistem, ex: `12`, `16`, `24`, `32`).\n   * **Virtualization:** Trebuie să scrie **`Enabled`**.\n\n* **EXPLICAREA PROFESORULUI (DE CE facem asta și ce înseamnă?):**\n  * Raportul dintre *Logical Processors* și *Cores* îți arată dacă ai **Hyper-Threading / SMT** activat. Când vom crea serverele noastre virtuale ESXi în capitolele următoare, numărul de *Logical Processors* este „plafonul” nostru de vCPU.\n  * Dacă la **Virtualization** scrie **`Disabled`**, procesorul tău are instrucțiunile hardware **Intel VT-x** sau **AMD-V** oprite din BIOS. Dacă încerci să pornești o mașină virtuală ESXi cu această setare pe *Disabled*, vei primi eroarea critică: *„This host does not support virtualizing real mode / Intel VT-x is disabled”*, deoarece Hypervisorul nu poate izola instrucțiunile procesorului fără suportul hardware direct al cipului."
+      }
+    },
+    {
+      "id": "pas-2",
+      "title": {
+        "ro": "Verificarea Avansată din PowerShell (Metoda Inginerului)"
+      },
+      "action": {
+        "ro": "În producție sau când faci audit pe un server de la distanță, nu ai mereu interfață grafică. Hai să interogăm direct hardware-ul prin WMI/CIM:\n1. Deschide **PowerShell** și rulează următoarea comandă:\n   ```powershell\n   Get-CimInstance -ClassName Win32_Processor | Select-Object Name, NumberOfCores, NumberOfLogicalProcessors, VirtualizationFirmwareEnabled\n   ```\n2. Verifică și cum arată modulele tale fizice de memorie RAM (inclusiv dacă ai sau nu ECC):\n   ```powershell\n   Get-CimInstance -ClassName Win32_PhysicalMemory | Select-Object BankLabel, Capacity, Speed, TotalWidth, DataWidth\n   ```\n\n* **EXPLICAREA PROFESORULUI (Cum citești rezultatul ca un profesionist?):**\n  * La comanda de RAM, uită-te la `TotalWidth` și `DataWidth`. Pe un PC normal, ambele vor fi `64` (64 de biți de date, 0 biți de corecție = **Non-ECC**). Pe un server fizic real din Data Center, `DataWidth` este `64`, dar `TotalWidth` este **`72`**! Acei **8 biți suplimentari** ($72 - 64 = 8$) sunt exact biții de control folosiți de memoria **ECC** pentru a repara erorile din mers fără să crape serverul ESXi!"
+      }
+    },
+    {
+      "id": "pas-3",
+      "title": {
+        "ro": "Simularea unei Console Out-of-Band (iDRAC / iLO) fără să cumperi un server fizic"
+      },
+      "action": {
+        "ro": "Vrei să vezi cum arată un server fizic în interiorul consolei sale de management?\n1. Când vom instala **VMware Workstation Pro** în Capitolul 0.3 (care este acum **100% GRATUIT** pentru uz personal de pe portalul Broadcom!), fiecare mașină virtuală pe care o vom crea va avea o bară de butoane deasupra ecranului: **Power On**, **Power Off**, **Reset**, **Send Ctrl+Alt+Del** și **Settings -> CD/DVD -> Use ISO Image file**.\n2. Această fereastră din VMware Workstation joacă pentru serverele noastre virtuale ESXi **exact același rol pe care îl joacă consola HTML5 din Dell iDRAC sau HPE iLO** pentru un server fizic dintr-un Data Center!"
+      }
+    }
+  ]
+}

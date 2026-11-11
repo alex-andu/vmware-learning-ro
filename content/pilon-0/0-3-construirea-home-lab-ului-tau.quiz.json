@@ -1,0 +1,179 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Un inginer își construiește un laborator de studiu vSphere 8 folosind Nested Virtualization. El a creat o mașină virtuală pentru primul său host ESXi (`L1`), a instalat ESXi 8.0 cu succes, dar când încearcă să pornească o mașină virtuală pe 64 de biți (`L2`) în interiorul acestui host Nested ESXi, primește o eroare care îi spune că instrucțiunile hardware Intel VT-x / AMD-V nu sunt disponibile. Care este setarea pe care a uitat să o activeze pe mașina virtuală a host-ului Nested ESXi (`L1`)?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Activarea *Promiscuous Mode* pe vSwitch-ul din interiorul Nested ESXi"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Bifa *Virtualize Intel VT-x/EPT or AMD-V/RVI* (`vhv.enable = \"TRUE\"`) în setările procesorului mașinii virtuale `L1`"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (`Virtualize Intel VT-x/EPT or AMD-V/RVI` / `vhv.enable = \"TRUE\"`)**\n\n* *Explicație:* Pentru ca un hypervisor de Nivel 1 (Nested ESXi) să poată rula mașini virtuale de Nivel 2 pe 64-bit, hypervisorul de Nivel 0 trebuie să îi expună extensiile hardware de virtualizare ale procesorului prin activarea `VHV` (`vhv.enable = \"TRUE\"`)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Alocarea unei memorii RAM de tip ECC pentru mașina virtuală"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Crearea unei înregistrări DNS de tip `PTR` pentru mașina virtuală `L2`"
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Într-o arhitectură Nested ESXi, serverul `Nested-ESXi-01` are o placă de rețea virtuală cu adresa MAC `00:0C:29:AA:AA:01`. În interiorul său rulează o mașină virtuală `Web-VM-01` care are propria adresă MAC `00:50:56:BB:BB:02`. Când `Web-VM-01` încearcă să comunice cu restul rețelei, pachetele ei sunt blocate la ieșirea din `Nested-ESXi-01` de către switch-ul gazdă (`L0`) deoarece adresa MAC sursă a pachetului (`00:50:56:BB:BB:02`) nu corespunde cu adresa MAC a portului lui `Nested-ESXi-01` (`00:0C:29:AA:AA:01`). Ce politică de securitate trebuie setată pe **`Accept`** pe switch-ul gazdă pentru a permite ieșirea acestor pachete?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Forged Transmits"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: A (`Forged Transmits`)**\n\n* *Explicație:* `Forged Transmits` verifică traficul de **ieșire (Egress)**, comparând adresa *Source MAC* din cadrul Ethernet cu adresa MAC alocată oficial plăcii virtuale. Când un Nested ESXi scoate pachete în numele mașinilor virtuale din interiorul său, aceste pachete au alt *Source MAC* și sunt blocate dacă `Forged Transmits` este pe `Reject`. (*Notă:* Pentru ca răspunsurile să se și întoarcă înapoi în Nested ESXi, va fi nevoie și de *Promiscuous Mode: Accept* sau *MAC Learning* la intrare!)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Promiscuous Mode"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Traffic Shaping"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Beacon Probing"
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Ce tehnologii din procesoarele moderne Intel și AMD sunt responsabile specific pentru traducerea în hardware a adreselor de memorie RAM pe două niveluri (*Second Level Address Translation - SLAT*), eliminând necesitatea tabelelor software de tip *Shadow Page Tables*?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Intel Hyper-Threading și AMD Simultaneous Multithreading (SMT)"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Intel Turbo Boost și AMD Precision Boost"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Intel EPT (Extended Page Tables) și AMD RVI (Rapid Virtualization Indexing)"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: C (`Intel EPT` și `AMD RVI`)**\n\n* *Explicație:* `VT-x` și `AMD-V` se ocupă de instrucțiunile procesorului (`CPU`), în timp ce **`EPT` (`Extended Page Tables`)** la Intel și **`RVI` (`Rapid Virtualization Indexing`)** la AMD se ocupă de traducerea în hardware a paginilor de memorie (`RAM`)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Intel AES-NI și AMD Secure Encrypted Virtualization"
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "Pe un laptop cu Windows 11, un administrator constată că mașinile sale virtuale Nested ESXi din VMware Workstation Pro pornesc extrem de greu și afișează avertismentul că rulează în modul *User Level Monitor (ULM)* în loc să acceseze direct extensiile hardware `VT-x`. Verificând în BIOS, funcția `Intel Virtualization Technology` este pe `Enabled`. Care este cauza din sistemul de operare Windows 11?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Placa de rețea `VMnet8` este configurată în modul NAT în loc de Bridged."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Discurile mașinilor virtuale au fost create în modul *Thin Provisioning*."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Funcția *Windows Hyper-V / Virtualization-Based Security (VBS / Memory Integrity)* este activă în Windows 11 și a preluat controlul exclusiv asupra nivelului `VMX Root Mode (Ring -1)` al procesorului."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: C (`Windows Hyper-V / VBS / Memory Integrity` activ în Windows 11)**\n\n* *Explicație:* Când `VBS` / `Hyper-V` rulează în Windows 11, el ocupă `Ring -1`, blocând accesul direct al lui VMware Workstation la `VT-x`. Dezactivarea cu `bcdedit /set hypervisorlaunchtype off` și oprirea *Memory Integrity* rezolvă problema."
+          }
+        },
+        {
+          "text": {
+            "ro": "Lipsește fișierul `.vmem` de pe discul SSD."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "În ce situație reală dintr-un Data Center de **producție** (fără Nested Virtualization) este recomandată și necesară schimbarea politicii **Promiscuous Mode** de pe valoarea implicită `Reject` pe valoarea **`Accept`** pe un Port Group?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Atunci când vrem să creștem viteza de migrare `vMotion` între două host-uri ESXi."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Atunci când într-o mașină virtuală rulează o aplicație de securitate de tip IDS/IPS (Intrusion Detection System) sau analizor de trafic care trebuie să inspecteze toate pachetele ce circulă în acel segment de rețea."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (Mașină virtuală IDS/IPS sau Packet Sniffer)**\n\n* *Explicație:* În producție, *Promiscuous Mode* este o breșă de securitate dacă e lăsat activ pentru mașini normale, fiind folosit exclusiv pe Port Group-uri dedicate sondelor de securitate (IDS/IPS) care trebuie să asculte tot traficul."
+          }
+        },
+        {
+          "text": {
+            "ro": "Atunci când montăm un datastore `NFS v3` sau `iSCSI` pe host-urile ESXi."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Atunci când activăm `Jumbo Frames (MTU 9000)` pentru rețeaua `vSAN`."
+          },
+          "correct": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,10 +1,9 @@
-import Markdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import { HelpCircle } from 'lucide-react';
 import { loc } from '../lib/content';
 import { useStore } from '../lib/storage';
 import { useT } from '../lib/i18n';
 import type { LabChecklist as Lab } from '../lib/types';
+import { Md } from './Md';
 
 export function LabChecklist({ lessonKey, lab }: { lessonKey: string; lab: Lab }) {
   const { state, update } = useStore();
@@ -40,13 +39,15 @@ export function LabChecklist({ lessonKey, lab }: { lessonKey: string; lab: Lab }
                   <strong>{t('uiPath')}:</strong> <code>{loc(step.path, state.lang)}</code>
                 </p>
               )}
-              <Markdown remarkPlugins={[remarkGfm]}>{loc(step.action, state.lang)}</Markdown>
-              <div className="mt-2 rounded border-l-2 border-emerald-500 bg-emerald-500/5 px-3 py-2">
-                <p className="m-0 flex items-center gap-1 font-semibold text-emerald-600 dark:text-emerald-400">
-                  <HelpCircle size={16} aria-hidden="true" /> {t('whyStep')}
-                </p>
-                <Markdown remarkPlugins={[remarkGfm]}>{loc(step.why, state.lang)}</Markdown>
-              </div>
+              <Md>{loc(step.action, state.lang)}</Md>
+              {step.why && (
+                <div className="mt-2 rounded border-l-2 border-emerald-500 bg-emerald-500/5 px-3 py-2">
+                  <p className="m-0 flex items-center gap-1 font-semibold text-emerald-600 dark:text-emerald-400">
+                    <HelpCircle size={16} aria-hidden="true" /> {t('whyStep')}
+                  </p>
+                  <Md>{loc(step.why, state.lang)}</Md>
+                </div>
+              )}
             </div>
           </li>
         ))}

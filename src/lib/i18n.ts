@@ -16,6 +16,7 @@ const dict = {
   lessons: { ro: 'lecții', en: 'lessons' },
   lesson: { ro: 'Lecție', en: 'Lesson' },
   competency: { ro: 'Competență pentru CV', en: 'CV competency' },
+  objective: { ro: 'Obiectiv', en: 'Objective' },
   labTitle: { ro: 'Laboratorul modulului', en: 'Module lab' },
   markDone: { ro: 'Marchează lecția ca terminată', en: 'Mark lesson as done' },
   markUndone: { ro: 'Lecție terminată (anulează)', en: 'Lesson done (undo)' },
@@ -72,8 +73,8 @@ const dict = {
   sourcesTitle: { ro: 'Surse folosite (din registru)', en: 'Sources used (from registry)' },
   curriculum: { ro: 'Curriculum', en: 'Curriculum' },
   curriculumIntro: {
-    ro: 'Toate modulele cursului, cu competența de CV pe care o obții, laboratorul fiecărui modul și obiectivele de examen acoperite de fiecare capitol.',
-    en: 'All course modules, with the CV competency you gain, each module lab and the exam objectives each chapter covers.',
+    ro: 'Toți pilonii cursului, cu obiectivul fiecăruia și subiectele fiecărui capitol. Capitolele fără lecție apar „planificat” până când sunt adăugate.',
+    en: 'All course pillars, with each pillar objective and the topics of each chapter. Chapters without a lesson show as planned until they are added.',
   },
   examLegend: { ro: 'Ce înseamnă etichetele de examen', en: 'What the exam tags mean' },
   examLegendHint: {

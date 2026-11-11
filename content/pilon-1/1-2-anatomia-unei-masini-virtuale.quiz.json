@@ -1,0 +1,179 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "O mașină virtuală de producție este configurată cu $64\\text{ GB RAM}$ și are setată o rezervare de memorie (*Memory Reservation*) de $24\\text{ GB}$. Mașina virtuală este în prezent oprită (*Powered Off*). De cât spațiu liber pe Datastore va avea nevoie hypervisorul ESXi strict pentru crearea fișierului principal de swap al mașinii virtuale (`.vswp`) în momentul în care administratorul apasă pe *Power On*?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "$64\\text{ GB}$"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "$40\\text{ GB}$"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B ($40\\text{ GB}$)**\n\n* *Explicație:* Formula oficială pentru dimensiunea fișierului `.vswp` creat la *Power On* este: $\\text{Allocated RAM} - \\text{Reserved RAM}$. Prin urmare, $64\\text{ GB} - 24\\text{ GB} = \\mathbf{40\\text{ GB}}$."
+          }
+        },
+        {
+          "text": {
+            "ro": "$24\\text{ GB}$"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "$0\\text{ GB}$"
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Un administrator inspectează fișierele unei mașini virtuale prin SSH în calea `/vmfs/volumes/Datastore01/App-VM/` și observă două fișiere legate de disc: `App-VM.vmdk` (cu dimensiunea de $540\\text{ Bytes}$) și `App-VM-flat.vmdk` (cu dimensiunea de $80\\text{ GB}$). Care este rolul fișierului `App-VM.vmdk` de $540\\text{ Bytes}$?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Este un fișier de snapshot diferențial (*Delta Disk*) care stochează modificările temporare."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Este fișierul care păstrează setările de BIOS/UEFI ale mașinii virtuale."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Este fișierul descriptor (în format text) care definește geometria discului, tipul adaptorului SCSI și indică spre fișierul binar `-flat.vmdk` unde sunt stocate efectiv datele."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: C (Fișierul descriptor text care indică spre `-flat.vmdk`)**\n\n* *Explicație:* Fiecare disc virtual pe `VMFS`/`NFS` este compus din fișierul descriptor text (`.vmdk`, de câțiva sute de octeți) și fișierul binar de date (`-flat.vmdk`). Ștergerea fișierului `.vmdk` face ca ESXi să nu mai poată monta discul până la recrearea descriptorului."
+          }
+        },
+        {
+          "text": {
+            "ro": "Este un fișier rezidual corupt care trebuie șters manual din linia de comandă."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Care dintre următoarele configurații de rețea și stocare oferă cea mai mare performanță (Throughput și IOPS) și cel mai redus consum de procesor (CPU Overhead) pentru o mașină virtuală care rulează o bază de date intensivă pe VMware vSphere 8?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Adaptor de rețea `E1000e` și controller de stocare `LSI Logic Parallel`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Adaptor de rețea `VMXNET3` și controller de stocare `VMware Paravirtual SCSI (PVSCSI)` (sau `Virtual NVMe`)"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (`VMXNET3` și `PVSCSI` / `Virtual NVMe`)**\n\n* *Explicație:* Dispozitivele paravirtualizate (`VMXNET3` pentru rețea și `PVSCSI` pentru SCSI) elimină emularea hardware-ului vechi, comunicând direct cu `VMkernel`-ul prin *Shared Memory Ring Buffers* cu latență minimă și consum redus de CPU."
+          }
+        },
+        {
+          "text": {
+            "ro": "Adaptor de rețea `Flexible` și controller de stocare `LSI Logic SAS`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Adaptor de rețea `VMXNET2 (Enhanced)` și controller `SATA AHCI`"
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "Un inginer trebuie să instaleze Windows 11 Enterprise (sau Windows Server cu BitLocker și Virtualization-Based Security activat) într-o mașină virtuală și are nevoie să adauge dispozitivul **Virtual Trusted Platform Module (`vTPM 2.0`)**. Care este cerința tehnică obligatorie la nivelul firmware-ului mașinii virtuale pentru a putea atașa un `vTPM`?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Mașina virtuală trebuie să fie configurată cu firmware `EFI (UEFI)` în loc de `Legacy BIOS`."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: A (Firmware `EFI / UEFI`)**\n\n* *Explicație:* Dispozitivul `vTPM 2.0` și funcția `Secure Boot` nu sunt suportate pe arhitectura veche `Legacy BIOS`, necesitând obligatoriu firmware **`EFI (UEFI)`** (și un *Native Key Provider* sau *KMS* configurat în vCenter)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Discul mașinii virtuale trebuie să fie formatat în modul *Thick Provision Eager Zeroed*."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Mașina virtuală trebuie să folosească placa de rețea `E1000e`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Serviciul `SSH` trebuie să fie activat pe host-ul ESXi."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "Ce se întâmplă atunci când un administrator dă click-dreapta pe o mașină virtuală în inventarul vSphere și selectează opțiunea **`Remove from Inventory`**?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Toate fișierele mașinii virtuale, inclusiv `-flat.vmdk`, sunt șterse permanent de pe Datastore."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Mașina virtuală este deconectată doar de la switch-ul virtual, dar rămâne în lista din vCenter."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Mașina virtuală este dezînregistrată din inventarul vCenter/ESXi, dar toate fișierele ei rămân intacte pe Datastore și pot fi re-înregistrate ulterior prin fișierul `.vmx`."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: C (Dezînregistrată din inventar, dar fișierele rămân intacte pe Datastore)**\n\n* *Explicație:* `Remove from Inventory` doar scoate mașina din catalogul `hostd`/`vCenter`. Toate fișierele rămân pe disc și mașina poate fi readusă în inventar dând click-dreapta pe fișierul `.vmx` în Datastore Browser $\\rightarrow$ *Register VM*."
+          }
+        },
+        {
+          "text": {
+            "ro": "Se șterg doar snapshot-urile mașinii virtuale."
+          },
+          "correct": false
+        }
+      ]
+    }
+  ]
+}

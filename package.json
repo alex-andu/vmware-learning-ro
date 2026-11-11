@@ -13,6 +13,7 @@
     "test:e2e": "node scripts/smoke-test.mjs"
   },
   "dependencies": {
+    "katex": "^0.16.47",
     "lucide-react": "^1.71.0",
     "mermaid": "^12.3.0",
     "minisearch": "^7.2.0",
@@ -20,8 +21,10 @@
     "react-dom": "^18.3.1",
     "react-markdown": "^10.1.0",
     "react-router-dom": "^6.30.6",
+    "rehype-katex": "^7.0.1",
     "remark-directive": "^4.0.0",
     "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0",
     "unist-util-visit": "^5.2.0",
     "yaml": "^2.9.1"
   },

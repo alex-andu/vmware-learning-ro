@@ -1,0 +1,179 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Un administrator VMware analizează performanța unei mașini virtuale cu `8 vCPU` folosind utilitarul `esxtop`. În ecranul de CPU, administratorul observă că valoarea **`%CSTP` (`Co-Stop`)** stă constant la $9.5\\%$. Care este cauza tehnică a acestei valori ridicate și ce acțiune o va remedia?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Mașina virtuală are configurată o limită de memorie (*Memory Limit*) prea mică; creșterea memoriei RAM va rezolva problema."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Mașina virtuală are alocate prea multe procesoare virtuale (`vCPU`) față de câte fire de execuție folosește în realitate aplicația din interiorul ei, forțând scheduler-ul să oprească nucleele pentru sincronizare; reducerea numărului de `vCPU` (de exemplu la `4 vCPU`) va rezolva problema."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (Mașina are prea multe `vCPU` alocate; reducerea numărului de `vCPU` rezolvă `%CSTP`)**\n\n* *Explicație:* `%CSTP` (*Co-Stop*) apare exclusiv la mașinile virtuale multi-procesor (`vSMP`) atunci când nu toate nucleele lor sunt folosite uniform sau nu găsesc simultan loc pe procesorul fizic. Reducerea numărului de `vCPU` (*Right-Sizing*) este singura soluție arhitecturală corectă."
+          }
+        },
+        {
+          "text": {
+            "ro": "Placa de rețea a mașinii virtuale este de tip `E1000e`; schimbarea ei în `VMXNET3` va elimina `%CSTP`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Discul virtual al mașinii este de tip *Thin Provisioned*; convertirea lui în *Thick Provision Eager Zeroed* va elimina `%CSTP`."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Care este rolul driverului **`vmmemctl`** instalat prin pachetul **VMware Tools** în timpul procesului de recuperare a memoriei (*Memory Reclamation*) de pe un host ESXi?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Comprimă fișierele `-flat.vmdk` direct pe datastore-ul VMFS pentru a elibera spațiu pe disc."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Permite partajarea paginilor de memorie identice între mașini virtuale aflate pe servere ESXi diferite prin vMotion."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Implementează mecanismul *Memory Ballooning*: la cererea `VMkernel`-ului, alocă și blochează pagini de memorie în interiorul sistemului de operare Guest, lăsând Guest OS-ul să decidă care pagini sunt libere sau inactive pentru a fi restituite hypervisorului."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: C (Implementează *Memory Ballooning*, lăsând Guest OS-ul să aleagă paginile libere/inactive)**\n\n* *Explicație:* Driverul `vmmemctl` este driverul de *Ballooning*. El evită *Host Swapping*-ul orb prin faptul că cere memorie din interiorul sistemului de operare oaspete, care știe exact care pagini sunt nefolosite."
+          }
+        },
+        {
+          "text": {
+            "ro": "Criptează traficul de memorie în timpul migrării mașinii virtuale."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Când intră în acțiune valorile **`Shares`** (*Low, Normal, High*) configurate pentru CPU sau Memorie pe mașinile virtuale de pe un host ESXi?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Permanent, din secunda în care mașina virtuală este pornită, indiferent cât procesor sau RAM liber există pe server."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Exclusiv în momentele în care există contenție de resurse (*Resource Contention*), adică atunci când mașinile virtuale cer în total mai multe resurse fizice decât poate oferi host-ul ESXi."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (Exclusiv în momentele de *Resource Contention*)**\n\n* *Explicație:* Cotele `Shares` garantează împărțirea proporțională a resurselor **doar atunci când nu ajung pentru toată lumea**. Când host-ul are resurse libere, `Shares` nu limitează nicio mașină virtuală."
+          }
+        },
+        {
+          "text": {
+            "ro": "Doar atunci când mașina virtuală este oprită (*Powered Off*)."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Doar atunci când pe host este activat modul *Strict Lockdown Mode*."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "În timpul unei investigații de stocare în `esxtop` (tasta `u`), un inginer observă pe un volum LUN iSCSI următoarele valori medii de latență: **`DAVG/cmd = 42.5 ms`**, **`KAVG/cmd = 0.2 ms`** și **`GAVG/cmd = 42.7 ms`**. Unde se află blocajul de performanță (bottleneck-ul)?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "În interiorul kernelului ESXi (`VMkernel`), deoarece `KAVG/cmd` este sub $1\\text{ ms}$."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "În afara serverului ESXi — la nivelul rețelei de stocare SAN sau al discurilor fizice din echipamentul Storage Array — deoarece `DAVG/cmd` (*Device Average Latency*) este foarte ridicat ($42.5\\text{ ms}$)."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (În afara serverului ESXi – în rețeaua SAN sau în Storage Array)**\n\n* *Explicație:* `GAVG = DAVG + KAVG`. Cum `KAVG` (timpul petrecut în kernelul ESXi) este doar $0.2\\text{ ms}$, iar `DAVG` (timpul de răspuns al echipamentului extern de stocare) este $42.5\\text{ ms}$, întârzierea vine de la SAN/Storage Array."
+          }
+        },
+        {
+          "text": {
+            "ro": "În driverul `vmmemctl` din interiorul mașinii virtuale."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "În setarea `CPU Shares` a mașinii virtuale."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "Din motive de securitate (*Side-Channel Attack Mitigation*), cum funcționează în mod implicit tehnologia **Transparent Page Sharing (`TPS`)** în versiunile moderne de VMware ESXi (când parametrul `Mem.ShareForceSalting` are valoarea implicită `2`)?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Partajează paginile de memorie identice între toate mașinile virtuale de pe toate host-urile din vCenter."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Partajează paginile de memorie identice doar în interiorul aceleiași mașini virtuale (*Intra-VM*), fără a mai partaja pagini între mașini virtuale diferite (*Inter-VM*) decât dacă administratorul configurează explicit aceeași valoare `Salt`."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (Partajează pagini doar *Intra-VM*, în interiorul fiecărei mașini virtuale)**\n\n* *Explicație:* Conform VMware KB 2080735, activarea implicită a *TPS Salting* (`Mem.ShareForceSalting = 2`) oprește deduplicarea memoriei între mașini virtuale diferite, păstrând deduplicarea internă a fiecărui VM."
+          }
+        },
+        {
+          "text": {
+            "ro": "Mută toate paginile identice direct în fișierul `.vswp` de pe disc."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Dezactivează complet suportul pentru memoria `ECC RAM`."
+          },
+          "correct": false
+        }
+      ]
+    }
+  ]
+}

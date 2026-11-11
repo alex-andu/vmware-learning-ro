@@ -37,7 +37,7 @@ if (sourceIds.size !== sources.length) err('sources.json', 'duplicate ids');
 if (glossaryIds.size !== glossary.length) err('glossary.json', 'duplicate ids');
 for (const g of glossary) if (!g.term || !g.ro || !g.en) err('glossary.json', `${g.id} needs term, ro, en`);
 for (const m of modules) {
-  for (const k of ['title', 'competency', 'labTitle']) if (!m[k]?.ro) err('modules.json', `${m.id} missing ${k}.ro`);
+  if (!m.title?.ro) err('modules.json', `${m.id} missing title.ro`);
   if (!Array.isArray(m.chapters) || m.chapters.length === 0) err('modules.json', `${m.id} needs chapters[]`);
   const ids = new Set();
   for (const c of m.chapters ?? []) {
@@ -98,20 +98,23 @@ for (const dir of readdirSync(CONTENT)) {
         err(f, 'missing frontmatter');
         continue;
       }
+      // origin: alex = Alex's own chapter, imported unchanged: only the platform format is checked.
+      const alex = data.origin === 'alex';
       for (const k of ['title', 'summary', 'order']) if (data[k] === undefined) err(f, `frontmatter missing ${k}`);
-      if (lang === 'ro' && !data.examSummaryEn) err(f, 'RO lesson needs examSummaryEn');
+      if (!alex && lang === 'ro' && !data.examSummaryEn) err(f, 'RO lesson needs examSummaryEn');
       for (const id of data.sources ?? []) if (!sourceIds.has(id)) err(f, `unknown source ${id}`);
       for (const id of data.glossaryTerms ?? []) if (!glossaryIds.has(id)) err(f, `unknown glossary term ${id}`);
       for (const m of body.matchAll(/\[(S\d{2,})\]/g)) if (!sourceIds.has(m[1])) err(f, `inline citation ${m[1]} not in sources.json`);
-      if (data.status !== 'test' && (data.sources ?? []).length < 10) err(f, `needs >= 10 sources (has ${(data.sources ?? []).length})`);
+      if (!alex && data.status !== 'test' && (data.sources ?? []).length < 10) err(f, `needs >= 10 sources (has ${(data.sources ?? []).length})`);
       if (lang === 'en' && !existsSync(join(dpath, `${lessonId}.ro.md`))) err(f, 'EN lesson without RO original');
 
-      checkAbbreviations(f, body);
+      if (!alex) checkAbbreviations(f, body);
 
       // Section structure: exactly the 8 container directives, in order (outside code fences).
       const noCode = body.replace(/```[\s\S]*?```/g, '');
       const found = [...noCode.matchAll(/^:::([a-z-]+)\s*$/gm)].map((m) => m[1]);
-      if (JSON.stringify(found) !== JSON.stringify(SECTION_ORDER)) {
+      const inOrder = found.every((s, i) => SECTION_ORDER.includes(s) && (i === 0 || SECTION_ORDER.indexOf(s) > SECTION_ORDER.indexOf(found[i - 1])));
+      if (alex ? !inOrder || found.length === 0 : JSON.stringify(found) !== JSON.stringify(SECTION_ORDER)) {
         err(f, `sections must be exactly [${SECTION_ORDER.join(', ')}], found [${found.join(', ')}]`);
       }
 
@@ -119,7 +122,7 @@ for (const dir of readdirSync(CONTENT)) {
       const blocks = [...body.matchAll(/```mermaid\n([\s\S]*?)```/g)].map((m) => m[1]);
       const arch = /:::architecture\n([\s\S]*?)\n:::\s*$/m.exec(body)?.[1] ?? '';
       const archDiagrams = (arch.match(/```mermaid/g) ?? []).length;
-      if (archDiagrams < 2) err(f, `architecture needs >= 2 Mermaid diagrams (has ${archDiagrams})`);
+      if (!alex && archDiagrams < 2) err(f, `architecture needs >= 2 Mermaid diagrams (has ${archDiagrams})`);
       for (const [i, code] of blocks.entries()) {
         diagramCount++;
         try {
@@ -147,7 +150,7 @@ for (const dir of readdirSync(CONTENT)) {
         for (const s of data.steps ?? []) {
           if (!s.id || ids.has(s.id)) err(f, `step id missing/duplicate: ${s.id}`);
           ids.add(s.id);
-          for (const k of ['title', 'action', 'why']) if (!localized(s[k])) err(f, `step ${s.id} needs ${k}.ro`);
+          for (const k of ['title', 'action']) if (!localized(s[k])) err(f, `step ${s.id} needs ${k}.ro`);
         }
       } else {
         const qs = data.questions ?? [];
@@ -161,7 +164,8 @@ for (const dir of readdirSync(CONTENT)) {
           if ((q.options ?? []).filter((o) => o.correct).length !== 1) err(f, `${q.id} needs exactly 1 correct option`);
           for (const [i, o] of (q.options ?? []).entries()) {
             if (!localized(o.text)) err(f, `${q.id} option ${i} needs text.ro`);
-            if (!localized(o.explanation)) err(f, `${q.id} option ${i} needs explanation.ro`);
+            if (o.correct && !localized(o.explanation)) err(f, `${q.id} correct option ${i} needs explanation.ro`);
+            if (o.explanation && !localized(o.explanation)) err(f, `${q.id} option ${i} explanation needs .ro`);
           }
         }
       }

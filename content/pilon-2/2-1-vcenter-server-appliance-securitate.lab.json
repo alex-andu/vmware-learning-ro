@@ -1,0 +1,40 @@
+{
+  "steps": [
+    {
+      "id": "pas-1",
+      "title": {
+        "ro": "Verificarea Pre-Check Obligatorie (DNS Forward + Reverse și NTP)"
+      },
+      "action": {
+        "ro": "Înainte să deschizi măcar instalatorul `VCSA`, deschide un terminal pe PC-ul tău și verifică faptul că serverul tău DNS (`192.168.10.2`) răspunde impecabil la ambele întrebări:\n```powershell\nnslookup vcsa01.lab.local 192.168.10.2\nnslookup 192.168.10.10 192.168.10.2\n```\n* **EXPLICAREA PROFESORULUI:** Dacă oricare dintre cele două comenzi dă eroare, **NU porni instalarea VCSA**, ci revino la Capitolul 0.3 (Pasul 4) și verifică înregistrările `A` și `PTR` din DNS! De asemenea, asigură-te că pe host-ul `esxi01.lab.local` ceasul și data sunt corecte!"
+      }
+    },
+    {
+      "id": "pas-2",
+      "title": {
+        "ro": "Rularea `Stage 1` (Deploy vCenter Server Appliance)"
+      },
+      "action": {
+        "ro": "1. Pe PC-ul tău cu Windows, dă dublu-click pe imaginea `.iso` descărcată **`VMware-VCSA-all-8.0.x.iso`** pentru a o monta ca un DVD virtual (ex: unitatea `E:\\`).\n2. Intră în folderul **`E:\\vcsa-ui-installer\\win32\\`**, dă click-dreapta pe **`installer.exe`** și alege **Run as administrator**.\n3. Apasă pe prima casetă mare: **`Install` (Install a new vCenter Server)** $\\rightarrow$ **Next** $\\rightarrow$ acceptă licența EULA $\\rightarrow$ **Next**.\n4. **vCenter Server deployment target:** Completează datele host-ului tău ESXi pe care va locui mașina virtuală `VCSA`:\n   * **ESXi host or vCenter Server name:** `192.168.10.51` (sau `esxi01.lab.local`)\n   * **HTTPS port:** `443` | **User name:** `root` | **Password:** *(parola ta de root de pe esxi01)* $\\rightarrow$ **Next** $\\rightarrow$ apasă **Yes** la avertismentul de certificat SSL.\n5. **Set up vCenter Server VM:**\n   * **VM Name:** `vcsa01`\n   * **Set root password:** Setează o parolă puternică (ex: `VMware1!VMware1!`) – aceasta este parola contului `root` de Linux cu care te vei loga pe portul `:5480 (VAMI)` și pe `SSH`!\n6. **Select deployment size:**\n   * **Deployment size:** **`Tiny`** (pentru laborator; alocă 2 vCPU și 14 GB RAM).\n   * **Storage size:** **`Default`** $\\rightarrow$ **Next**.\n7. **Select datastore:**\n   * Selectează `datastore1` de pe `esxi01` și **BIFEAZĂ OBLIGATORIU căsuța `Enable Thin Disk Mode`**! *(Dacă nu bifezi Thin Disk Mode, cele 16 discuri ale VCSA-ului îți vor mânca pe loc peste $500\\text{ GB}$ pe SSD! Cu Thin Disk Mode bifat, va ocupa doar $\\sim 18\\text{ GB}$!).*\n8. **Configure network settings (Atenție maximă la fiecare cifră!):**\n   * **Network:** `VM Network`\n   * **IP version:** `IPv4` | **IP assignment:** `static`\n   * **FQDN:** **`vcsa01.lab.local`** *(Scrie obligatoriu FQDN-ul complet aici!)*\n   * **IP address:** **`192.168.10.10`**\n   * **Subnet mask or prefix length:** **`255.255.255.0`** (sau `24`)\n   * **Default gateway:** **`192.168.10.1`**\n   * **DNS servers:** **`192.168.10.2`**\n   * **Common Ports:** Lasă `80` și `443` $\\rightarrow$ **Next** $\\rightarrow$ **Finish**!\n   * *Așteaptă $5 - 10\\text{ minute}$ până când bara de progres ajunge la $100\\%$ și apare mesajul: „You have successfully deployed the vCenter Server”.*"
+      }
+    },
+    {
+      "id": "pas-3",
+      "title": {
+        "ro": "Rularea `Stage 2` (Configurarea `NTP` și a Domeniului `vSphere SSO`)"
+      },
+      "action": {
+        "ro": "1. Apasă pe butonul **`Continue`** din instalator (sau dacă s-a închis fereastra instalatorului, nu te panica! Poți continua Stage 2 direct din orice browser intrând pe **`https://vcsa01.lab.local:5480`**!).\n2. **vCenter Server Configuration (Time & SSH):**\n   * **Time synchronization mode:** Alege **`Synchronize time with NTP servers`** și scrie la *NTP servers*: **`192.168.10.2`** (sau `pool.ntp.org` dacă ai ieșire la internet prin routerul de lab; dacă nu ai încă un server NTP dedicat în lab, alege temporar *Synchronize time with the ESXi host*).\n   * **SSH access:** Schimbă pe **`Enabled`**! $\\rightarrow$ **Next**.\n3. **SSO Configuration:**\n   * Selectează **`Create a new SSO domain`**.\n   * **Single Sign-On domain name:** Lasă standardul universal **`vsphere.local`**.\n   * **Single Sign-On user name:** `administrator` (deci te vei loga cu **`administrator@vsphere.local`**).\n   * **Single Sign-On password:** Setează parola ta de SSO $\\rightarrow$ **Next**.\n4. **Configure CEIP:** **DEBIFEAZĂ** căsuța *Join the VMware's Customer Experience Improvement Program (CEIP)* (pentru a economisi RAM și procesor în laborator!) $\\rightarrow$ **Next** $\\rightarrow$ bifează confirmarea și apasă **`Finish`**!\n   * *În timpul Stage 2 (care durează $10 - 15\\text{ minute}$), vCenter își pornește baza de date PostgreSQL, serviciul `STS`, `VMCA` și `vpxd`.*"
+      }
+    },
+    {
+      "id": "pas-4",
+      "title": {
+        "ro": "Configurarea Inițială în `VAMI (:5480)` și în `vSphere Client (:443)`"
+      },
+      "action": {
+        "ro": "1. **Dezactivarea expirării parolei de `root` în VAMI:**\n   * Deschide în browser **`https://vcsa01.lab.local:5480`** și loghează-te cu userul **`root`**.\n   * Mergi în stânga la **Administration** $\\rightarrow$ comută **Password expiration settings** pe **`No`** și salvează!\n2. **Conectarea în `vSphere Client` și crearea Datacenterului:**\n   * Deschide **`https://vcsa01.lab.local/ui`** și loghează-te cu **`administrator@vsphere.local`**.\n   * În stânga, dă click-dreapta pe rădăcina **`vcsa01.lab.local`** $\\rightarrow$ **New Datacenter...** $\\rightarrow$ numește-l **`Lab-DC`** și apasă **OK**.\n3. **Adăugarea Serverului `esxi01.lab.local` sub comanda Dirijorului (`vCenter`):**\n   * Dă click-dreapta pe **`Lab-DC`** $\\rightarrow$ **Add Host...**\n   * La **Name and location**, scrie FQDN-ul **`esxi01.lab.local`** (nu IP-ul! În producție adăugăm întotdeauna host-urile după **FQDN**!) $\\rightarrow$ **Next**.\n   * Introdu userul `root` și parola lui `esxi01` $\\rightarrow$ acceptă amprenta certificatului SSL $\\rightarrow$ lasă *Lockdown Mode* pe **`Disabled`** (deocamdată, pentru studiu) $\\rightarrow$ **Finish**!\n   * *Uită-te jos în bara `Recent Tasks`: vCenter se conectează la `esxi01`, îi instalează pe loc agentul **`vpxa`** și îi semnează certificatul SSL prin **`VMCA`**!*\n   * *(Opțional – Trucul de reducere a RAM-ului):* După ce ai văzut că totul merge perfect, dacă ai doar $16\\text{ GB}$ sau $32\\text{ GB RAM}$ pe PC-ul tău, poți intra pe `https://vcsa01.lab.local:5480` $\\rightarrow$ *Actions -> Shut Down*, apoi în Host Client pe `esxi01` editezi memoria mașinii `vcsa01` de la `14 GB` la **`8 GB` (sau `10 GB`)** și îi dai din nou *Power On*!"
+      }
+    }
+  ]
+}

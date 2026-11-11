@@ -26,7 +26,7 @@ export function LessonPage() {
   const done = !!state.completed[key];
   const terms = (meta.glossaryTerms ?? []).map((id) => glossary.find((g) => g.id === id)).filter((g) => !!g);
 
-  const references = (
+  const references = (meta.sources ?? []).length === 0 ? undefined : (
     <div className="not-prose mt-4 text-sm">
       <p className="mb-1 font-semibold">{t('sourcesTitle')}</p>
       <ol className="list-decimal space-y-1 pl-5">

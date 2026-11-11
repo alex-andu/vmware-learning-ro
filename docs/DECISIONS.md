@@ -28,3 +28,11 @@ Decizii luate fără a întreba (reversibile). Cea mai nouă sus.
 
 ## 2026-11-11 — Capitolele scrise de Alex (0.1–2.1 + cuprins)
 Le folosim ca sursă de idei, nu ca text: se suprapun cu modulele 1–2 deja scrise. Am adăugat doar ce lipsea și am putut verifica oficial (compatibilitatea hardware și procesoarele deprecated/EOL în 9.0 la lecția 1.4; fișierele snapshot, SEsparse și memorie vs quiesce la lecția 1.6). KB-urile, porturile și limitele din fișiere nu au fost copiate. Partea de dimensionare a home lab-ului (0.3) rămâne în afara cursului.
+
+## 2026-11-11 — Cursul trece pe capitolele lui Alex
+Alex: „vreau sa folosesti exact ce-ti dau de acum inainte ca si knowledge base” și „te vei ocupa doar de partea de integrare in platforma a teoriei pe care ti-o dau”.
+- Structura urmează `cuprins.md` (Pilonii 0–5, 26 de capitole); lecțiile vechi (modulele 01–04, scrise de Claude) au fost scoase și rămân în istoricul git (ultimul commit cu ele: c3692df).
+- Capitolele 0.1–2.1 sunt importate neschimbate cu `scripts/import-alex.mjs`; capitolul 0.3 (home lab) intră acum în curs, fiind textul lui Alex.
+- Formulele LaTeX (`$…$`) se afișează cu KaTeX (remark-math + rehype-katex); pe telefon, formulele lungi, codul și tabelele se derulează în cutia lor.
+- Quiz-ul păstrează ordinea variantelor lui Alex; explicația lui apare sub întrebare după răspuns.
+- Lecțiile lui Alex sunt doar în română; comutarea pe EN afișează RO cu banner.

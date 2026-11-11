@@ -16,52 +16,37 @@ Rulează local, fără backend și fără bază de date. Utilizatorul e începă
 
 La fiecare etapă: rulează `build`, `lint`, `test:e2e` înainte de commit.
 
+## Conținutul vine de la Alex (din 2026-11-11)
+
+Teoria cursului o scrie Alex. Claude se ocupă **doar de integrarea ei în platformă**: nu scrie, nu cercetează și nu rescrie lecții.
+
+- Capitolele lui Alex sunt în `/mnt/project-files/surse-alex/` (`cuprins.md` + `capitolul_X_Y_*.md`).
+- Import: `node scripts/import-alex.mjs <folder>`. Scriptul:
+  - transformă `cuprins.md` în `content/modules.json` (Pilonii = module, Capitolele = capitole, cu subiectele din cuprins);
+  - pune fiecare `capitolul_X_Y_*.md` în `content/pilon-X/<capitol>.ro.md`, cu secțiunile `:::` ale platformei, plus `.quiz.json` (din „QUIZ DE CERTIFICARE”) și `.lab.json` (din „Pasul N”);
+  - marchează lecția cu `origin: alex` și etichetează ca `mermaid` blocurile de diagramă scrise fără limbaj.
+- Textul lui Alex rămâne neschimbat. Greșelile de formatare (de exemplu o formulă `$…$` neînchisă) i le semnalăm lui Alex, nu le corectăm în tăcere.
+- Formulele `$…$` se afișează cu KaTeX; diagramele Mermaid trebuie să fie valide (build-ul eșuează altfel).
+- Capitolele din cuprins fără fișier apar „planificat” pe `/curriculum`, cu subiectele lor.
+- Lecțiile vechi scrise de Claude (modulele 01–04) au fost scoase; sunt în istoricul git până la commitul c3692df.
+
 ## Structura conținutului
 
 ```
 content/
-  modules.json                 # module: id, order, title, target, competency (CV), labTitle, chapters[{id,title,exam[],examNote}] — RO + EN
-  glossary.json                # glosar global: id, term, aliases, abbr, expansion, ro, en
-  sources.json                 # registrul de surse: id (S01…), title, url, type, accessed, read, usedBy
-  <modul>/<lecție>.ro.md       # lecția (RO e varianta de referință, obligatorie)
-  <modul>/<lecție>.en.md       # varianta EN (opțională; lipsa ei afișează RO cu banner)
-  <modul>/<lecție>.lab.json    # checklist-ul de lab (pași cu title/path/action/why, RO+EN)
-  <modul>/<lecție>.quiz.json   # exact 5 întrebări, 4 variante, 1 corectă, explicație la FIECARE variantă
-docs/
-  STATE_OF_THE_ART.md          # rezultatul Pasului 0 (verificare web, cu dată)
-  DECISIONS.md                 # decizii luate fără a întreba
+  modules.json                 # generat din cuprins.md: id pilon-N, title, target (obiectivul), chapters[{id, number, title, topics, exam}]
+  glossary.json                # glosar (tooltip-uri pentru abrevieri)
+  sources.json                 # registru de surse (gol pentru lecțiile lui Alex; bibliografia e în secțiunea :::references)
+  pilon-N/<capitol>.ro.md      # lecția (RO); lipsa EN afișează RO cu banner
+  pilon-N/<capitol>.lab.json   # pașii de laborator (title + action; „why” e opțional)
+  pilon-N/<capitol>.quiz.json  # întrebările lui Alex; explicația stă la varianta corectă
 ```
 
+Validatorul verifică pentru `origin: alex` doar formatul: secțiunile `:::` în ordinea de mai jos (cele lipsă sunt permise), Mermaid valid, quiz cu 5 întrebări × 4 variante și exact una corectă, cu explicație. Regulile mai stricte (10 surse, abrevieri, `examSummaryEn`, 2 diagrame) rămân doar pentru lecții care nu sunt ale lui Alex.
+
+Ordinea secțiunilor: `analogy` (Introducerea profesorului), `architecture` (Arhitectură), `exam-alert` (Cutia cu secrete), `trenches` (Din tranșee), `interview`, `lab`, `quiz`, `references` (Bibliografie).
+
 Lecțiile NU se hardcodează în componente; loader-ul (`src/lib/content.ts`) le citește prin `import.meta.glob`.
-
-## Șablonul lecției (strict, validat la build)
-
-Frontmatter obligatoriu: `title`, `summary`, `order`; recomandat `level`, `examTargets`, `sources` (id-uri din `sources.json`), `updated`, `glossaryTerms`. Varianta RO cere `examSummaryEn` (rezumatul în engleză pentru examen). `status: test` doar pentru lecția de test.
-
-Corpul are exact aceste 8 blocuri `:::`, în ordinea asta (ele formează cele 6 părți ale lecției):
-
-1. `:::analogy` — Introducerea Profesorului & analogia (durerea din data center + analogie din viața de zi cu zi)
-2. `:::architecture` — teorie de la simplu la complex; **minim 2 diagrame Mermaid** (arhitectură + flux/decizie), tabel comparativ, sugestii `[IMAGE SEARCH / PROMPT]`
-3. `:::exam-alert` — De memorat (porturi, limite, cerințe, cu sursă) + 3 capcane de examen
-   `:::trenches` — 2 greșeli din producție, cu remediere și concept/KB oficial
-4. `:::interview` — 1 întrebare Junior/Mid + 1 scenariu de troubleshooting, cu răspunsul ideal
-5. `:::lab` — scenariu, test de avarie/validare; pașii bifabili stau în `.lab.json` (fiecare cu „De ce?”)
-6. `:::quiz` — intro scurt; întrebările stau în `.quiz.json`
-   `:::references` — 5–10 resurse specifice; lista din `sources` se afișează automat dedesubt
-
-## Reguli de conținut (nenegociabile)
-
-- **Fără KB-uri, porturi, limite sau comenzi inventate.** Totul se verifică în documentația oficială a versiunii vizate. Ce nu se poate verifica primește `⚠ de verificat` în text.
-- Fiecare lecție: minim 10 surse citite efectiv (țintă 20+ la modulele grele), adăugate în `content/sources.json`. Validatorul refuză lecțiile non-test cu sub 10 surse.
-- Citările inline folosesc `[Sxx]`; validatorul verifică că id-ul există.
-- Parafrazează. Citate sub 15 cuvinte, doar cu atribuire. Fără exam dumps; quiz-urile sunt originale, în stil VCP.
-- Quiz-ul NU amestecă variantele la afișare: poziția răspunsului corect (`correct`) se variază manual de la o întrebare la alta (nu mereu prima variantă).
-- Marchează clar „supported” vs „home-lab only / not supported”.
-- Explicații în română; termenii tehnici în engleză, explicați la prima apariție.
-- **Orice abreviere se explică la prima apariție** (forma completă imediat lângă ea). Validatorul verifică asta pentru toate abrevierile din `glossary.json` (`abbr` + `expansion`); o abreviere nouă se adaugă întâi în glosar.
-- Id-ul lecției (numele fișierului) trebuie să fie un capitol din `modules.json`. Pagina `/curriculum` arată toate capitolele; cele fără fișier apar „planificat”.
-- Home Lab-ul nu face parte din curs: lecțiile presupun că lab-ul există.
-- Versiunea predată: VCF/VVF **9.0** (ce acoperă examenele), cu diferențele 9.1 semnalate. Vezi `docs/STATE_OF_THE_ART.md`.
 
 ## Cod
 

@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "id": "pas-1",
+      "title": {
+        "ro": "Demonstrarea Practică a Limitei de `MTU` și a Bitului `DF` (`Don't Fragment`)"
+      },
+      "action": {
+        "ro": "Vom folosi comanda `ping` cu doi parametri speciali de inginerie:\n* **`-f`** (în Windows; pe ESXi se scrie **`-d`**): Setează bitul **`DF` (`Don't Fragment`)** pe `1` în antetul IP, interzicând plăcii de rețea sau routerului să taie pachetul în bucăți dacă e prea mare.\n* **`-l <număr>`** (în Windows; pe ESXi se scrie **`-s <număr>`**): Setează dimensiunea în Bytes a datelor din interiorul ping-ului (`ICMP Payload`).\n\n1. Deschide **PowerShell** sau **Command Prompt (`cmd`)** pe PC-ul tău.\n2. Află adresa IP a routerului tău (`Default Gateway`) scriind:\n   ```powershell\n   ipconfig\n   ```\n   *(Caută linia `Default Gateway`, de exemplu `192.168.1.1`).*\n3. Trimite acum un pachet nefragmentat de exact **`1472 Bytes`** de date către routerul tău (înlocuiește `192.168.1.1` cu IP-ul găsit la pasul 2):\n   ```powershell\n   ping -f -l 1472 192.168.1.1\n   ```\n   * **DE CE `1472` și ce se întâmplă în spate?**\n     Placa ta de rețea ia cei **`1472 Bytes`** de date, adaugă **`8 Bytes`** (antetul `ICMP`) și adaugă **`20 Bytes`** (antetul `IPv4`). Totalul este **$1472 + 8 + 20 = \\mathbf{1500\\text{ Bytes}}$**, adică exact limita maximă a tunelului standard Ethernet (`MTU = 1500`)! De aceea vei primi **`Reply from...`** fără nicio eroare!\n4. Acum, adaugă **un singur Byte** în plus (pune **`1473`** în loc de `1472`, ceea ce face ca pachetul total să aibă $1473 + 28 = \\mathbf{1501\\text{ Bytes}}$):\n   ```powershell\n   ping -f -l 1473 192.168.1.1\n   ```\n   * **Observă eroarea returnată pe ecran:**\n     `Packet needs to be fragmented but DF set.`\n   * **EXPLICAREA PROFESORULUI:** Păstrează bine în minte această eroare! Exact asta se întâmplă în secunda în care instalezi **VMware NSX** (care trimite pachete GENEVE de $1600\\text{ Bytes}$ cu bitul `DF` activat) sau configurezi **iSCSI / vSAN cu Jumbo Frames ($9000\\text{ Bytes}$)**, dar uiți să mărești MTU-ul pe switch-ul fizic! Un `ping` normal (care are doar $32\\text{ sau }64\\text{ Bytes}$) trece fluierând și te păcălește că rețeaua merge, dar primul pachet real de date se lovește de zidul de $1500\\text{ Bytes}$!"
+      }
+    },
+    {
+      "id": "pas-2",
+      "title": {
+        "ro": "Inspectarea Tabelei `ARP` (Cum traduce sistemul din Layer 3 `IP` în Layer 2 `MAC`)"
+      },
+      "action": {
+        "ro": "1. În aceeași fereastră PowerShell/CMD, tastează:\n   ```powershell\n   arp -a\n   ```\n2. Uită-te pe coloana `Internet Address` (Adresa IP de Layer 3) și pe coloana `Physical Address` (Adresa MAC de Layer 2, formată din 6 perechi hexazecimale).\n   * **EXPLICAREA PROFESORULUI:** Pentru că la Pasul 1 i-ai dat `ping` routerului tău, calculatorul tău a trimis în spate un **ARP Request Broadcast** (`FF-FF-FF-FF-FF-FF`) ca să afle adresa MAC a routerului și a salvat-o în această tabelă. Observă și ultima linie din tabel: `255.255.255.255` are adresa fizică `ff-ff-ff-ff-ff-ff` — aceasta este adresa de Broadcast de Layer 2 și Layer 3!"
+      }
+    },
+    {
+      "id": "pas-3",
+      "title": {
+        "ro": "Testarea Rezoluției Dublului `DNS` (`Forward Lookup A` și `Reverse Lookup PTR`)"
+      },
+      "action": {
+        "ro": "Înainte să instalezi orice server vCenter (`VCSA`) în viața ta profesională, vei rula aceste două comenzi cu utilitarul **`nslookup` (`Name Server Lookup`)**:\n\n1. Testează **Forward Lookup (traducerea din `FQDN` în `IP` – înregistrarea `A`):**\n   ```powershell\n   nslookup dns.google\n   ```\n   *(Serverul DNS îți va răspunde că numele `dns.google` are adresele IP `8.8.8.8` și `8.8.4.4`).*\n2. Testează **Reverse Lookup (traducerea inversă din `IP` înapoi în `FQDN` – înregistrarea `PTR`):**\n   ```powershell\n   nslookup 8.8.8.8\n   ```\n   *(Serverul DNS caută în zona inversă și îți răspunde `Name: dns.google`).*\n   * **EXPLICAREA PROFESORULUI:** Când vom construi propriul nostru server DNS local în **Capitolul 0.3**, vom crea manual atât înregistrarea `A`, cât și înregistrarea `PTR` pentru serverele noastre ESXi și vCenter, și le vom valida exact cu aceste două comenzi!"
+      }
+    }
+  ]
+}

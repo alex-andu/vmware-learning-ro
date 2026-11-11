@@ -1,0 +1,179 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Un host ESXi 8.0 gestionat de un vCenter Server Appliance devine brusc inaccesibil în inventarul vCenter (afișând starea *Disconnected*), însă toate mașinile virtuale de pe acel host continuă să funcționeze normal și sunt accesibile prin rețea. Administratorul se conectează prin SSH la host-ul ESXi. Care două servicii/procese din ESXi trebuie verificate și repornite pentru a restabili conexiunea cu vCenter Server fără a întrerupe mașinile virtuale?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "`vmm` și `vmx`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`hostd` și `vpxa`"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (`hostd` și `vpxa`)**\n\n* *Explicație:* `hostd` este agentul local de management al host-ului ESXi, iar `vpxa` este agentul intermediar prin care `vCenter Server` (`vpxd`) comunică cu `hostd`. Repornirea lor din CLI restabilește comunicarea de management fără a atinge procesele `VMM`/`VMX` ale mașinilor virtuale."
+          }
+        },
+        {
+          "text": {
+            "ro": "`dcui` și `slpd`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`fdm` și `vsanmgmtd`"
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Care este rolul procesului **`fdm` (`Fault Domain Manager`)** pe un host VMware ESXi?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Afișează interfața grafică HTML5 *VMware Host Client* pe portul 443."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Este agentul instalat atunci când se activează **vSphere HA (High Availability)** pe cluster, fiind responsabil de schimbul de *Heartbeats* între host-uri și de repornirea mașinilor virtuale în caz de avarie, independent de vCenter Server."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (Agentul pentru vSphere HA)**\n\n* *Explicație:* `fdm` (*Fault Domain Manager*) este motorul din spatele `vSphere HA`, comunicând direct între host-urile ESXi pe portul `8182` pentru a garanta repornirea mașinilor virtuale chiar și dacă `vCenter`-ul este căzut."
+          }
+        },
+        {
+          "text": {
+            "ro": "Gestionează partiția `ESX-OSData` în timpul procesului de instalare a ESXi."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Traduce adresele de memorie virtuală folosind extensiile Intel EPT / AMD RVI."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Un administrator a efectuat un upgrade al unui server de la ESXi 8.0 Update 1 la ESXi 8.0 Update 3. Imediat după reboot, observă că un driver critic de stocare nu funcționează corect cu noua versiune și dorește să revină imediat la versiunea anterioară (Rollback) fără a reinstala serverul. Ce combinație de taste trebuie să apese în timpul secvenței de pornire (boot) a serverului ESXi și ce mecanism arhitectural face posibil acest lucru?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "`Alt + F1`, deoarece ESXi păstrează un snapshot `.vmsn` în memoria RAM."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`Shift + R`, deoarece ESXi păstrează două partiții **Bootbank** independente de câte 4 GB (una activă cu noua versiune și una de rezervă cu versiunea anterioară)."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (`Shift + R` și arhitectura cu două partiții Bootbank)**\n\n* *Explicație:* Existența celor două partiții *Bootbank* (Partiția 5 și Partiția 6) permite ca la un update să nu fie ștearsă imaginea veche a ESXi-ului. Apăsarea `Shift + R` la bootare încarcă *Alternate Bootbank*-ul."
+          }
+        },
+        {
+          "text": {
+            "ro": "`F12`, deoarece `vpxa` descarcă automat vechea versiune din vCenter."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`Shift + O`, care formatează partiția `ESX-OSData`."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "Un administrator activează **Strict Lockdown Mode** pe un cluster de host-uri ESXi din vCenter Server, fără a configura niciun cont în lista *Exception Users*, iar serviciul SSH este oprit pe toate host-urile. Ce se întâmplă cu serviciul local **`DCUI`** pe acele host-uri ESXi?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Rămâne activ și permite autentificarea cu contul `root` de la consola fizică a serverului."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Serviciul `DCUI` este oprit complet; nimeni nu se mai poate autentifica nici măcar de la consola fizică (`iDRAC`/`iLO`), toată administrarea putând fi făcută exclusiv prin vCenter Server."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (Serviciul `DCUI` este oprit complet în *Strict Lockdown Mode*)**\n\n* *Explicație:* Spre deosebire de *Normal Lockdown Mode* (unde `DCUI` rămâne activ pentru contul `root` și *Exception Users* în caz că pică vCenter-ul), în *Strict Lockdown Mode* serviciul `DCUI` este oprit."
+          }
+        },
+        {
+          "text": {
+            "ro": "Repornește automat toate mașinile virtuale în modul *Safe Mode*."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Șterge parola de `root` de pe host-urile ESXi."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "În arhitectura de partiționare introdusă în ESXi 7.0 și ESXi 8.0, care este rolul noii partiții **`ESX-OSData`**?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Stochează exclusiv sistemul de operare Windows al mașinilor virtuale."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Înlocuiește vechile partiții separate (*Scratch*, *Locker / VMware Tools* și *Core Dump*), împărțindu-se într-o zonă persistentă (baza de date de configurare, VMware Tools ISO) și o zonă non-persistentă (loguri `/var/log`, fișiere de diagnostic *Core Dumps* și urme *vSAN*)."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (Unifică stocarea pentru configurare, VMware Tools, Loguri, Core Dumps și vSAN Traces)**\n\n* *Explicație:* `ESX-OSData` (formatată cu `VMFS-L`) consolidează toate datele operaționale și de diagnostic ale hypervisorului pe un mediu de stocare rapid și rezistent (SSD/NVMe)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Permite rularea ESXi exclusiv de pe carduri SD de 4 GB fără uzură."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Acționează ca memorie cache pentru placa video a serverului."
+          },
+          "correct": false
+        }
+      ]
+    }
+  ]
+}

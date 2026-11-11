@@ -8,10 +8,11 @@ const { chromium } = createRequire(import.meta.url)('playwright');
 
 const PORT = 5199;
 const BASE = `http://localhost:${PORT}`;
-const LESSON = '/lesson/01-fundamente/01-ce-este-virtualizarea';
+const KEY = 'pilon-0/0-1-anatomia-unui-data-center';
+const LESSON = '/lesson/pilon-0/0-1-anatomia-unui-data-center';
 mkdirSync('screenshots', { recursive: true });
 // Temporary RO-only lesson to exercise the "EN missing" fallback banner; removed at the end.
-const TMP_LESSON = 'content/01-fundamente/99-smoke-fallback.ro.md';
+const TMP_LESSON = 'content/pilon-0/99-smoke-fallback.ro.md';
 writeFileSync(TMP_LESSON, '---\ntitle: Smoke fallback\nsummary: tmp\norder: 99\n---\nDoar RO.\n');
 
 const server = spawn(process.execPath, ['node_modules/vite/bin/vite.js', '--port', String(PORT), '--strictPort'], { stdio: 'pipe' });
@@ -51,7 +52,6 @@ try {
   );
   const nMermaid = await page.locator('[data-mermaid="ok"]').count();
   check(nMermaid >= 2, `${nMermaid} Mermaid diagrams rendered as SVG (min 2)`);
-  check((await page.locator('abbr[title]').count()) > 0, 'abbreviations wrapped in <abbr> with expansion');
   check(await page.locator('[data-testid="abbr-legend"]').isVisible(), 'lesson abbreviation legend shown');
   check((await page.locator('[data-mermaid="error"]').count()) === 0, 'no Mermaid fallback errors');
   check((await page.locator('a.glossary-link').count()) > 0, 'glossary terms auto-linked');
@@ -59,10 +59,10 @@ try {
 
   // Lab checklist persists
   await page.locator('section[data-section="lab"] input[type=checkbox]').first().check();
-  // Quiz: answer all 5, picking option A each time
+  // Quiz: answer all 5, picking option B each time (some right, some wrong)
   for (let i = 0; i < 5; i++) {
-    await page.locator('[data-quiz] ul button').first().click();
-    check((await page.locator('[data-quiz] ul button span.block').count()) === 4, `quiz q${i + 1}: explanation shown for all 4 options`);
+    await page.locator('[data-quiz] ul button').nth(1).click();
+    check((await page.locator('[data-quiz] [data-testid="quiz-explanation"]').count()) >= 1, `quiz q${i + 1}: explanation shown after answering`);
     await page.locator('[data-quiz] > div > button.btn').click();
   }
   await page.getByText(/Scor: \d\/5/).waitFor();
@@ -79,11 +79,14 @@ try {
   await page.waitForSelector('[data-mermaid="ok"]');
   const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('vmw-lms:v1')));
   check(stored.version === 1, 'LocalStorage key vmw-lms:v1 with version 1');
-  check(Object.values(stored.lab['01-fundamente/01-ce-este-virtualizarea'] ?? {}).some(Boolean), 'lab step persisted after reload');
-  check((stored.quiz['01-fundamente/01-ce-este-virtualizarea'] ?? []).length === 1, 'quiz score saved to history');
-  check(stored.notes['01-fundamente/01-ce-este-virtualizarea'] === 'notiță de test', 'notes persisted');
-  check(!!stored.completed['01-fundamente/01-ce-este-virtualizarea'], 'lesson marked complete');
+  check(Object.values(stored.lab[KEY] ?? {}).some(Boolean), 'lab step persisted after reload');
+  check((stored.quiz[KEY] ?? []).length === 1, 'quiz score saved to history');
+  check(stored.notes[KEY] === 'notiță de test', 'notes persisted');
+  check(!!stored.completed[KEY], 'lesson marked complete');
   check(await page.locator('#notes').inputValue() === 'notiță de test', 'notes restored in UI');
+
+  check((await page.locator('.katex').count()) > 0, 'math formulas rendered with KaTeX');
+  check((await page.locator('.katex-error').count()) === 0, 'no KaTeX errors');
 
   // Theme toggle re-renders Mermaid
   const svgDark = await page.locator('[data-mermaid="ok"]').first().innerHTML();
@@ -96,17 +99,15 @@ try {
   check((await page.locator('[data-mermaid="error"]').count()) === 0, 'Mermaid re-rendered for light theme without errors');
   await page.screenshot({ path: 'screenshots/03-lesson-light.png', fullPage: true });
 
-  // Language toggle
+  // Language toggle: Alex's lessons are RO-only, so EN shows the RO text with a banner
   await page.getByRole('button', { name: 'Limba' }).click();
-  await page.getByRole('heading', { name: /What virtualization is/ }).waitFor();
-  check(true, 'EN lesson loaded after language toggle');
-  check((await page.getByText('The English version of this lesson is not available yet').count()) === 0, 'no fallback banner when EN exists');
+  check(await page.getByText('The English version of this lesson is not available yet').isVisible(), 'EN toggle shows the RO lesson with the fallback banner');
   await page.getByRole('button', { name: 'Theme' }).click(); // back to dark
   await page.getByRole('button', { name: 'Language' }).click(); // back to RO
 
   // Fallback banner for a lesson without EN
   await page.getByRole('button', { name: 'Limba' }).click(); // EN
-  await page.goto(BASE + '/lesson/01-fundamente/99-smoke-fallback');
+  await page.goto(BASE + '/lesson/pilon-0/99-smoke-fallback');
   check(await page.getByText('The English version of this lesson is not available yet').isVisible(), 'fallback banner shown when EN is missing');
   await page.getByRole('button', { name: 'Language' }).click(); // back to RO
 
@@ -123,8 +124,8 @@ try {
   await page.getByRole('heading', { name: 'Curriculum' }).first().waitFor();
   const nMods = await page.locator('section[data-module]').count();
   const nChaps = await page.locator('li[data-chapter]').count();
-  check(nMods === 5 && nChaps >= 30, `curriculum lists all modules and chapters (${nMods} modules, ${nChaps} chapters)`);
-  check((await page.locator('li[data-chapter="01-fundamente/01-ce-este-virtualizarea"] a').count()) === 1, 'available lesson is linked from curriculum');
+  check(nMods === 6 && nChaps >= 26, `curriculum lists all pillars and chapters (${nMods} modules, ${nChaps} chapters)`);
+  check((await page.locator(`li[data-chapter="${KEY}"] a`).count()) === 1, 'available lesson is linked from curriculum');
   check(await page.locator('[data-testid="abbr-legend"]').isVisible(), 'curriculum abbreviation legend shown');
   await page.screenshot({ path: 'screenshots/06-curriculum.png', fullPage: true });
 
@@ -143,7 +144,7 @@ try {
   await page.locator('[data-testid="import-input"]').setInputFiles(path);
   await page.getByText('Import reușit.').waitFor();
   const restored = await page.evaluate(() => JSON.parse(localStorage.getItem('vmw-lms:v1')));
-  check(!!restored.completed['01-fundamente/01-ce-este-virtualizarea'], 'import restores progress');
+  check(!!restored.completed[KEY], 'import restores progress');
   await page.locator('[data-testid="import-input"]').setInputFiles({ name: 'bad.json', mimeType: 'application/json', buffer: Buffer.from('{"x":1}') });
   await page.getByText(/Fișier invalid/).waitFor();
   check(true, 'invalid import rejected with a message');
