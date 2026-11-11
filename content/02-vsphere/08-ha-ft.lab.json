@@ -1,0 +1,118 @@
+{
+  "steps": [
+    {
+      "id": "settings",
+      "title": {
+        "ro": "Citește setările vSphere HA",
+        "en": "Read the vSphere HA settings"
+      },
+      "path": {
+        "ro": "cluster → Configure → Services → vSphere Availability → Edit ⚠ de verificat",
+        "en": "cluster → Configure → Services → vSphere Availability → Edit ⚠ to verify"
+      },
+      "action": {
+        "ro": "Notează în Failures and Responses: Host Failure Response, Host Isolation Response, restart priority implicită, PDL și APD, VM Monitoring. Închide cu Cancel.",
+        "en": "In Failures and Responses, note: Host Failure Response, Host Isolation Response, default restart priority, PDL and APD, VM Monitoring. Close with Cancel."
+      },
+      "why": {
+        "ro": "Înainte să testezi o cădere trebuie să știi ce va face HA (High Availability): repornește sau nu, cu ce prioritate și ce face un host izolat (documentația vSphere 8).",
+        "en": "Before testing a failure you must know what HA (High Availability) will do: restart or not, with which priority and what an isolated host does (vSphere 8 docs)."
+      }
+    },
+    {
+      "id": "heartbeat",
+      "title": {
+        "ro": "Verifică datastore-urile de heartbeat",
+        "en": "Check the heartbeat datastores"
+      },
+      "path": {
+        "ro": "cluster → Monitor → vSphere HA → Heartbeat; apoi datastore → Files ⚠ de verificat",
+        "en": "cluster → Monitor → vSphere HA → Heartbeat; then datastore → Files ⚠ to verify"
+      },
+      "action": {
+        "ro": "Notează ce datastore-uri folosește fiecare host pentru heartbeat. Apoi deschide unul dintre ele și găsește directorul .vSphere-HA, fără să-l modifici.",
+        "en": "Note which datastores each host uses for heartbeats. Then open one of them and find the .vSphere-HA folder, without changing it."
+      },
+      "why": {
+        "ro": "Datastore heartbeating separă un host căzut de unul izolat sau partiționat; implicit sunt 2 datastore-uri pe host, iar directorul .vSphere-HA nu se șterge (documentația vSphere 8).",
+        "en": "Datastore heartbeating tells a failed host apart from an isolated or partitioned one; by default there are 2 datastores per host, and the .vSphere-HA folder must not be deleted (vSphere 8 docs)."
+      }
+    },
+    {
+      "id": "admission",
+      "title": {
+        "ro": "Citește admission control",
+        "en": "Read admission control"
+      },
+      "path": {
+        "ro": "cluster → Configure → vSphere Availability → Edit → Admission Control",
+        "en": "cluster → Configure → vSphere Availability → Edit → Admission Control"
+      },
+      "action": {
+        "ro": "Notează politica și valoarea Host failures cluster tolerates. Calculează ce procent ar trebui păstrat pentru clusterul tău (de exemplu 50% la 2 hosturi) și compară cu ce arată cluster → Summary.",
+        "en": "Note the policy and the Host failures cluster tolerates value. Work out which percentage should be kept for your cluster (for example 50% with 2 hosts) and compare with what cluster → Summary shows."
+      },
+      "why": {
+        "ro": "Admission control păstrează capacitate pentru failover și se calculează din rezervări, nu din consum; cu o cădere tolerată, 2 hosturi înseamnă 50%, 4 hosturi 25%.",
+        "en": "Admission control keeps capacity for failover and is computed from reservations, not usage; with one failure tolerated, 2 hosts mean 50%, 4 hosts 25%."
+      }
+    },
+    {
+      "id": "priority",
+      "title": {
+        "ro": "Setează priorități diferite pe VM-uri",
+        "en": "Set different priorities on VMs"
+      },
+      "path": {
+        "ro": "cluster → Configure → Configuration → VM Overrides → Add",
+        "en": "cluster → Configure → Configuration → VM Overrides → Add"
+      },
+      "action": {
+        "ro": "Pune VM-ul A pe restart priority High și VM-ul B pe Low. Mută-le pe același host cu vMotion, ca să cadă împreună la pasul următor.",
+        "en": "Set VM A to restart priority High and VM B to Low. Move them to the same host with vMotion, so they fail together in the next step."
+      },
+      "why": {
+        "ro": "HA pornește VM-urile în ordinea priorității (Lowest până la Highest, implicit Medium); așa vezi ordinea la pasul 5 (documentația vSphere 8, Yellow Bricks).",
+        "en": "HA starts VMs in priority order (Lowest to Highest, default Medium); this lets you see the order in step 5 (vSphere 8 docs, Yellow Bricks)."
+      }
+    },
+    {
+      "id": "failover",
+      "title": {
+        "ro": "Provoacă o cădere de host (home lab only)",
+        "en": "Cause a host failure (home lab only)"
+      },
+      "path": {
+        "ro": "lab nested: Power Off pe VM-ul ESXi din stratul de sus; hardware fizic: oprirea serverului",
+        "en": "nested lab: Power Off on the ESXi VM in the outer layer; physical hardware: power off the server"
+      },
+      "action": {
+        "ro": "Pornește un ping continuu spre VM-ul A. Oprește brusc hostul (nu din maintenance mode). Notează câte ping-uri lipsesc, apoi verifică în Events ordinea în care au pornit A și B. Pornește hostul la loc.",
+        "en": "Start a continuous ping to VM A. Power off the host abruptly (not through maintenance mode). Note how many pings are missing, then check in Events the order in which A and B started. Power the host back on."
+      },
+      "why": {
+        "ro": "O cădere reală e singurul mod de a vedea că HA repornește VM-urile și că există downtime; maintenance mode ar muta VM-urile cu vMotion și nu ar testa HA (documentația vSphere 8).",
+        "en": "A real failure is the only way to see that HA restarts the VMs and that there is downtime; maintenance mode would move the VMs with vMotion and would not test HA (vSphere 8 docs)."
+      }
+    },
+    {
+      "id": "ft",
+      "title": {
+        "ro": "Activează FT și testează failover-ul",
+        "en": "Enable FT and test failover"
+      },
+      "path": {
+        "ro": "host → Configure → Networking → VMkernel adapters (FT logging); apoi click dreapta pe VM → Fault Tolerance → Turn On FT, apoi Test Failover ⚠ de verificat",
+        "en": "host → Configure → Networking → VMkernel adapters (FT logging); then right-click the VM → Fault Tolerance → Turn On FT, then Test Failover ⚠ to verify"
+      },
+      "action": {
+        "ro": "Activează serviciul Fault Tolerance logging pe un vmk al fiecărui host. Pe VM-ul C (1 vCPU, fără snapshot-uri) pornește FT și alege datastore-ul și hostul pentru Secondary. Cu ping continuu, rulează Test Failover și notează pe ce host ajunge noul Secondary.",
+        "en": "Enable the Fault Tolerance logging service on one vmk of each host. On VM C (1 vCPU, no snapshots) turn on FT and choose the datastore and host for the Secondary. With a continuous ping, run Test Failover and note on which host the new Secondary lands."
+      },
+      "why": {
+        "ro": "FT (Fault Tolerance) cere HA activ, rețea de FT logging și VM fără snapshot-uri; la failover, Secondary preia fără pierdere de date și se creează automat un Secondary nou (documentația vSphere 8).",
+        "en": "FT (Fault Tolerance) needs HA enabled, an FT logging network and a VM with no snapshots; on failover the Secondary takes over with no data loss and a new Secondary is created automatically (vSphere 8 docs)."
+      }
+    }
+  ]
+}

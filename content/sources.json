@@ -33,7 +33,8 @@
       "02-vsphere/04-vds",
       "02-vsphere/05-stocare-partajata",
       "02-vsphere/06-vmotion",
-      "02-vsphere/07-drs"
+      "02-vsphere/07-drs",
+      "02-vsphere/08-ha-ft"
     ]
   },
   {
@@ -558,7 +559,8 @@
       "02-vsphere/04-vds",
       "02-vsphere/05-stocare-partajata",
       "02-vsphere/06-vmotion",
-      "02-vsphere/07-drs"
+      "02-vsphere/07-drs",
+      "02-vsphere/08-ha-ft"
     ]
   },
   {
@@ -2100,7 +2102,8 @@
     "usedBy": [
       "02-vsphere/05-stocare-partajata",
       "02-vsphere/06-vmotion",
-      "02-vsphere/07-drs"
+      "02-vsphere/07-drs",
+      "02-vsphere/08-ha-ft"
     ]
   },
   {
@@ -2431,7 +2434,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "02-vsphere/07-drs"
+      "02-vsphere/07-drs",
+      "02-vsphere/08-ha-ft"
     ]
   },
   {
@@ -2497,7 +2501,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "02-vsphere/07-drs"
+      "02-vsphere/07-drs",
+      "02-vsphere/08-ha-ft"
     ]
   },
   {
@@ -2508,7 +2513,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "02-vsphere/07-drs"
+      "02-vsphere/07-drs",
+      "02-vsphere/08-ha-ft"
     ]
   },
   {
@@ -2541,7 +2547,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "02-vsphere/07-drs"
+      "02-vsphere/07-drs",
+      "02-vsphere/08-ha-ft"
     ]
   },
   {
@@ -2575,6 +2582,314 @@
     "read": true,
     "usedBy": [
       "02-vsphere/07-drs"
+    ]
+  },
+  {
+    "id": "S229",
+    "title": "vSphere 8 Availability: How vSphere HA works (primary host, secondary hosts)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-availability/GUID-33A65FF7-DA22-4DC5-8B18-5A7F97CCA536.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S230",
+    "title": "vSphere 8 Availability: Host failure types and detection (failure, isolation, partition, heartbeats, Proactive HA)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-availability/GUID-4ED552C3-0291-4553-A46A-290EF883BC8D.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S231",
+    "title": "vSphere 8 Availability: Datastore heartbeating",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-availability/GUID-0502B198-F5F7-4101-969C-C5B6F364C678.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S232",
+    "title": "vSphere 8 Availability: Configure heartbeat datastores",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-availability/GUID-3E042A65-9E2A-4966-B838-0E24FA54286A.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S233",
+    "title": "vSphere 8 Availability: vSphere HA admission control",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-availability/GUID-53F6938C-96E5-4F67-9A6E-479F5A894571.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S234",
+    "title": "vSphere 8 Availability: Configure admission control",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-availability/GUID-C4059DB9-D673-45CB-918C-68C87FEB060A.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S235",
+    "title": "VMware Arena: vSphere 6.5 HA admission control, what is new (default percentage policy, automatic calculation)",
+    "url": "https://www.vmwarearena.com/vmware-vsphere-6-5-ha-admission-control-overview/",
+    "type": "community",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S236",
+    "title": "vSphere 8 Availability: Respond to host failure (failure response, restart priority, conditions)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-availability/GUID-C26254A3-9A4F-4D32-96EC-4A08314753B1.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S237",
+    "title": "vSphere 8 Availability: VM and application monitoring (sensitivity presets)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-availability/GUID-62B80D7A-C764-40CB-AE59-752DA6AD78E7.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S238",
+    "title": "vSphere 8 Availability: VM restart priority, host isolation response and restart host selection",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-availability/GUID-FA8B166D-A5F5-47D3-840E-68996507A95B.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S239",
+    "title": "vSphere 8 Availability: VM Component Protection (PDL and APD)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-availability/GUID-F01F7EB8-FF9D-45E2-A093-5F56A788D027.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S240",
+    "title": "vSphere 8 Availability: Configure VMCP responses",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-availability/GUID-DF3123C3-CE63-4431-A1FE-FD41F3395BCE.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S241",
+    "title": "vSphere 8 Availability: vSphere HA advanced options",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-availability/GUID-E0161CB5-BD3F-425F-A7E0-BF83B005FECA.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S242",
+    "title": "vSphere 8 Availability: vSphere HA checklist",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-availability/GUID-BA85FEC4-A37C-45BA-938D-37B309010D93.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S243",
+    "title": "KB 406100: Best practice for vSphere HA specific to APD and PDL storage events",
+    "url": "https://knowledge.broadcom.com/external/article/406100/best-practice-for-vsphere-high-availabil.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S244",
+    "title": "KB 341627: Setting multiple isolation response addresses for vSphere HA",
+    "url": "https://knowledge.broadcom.com/external/article/341627/setting-multiple-isolation-response-addr.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S245",
+    "title": "KB 318133: Insufficient configured resources to satisfy the desired vSphere HA failover level on the cluster",
+    "url": "https://knowledge.broadcom.com/external/article/318133/",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S246",
+    "title": "vSphere Web Services API 9.0: ClusterDasVmSettingsRestartPriority enum",
+    "url": "https://developer.broadcom.com/xapis/vsphere-web-services-api/9.0/vim.cluster.DasVmSettings.RestartPriority.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S247",
+    "title": "Yellow Bricks (Duncan Epping): vSphere HA restart priority",
+    "url": "https://www.yellow-bricks.com/2018/04/04/vsphere-ha-restart-priority/",
+    "type": "community",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S248",
+    "title": "vSphere 8 Availability: How Fault Tolerance works",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-availability/GUID-623812E6-D253-4FBC-B3E1-6FBFDF82ED21.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S249",
+    "title": "vSphere 8 Availability: Fault Tolerance requirements, limits and licensing",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-availability/GUID-57929CF0-DA9B-407A-BF2E-E7B72708D825.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S250",
+    "title": "vSphere 8 Availability: Fault Tolerance interoperability (features not supported)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-availability/GUID-F5264795-11DA-4242-B774-8C3450997033.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S251",
+    "title": "vSphere 8 Availability: Fault Tolerance checklist (cluster, host and VM requirements)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-availability/GUID-83FE5A45-8260-436B-A603-B8CBD2A1A611.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S252",
+    "title": "vSphere 8 Availability: Best practices for Fault Tolerance",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-availability/GUID-2A87B967-5BBB-4394-B1E6-EE87D50A2A86.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S253",
+    "title": "vSphere 8 Availability: Configure networking for host machines (vMotion and FT logging)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-availability/GUID-12E9AF7F-50D0-405D-AFDF-51878E2949AD.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S254",
+    "title": "KB 307309: FAQ: VMware Fault Tolerance",
+    "url": "https://knowledge.broadcom.com/external/article/307309/faq-vmware-fault-tolerance.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S255",
+    "title": "KB 306275: Turn on Fault Tolerance option is disabled",
+    "url": "https://knowledge.broadcom.com/external/article/306275/turn-on-fault-tolerance-option-is-disabl.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
+    ]
+  },
+  {
+    "id": "S256",
+    "title": "VMware blog: vSphere in VCF 9.0, what is new (HA components in the base ESX image)",
+    "url": "https://blogs.vmware.com/cloud-foundation/2025/06/23/vsphere-in-vcf-9-0-whats-new/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/08-ha-ft"
     ]
   }
 ]

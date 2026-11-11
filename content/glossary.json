@@ -1337,5 +1337,48 @@
     ],
     "ro": "Reguli DRS: VM-VM (împreună sau separat) și VM-Host (must/should run sau not run pe un grup de hosturi).",
     "en": "DRS rules: VM-VM (together or apart) and VM-Host (must/should run or not run on a host group)."
+  },
+  {
+    "id": "vmcp",
+    "term": "VMCP",
+    "abbr": "VMCP",
+    "expansion": "VM Component Protection",
+    "ro": "Funcție vSphere HA care reacționează când un host pierde accesul la un datastore (PDL sau APD): emite evenimente sau oprește și repornește VM-urile pe alt host.",
+    "en": "A vSphere HA feature that reacts when a host loses access to a datastore (PDL or APD): it issues events or powers off and restarts the VMs on another host."
+  },
+  {
+    "id": "icmp",
+    "term": "ICMP",
+    "abbr": "ICMP",
+    "expansion": "Internet Control Message Protocol",
+    "ro": "Protocolul folosit de ping; HA îl folosește ca verificare suplimentară a unui host și pentru adresele de izolare.",
+    "en": "The protocol used by ping; HA uses it as an extra check of a host and for isolation addresses."
+  },
+  {
+    "id": "admission-control",
+    "term": "Admission control (HA)",
+    "ro": "Mecanism vSphere HA care păstrează capacitate liberă pentru failover și blochează pornirea sau mutarea VM-urilor care ar consuma-o.",
+    "en": "A vSphere HA mechanism that keeps spare capacity for failover and blocks VM power-ons or migrations that would consume it."
+  },
+  {
+    "id": "host-isolation",
+    "term": "Host isolation",
+    "aliases": [
+      "isolation response"
+    ],
+    "ro": "Starea unui host care rulează, dar nu mai vede traficul HA pe rețeaua de management și nu răspund nici adresele de izolare; isolation response decide ce face cu VM-urile.",
+    "en": "The state of a host that runs but no longer sees HA traffic on the management network and cannot reach its isolation addresses; the isolation response decides what happens to the VMs."
+  },
+  {
+    "id": "datastore-heartbeating",
+    "term": "Datastore heartbeating",
+    "ro": "Al doilea canal de heartbeat al HA, prin datastore-uri partajate, care separă un host căzut de unul izolat sau partiționat.",
+    "en": "HA's second heartbeat channel, through shared datastores, which tells a failed host apart from an isolated or partitioned one."
+  },
+  {
+    "id": "proactive-ha",
+    "term": "Proactive HA",
+    "ro": "Reacție la defecte parțiale de hardware (de exemplu o sursă de alimentare din mai multe): VM-urile sunt evacuate și hostul intră în Quarantine sau Maintenance mode.",
+    "en": "A reaction to partial hardware faults (for example one of several power supplies): VMs are evacuated and the host enters Quarantine or Maintenance mode."
   }
 ]
