@@ -1763,5 +1763,66 @@
     "term": "Cluster partition (vSAN)",
     "ro": "Situația în care hosturile vSAN nu se mai văd prin rețeaua vSAN și clusterul se rupe în grupuri; cauze tipice: VLAN greșit, MTU nepotrivit, porturi blocate.",
     "en": "The situation where vSAN hosts no longer see each other on the vSAN network and the cluster splits into groups; typical causes: wrong VLAN, MTU mismatch, blocked ports."
+  },
+  {
+    "id": "erasure-coding",
+    "term": "Erasure coding (RAID-5/6)",
+    "ro": "Metodă de protecție care împarte datele în bucăți și adaugă paritate (RAID-5: o paritate, RAID-6: două); ocupă mai puțin spațiu decât oglindirea, dar cere mai multe hosturi.",
+    "en": "A protection method that splits data into pieces and adds parity (RAID-5: one parity, RAID-6: two); uses less space than mirroring but needs more hosts."
+  },
+  {
+    "id": "osr",
+    "term": "Object Space Reservation",
+    "abbr": "OSR",
+    "expansion": "Object Space Reservation",
+    "ro": "Regula de politică ce spune cât din dimensiunea logică a unui disc virtual se rezervă la creare: thin (implicit), 25%, 50%, 75% sau thick.",
+    "en": "The policy rule that sets how much of a virtual disk logical size is reserved at creation: thin (default), 25%, 50%, 75% or thick."
+  },
+  {
+    "id": "force-provisioning",
+    "term": "Force provisioning",
+    "ro": "Regula care creează obiectul chiar dacă politica nu poate fi respectată (FTT, stripes); implicit No, gândită pentru bootstrap sau avarii.",
+    "en": "The rule that creates the object even if the policy cannot be met (FTT, stripes); default No, meant for bootstrapping or outages."
+  },
+  {
+    "id": "disk-stripes",
+    "term": "Number of disk stripes per object",
+    "aliases": [
+      "stripe width"
+    ],
+    "ro": "Numărul minim de dispozitive de capacitate pe care se împarte fiecare replică; implicit 1, maximum 12.",
+    "en": "The minimum number of capacity devices each replica is striped across; default 1, maximum 12."
+  },
+  {
+    "id": "auto-policy",
+    "term": "Auto-policy management (vSAN ESA)",
+    "ro": "Funcție ESA care generează o politică implicită optimă pentru datastore în funcție de numărul de hosturi și semnalează prin health când trebuie actualizată.",
+    "en": "An ESA feature that generates an optimal default datastore policy based on host count and raises a health finding when it should be updated."
+  },
+  {
+    "id": "auto-raid",
+    "term": "Auto-RAID (VCF 9.1)",
+    "ro": "Politica gestionată de sistem din VCF 9.1 care alege singură reziliența (RAID-5, RAID-6, oglindire de site) după tipul și mărimea clusterului.",
+    "en": "The system-managed policy in VCF 9.1 that picks resilience (RAID-5, RAID-6, site mirroring) by itself from cluster type and size."
+  },
+  {
+    "id": "adaptive-raid5",
+    "term": "Adaptive RAID-5 (ESA)",
+    "ro": "Comportamentul ESA care folosește RAID-5 2+1 pe clustere mici și 4+1 de la 6 hosturi, schimbând schema la 24 de ore după ce se schimbă mărimea clusterului.",
+    "en": "The ESA behaviour that uses RAID-5 2+1 on small clusters and 4+1 from 6 hosts, switching scheme 24 hours after the cluster size changes."
+  },
+  {
+    "id": "hrr",
+    "term": "Host Rebuild Reserve",
+    "abbr": "HRR",
+    "expansion": "Host Rebuild Reserve",
+    "ro": "Rezervă de capacitate vSAN care păstrează loc pentru reconstruirea datelor unui host căzut.",
+    "en": "A vSAN capacity reserve that keeps room to rebuild the data of a failed host."
+  },
+  {
+    "id": "policy-compliance",
+    "term": "Storage policy compliance",
+    "ro": "Starea care arată dacă un obiect respectă politica atribuită (Compliant) sau nu (Noncompliant), de exemplu după căderea unui host.",
+    "en": "The state that shows whether an object meets its assigned policy (Compliant) or not (Noncompliant), for example after a host failure."
   }
 ]

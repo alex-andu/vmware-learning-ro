@@ -42,7 +42,8 @@
       "02-vsphere/13-lifecycle",
       "02-vsphere/14-supervisor-vks",
       "03-vsan/01-concepte-osa-esa",
-      "03-vsan/02-deploy"
+      "03-vsan/02-deploy",
+      "03-vsan/03-spbm-ftt"
     ]
   },
   {
@@ -58,7 +59,8 @@
       "content/modules.json",
       "01-fundamente/02-retea-de-baza",
       "03-vsan/01-concepte-osa-esa",
-      "03-vsan/02-deploy"
+      "03-vsan/02-deploy",
+      "03-vsan/03-spbm-ftt"
     ]
   },
   {
@@ -4011,7 +4013,8 @@
     "read": true,
     "usedBy": [
       "03-vsan/01-concepte-osa-esa",
-      "03-vsan/02-deploy"
+      "03-vsan/02-deploy",
+      "03-vsan/03-spbm-ftt"
     ]
   },
   {
@@ -4079,7 +4082,8 @@
     "read": true,
     "usedBy": [
       "03-vsan/01-concepte-osa-esa",
-      "03-vsan/02-deploy"
+      "03-vsan/02-deploy",
+      "03-vsan/03-spbm-ftt"
     ]
   },
   {
@@ -4212,6 +4216,204 @@
     "read": true,
     "usedBy": [
       "03-vsan/02-deploy"
+    ]
+  },
+  {
+    "id": "S374",
+    "title": "VCF 9.0 vSAN Administration: What are vSAN Policies (rules, FTT options, stripes, OSR, checksum, force provisioning)",
+    "url": "https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-0/vsan-deployment-administration-and-monitoring/administering-vmware-vsan/using-vsan-policies/about-vsan-policies.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/03-spbm-ftt"
+    ]
+  },
+  {
+    "id": "S375",
+    "title": "VCF 9.0 vSAN Administration: What are vSAN Default Storage Policies (default, ESA RAID-5/6, auto-policy management)",
+    "url": "https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-0/vsan-deployment-administration-and-monitoring/administering-vmware-vsan/using-vsan-policies/about-the-vsan-default-storage-policy.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/03-spbm-ftt"
+    ]
+  },
+  {
+    "id": "S376",
+    "title": "VCF 9.0 vSAN Administration: How vSAN Manages Policy Changes",
+    "url": "https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-0/vsan-deployment-administration-and-monitoring/administering-vmware-vsan/using-vsan-policies/how-vsan-manages-policy-changes.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/03-spbm-ftt"
+    ]
+  },
+  {
+    "id": "S377",
+    "title": "VCF 9.0 vSAN Administration: Define a Storage Policy for vSAN Using vSphere Client",
+    "url": "https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-0/vsan-deployment-administration-and-monitoring/administering-vmware-vsan/using-vsan-policies/define-a-storage-policy-for-virtual-san.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/03-spbm-ftt"
+    ]
+  },
+  {
+    "id": "S378",
+    "title": "VCF 9.0 vSAN Administration: Change the Default Storage Policy for vSAN Datastores",
+    "url": "https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-0/vsan-deployment-administration-and-monitoring/administering-vmware-vsan/using-vsan-policies/assign-a-default-storage-policy-to-vsan-datastores.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/03-spbm-ftt"
+    ]
+  },
+  {
+    "id": "S379",
+    "title": "KB 326549: Glossary of vSAN Terms and Acronyms",
+    "url": "https://knowledge.broadcom.com/external/article/326549/glossary-of-vsan-terms-and-acronyms.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/03-spbm-ftt"
+    ]
+  },
+  {
+    "id": "S380",
+    "title": "KB 421094: Clarification on vSAN \"Fault domain failures to tolerate\" under Cluster > Configure > Fault Domains",
+    "url": "https://knowledge.broadcom.com/external/article/421094/clarification-on-vsan-fault-domain-failu.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/03-spbm-ftt"
+    ]
+  },
+  {
+    "id": "S381",
+    "title": "KB 383978: Error when creating a RAID-5/6 storage policy for a hybrid vSAN cluster",
+    "url": "https://knowledge.broadcom.com/external/article/383978/error-when-attempting-to-create-a-raid56.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/03-spbm-ftt"
+    ]
+  },
+  {
+    "id": "S382",
+    "title": "KB 424165: Supportability of RAID-5 erasure coding (hybrid OSA)",
+    "url": "https://knowledge.broadcom.com/external/article/424165/supportability-of-raid-5-erasure-coding.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/03-spbm-ftt"
+    ]
+  },
+  {
+    "id": "S383",
+    "title": "KB 326540: Failures to tolerate method missing from storage policy (cannot select erasure coding)",
+    "url": "https://knowledge.broadcom.com/external/article/326540/failures-to-tolerate-method-is-missing-f.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/03-spbm-ftt"
+    ]
+  },
+  {
+    "id": "S384",
+    "title": "KB 371806: Erasure coding vSAN storage policy creation fails (storage tier No Preference)",
+    "url": "https://knowledge.broadcom.com/external/article/371806/erasure-coding-vsan-storage-policy-creat.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/03-spbm-ftt"
+    ]
+  },
+  {
+    "id": "S385",
+    "title": "KB 431247: vSAN objects in reduced availability with no rebuild after host failure (RAID-6 below 6 hosts)",
+    "url": "https://knowledge.broadcom.com/external/article/431247/vsan-objects-in-reduced-availability-wit.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/03-spbm-ftt"
+    ]
+  },
+  {
+    "id": "S386",
+    "title": "KB 397437: Host cannot enter maintenance mode, resource check failed (4-node vSAN cluster)",
+    "url": "https://knowledge.broadcom.com/external/article/397437/the-host-cannot-enter-maintenance-mode-r.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/03-spbm-ftt"
+    ]
+  },
+  {
+    "id": "S387",
+    "title": "VMware blog: Adaptive RAID-5 erasure coding with the Express Storage Architecture in vSAN 8",
+    "url": "https://blogs.vmware.com/cloud-foundation/2022/09/08/adaptive-raid-5-erasure-coding-with-the-express-storage-architecture-in-vsan-8/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/03-spbm-ftt"
+    ]
+  },
+  {
+    "id": "S388",
+    "title": "VMware blog: Auto-policy remediation enhancements for the ESA in vSAN 8 U2",
+    "url": "https://blogs.vmware.com/cloud-foundation/2023/09/26/auto-policy-remediation-enhancements-for-the-esa-in-vsan-8-u2/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/03-spbm-ftt"
+    ]
+  },
+  {
+    "id": "S389",
+    "title": "VMware blog: Auto-RAID in vSAN for VCF 9.1",
+    "url": "https://blogs.vmware.com/cloud-foundation/2026/05/08/auto-raid-in-vsan-for-vcf-9.1/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/03-spbm-ftt"
+    ]
+  },
+  {
+    "id": "S390",
+    "title": "Yellow Bricks (Duncan Epping): vSAN ESA and the minimum number of hosts with RAID-1/5/6",
+    "url": "https://www.yellow-bricks.com/2024/01/23/vsan-esa-and-the-minimum-number-of-hosts-with-raid-1-5-6",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/03-spbm-ftt"
+    ]
+  },
+  {
+    "id": "S391",
+    "title": "Yellow Bricks (Duncan Epping): vSAN 8.0 ESA, introducing adaptive RAID-5",
+    "url": "https://www.yellow-bricks.com/2022/11/15/vsan-8-0-esa-introducing-adaptive-raid-5/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/03-spbm-ftt"
     ]
   }
 ]

@@ -1,0 +1,156 @@
+{
+  "steps": [
+    {
+      "id": "r1",
+      "title": {
+        "ro": "Creează politica RAID-1 FTT=1",
+        "en": "Create the RAID-1 FTT=1 policy"
+      },
+      "path": {
+        "ro": "Policies and Profiles → VM Storage Policies → Create",
+        "en": "Policies and Profiles → VM Storage Policies → Create"
+      },
+      "action": {
+        "ro": "Nume „Lab-R1-FTT1”, bifează Enable rules for vSAN storage, la Availability alege Failures to tolerate: 1 failure - RAID-1 (Mirroring). Lasă restul implicit și verifică la Storage compatibility că datastore-ul vSAN apare compatibil.",
+        "en": "Name it \"Lab-R1-FTT1\", tick Enable rules for vSAN storage, on Availability choose Failures to tolerate: 1 failure - RAID-1 (Mirroring). Leave the rest at default and check under Storage compatibility that the vSAN datastore is compatible."
+      },
+      "why": {
+        "ro": "RAID-1 FTT=1 e punctul de referință: merge de la 3 hosturi, pe hybrid și all-flash, și ocupă dublu.",
+        "en": "RAID-1 FTT=1 is the reference point: it works from 3 hosts, on hybrid and all-flash, and takes double the space."
+      }
+    },
+    {
+      "id": "r5",
+      "title": {
+        "ro": "Creează politica RAID-5 FTT=1",
+        "en": "Create the RAID-5 FTT=1 policy"
+      },
+      "path": {
+        "ro": "Policies and Profiles → VM Storage Policies → Create → vSAN → Availability și Storage rules",
+        "en": "Policies and Profiles → VM Storage Policies → Create → vSAN → Availability and Storage rules"
+      },
+      "action": {
+        "ro": "Nume „Lab-R5-FTT1”, la Availability alege 1 failure - RAID-5 (Erasure Coding), iar la Storage rules setează Storage tier pe All flash. Notează dacă datastore-ul apare compatibil.",
+        "en": "Name it \"Lab-R5-FTT1\", on Availability choose 1 failure - RAID-5 (Erasure Coding), and under Storage rules set Storage tier to All flash. Note whether the datastore is compatible."
+      },
+      "why": {
+        "ro": "Erasure coding cere all-flash; cu Storage tier pe No Preference crearea poate eșua (KB 371806).",
+        "en": "Erasure coding needs all-flash; with Storage tier at No Preference creation can fail (KB 371806)."
+      }
+    },
+    {
+      "id": "apply",
+      "title": {
+        "ro": "Aplică politica pe discul de test",
+        "en": "Apply the policy to the test disk"
+      },
+      "path": {
+        "ro": "VM → Configure → Policies → Edit VM Storage Policies",
+        "en": "VM → Configure → Policies → Edit VM Storage Policies"
+      },
+      "action": {
+        "ro": "Pe VM-ul de test aplică Lab-R1-FTT1 pe hard disk și pe VM home. Așteaptă și verifică la Compliance Status că apare Compliant.",
+        "en": "On the test VM apply Lab-R1-FTT1 to the hard disk and VM home. Wait and check that Compliance Status shows Compliant."
+      },
+      "why": {
+        "ro": "Politica se aplică pe fiecare obiect; vrei să vezi că vSAN a construit componentele așa cum cere politica.",
+        "en": "The policy applies per object; you want to see that vSAN built the components the way the policy asks."
+      }
+    },
+    {
+      "id": "space",
+      "title": {
+        "ro": "Compară spațiul RAID-1 cu RAID-5",
+        "en": "Compare RAID-1 and RAID-5 space"
+      },
+      "path": {
+        "ro": "Cluster → Monitor → vSAN → Capacity; VM → Monitor → vSAN → Physical disk placement",
+        "en": "Cluster → Monitor → vSAN → Capacity; VM → Monitor → vSAN → Physical disk placement"
+      },
+      "action": {
+        "ro": "Notează spațiul folosit și componentele discului. Schimbă politica discului pe Lab-R5-FTT1, așteaptă reconfigurarea și compară din nou spațiul și numărul de componente.",
+        "en": "Note the space used and the disk components. Change the disk policy to Lab-R5-FTT1, wait for the reconfiguration and compare the space and the number of components again."
+      },
+      "why": {
+        "ro": "Vezi cu ochii tăi diferența: 200% la RAID-1, 133% la RAID-5 3+1 în OSA, 150% sau 125% în ESA; observi și spațiul temporar folosit în timpul schimbării.",
+        "en": "You see the difference yourself: 200% for RAID-1, 133% for RAID-5 3+1 in OSA, 150% or 125% in ESA; you also notice the temporary space used during the change."
+      }
+    },
+    {
+      "id": "default",
+      "title": {
+        "ro": "Schimbă politica implicită a datastore-ului",
+        "en": "Change the datastore default policy"
+      },
+      "path": {
+        "ro": "Datastore vSAN → Configure → General → Default Storage Policy → Edit",
+        "en": "vSAN datastore → Configure → General → Default Storage Policy → Edit"
+      },
+      "action": {
+        "ro": "Alege Lab-R1-FTT1 ca politică implicită, creează o VM nouă fără să alegi politica și verifică ce politică a primit. Apoi revino la politica implicită inițială.",
+        "en": "Choose Lab-R1-FTT1 as default, create a new VM without choosing a policy and check which policy it got. Then go back to the original default policy."
+      },
+      "why": {
+        "ro": "Politica implicită a datastore-ului se aplică doar VM-urilor noi fără politică aleasă; nu schimbă VM-urile existente.",
+        "en": "The datastore default policy applies only to new VMs without a chosen policy; it does not change existing VMs."
+      }
+    },
+    {
+      "id": "r6",
+      "title": {
+        "ro": "Testează o politică RAID-6 pe prea puține hosturi",
+        "en": "Test a RAID-6 policy on too few hosts"
+      },
+      "path": {
+        "ro": "Policies and Profiles → VM Storage Policies → Create → Storage compatibility",
+        "en": "Policies and Profiles → VM Storage Policies → Create → Storage compatibility"
+      },
+      "action": {
+        "ro": "Dacă ai sub 6 hosturi, creează „Lab-R6-FTT2” cu 2 failures - RAID-6 (Erasure Coding) și uită-te la Storage compatibility. Încearcă s-o aplici pe discul de test și notează mesajul.",
+        "en": "If you have fewer than 6 hosts, create \"Lab-R6-FTT2\" with 2 failures - RAID-6 (Erasure Coding) and look at Storage compatibility. Try to apply it to the test disk and note the message."
+      },
+      "why": {
+        "ro": "Acesta e testul de avarie: o schimbare imposibilă e refuzată, iar tu înveți să citești compatibilitatea înainte de a aplica politica pe producție.",
+        "en": "This is the failure test: an impossible change is rejected, and you learn to read compatibility before applying a policy in production."
+      }
+    },
+    {
+      "id": "cli",
+      "title": {
+        "ro": "Verifică obiectele din linia de comandă",
+        "en": "Check objects from the command line"
+      },
+      "path": {
+        "ro": "SSH (Secure Shell) pe un host ESXi",
+        "en": "SSH (Secure Shell) on an ESXi host"
+      },
+      "action": {
+        "ro": "Rulează esxcli vsan debug object health summary get și notează câte obiecte sunt healthy și dacă există reduced-availability-with-no-rebuild.",
+        "en": "Run esxcli vsan debug object health summary get and note how many objects are healthy and whether any are reduced-availability-with-no-rebuild."
+      },
+      "why": {
+        "ro": "Aceeași comandă e folosită în KB 431247 ca să vezi obiectele care nu se mai pot reconstrui.",
+        "en": "The same command is used in KB 431247 to see objects that can no longer be rebuilt."
+      }
+    },
+    {
+      "id": "clean",
+      "title": {
+        "ro": "Curăță lab-ul",
+        "en": "Clean up the lab"
+      },
+      "path": {
+        "ro": "VM → Edit VM Storage Policies; Policies and Profiles → VM Storage Policies",
+        "en": "VM → Edit VM Storage Policies; Policies and Profiles → VM Storage Policies"
+      },
+      "action": {
+        "ro": "Readu discul de test pe politica implicită, șterge politicile de lab nefolosite și oprește SSH pe host.",
+        "en": "Move the test disk back to the default policy, delete the unused lab policies and stop SSH on the host."
+      },
+      "why": {
+        "ro": "Politicile de test uitate ajung aplicate din greșeală pe VM-uri reale, iar SSH lăsat pornit e un risc de securitate.",
+        "en": "Forgotten test policies end up applied to real VMs by mistake, and SSH left running is a security risk."
+      }
+    }
+  ]
+}
