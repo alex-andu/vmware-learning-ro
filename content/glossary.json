@@ -1745,5 +1745,23 @@
     "term": "vSAN",
     "ro": "Stocarea software VMware care adună discurile locale ale hosturilor ESXi într-un datastore partajat de tot clusterul.",
     "en": "VMware software-defined storage that pools the local disks of ESXi hosts into one datastore shared by the whole cluster."
+  },
+  {
+    "id": "quickstart",
+    "term": "Quickstart (vSAN)",
+    "ro": "Asistentul din Configure al clusterului care configurează pas cu pas hosturile, rețeaua (VDS, port groups vMotion și vSAN), serviciile și discurile unui cluster vSAN.",
+    "en": "The wizard on the cluster Configure tab that sets up the hosts, networking (VDS, vMotion and vSAN port groups), services and disks of a vSAN cluster step by step."
+  },
+  {
+    "id": "fault-domain",
+    "term": "Fault domain (vSAN)",
+    "ro": "Grup de hosturi care pot cădea împreună (de exemplu același rack); vSAN pune componentele unui obiect în fault domains diferite.",
+    "en": "A group of hosts that can fail together (for example the same rack); vSAN places an object's components in different fault domains."
+  },
+  {
+    "id": "cluster-partition",
+    "term": "Cluster partition (vSAN)",
+    "ro": "Situația în care hosturile vSAN nu se mai văd prin rețeaua vSAN și clusterul se rupe în grupuri; cauze tipice: VLAN greșit, MTU nepotrivit, porturi blocate.",
+    "en": "The situation where vSAN hosts no longer see each other on the vSAN network and the cluster splits into groups; typical causes: wrong VLAN, MTU mismatch, blocked ports."
   }
 ]

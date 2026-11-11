@@ -41,7 +41,8 @@
       "02-vsphere/12-monitorizare",
       "02-vsphere/13-lifecycle",
       "02-vsphere/14-supervisor-vks",
-      "03-vsan/01-concepte-osa-esa"
+      "03-vsan/01-concepte-osa-esa",
+      "03-vsan/02-deploy"
     ]
   },
   {
@@ -56,7 +57,8 @@
       "01-fundamente/01-ce-este-virtualizarea",
       "content/modules.json",
       "01-fundamente/02-retea-de-baza",
-      "03-vsan/01-concepte-osa-esa"
+      "03-vsan/01-concepte-osa-esa",
+      "03-vsan/02-deploy"
     ]
   },
   {
@@ -4008,7 +4010,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "03-vsan/01-concepte-osa-esa"
+      "03-vsan/01-concepte-osa-esa",
+      "03-vsan/02-deploy"
     ]
   },
   {
@@ -4019,7 +4022,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "03-vsan/01-concepte-osa-esa"
+      "03-vsan/01-concepte-osa-esa",
+      "03-vsan/02-deploy"
     ]
   },
   {
@@ -4074,7 +4078,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "03-vsan/01-concepte-osa-esa"
+      "03-vsan/01-concepte-osa-esa",
+      "03-vsan/02-deploy"
     ]
   },
   {
@@ -4108,6 +4113,105 @@
     "read": true,
     "usedBy": [
       "03-vsan/01-concepte-osa-esa"
+    ]
+  },
+  {
+    "id": "S365",
+    "title": "vSphere 8 vSAN Planning: Configuring a vSAN cluster with Quickstart",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsan-planning/GUID-7BC09239-46BD-46FD-B803-95244CCBC8F4.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/02-deploy"
+    ]
+  },
+  {
+    "id": "S366",
+    "title": "vSphere 8 vSAN Planning: Quickstart for a stretched or two-node vSAN cluster (witness host)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsan-planning/GUID-7DC2815D-4D38-43B6-8551-43B2FFB68ACF.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/02-deploy"
+    ]
+  },
+  {
+    "id": "S367",
+    "title": "vSphere 8 vSAN Network Design: Unicast communication (port 12321, IP over UDP)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsan-network-design-guide/GUID-292E39E2-1B74-4742-A594-DE8FF7BDF2EE.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/02-deploy"
+    ]
+  },
+  {
+    "id": "S368",
+    "title": "vSphere 8 vSAN Planning: Networking design (bandwidth per architecture, VMkernel adapters, jumbo frames, NIOC)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsan-planning/GUID-031F9637-EE29-4684-8644-7A93B9FD8D7B.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/02-deploy"
+    ]
+  },
+  {
+    "id": "S369",
+    "title": "KB 326954: Troubleshooting vSAN networking",
+    "url": "https://knowledge.broadcom.com/external/article/326954/troubleshooting-vsan-networking.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/02-deploy"
+    ]
+  },
+  {
+    "id": "S370",
+    "title": "KB 391883: vSAN cluster partition due to MTU mismatch or network misconfiguration",
+    "url": "https://knowledge.broadcom.com/external/article/391883/vsan-cluster-partition-due-to-mtu-mismat.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/02-deploy"
+    ]
+  },
+  {
+    "id": "S371",
+    "title": "KB 400637: Add a host to an existing vSAN cluster using Quickstart",
+    "url": "https://knowledge.broadcom.com/external/article/400637/add-a-host-to-an-existing-vsan-cluster-u.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/02-deploy"
+    ]
+  },
+  {
+    "id": "S372",
+    "title": "KB 327002: Enabling or disabling a vSAN cluster (vSphere HA off first)",
+    "url": "https://knowledge.broadcom.com/external/article/327002/",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/02-deploy"
+    ]
+  },
+  {
+    "id": "S373",
+    "title": "KB 415675: Unable to configure vSphere HA in a vSAN cluster (vSAN network missing)",
+    "url": "https://knowledge.broadcom.com/external/article/415675/unable-to-configure-vsphere-ha-in-a-vsan.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/02-deploy"
     ]
   }
 ]

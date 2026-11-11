@@ -1,0 +1,269 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Vrei să activezi vSAN pe un cluster existent unde vSphere HA e pornit. Ce faci întâi?",
+        "en": "You want to enable vSAN on an existing cluster where vSphere HA is on. What do you do first?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Activezi vSAN direct; HA se adaptează singur",
+            "en": "Enable vSAN directly; HA adapts on its own"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. KB 327002 cere HA oprit cât activezi vSAN.",
+            "en": "Wrong. KB 327002 requires HA off while you enable vSAN."
+          }
+        },
+        {
+          "text": {
+            "ro": "Treci DRS pe Manual",
+            "en": "Set DRS to Manual"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. DRS nu e cerința aici.",
+            "en": "Wrong. DRS is not the requirement here."
+          }
+        },
+        {
+          "text": {
+            "ro": "Configurezi rețeaua VMkernel vSAN și oprești temporar HA",
+            "en": "Configure the vSAN VMkernel network and temporarily turn HA off"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Rețeaua vSAN vine prima, HA se oprește pe durata activării și se repornește după.",
+            "en": "Correct. The vSAN network comes first, HA is off during enablement and turned back on afterwards."
+          }
+        },
+        {
+          "text": {
+            "ro": "Pui toate hosturile în maintenance mode",
+            "en": "Put every host in maintenance mode"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Nu e necesar pentru activarea vSAN.",
+            "en": "Wrong. It is not needed to enable vSAN."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "După un upgrade de switch, un host arată Sub-Cluster Member Count 1. Ce verifici întâi?",
+        "en": "After a switch upgrade, a host shows Sub-Cluster Member Count 1. What do you check first?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "VLAN-ul și MTU-ul pe porturile switch-ului și porturile TCP 2233 și UDP 12321",
+            "en": "The VLAN and MTU on the switch ports and the TCP 2233 and UDP 12321 ports"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Acestea sunt cauzele tipice ale unei partiții (KB 391883).",
+            "en": "Correct. These are the typical causes of a partition (KB 391883)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Licența vSAN",
+            "en": "The vSAN license"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Licența nu izolează un host în rețea.",
+            "en": "Wrong. The license does not isolate a host on the network."
+          }
+        },
+        {
+          "text": {
+            "ro": "Politica de stocare a VM-urilor",
+            "en": "The VMs storage policy"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Politica nu decide apartenența la cluster.",
+            "en": "Wrong. The policy does not decide cluster membership."
+          }
+        },
+        {
+          "text": {
+            "ro": "Dacă multicast e activ pe switch",
+            "en": "Whether multicast is enabled on the switch"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. vSAN modern folosește unicast.",
+            "en": "Wrong. Modern vSAN uses unicast."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Folosești MTU 9000 pe rețeaua vSAN. Ce comandă testează corect drumul fără fragmentare?",
+        "en": "You use MTU 9000 on the vSAN network. Which command correctly tests the path without fragmentation?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "vmkping -I vmkX -s 9000",
+            "en": "vmkping -I vmkX -s 9000"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Fără -d se poate fragmenta, iar 9000 nu lasă loc pentru antete.",
+            "en": "Wrong. Without -d it can fragment, and 9000 leaves no room for headers."
+          }
+        },
+        {
+          "text": {
+            "ro": "vmkping -I vmkX -d -s 8972",
+            "en": "vmkping -I vmkX -d -s 8972"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. 8972 lasă loc antetelor, iar -d interzice fragmentarea.",
+            "en": "Correct. 8972 leaves room for headers, and -d forbids fragmentation."
+          }
+        },
+        {
+          "text": {
+            "ro": "ping -s 1472",
+            "en": "ping -s 1472"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. 1472 e pentru MTU 1500, iar fără -I nu alegi VMkernel-ul vSAN.",
+            "en": "Wrong. 1472 is for MTU 1500, and without -I you do not pick the vSAN VMkernel."
+          }
+        },
+        {
+          "text": {
+            "ro": "esxcli vsan cluster get",
+            "en": "esxcli vsan cluster get"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Arată apartenența, nu testează MTU-ul.",
+            "en": "Wrong. It shows membership; it does not test MTU."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "Ai creat clusterul cu Quickstart, apoi ai schimbat manual port group-ul vSAN pe un VDS nou. Acum vrei să adaugi un host. Ce se întâmplă?",
+        "en": "You built the cluster with Quickstart, then manually moved the vSAN port group to a new VDS. Now you want to add a host. What happens?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Quickstart adaugă hostul pe noul VDS automat",
+            "en": "Quickstart adds the host to the new VDS automatically"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Quickstart nu mai poate folosi o rețea schimbată în afara lui.",
+            "en": "Wrong. Quickstart can no longer use a network changed outside it."
+          }
+        },
+        {
+          "text": {
+            "ro": "Trebuie să recreezi clusterul",
+            "en": "You must rebuild the cluster"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Clusterul merge; doar adăugarea se face altfel.",
+            "en": "Wrong. The cluster works; only adding is done differently."
+          }
+        },
+        {
+          "text": {
+            "ro": "Hostul intră, dar fără discuri",
+            "en": "The host joins, but without disks"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Nu e comportamentul descris în documentație.",
+            "en": "Wrong. That is not the behavior the documentation describes."
+          }
+        },
+        {
+          "text": {
+            "ro": "Nu mai poți adăuga hosturi cu Quickstart; le configurezi manual",
+            "en": "You can no longer add hosts with Quickstart; you configure them manually"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Dacă schimbi rețeaua Quickstart în afara lui, nu-l mai poți folosi pentru hosturi noi.",
+            "en": "Correct. If you change Quickstart networking outside it, you cannot use it for new hosts."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "Activezi HA pe un cluster vSAN și primești „vSphere HA is missing network configuration information”. Cauza?",
+        "en": "You enable HA on a vSAN cluster and get \"vSphere HA is missing network configuration information\". The cause?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Lipsește rețeaua VMkernel vSAN, prin care comunică HA când vSAN e pornit",
+            "en": "The vSAN VMkernel network is missing, which HA uses when vSAN is on"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Cu vSAN pornit, agenții HA folosesc rețeaua vSAN (KB 415675).",
+            "en": "Correct. With vSAN on, HA agents use the vSAN network (KB 415675)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Licența HA a expirat",
+            "en": "The HA license expired"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Mesajul e despre rețea.",
+            "en": "Wrong. The message is about networking."
+          }
+        },
+        {
+          "text": {
+            "ro": "Datastore heartbeating nu are două datastore-uri",
+            "en": "Datastore heartbeating does not have two datastores"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Asta dă alt avertisment, nu această eroare.",
+            "en": "Wrong. That gives a different warning, not this error."
+          }
+        },
+        {
+          "text": {
+            "ro": "DRS e dezactivat",
+            "en": "DRS is disabled"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. HA nu depinde de DRS pentru configurare.",
+            "en": "Wrong. HA does not depend on DRS to configure."
+          }
+        }
+      ]
+    }
+  ]
+}
