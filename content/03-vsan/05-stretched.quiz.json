@@ -1,0 +1,269 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Într-un stretched cluster vSAN, legătura dintre cele două site-uri de date cade, iar witness-ul e accesibil din ambele. Ce se întâmplă cu VM-urile?",
+        "en": "In a vSAN stretched cluster, the link between the two data sites fails and the witness is reachable from both. What happens to the VMs?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "VM-urile de pe secondary sunt oprite și repornite de HA pe preferred site",
+            "en": "VMs on the secondary site are powered off and restarted by HA on the preferred site"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Preferred site păstrează quorum-ul cu witness-ul; obiectele de pe secondary devin inaccesibile acolo, iar VM-urile sunt repornite pe preferred.",
+            "en": "Correct. The preferred site keeps quorum with the witness; objects on the secondary site become inaccessible there, and the VMs are restarted on the preferred site."
+          }
+        },
+        {
+          "text": {
+            "ro": "Ambele site-uri continuă să ruleze VM-urile lor",
+            "en": "Both sites keep running their VMs"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Asta ar duce la scrieri în conflict în două locuri; vSAN evită exact asta.",
+            "en": "Wrong. That would lead to conflicting writes in two places; vSAN avoids exactly that."
+          }
+        },
+        {
+          "text": {
+            "ro": "Toate VM-urile se opresc până revine legătura",
+            "en": "All VMs stop until the link returns"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Preferred site și witness-ul au majoritatea, deci VM-urile de pe preferred merg mai departe.",
+            "en": "Wrong. The preferred site and the witness have the majority, so VMs on the preferred site keep running."
+          }
+        },
+        {
+          "text": {
+            "ro": "Witness-ul preia VM-urile de pe secondary",
+            "en": "The witness takes over the secondary site VMs"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Witness-ul nu rulează VM-uri; ține doar metadate.",
+            "en": "Wrong. The witness runs no VMs; it holds only metadata."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Care e latența maximă RTT (Round-Trip Time) acceptată între hosturile unui cluster vSAN cu 2 noduri și witness?",
+        "en": "What is the maximum RTT (Round-Trip Time) latency allowed between the hosts of a 2-node vSAN cluster and the witness?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "5 ms",
+            "en": "5 ms"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. 5 ms e limita dintre site-urile de date ale unui stretched cluster.",
+            "en": "Wrong. 5 ms is the limit between the data sites of a stretched cluster."
+          }
+        },
+        {
+          "text": {
+            "ro": "100 ms",
+            "en": "100 ms"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. 100 ms apare în documentația vSphere 8 pentru stretched cu 11 sau mai multe hosturi pe site.",
+            "en": "Wrong. 100 ms appears in the vSphere 8 documentation for stretched with 11 or more hosts per site."
+          }
+        },
+        {
+          "text": {
+            "ro": "200 ms",
+            "en": "200 ms"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. 200 ms e limita spre witness pentru stretched cluster.",
+            "en": "Wrong. 200 ms is the witness limit for a stretched cluster."
+          }
+        },
+        {
+          "text": {
+            "ro": "500 ms",
+            "en": "500 ms"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Pentru clusterele cu 2 noduri, documentația dă sub 500 ms RTT spre witness.",
+            "en": "Correct. For 2-node clusters, the documentation gives under 500 ms RTT to the witness."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Unde instalezi witness appliance-ul unui stretched cluster vSAN?",
+        "en": "Where do you deploy the witness appliance of a vSAN stretched cluster?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Pe datastore-ul vSAN al clusterului, pe preferred site",
+            "en": "On the cluster vSAN datastore, at the preferred site"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Witness-ul are nevoie de un datastore diferit și nu trebuie să depindă de clusterul pe care îl servește.",
+            "en": "Wrong. The witness needs a different datastore and must not depend on the cluster it serves."
+          }
+        },
+        {
+          "text": {
+            "ro": "Pe un al treilea site, pe un host sau cluster din afara clusterului stretched",
+            "en": "At a third site, on a host or cluster outside the stretched cluster"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Witness-ul stă pe un al treilea site, în afara clusterului, ca pierderea unui site să nu ia două voturi deodată.",
+            "en": "Correct. The witness sits at a third site, outside the cluster, so losing a site does not take two votes at once."
+          }
+        },
+        {
+          "text": {
+            "ro": "Ca VM în clusterul stretched, cu politică de site mirroring",
+            "en": "As a VM in the stretched cluster, with a site mirroring policy"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. KB 384420 spune că plasarea în cluster creează o dependență circulară nesuportată.",
+            "en": "Wrong. KB 384420 says placing it in the cluster creates an unsupported circular dependency."
+          }
+        },
+        {
+          "text": {
+            "ro": "Pe același witness folosit deja de alt stretched cluster",
+            "en": "On the same witness already used by another stretched cluster"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Fiecare stretched cluster are witness-ul lui; shared witness e doar pentru clusterele cu 2 noduri.",
+            "en": "Wrong. Each stretched cluster has its own witness; a shared witness is only for 2-node clusters."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "Ce admission control recomandă ghidul vSAN pentru HA într-un stretched cluster cu două site-uri egale?",
+        "en": "Which HA admission control does the vSAN guide recommend for a stretched cluster with two equal sites?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Admission control dezactivat, ca să pornească toate VM-urile",
+            "en": "Admission control disabled, so every VM can start"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Fără rezervă, un site nu are garantat loc pentru VM-urile celuilalt.",
+            "en": "Wrong. Without a reserve, one site is not guaranteed room for the other site VMs."
+          }
+        },
+        {
+          "text": {
+            "ro": "25% CPU și memorie",
+            "en": "25% CPU and memory"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. 25% nu acoperă un site întreg dintr-un cluster cu două site-uri egale.",
+            "en": "Wrong. 25% does not cover a whole site in a cluster with two equal sites."
+          }
+        },
+        {
+          "text": {
+            "ro": "50% CPU și memorie",
+            "en": "50% CPU and memory"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Ghidul recomandă 50% pentru CPU și memorie, ca fiecare site să poată prelua toate VM-urile celuilalt.",
+            "en": "Correct. The guide recommends 50% for CPU and memory, so each site can take over all the other site VMs."
+          }
+        },
+        {
+          "text": {
+            "ro": "100% CPU și memorie",
+            "en": "100% CPU and memory"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. 100% ar bloca pornirea oricărei VM.",
+            "en": "Wrong. 100% would block any VM from powering on."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "Un stretched cluster vSAN 8 pierde un site întreg; după câteva minute cade și witness-ul. Ce se întâmplă?",
+        "en": "A vSAN 8 stretched cluster loses a whole site; a few minutes later the witness also fails. What happens?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Site-ul rămas continuă, pentru că Adaptive Quorum Control a recalculat voturile",
+            "en": "The remaining site carries on, because Adaptive Quorum Control recounted the votes"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Din vSAN 7 U3, după căderea unui site voturile se recalculează, iar site-ul rămas supraviețuiește pierderii ulterioare a witness-ului.",
+            "en": "Correct. From vSAN 7 U3, after a site fails the votes are recounted, and the remaining site survives the later loss of the witness."
+          }
+        },
+        {
+          "text": {
+            "ro": "Toate datele devin indisponibile, ca la o avarie simultană",
+            "en": "All data becomes unavailable, as in a simultaneous failure"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Așa se întâmplă doar dacă site-ul și witness-ul cad în același timp sau înainte de vSAN 7 U3.",
+            "en": "Wrong. That only happens if the site and the witness fail at the same time, or before vSAN 7 U3."
+          }
+        },
+        {
+          "text": {
+            "ro": "vSAN repornește automat witness-ul pe site-ul rămas",
+            "en": "vSAN automatically restarts the witness on the remaining site"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. vSAN nu mută witness-ul; îl înlocuiești cu asistentul Change Witness Host.",
+            "en": "Wrong. vSAN does not move the witness; you replace it with the Change Witness Host wizard."
+          }
+        },
+        {
+          "text": {
+            "ro": "VM-urile trec în modul read-only până revine witness-ul",
+            "en": "VMs switch to read-only mode until the witness returns"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. vSAN nu are un mod read-only pentru VM-uri în acest scenariu.",
+            "en": "Wrong. vSAN has no read-only mode for VMs in this scenario."
+          }
+        }
+      ]
+    }
+  ]
+}

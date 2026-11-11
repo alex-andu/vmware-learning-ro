@@ -44,7 +44,8 @@
       "03-vsan/01-concepte-osa-esa",
       "03-vsan/02-deploy",
       "03-vsan/03-spbm-ftt",
-      "03-vsan/04-eficienta-spatiu"
+      "03-vsan/04-eficienta-spatiu",
+      "03-vsan/05-stretched"
     ]
   },
   {
@@ -62,7 +63,8 @@
       "03-vsan/01-concepte-osa-esa",
       "03-vsan/02-deploy",
       "03-vsan/03-spbm-ftt",
-      "03-vsan/04-eficienta-spatiu"
+      "03-vsan/04-eficienta-spatiu",
+      "03-vsan/05-stretched"
     ]
   },
   {
@@ -4087,7 +4089,8 @@
       "03-vsan/01-concepte-osa-esa",
       "03-vsan/02-deploy",
       "03-vsan/03-spbm-ftt",
-      "03-vsan/04-eficienta-spatiu"
+      "03-vsan/04-eficienta-spatiu",
+      "03-vsan/05-stretched"
     ]
   },
   {
@@ -4142,7 +4145,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "03-vsan/02-deploy"
+      "03-vsan/02-deploy",
+      "03-vsan/05-stretched"
     ]
   },
   {
@@ -4231,7 +4235,8 @@
     "read": true,
     "usedBy": [
       "03-vsan/03-spbm-ftt",
-      "03-vsan/04-eficienta-spatiu"
+      "03-vsan/04-eficienta-spatiu",
+      "03-vsan/05-stretched"
     ]
   },
   {
@@ -4397,7 +4402,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "03-vsan/03-spbm-ftt"
+      "03-vsan/03-spbm-ftt",
+      "03-vsan/05-stretched"
     ]
   },
   {
@@ -4529,7 +4535,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "03-vsan/04-eficienta-spatiu"
+      "03-vsan/04-eficienta-spatiu",
+      "03-vsan/05-stretched"
     ]
   },
   {
@@ -4574,6 +4581,149 @@
     "read": true,
     "usedBy": [
       "03-vsan/04-eficienta-spatiu"
+    ]
+  },
+  {
+    "id": "S406",
+    "title": "VMware: vSAN Stretched Cluster Guide (recommendations for vSAN 8 U3 / VCF 5.2, February 2025)",
+    "url": "https://www.vmware.com/docs/vsan-stretched-cluster-guide",
+    "type": "whitepaper",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/05-stretched"
+    ]
+  },
+  {
+    "id": "S407",
+    "title": "KB 394978: Understanding vSAN Stretched Cluster Failure Scenarios",
+    "url": "https://knowledge.broadcom.com/external/article/394978/understanding-vsan-stretched-cluster-fai.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/05-stretched"
+    ]
+  },
+  {
+    "id": "S408",
+    "title": "KB 412056: vSAN health test \"Site latency health\" changed from green to yellow",
+    "url": "https://knowledge.broadcom.com/external/article/412056/vsan-health-test-site-latency-health-sta.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/05-stretched"
+    ]
+  },
+  {
+    "id": "S409",
+    "title": "KB 402974: All VMs inaccessible after failover on vSAN stretched cluster",
+    "url": "https://knowledge.broadcom.com/external/article/402974/all-vms-inaccessible-after-failover-on-v.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/05-stretched"
+    ]
+  },
+  {
+    "id": "S410",
+    "title": "KB 438087: vSAN stretched cluster instability and stuck I/O due to witness node flapping",
+    "url": "https://knowledge.broadcom.com/external/article/438087/vsan-stretched-cluster-instability-and-s.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/05-stretched"
+    ]
+  },
+  {
+    "id": "S411",
+    "title": "KB 447251: Deploying a vSAN 8.0 witness appliance for stretched and two-node clusters",
+    "url": "https://knowledge.broadcom.com/external/article/447251/deploying-a-vsan-80-witness-appliance-fo.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/05-stretched"
+    ]
+  },
+  {
+    "id": "S412",
+    "title": "KB 384420: vSAN stretched clusters, how to replace the witness appliance/host",
+    "url": "https://knowledge.broadcom.com/external/article/384420",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/05-stretched"
+    ]
+  },
+  {
+    "id": "S413",
+    "title": "KB 417356: Considerations for implementing vSphere Metro Storage Cluster (vMSC) on VMware Cloud Foundation 9.x",
+    "url": "https://knowledge.broadcom.com/external/article/417356/considerations-for-implementing-vsphere.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/05-stretched"
+    ]
+  },
+  {
+    "id": "S414",
+    "title": "KB 429477: vSAN, the current topology that contains stretch cluster is not supported (VCF 9.0 precheck)",
+    "url": "https://knowledge.broadcom.com/external/article/429477/vsan-the-current-topology-that-contains.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/05-stretched"
+    ]
+  },
+  {
+    "id": "S415",
+    "title": "VMware: vSAN Stretched Cluster Bandwidth Sizing (vSAN 9.0 / VCF 9.1, May 2026)",
+    "url": "https://www.vmware.com/docs/vmw-vsan-stretched-cluster-bandwidth-sizing",
+    "type": "whitepaper",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/05-stretched"
+    ]
+  },
+  {
+    "id": "S416",
+    "title": "vSphere 8 vSAN Planning: witness appliance sizes, network requirements and witness traffic separation",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsan-planning/GUID-05C1737A-5FBA-4AEE-BDB8-3BF5DE569E0A.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/05-stretched"
+    ]
+  },
+  {
+    "id": "S417",
+    "title": "vSphere 8 vSAN Planning: two-node vSAN clusters and shared witness",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsan-planning/GUID-AB546FEB-034B-4544-8208-B9144FEFD65A.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/05-stretched"
+    ]
+  },
+  {
+    "id": "S418",
+    "title": "VMware blog: Shared witness for 2-node vSAN deployments (vSAN 7 U1)",
+    "url": "https://blogs.vmware.com/cloud-foundation/2020/09/21/shared-witness-for-2-node-vsan-deployments/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "03-vsan/05-stretched"
     ]
   }
 ]

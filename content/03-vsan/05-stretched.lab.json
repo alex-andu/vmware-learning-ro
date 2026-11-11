@@ -1,0 +1,137 @@
+{
+  "steps": [
+    {
+      "id": "ova",
+      "title": {
+        "ro": "Instalează witness appliance-ul",
+        "en": "Deploy the witness appliance"
+      },
+      "path": {
+        "ro": "vSphere Client → host sau cluster din afara clusterului vSAN → Deploy OVF Template",
+        "en": "vSphere Client → host or cluster outside the vSAN cluster → Deploy OVF Template"
+      },
+      "action": {
+        "ro": "Descarcă OVA-ul witness potrivit (ESA sau OSA, același build ca hosturile) și instalează-l pe un datastore care nu e datastore-ul vSAN al clusterului. Alege mărimea Tiny pentru lab și pune a doua placă de rețea pe port group-ul vSAN.",
+        "en": "Download the matching witness OVA (ESA or OSA, the same build as the hosts) and deploy it on a datastore that is not the cluster vSAN datastore. Pick the Tiny size for the lab and put the second network adapter on the vSAN port group."
+      },
+      "why": {
+        "ro": "Witness-ul trebuie să stea în afara clusterului pe care îl servește; în interior ar crea o dependență circulară nesuportată.",
+        "en": "The witness must sit outside the cluster it serves; inside it would create an unsupported circular dependency."
+      }
+    },
+    {
+      "id": "add",
+      "title": {
+        "ro": "Configurează witness-ul și adaugă-l în vCenter",
+        "en": "Configure the witness and add it to vCenter"
+      },
+      "path": {
+        "ro": "Consola witness-ului (DCUI) → Configure Management Network; vCenter → Add Host",
+        "en": "Witness console (DCUI) → Configure Management Network; vCenter → Add Host"
+      },
+      "action": {
+        "ro": "Setează IP, mască, gateway, DNS și hostname pe management, apoi adaugă appliance-ul în vCenter ca host standalone, nu într-un cluster.",
+        "en": "Set IP, mask, gateway, DNS and hostname on management, then add the appliance to vCenter as a standalone host, not into a cluster."
+      },
+      "why": {
+        "ro": "Witness-ul e un ESXi special care ține doar metadate; vCenter trebuie să-l vadă ca să-l poți alege la configurarea clusterului.",
+        "en": "The witness is a special ESXi that holds only metadata; vCenter must see it so you can pick it when configuring the cluster."
+      }
+    },
+    {
+      "id": "cfg",
+      "title": {
+        "ro": "Configurează stretched sau 2 noduri",
+        "en": "Configure stretched or 2-node"
+      },
+      "path": {
+        "ro": "Cluster → Configure → vSAN → Fault Domains → Configure Stretched Cluster (sau Quickstart)",
+        "en": "Cluster → Configure → vSAN → Fault Domains → Configure Stretched Cluster (or Quickstart)"
+      },
+      "action": {
+        "ro": "Împarte hosturile în preferred și secondary fault domain, alege witness-ul și finalizează. Notează care site e preferred.",
+        "en": "Split the hosts into the preferred and secondary fault domains, pick the witness and finish. Note which site is preferred."
+      },
+      "why": {
+        "ro": "Preferred site e cel care câștigă când se rupe legătura dintre site-uri; trebuie să știi dinainte unde vor rămâne VM-urile.",
+        "en": "The preferred site is the one that wins when the link between sites breaks; you must know in advance where the VMs will stay."
+      }
+    },
+    {
+      "id": "wts",
+      "title": {
+        "ro": "Verifică rețeaua spre witness",
+        "en": "Check the network to the witness"
+      },
+      "path": {
+        "ro": "SSH (Secure Shell) pe un host de date",
+        "en": "SSH (Secure Shell) on a data host"
+      },
+      "action": {
+        "ro": "Rulează esxcli vsan network list și vezi ce VMkernel are traficul vsan și care witness. La 2 noduri cu conexiune directă, setează traficul witness pe management cu esxcli vsan network ip add -i vmk0 -T witness pe ambele hosturi de date. Testează cu vmkping către witness.",
+        "en": "Run esxcli vsan network list and see which VMkernel carries vsan and which witness traffic. For 2-node with direct connect, set witness traffic on management with esxcli vsan network ip add -i vmk0 -T witness on both data hosts. Test with vmkping to the witness."
+      },
+      "why": {
+        "ro": "Witness traffic separation se face doar pe hosturile de date, nu pe witness; fără drum spre witness clusterul pierde quorum-ul la prima avarie.",
+        "en": "Witness traffic separation is done only on data hosts, not on the witness; without a path to the witness the cluster loses quorum at the first failure."
+      }
+    },
+    {
+      "id": "pol",
+      "title": {
+        "ro": "Politica și setările HA",
+        "en": "The policy and the HA settings"
+      },
+      "path": {
+        "ro": "Policies and Profiles → VM Storage Policies; Cluster → Configure → vSphere Availability",
+        "en": "Policies and Profiles → VM Storage Policies; Cluster → Configure → vSphere Availability"
+      },
+      "action": {
+        "ro": "Creează o politică cu Site disaster tolerance: Site mirroring (sau Host mirroring la 2 noduri, dacă ai discurile necesare) și aplic-o pe o VM de test. La HA setează admission control 50% CPU și memorie, isolation response Power off and restart VMs, das.isolationaddress0 și 1 câte o adresă vSAN din fiecare site și das.usedefaultisolationaddress false.",
+        "en": "Create a policy with Site disaster tolerance: Site mirroring (or Host mirroring for 2-node, if you have the required disks) and apply it to a test VM. In HA set admission control 50% CPU and memory, isolation response Power off and restart VMs, das.isolationaddress0 and 1 one vSAN address per site and das.usedefaultisolationaddress false."
+      },
+      "why": {
+        "ro": "Politica pune câte o copie pe fiecare site, iar setările HA asigură că un site poate prelua VM-urile celuilalt.",
+        "en": "The policy puts a copy on each site, and the HA settings ensure one site can take over the other site VMs."
+      }
+    },
+    {
+      "id": "fail",
+      "title": {
+        "ro": "Testează căderea witness-ului",
+        "en": "Test a witness failure"
+      },
+      "path": {
+        "ro": "Witness VM → Power → Shut Down Guest OS; Cluster → Monitor → vSAN → Skyline Health",
+        "en": "Witness VM → Power → Shut Down Guest OS; Cluster → Monitor → vSAN → Skyline Health"
+      },
+      "action": {
+        "ro": "Oprește witness appliance-ul. Verifică că VM-ul de test merge mai departe și că obiectele apar în reduced availability. Notează ce alerte vezi.",
+        "en": "Shut down the witness appliance. Check that the test VM keeps running and that objects show reduced availability. Note the alerts you see."
+      },
+      "why": {
+        "ro": "Acesta e testul de avarie: o singură avarie (doar witness-ul) nu oprește VM-urile, pentru că site-urile de date mai au majoritatea.",
+        "en": "This is the failure test: a single failure (the witness only) does not stop VMs, because the data sites still hold the majority."
+      }
+    },
+    {
+      "id": "back",
+      "title": {
+        "ro": "Repornește witness-ul și verifică",
+        "en": "Restart the witness and verify"
+      },
+      "path": {
+        "ro": "Witness VM → Power On; Cluster → Monitor → vSAN → Skyline Health și Virtual Objects",
+        "en": "Witness VM → Power On; Cluster → Monitor → vSAN → Skyline Health and Virtual Objects"
+      },
+      "action": {
+        "ro": "Pornește witness-ul, așteaptă să se alăture clusterului și verifică că obiectele revin la healthy și compliant.",
+        "en": "Power on the witness, wait for it to rejoin the cluster and check that objects return to healthy and compliant."
+      },
+      "why": {
+        "ro": "Vrei să vezi că witness-ul revine fără intervenție și că nu rămân obiecte noncompliant înainte de altă avarie.",
+        "en": "You want to see that the witness returns without intervention and that no noncompliant objects remain before another failure."
+      }
+    }
+  ]
+}

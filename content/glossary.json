@@ -1863,5 +1863,50 @@
     "term": "Operations reserve (vSAN)",
     "ro": "Capacitate rezervată pentru operațiile interne vSAN (resync, rebalance, schimbări de politică); peste prag, vSAN poate să nu mai funcționeze corect.",
     "en": "Capacity reserved for internal vSAN operations (resync, rebalance, policy changes); above the threshold vSAN might not operate properly."
+  },
+  {
+    "id": "stretched-cluster",
+    "term": "vSAN stretched cluster",
+    "ro": "Un singur cluster vSAN întins pe două site-uri de date, cu un witness pe un al treilea site; datele se oglindesc între site-uri, ca să supraviețuiască pierderii unui site întreg.",
+    "en": "A single vSAN cluster spread over two data sites, with a witness at a third site; data is mirrored between sites so it survives the loss of a whole site."
+  },
+  {
+    "id": "two-node-cluster",
+    "term": "vSAN two-node cluster",
+    "ro": "Cluster vSAN cu două hosturi de date în aceeași locație (de obicei o sucursală) și un witness la distanță.",
+    "en": "A vSAN cluster with two data hosts in the same location (usually a branch office) and a remote witness."
+  },
+  {
+    "id": "witness-host",
+    "term": "Witness host (vSAN)",
+    "aliases": [
+      "witness appliance"
+    ],
+    "ro": "Host ESXi (de obicei appliance virtual) care păstrează doar componentele witness, metadate pentru quorum; nu rulează VM-uri și nu face parte din clusterul pe care îl servește.",
+    "en": "An ESXi host (usually a virtual appliance) that holds only witness components, metadata for quorum; it runs no VMs and is not part of the cluster it serves."
+  },
+  {
+    "id": "preferred-site",
+    "term": "Preferred site (vSAN)",
+    "ro": "Site-ul de date care rămâne activ când se rupe legătura dintre site-uri; celălalt site e non-preferred (secondary).",
+    "en": "The data site that stays active when the link between sites breaks; the other site is non-preferred (secondary)."
+  },
+  {
+    "id": "site-read-locality",
+    "term": "Site read locality",
+    "ro": "Setare de cluster prin care citirile se servesc din copia de pe site-ul local al VM-ului, ca să nu treacă prin legătura dintre site-uri.",
+    "en": "A cluster setting by which reads are served from the copy on the VM local site, so they do not cross the link between sites."
+  },
+  {
+    "id": "adaptive-quorum",
+    "term": "Adaptive Quorum Control",
+    "ro": "Mecanism vSAN (din 7 U3) care, după căderea unui site, recalculează voturile ca site-ul rămas să supraviețuiască și pierderii ulterioare a witness-ului.",
+    "en": "A vSAN mechanism (from 7 U3) that, after a site fails, recounts votes so the remaining site also survives a later witness loss."
+  },
+  {
+    "id": "shared-witness",
+    "term": "Shared witness",
+    "ro": "Un singur witness care servește mai multe clustere vSAN cu două noduri (până la 64), introdus în vSAN 7 U1.",
+    "en": "A single witness serving several two-node vSAN clusters (up to 64), introduced in vSAN 7 U1."
   }
 ]
