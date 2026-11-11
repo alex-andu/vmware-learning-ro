@@ -31,7 +31,8 @@
       "02-vsphere/02-identitate-rbac",
       "02-vsphere/03-licente-certificate",
       "02-vsphere/04-vds",
-      "02-vsphere/05-stocare-partajata"
+      "02-vsphere/05-stocare-partajata",
+      "02-vsphere/06-vmotion"
     ]
   },
   {
@@ -554,7 +555,8 @@
       "02-vsphere/02-identitate-rbac",
       "02-vsphere/03-licente-certificate",
       "02-vsphere/04-vds",
-      "02-vsphere/05-stocare-partajata"
+      "02-vsphere/05-stocare-partajata",
+      "02-vsphere/06-vmotion"
     ]
   },
   {
@@ -1269,7 +1271,8 @@
     "read": true,
     "usedBy": [
       "01-fundamente/07-retea-esxi",
-      "01-fundamente/08-stocare-esxi"
+      "01-fundamente/08-stocare-esxi",
+      "02-vsphere/06-vmotion"
     ]
   },
   {
@@ -1992,7 +1995,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "02-vsphere/04-vds"
+      "02-vsphere/04-vds",
+      "02-vsphere/06-vmotion"
     ]
   },
   {
@@ -2091,7 +2095,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "02-vsphere/05-stocare-partajata"
+      "02-vsphere/05-stocare-partajata",
+      "02-vsphere/06-vmotion"
     ]
   },
   {
@@ -2246,6 +2251,171 @@
     "read": true,
     "usedBy": [
       "02-vsphere/05-stocare-partajata"
+    ]
+  },
+  {
+    "id": "S200",
+    "title": "vSphere 8 vCenter and Host Management: Limits on simultaneous migrations",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vcenter-esxi-management/GUID-25EA5833-03B5-4EDD-A167-87578B8009B3.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/06-vmotion"
+    ]
+  },
+  {
+    "id": "S201",
+    "title": "vSphere 8: Encrypted vSphere vMotion",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vcenter-esxi-management/GUID-6865D84A-C286-49C4-A4D4-D62145150242.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/06-vmotion"
+    ]
+  },
+  {
+    "id": "S202",
+    "title": "vSphere 8 vCenter and Host Management: CPU compatibility and Enhanced vMotion Compatibility (EVC)",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vcenter-esxi-management/GUID-03E7E5F9-06D9-463F-A64F-D4EC20DAF22E.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/06-vmotion"
+    ]
+  },
+  {
+    "id": "S203",
+    "title": "vSphere 8 VM Administration: Per-VM EVC",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vm-administration/GUID-EE6F4E5A-3BEA-43DD-9990-DBEB0A280F3A.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/06-vmotion"
+    ]
+  },
+  {
+    "id": "S204",
+    "title": "KB 446114: How to configure per-VM Enhanced vMotion Compatibility in vSphere 8.0",
+    "url": "https://knowledge.broadcom.com/external/article/446114/how-to-configure-pervm-enhanced-vmotion.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/06-vmotion"
+    ]
+  },
+  {
+    "id": "S205",
+    "title": "KB 324991: Enhanced vMotion Compatibility (EVC) processor support",
+    "url": "https://knowledge.broadcom.com/external/article/324991",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/06-vmotion"
+    ]
+  },
+  {
+    "id": "S206",
+    "title": "KB 411652: Adding a new host with a higher-generation CPU to an existing EVC cluster",
+    "url": "https://knowledge.broadcom.com/external/article/411652/adding-a-new-host-with-a-highergeneratio.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/06-vmotion"
+    ]
+  },
+  {
+    "id": "S207",
+    "title": "KB 318962: \"The target host does not support the virtual machine's current hardware requirements\" error during vMotion",
+    "url": "https://knowledge.broadcom.com/external/article/318962/the-target-host-does-not-support-the-vir.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/06-vmotion"
+    ]
+  },
+  {
+    "id": "S208",
+    "title": "KB 321009: Understanding and troubleshooting vMotion",
+    "url": "https://knowledge.broadcom.com/external/article/321009",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/06-vmotion"
+    ]
+  },
+  {
+    "id": "S209",
+    "title": "VMware blog: The vMotion process under the hood (2019-07-09)",
+    "url": "https://blogs.vmware.com/cloud-foundation/2019/07/09/the-vmotion-process-under-the-hood/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/06-vmotion"
+    ]
+  },
+  {
+    "id": "S210",
+    "title": "vSphere 8 vCenter and Host Management: Types of virtual machine migration",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vcenter-esxi-management/GUID-FE2B516E-7366-4978-B75C-64BF0AC676EB.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/06-vmotion"
+    ]
+  },
+  {
+    "id": "S211",
+    "title": "vSphere 8 vCenter and Host Management: Requirements for migration between vCenter Server instances",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vcenter-esxi-management/GUID-DAD0C40A-7F66-44CF-B6E8-43A0153ABE81.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/06-vmotion"
+    ]
+  },
+  {
+    "id": "S212",
+    "title": "vSphere 8 vCenter and Host Management: Storage vMotion requirements and limitations",
+    "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/vsphere-vcenter-esxi-management/GUID-AB266895-BAA4-4BF3-894E-47F99DC7B77F.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/06-vmotion"
+    ]
+  },
+  {
+    "id": "S213",
+    "title": "KB 337539: Migrating virtual machines with Raw Device Mappings (RDMs)",
+    "url": "https://knowledge.broadcom.com/external/article/337539/migrating-virtual-machines-with-raw-devi.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/06-vmotion"
+    ]
+  },
+  {
+    "id": "S214",
+    "title": "VMware blog: How to enable and configure a VM for the vMotion application notification feature (2024-01-30)",
+    "url": "https://blogs.vmware.com/cloud-foundation/2024/01/30/how-to-enable-and-configure-a-vm-for-the-new-vmotion-application-notification-feature/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "02-vsphere/06-vmotion"
     ]
   }
 ]

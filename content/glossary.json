@@ -1255,5 +1255,43 @@
     ],
     "ro": "Set de reguli (bazate pe capabilități sau pe tag-uri) care spune pe ce datastore poate sta un VM și ce servicii primește.",
     "en": "A set of rules (capability-based or tag-based) that says which datastore a VM can live on and which services it gets."
+  },
+  {
+    "id": "storage-vmotion",
+    "term": "Storage vMotion",
+    "ro": "Mută fișierele și discurile unui VM pornit pe alt datastore, fără oprire; hostul rămâne același.",
+    "en": "Moves a running VM's files and disks to another datastore with no downtime; the host stays the same."
+  },
+  {
+    "id": "cold-migration",
+    "term": "Cold migration",
+    "aliases": [
+      "migrare la rece"
+    ],
+    "ro": "Mutarea unui VM oprit sau suspendat pe alt host și/sau datastore.",
+    "en": "Moving a powered-off or suspended VM to another host and/or datastore."
+  },
+  {
+    "id": "sdps",
+    "term": "SDPS",
+    "abbr": "SDPS",
+    "expansion": "Stun During Page Send",
+    "ro": "Mecanism vMotion care încetinește foarte puțin VM-ul când acesta murdărește memoria mai repede decât se poate copia, ca migrarea să se termine.",
+    "en": "A vMotion mechanism that slows the VM very slightly when it dirties memory faster than it can be copied, so the migration can finish."
+  },
+  {
+    "id": "per-vm-evc",
+    "term": "Per-VM EVC",
+    "ro": "Mod EVC setat pe VM, nu pe cluster; se schimbă doar cu VM-ul oprit și îl urmează pe VM între clustere și vCenter-e.",
+    "en": "An EVC mode set on the VM rather than the cluster; changed only with the VM powered off and follows the VM across clusters and vCenters."
+  },
+  {
+    "id": "cross-vcenter-vmotion",
+    "term": "Advanced Cross vCenter vMotion",
+    "aliases": [
+      "cross vCenter vMotion"
+    ],
+    "ro": "Migrarea unui VM între instanțe vCenter din domenii SSO diferite, prin Import sau Export VMs, de la 7.0 U1c.",
+    "en": "Migrating a VM between vCenter instances in different SSO domains, through Import or Export VMs, from 7.0 U1c."
   }
 ]
