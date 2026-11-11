@@ -3486,7 +3486,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "02-vsphere/11-backup"
+      "02-vsphere/11-backup",
+      "01-fundamente/06-masini-virtuale"
     ]
   },
   {
@@ -6242,6 +6243,28 @@
     "read": true,
     "usedBy": [
       "04-nsx/09-vcf"
+    ]
+  },
+  {
+    "id": "S553",
+    "title": "KB 381824: Checking VMware ESXi Host Compatibility Before Upgrade Using the Broadcom Compatibility Guide",
+    "url": "https://knowledge.broadcom.com/external/article/381824/checking-vmware-esxi-host-compatibility.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/04-arhitectura-esxi"
+    ]
+  },
+  {
+    "id": "S554",
+    "title": "KB 428874: Deprecated CPU Systems / Servers in ESX 9.0 and implications for support",
+    "url": "https://knowledge.broadcom.com/external/article/428874/deprecated-cpu-systems-servers-in-esx-9.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "01-fundamente/04-arhitectura-esxi"
     ]
   }
 ]

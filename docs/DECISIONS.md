@@ -25,3 +25,6 @@ Decizii luate fără a întreba (reversibile). Cea mai nouă sus.
 10. **Playwright nu e în `devDependencies`**: e instalat global în mediul de dezvoltare cloud. Local se instalează separat (vezi `CLAUDE.md`).
 11. **Lecția de test** („Ce este virtualizarea”) are `status: test` și doar 7 surse; validatorul o scutește de pragul de 10. Va fi rescrisă complet în Etapa 3 sau înlocuită de capitolul-pilot.
 12. **Modulele 2–5 și Home Lab nu apar încă în `modules.json`**; se adaugă în Etapa 2, odată cu curriculumul complet.
+
+## 2026-11-11 — Capitolele scrise de Alex (0.1–2.1 + cuprins)
+Le folosim ca sursă de idei, nu ca text: se suprapun cu modulele 1–2 deja scrise. Am adăugat doar ce lipsea și am putut verifica oficial (compatibilitatea hardware și procesoarele deprecated/EOL în 9.0 la lecția 1.4; fișierele snapshot, SEsparse și memorie vs quiesce la lecția 1.6). KB-urile, porturile și limitele din fișiere nu au fost copiate. Partea de dimensionare a home lab-ului (0.3) rămâne în afara cursului.

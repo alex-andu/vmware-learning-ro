@@ -5,7 +5,7 @@ order: 4
 level: "Nivel 0"
 examTargets: ["VVF 2.2.1", "DCV 1.1", "DCV 4.19"]
 updated: "2026-11-10"
-sources: ["S02", "S47", "S88", "S86", "S87", "S80", "S83", "S84", "S85", "S81", "S82", "S78", "S79"]
+sources: ["S02", "S47", "S88", "S86", "S87", "S80", "S83", "S84", "S85", "S81", "S82", "S78", "S79", "S553", "S554"]
 examSummaryEn: "ESXi is a bare-metal hypervisor whose core is the VMkernel. Management runs as services on top: hostd (main host management service, used by Host Client and the API) and vpxa (the vCenter Server agent, the conduit between vCenter and hostd). Access paths: DCUI (physical console, F2), VMware Host Client (browser, one host, emergency use when vCenter is down), vSphere Client through vCenter (many hosts), ESXi Shell and SSH (both deactivated by default; enable only for troubleshooting; UserVars.ESXiShellTimeOut and UserVars.ESXiShellInteractiveTimeOut limit them). ESXi 8 system storage: System Boot (100 MB), Boot-bank 0/1, ESX-OSData (VMFS-L; logs, scratch, Tools, core dumps). SD/USB boot is legacy; ESXi 9 needs a 128 GB local persistent boot device. Restart agents individually (/etc/init.d/hostd restart, /etc/init.d/vpxa restart or Host Client > Manage > Services); avoid services.sh restart on hosts with vSAN, NSX or LACP. The ESXi firewall is on by default and allows only enabled services; restrict each service to management IPs and always include the vCenter IP. Lockdown mode forces management through vCenter: Normal keeps DCUI for exception users and DCUI.Access users; Strict stops DCUI, so if vCenter is lost and SSH/Shell are off the host may need reinstalling. Do not add administrators as exception users."
 glossaryTerms: ["vmkernel", "dcui", "esx-osdata", "hostd", "vpxa", "esxi-shell", "lockdown-mode", "host-client"]
 ---
@@ -71,6 +71,10 @@ Din ESXi 7, discul de boot are o structură nouă. Documentația pentru ESXi 8 d
 Mărimea partițiilor depinde de disc: de la boot-bank-uri de 500 MB pe discuri de 8–10 GB până la 4 GB fiecare și ESX-OSData de până la 128 GB pe discuri de peste 128 GB. [S86]
 
 **Cardurile SD și stick-urile USB.** Ani de zile serverele porneau ESXi de pe SD sau USB. KB 317631 spune clar direcția: suportul continuă până la VCF (VMware Cloud Foundation) 9.0, dar pe hardware nou se folosește un dispozitiv persistent: SSD (Solid-State Drive), NVMe (Non-Volatile Memory Express), SAS sau SATA. Pentru ESXi 9, discul local persistent de boot trebuie să aibă **minimum 128 GB**. [S87]
+
+**Înainte de instalare: compatibilitatea hardware.** Un ESXi pornește uneori și pe hardware necertificat, dar suportul oficial există doar pentru ce apare în HCL (Hardware Compatibility List, lista de hardware certificat). Azi lista se numește **Broadcom Compatibility Guide** și stă la `compatibilityguide.broadcom.com`. Articolul KB 381824 descrie verificarea înainte de un upgrade: alegi Systems / Servers, cauți producătorul și modelul serverului, selectezi versiunea ESXi țintă și compari versiunea de BIOS (Basic Input/Output System, firmware-ul plăcii de bază) cerută cu cea instalată. Un upgrade poate eșua doar din cauza unui BIOS vechi. [S553]
+
+Cu ESXi 9.0 contează și generația procesorului. KB 428874 împarte serverele vechi în două categorii. **Deprecated** înseamnă că serverul e încă suportat în 9.x, dar nu mai primește îmbunătățiri și va dispărea la următoarea versiune majoră. **EOL** (End of Life, sfârșitul suportului) înseamnă că serverul nu mai e în ghid, iar instalarea 9.x poate să nu recunoască procesorul sau dispozitivele. Exemplele din articol: Intel Cascade Lake e deprecated în VCF 9, iar Skylake-SP, trecut inițial ca EOL, a fost mutat în deprecated doar pentru VCF 9.x. [S554] În laborator poți rula pe hardware nelistat, dar asta e **home-lab only / not supported**.
 
 ### 3. Căile de acces
 
@@ -164,6 +168,8 @@ flowchart TD
 | `services.sh restart` | De evitat pe hosturi cu vSAN, NSX, LACP | KB 320280 [S83] |
 | Partiția de sistem pentru loguri și scratch | ESX-OSData (VMFS-L) | Docs vSphere [S86] |
 | Disc de boot ESXi 9 | Minimum 128 GB, persistent | KB 317631 [S87] |
+| Unde verifici hardware-ul | Broadcom Compatibility Guide (Systems / Servers + BIOS) | KB 381824 [S553] |
+| Procesor deprecated vs EOL în 9.0 | Deprecated: suportat în 9.x; EOL: scos din ghid | KB 428874 [S554] |
 | Lockdown Normal vs Strict | Normal: DCUI pornit pentru excepții; Strict: DCUI oprit | Docs vSphere [S78] |
 | Restricționarea Host Client pe IP | IP-ul vCenter obligatoriu în listă | KB 418184 [S82] |
 

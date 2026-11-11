@@ -5,7 +5,7 @@ order: 4
 level: "Level 0"
 examTargets: ["VVF 2.2.1", "DCV 1.1", "DCV 4.19"]
 updated: "2026-11-10"
-sources: ["S02", "S47", "S88", "S86", "S87", "S80", "S83", "S84", "S85", "S81", "S82", "S78", "S79"]
+sources: ["S02", "S47", "S88", "S86", "S87", "S80", "S83", "S84", "S85", "S81", "S82", "S78", "S79", "S553", "S554"]
 glossaryTerms: ["vmkernel", "dcui", "esx-osdata", "hostd", "vpxa", "esxi-shell", "lockdown-mode", "host-client"]
 ---
 
@@ -70,6 +70,10 @@ Since ESXi 7 the boot disk has a new layout. The ESXi 8 documentation describes 
 Partition sizes depend on the disk: from 500 MB boot banks on 8–10 GB disks up to 4 GB each and ESX-OSData of up to 128 GB on disks larger than 128 GB. [S86]
 
 **SD cards and USB sticks.** For years servers booted ESXi from SD or USB. KB 317631 sets the direction: support continues through VCF (VMware Cloud Foundation) 9.0, but new hardware uses a persistent device: SSD (Solid-State Drive), NVMe (Non-Volatile Memory Express), SAS or SATA. For ESXi 9 the local persistent boot disk must be **at least 128 GB**. [S87]
+
+**Before installing: hardware compatibility.** ESXi sometimes boots on uncertified hardware, but official support covers only what appears in the HCL (Hardware Compatibility List). Today the list is called the **Broadcom Compatibility Guide**, at `compatibilityguide.broadcom.com`. KB 381824 describes the pre-upgrade check: choose Systems / Servers, search for the server vendor and model, pick the target ESXi version and compare the required BIOS (Basic Input/Output System, the motherboard firmware) version with the installed one. An upgrade can fail only because of an old BIOS. [S553]
+
+With ESXi 9.0 the CPU generation matters too. KB 428874 splits older servers into two groups. **Deprecated** means the server is still supported in 9.x but gets no further enhancements and goes away in the next major release. **EOL** (End of Life) means the server is no longer in the guide and a 9.x install may not recognise its CPU or devices. The article's examples: Intel Cascade Lake is deprecated in VCF 9, and Skylake-SP, first listed as EOL, was moved to deprecated for VCF 9.x only. [S554] In a lab you can run on unlisted hardware, but that is **home-lab only / not supported**.
 
 ### 3. Access paths
 
@@ -163,6 +167,8 @@ flowchart TD
 | `services.sh restart` | Avoid on hosts with vSAN, NSX, LACP | KB 320280 [S83] |
 | System partition for logs and scratch | ESX-OSData (VMFS-L) | vSphere docs [S86] |
 | ESXi 9 boot disk | At least 128 GB, persistent | KB 317631 [S87] |
+| Where to check hardware | Broadcom Compatibility Guide (Systems / Servers + BIOS) | KB 381824 [S553] |
+| Deprecated vs EOL CPU in 9.0 | Deprecated: supported in 9.x; EOL: removed from the guide | KB 428874 [S554] |
 | Normal vs Strict lockdown | Normal: DCUI up for exceptions; Strict: DCUI stopped | vSphere docs [S78] |
 | Restricting Host Client by IP | The vCenter IP must be in the list | KB 418184 [S82] |
 

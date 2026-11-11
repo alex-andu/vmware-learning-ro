@@ -5,7 +5,7 @@ order: 6
 level: "Level 0"
 examTargets: ["VVF 2.2.3", "DCV 1.12", "DCV 7.1", "DCV 7.2"]
 updated: "2026-11-10"
-sources: ["S02", "S47", "S38", "S97", "S95", "S100", "S104", "S98", "S99", "S101", "S102", "S90", "S41", "S103"]
+sources: ["S02", "S47", "S38", "S97", "S95", "S100", "S104", "S98", "S99", "S101", "S102", "S90", "S41", "S103", "S305"]
 glossaryTerms: ["vm", "hardware-version", "thin-provisioning", "pvscsi", "vmxnet3", "vmware-tools", "snapshot", "datastore"]
 ---
 
@@ -98,6 +98,15 @@ On Linux the rule is simple: VMware recommends **open-vm-tools** shipped by the 
 ### 7. Snapshots: create, delete, consolidate
 
 Lesson 1.1 gave the KB 318825 rules: at most 32 in a chain, 2–3 recommended, no longer than 72 hours, and a snapshot is not a backup. [S41] The new part is what happens on deletion. **Deleting a snapshot does not lose changes.** The delta files (`-00000X.vmdk`) are merged back into the base disk: this is called commit or **consolidation**. [S103]
+
+**What a snapshot contains.** KB 342618 describes each file's role. `.vmsd` is the snapshot database: Snapshot Manager reads from it how snapshots and child disks relate. `.vmsn` holds the VM configuration and, optionally, the memory state. Each attached disk gets a child (delta) disk. On VMFS-6 (Virtual Machine File System) every snapshot uses the **SEsparse** format, whatever the disk size. [S305]
+
+**Memory or quiesce, not both.** When you take a snapshot you choose between two options that, the same article says, are mutually exclusive: [S305]
+- **Include memory** (default): also saves RAM (Random Access Memory), so you revert to a powered-on VM. It takes longer and the VM is briefly stunned.
+- **Quiesce guest file system**: VMware Tools flushes buffers and prepares applications so the on-disk data is consistent for backup. Works only on a powered-on VM.
+- **Neither**: the snapshot is only crash-consistent, as after a power cut.
+
+On Revert the guest OS also goes back to its old settings (IP, Internet Protocol, address and patches), which can upset time-sensitive applications. [S305]
 
 ```mermaid
 flowchart TD

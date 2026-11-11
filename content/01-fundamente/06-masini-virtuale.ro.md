@@ -5,7 +5,7 @@ order: 6
 level: "Nivel 0"
 examTargets: ["VVF 2.2.3", "DCV 1.12", "DCV 7.1", "DCV 7.2"]
 updated: "2026-11-10"
-sources: ["S02", "S47", "S38", "S97", "S95", "S100", "S104", "S98", "S99", "S101", "S102", "S90", "S41", "S103"]
+sources: ["S02", "S47", "S38", "S97", "S95", "S100", "S104", "S98", "S99", "S101", "S102", "S90", "S41", "S103", "S305"]
 examSummaryEn: "A VM is a set of files (.vmx, .vmdk/-flat.vmdk, .nvram, .vswp, .vmsd/.vmsn, .log) plus virtual hardware. The virtual hardware version sets which host can run it: ESXi 9.0 = 22, 8.0 U2/U3 = 21, 8.0/U1 = 20, 7.0 U2/U3 = 19; a VM cannot run on a host older than its hardware version. Back up or snapshot before upgrading the hardware version. Disk provisioning: thin grows on demand (not for Fault Tolerance); thick lazy zeroed allocates everything and zeroes on first write (default thick); thick eager zeroed zeroes at creation (slowest to create, required for FT and clustering). PVSCSI (hardware version 7+) gives more throughput and lower CPU; Windows needs the driver from VMware Tools, and switching a boot disk to PVSCSI without it causes a blue screen. Network adapters: E1000/E1000E emulate Intel NICs; VMXNET3 is paravirtual with multiqueue and offloads; on vSphere 9.1 E1000/E1000e remain supported for compatibility but VMXNET3 is recommended. VMware Tools provides drivers, time sync, quiesced snapshots and the balloon driver; on Linux use the distribution's open-vm-tools. Deleting snapshots commits deltas into the base disk; 'Needs consolidation' happens after backup leftovers, under 1 GB free on the datastore or more than 32 snapshots; fix with Delete All or Consolidate, never by deleting -00000X.vmdk files by hand."
 glossaryTerms: ["vm", "hardware-version", "thin-provisioning", "pvscsi", "vmxnet3", "vmware-tools", "snapshot", "datastore"]
 ---
@@ -99,6 +99,15 @@ Pe Linux, regula e simplă: VMware recomandă **open-vm-tools** distribuit de pr
 ### 7. Snapshot-urile: creare, ștergere, consolidare
 
 Ai văzut în lecția 1.1 regulile din KB 318825: cel mult 32 într-un lanț, recomandat 2–3, cel mult 72 de ore, iar snapshot-ul nu e backup. [S41] Partea nouă este ce se întâmplă la ștergere. **Ștergerea unui snapshot nu pierde modificările.** Fișierele delta (`-00000X.vmdk`) sunt îmbinate înapoi în discul de bază: asta se numește commit sau **consolidare**. [S103]
+
+**Ce conține un snapshot.** KB 342618 descrie rolul fiecărui fișier. `.vmsd` este baza de date a snapshot-urilor: din ea citește Snapshot Manager relațiile dintre snapshot-uri și discurile copil. `.vmsn` păstrează configurația VM-ului și, opțional, starea memoriei. Pentru fiecare disc atașat apare un disc copil (delta). Pe VMFS-6 (Virtual Machine File System) toate snapshot-urile folosesc formatul **SEsparse**, indiferent de mărimea discului. [S305]
+
+**Memorie sau quiesce, nu amândouă.** La crearea snapshot-ului alegi între două opțiuni, care se exclud reciproc, spune același articol: [S305]
+- **Include memory** (implicit): salvează și RAM-ul (Random Access Memory, memoria de lucru), deci revii la un VM pornit. Durează mai mult, iar VM-ul e oprit pentru scurt timp (stun).
+- **Quiesce guest file system**: VMware Tools golește bufferele și pregătește aplicațiile, ca datele de pe disc să fie consistente pentru backup. Merge doar cu VM-ul pornit.
+- **Niciuna**: snapshot-ul e doar crash-consistent, ca după o pană de curent.
+
+La Revert, sistemul de operare revine și cu setările vechi (IP, Internet Protocol, și patch-uri), lucru care poate deranja aplicațiile sensibile la timp. [S305]
 
 ```mermaid
 flowchart TD
