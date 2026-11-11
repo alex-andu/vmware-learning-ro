@@ -1,0 +1,137 @@
+{
+  "steps": [
+    {
+      "id": "ec",
+      "title": {
+        "ro": "Dă Tier-1-ului un Edge cluster",
+        "en": "Give the Tier-1 an Edge cluster"
+      },
+      "path": {
+        "ro": "NSX Manager > Networking > Tier-1 Gateways > t1-lab > Edit",
+        "en": "NSX Manager > Networking > Tier-1 Gateways > t1-lab > Edit"
+      },
+      "action": {
+        "ro": "Alege Edge clusterul din lecția 4.4 și salvează; verifică apoi că t1-lab are SR pe Edge-uri.",
+        "en": "Select the Edge cluster from lesson 4.4 and save; then check that t1-lab has an SR on the Edges."
+      },
+      "why": {
+        "ro": "NAT și DHCP pe gateway sunt servicii centralizate și au nevoie de SR, deci de Edge cluster.",
+        "en": "NAT and gateway DHCP are centralized services and need an SR, so an Edge cluster."
+      }
+    },
+    {
+      "id": "snat",
+      "title": {
+        "ro": "Creează o regulă SNAT pentru app-web",
+        "en": "Create an SNAT rule for app-web"
+      },
+      "path": {
+        "ro": "NSX Manager > Networking > NAT > Gateway t1-lab > Add NAT Rule",
+        "en": "NSX Manager > Networking > NAT > Gateway t1-lab > Add NAT Rule"
+      },
+      "action": {
+        "ro": "Action SNAT, Source subnetul app-web, Translated IP o adresă din rețeaua de uplink a lab-ului, prioritate 100.",
+        "en": "Action SNAT, Source the app-web subnet, Translated IP an address from the lab uplink network, priority 100."
+      },
+      "why": {
+        "ro": "Mai multe VM-uri traduse într-o singură adresă înseamnă PAT; vezi pe viu cum apar în exterior.",
+        "en": "Many VMs translated to one address means PAT; you see how they appear outside."
+      }
+    },
+    {
+      "id": "nosnat",
+      "title": {
+        "ro": "Adaugă o excepție No SNAT",
+        "en": "Add a No SNAT exception"
+      },
+      "path": {
+        "ro": "NSX Manager > Networking > NAT > Gateway t1-lab > Add NAT Rule",
+        "en": "NSX Manager > Networking > NAT > Gateway t1-lab > Add NAT Rule"
+      },
+      "action": {
+        "ro": "Action No SNAT, Source IP-ul unei singure VM web, prioritate 10.",
+        "en": "Action No SNAT, Source the IP of one web VM, priority 10."
+      },
+      "why": {
+        "ro": "Numărul mai mic are prioritate mai mare; regulile No SNAT trebuie să fie înaintea celorlalte.",
+        "en": "The lower number has higher priority; No SNAT rules must come before the others."
+      }
+    },
+    {
+      "id": "dnat",
+      "title": {
+        "ro": "Publică un server cu DNAT",
+        "en": "Publish a server with DNAT"
+      },
+      "path": {
+        "ro": "NSX Manager > Networking > NAT > Gateway t1-lab > Add NAT Rule",
+        "en": "NSX Manager > Networking > NAT > Gateway t1-lab > Add NAT Rule"
+      },
+      "action": {
+        "ro": "Action DNAT, Destination o adresă externă liberă, Translated IP adresa VM-ului db.",
+        "en": "Action DNAT, Destination a free external address, Translated IP the db VM address."
+      },
+      "why": {
+        "ro": "DNAT e felul în care faci accesibil din afară un server intern.",
+        "en": "DNAT is how you make an internal server reachable from outside."
+      }
+    },
+    {
+      "id": "dhcp",
+      "title": {
+        "ro": "Pornește un Segment DHCP server pe app-db",
+        "en": "Start a Segment DHCP server on app-db"
+      },
+      "path": {
+        "ro": "NSX Manager > Networking > Segments > app-db > Edit > Set DHCP Config",
+        "en": "NSX Manager > Networking > Segments > app-db > Edit > Set DHCP Config"
+      },
+      "action": {
+        "ro": "Tip Segment DHCP Server, un profil DHCP cu Edge cluster, un server IP în subnet și un interval care nu se suprapune.",
+        "en": "Type Segment DHCP Server, a DHCP profile with an Edge cluster, a server IP in the subnet and a non-overlapping range."
+      },
+      "why": {
+        "ro": "Profilul DHCP trebuie să aibă Edge cluster, altfel segmentul nu se salvează.",
+        "en": "The DHCP profile must have an Edge cluster, or the segment will not save."
+      }
+    },
+    {
+      "id": "client",
+      "title": {
+        "ro": "Testează clientul DHCP",
+        "en": "Test the DHCP client"
+      },
+      "path": {
+        "ro": "Consola unei VM de pe app-db",
+        "en": "The console of a VM on app-db"
+      },
+      "action": {
+        "ro": "Pune placa de rețea pe DHCP și verifică adresa, gateway-ul și durata lease-ului.",
+        "en": "Set the network adapter to DHCP and check the address, gateway and lease time."
+      },
+      "why": {
+        "ro": "Lease-ul implicit e 86400 de secunde; vezi dacă valoarea primită se potrivește.",
+        "en": "The default lease is 86400 seconds; see whether the value you get matches."
+      }
+    },
+    {
+      "id": "vpn",
+      "title": {
+        "ro": "Citește un serviciu IPsec VPN",
+        "en": "Read an IPsec VPN service"
+      },
+      "path": {
+        "ro": "NSX Manager > Networking > VPN > VPN Services",
+        "en": "NSX Manager > Networking > VPN > VPN Services"
+      },
+      "action": {
+        "ro": "Deschide Add Service > IPSec fără să salvezi și notează câmpurile; apoi notează comenzile get ipsecvpn session și get ipsecvpn ikesa pentru Edge-ul activ.",
+        "en": "Open Add Service > IPSec without saving and note the fields; then note the get ipsecvpn session and get ipsecvpn ikesa commands for the active Edge."
+      },
+      "why": {
+        "ro": "Serviciul se creează înaintea sesiunilor, iar comenzile sunt primul pas de troubleshooting.",
+        "en": "The service is created before the sessions, and the commands are the first troubleshooting step."
+      }
+    }
+  ]
+}

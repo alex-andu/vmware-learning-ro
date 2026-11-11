@@ -71,7 +71,8 @@
       "04-nsx/02-transport",
       "04-nsx/03-segmente",
       "04-nsx/04-edge",
-      "04-nsx/05-rutare"
+      "04-nsx/05-rutare",
+      "04-nsx/06-servicii"
     ]
   },
   {
@@ -608,7 +609,8 @@
       "04-nsx/02-transport",
       "04-nsx/03-segmente",
       "04-nsx/04-edge",
-      "04-nsx/05-rutare"
+      "04-nsx/05-rutare",
+      "04-nsx/06-servicii"
     ]
   },
   {
@@ -5263,7 +5265,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "04-nsx/03-segmente"
+      "04-nsx/03-segmente",
+      "04-nsx/06-servicii"
     ]
   },
   {
@@ -5307,7 +5310,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "04-nsx/03-segmente"
+      "04-nsx/03-segmente",
+      "04-nsx/06-servicii"
     ]
   },
   {
@@ -5606,7 +5610,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "04-nsx/05-rutare"
+      "04-nsx/05-rutare",
+      "04-nsx/06-servicii"
     ]
   },
   {
@@ -5650,7 +5655,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "04-nsx/05-rutare"
+      "04-nsx/05-rutare",
+      "04-nsx/06-servicii"
     ]
   },
   {
@@ -5728,6 +5734,138 @@
     "read": true,
     "usedBy": [
       "04-nsx/05-rutare"
+    ]
+  },
+  {
+    "id": "S508",
+    "title": "NSX 4.1 Administration Guide: Configure NAT on a Gateway",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.1/administration/GUID-DDB35A76-BD12-4F09-8D88-2490E4DAA8F6.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/06-servicii"
+    ]
+  },
+  {
+    "id": "S509",
+    "title": "NSX 4.1 Administration Guide: Network Address Translation (NAT types, use cases, flows)",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.1/administration/GUID-7AD2C384-4303-4D6C-A44A-DEF45AA18A92.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/06-servicii"
+    ]
+  },
+  {
+    "id": "S510",
+    "title": "NSX 4.1 Administration Guide: DHCP Configurations (Set DHCP Config)",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.1/administration/GUID-9CB2FE07-2E48-41E9-9BDA-BBAAA57D18B0.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/06-servicii"
+    ]
+  },
+  {
+    "id": "S511",
+    "title": "NSX 4.1 Administration Guide: Configuring VPN (IPSec and L2 VPN workflow)",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.1/administration/GUID-3615EAF3-E0B7-45B7-8D8C-637167C6B07B.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/06-servicii"
+    ]
+  },
+  {
+    "id": "S512",
+    "title": "NSX 4.1 Administration Guide: Understanding IPSec VPN",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.1/administration/GUID-DF689847-252E-451E-84B5-DB507CC010AC.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/06-servicii"
+    ]
+  },
+  {
+    "id": "S513",
+    "title": "NSX 4.1 Administration Guide: Add an IPSec VPN Service",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.1/administration/GUID-310E8701-4A97-459E-8B81-1C567D579007.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/06-servicii"
+    ]
+  },
+  {
+    "id": "S514",
+    "title": "KB 436852: SNAT rules not being hit on NSX Tier-1 Gateway",
+    "url": "https://knowledge.broadcom.com/external/article/436852/snat-rules-not-being-hit-on-nsx-tier1-ga.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/06-servicii"
+    ]
+  },
+  {
+    "id": "S515",
+    "title": "KB 425199: How to configure Reflexive NAT in NSX to preserve the source port",
+    "url": "https://knowledge.broadcom.com/external/article/425199/how-to-configure-reflexive-nat-in-nsx-to.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/06-servicii"
+    ]
+  },
+  {
+    "id": "S516",
+    "title": "KB 389357: Disable Edge Gateway Firewall if not in use",
+    "url": "https://knowledge.broadcom.com/external/article/389357/disable-edge-gateway-firewall-if-not-in.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/06-servicii"
+    ]
+  },
+  {
+    "id": "S517",
+    "title": "KB 379731: Troubleshooting NSX IPSEC VPN",
+    "url": "https://knowledge.broadcom.com/external/article/379731",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/06-servicii"
+    ]
+  },
+  {
+    "id": "S518",
+    "title": "KB 413085: DHCP Client not able to get the IP Address from external DHCP Server with NSX DHCP Relay",
+    "url": "https://knowledge.broadcom.com/external/article/413085/dhcp-client-not-able-to-get-the-ip-addre.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/06-servicii"
+    ]
+  },
+  {
+    "id": "S519",
+    "title": "KB 400763: NAT not working on NSX Tier0 router with or without IPSec VPN involved",
+    "url": "https://knowledge.broadcom.com/external/article/400763/nat-not-working-on-nsx-tier0-router-with.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/06-servicii"
     ]
   }
 ]
