@@ -1958,5 +1958,63 @@
     "term": "vSAN Cluster Shutdown Wizard",
     "ro": "Asistentul din vCenter (clic dreapta pe cluster > vSAN > Shutdown cluster) care oprește controlat un cluster vSAN și îl repornește cu Restart cluster.",
     "en": "The vCenter wizard (right-click the cluster > vSAN > Shutdown cluster) that shuts a vSAN cluster down in an orderly way and brings it back with Restart cluster."
+  },
+  {
+    "id": "nsx-manager",
+    "term": "NSX Manager",
+    "ro": "Appliance-ul care adună management plane-ul, policy și central control plane-ul NSX; rulează singur (model Simple) sau într-un cluster de 3 noduri.",
+    "en": "The appliance that combines the NSX management plane, policy and central control plane; it runs alone (Simple model) or in a 3-node cluster."
+  },
+  {
+    "id": "management-plane",
+    "term": "Management plane (NSX)",
+    "ro": "Stratul care primește configurația (UI, API, interfață de programare) și o păstrează; în NSX rulează pe NSX Manager.",
+    "en": "The layer that takes the configuration (UI, API) and stores it; in NSX it runs on NSX Manager."
+  },
+  {
+    "id": "ccp",
+    "term": "Central Control Plane",
+    "abbr": "CCP",
+    "expansion": "Central Control Plane",
+    "ro": "Partea de control NSX care rulează pe nodurile NSX Manager și calculează starea rețelei (de exemplu ce TEP are fiecare VM) pe care o trimite hosturilor.",
+    "en": "The NSX control part that runs on the NSX Manager nodes and computes network state (for example which TEP each VM sits behind) that it pushes to hosts."
+  },
+  {
+    "id": "lcp",
+    "term": "Local Control Plane",
+    "abbr": "LCP",
+    "expansion": "Local Control Plane",
+    "ro": "Partea de control NSX care rulează ca daemoni pe fiecare transport node și programează data plane-ul local.",
+    "en": "The NSX control part that runs as daemons on each transport node and programs the local data plane."
+  },
+  {
+    "id": "data-plane",
+    "term": "Data plane (NSX)",
+    "ro": "Motoarele de forwarding de pe transport nodes (hosturi ESX, Edge-uri) care mută efectiv pachetele.",
+    "en": "The forwarding engines on transport nodes (ESX hosts, Edges) that actually move packets."
+  },
+  {
+    "id": "transport-node",
+    "term": "Transport node",
+    "ro": "Un host ESX sau un Edge pregătit pentru NSX; hosturile ESX au nevoie de un VDS configurat.",
+    "en": "An ESX host or Edge prepared for NSX; ESX hosts need a configured VDS."
+  },
+  {
+    "id": "nsx-cluster-vip",
+    "term": "NSX Manager cluster virtual IP",
+    "ro": "Adresa IP comună a clusterului NSX Manager, deținută de nodul lider; la căderea liderului trece pe noul lider. Nu e load balancer.",
+    "en": "The shared IP address of the NSX Manager cluster, owned by the leader node; when the leader fails it moves to the new leader. It is not a load balancer."
+  },
+  {
+    "id": "transit-gateway",
+    "term": "Transit Gateway (VCF 9)",
+    "ro": "Componenta de rețea din VCF 9 care leagă VPC-urile între ele și de serviciile externe, cu conectivitate centralizată sau distribuită.",
+    "en": "The VCF 9 network component that connects VPCs to each other and to external services, with centralized or distributed connectivity."
+  },
+  {
+    "id": "compute-manager",
+    "term": "Compute manager (NSX)",
+    "ro": "Aplicația care gestionează hosturile și VM-urile și pe care NSX o folosește ca sursă de inventar; NSX suportă vCenter.",
+    "en": "The application that manages hosts and VMs and that NSX uses as an inventory source; NSX supports vCenter."
   }
 ]

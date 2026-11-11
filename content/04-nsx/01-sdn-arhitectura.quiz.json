@@ -1,0 +1,269 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Unde rulează Central Control Plane (CCP) în NSX?",
+        "en": "Where does the Central Control Plane (CCP) run in NSX?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Pe fiecare host ESX, ca daemon",
+            "en": "On every ESX host, as a daemon"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Pe hosturi rulează Local Control Plane, nu CCP.",
+            "en": "Wrong. The Local Control Plane runs on hosts, not the CCP."
+          }
+        },
+        {
+          "text": {
+            "ro": "Pe nodurile NSX Manager",
+            "en": "On the NSX Manager nodes"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. CCP rulează ca daemoni de cluster pe nodurile NSX Manager, în același appliance cu management plane-ul.",
+            "en": "Correct. The CCP runs as cluster daemons on the NSX Manager nodes, in the same appliance as the management plane."
+          }
+        },
+        {
+          "text": {
+            "ro": "Pe NSX Edge, doar în Tier-0",
+            "en": "On the NSX Edge, only in Tier-0"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Edge-ul e transport node; are LCP și data plane.",
+            "en": "Wrong. The Edge is a transport node; it has an LCP and a data plane."
+          }
+        },
+        {
+          "text": {
+            "ro": "În vCenter, ca plugin",
+            "en": "In vCenter, as a plugin"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. vCenter e compute manager-ul NSX, nu controlerul lui.",
+            "en": "Wrong. vCenter is the NSX compute manager, not its controller."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Care afirmație despre VIP-ul (Virtual IP) clusterului NSX Manager e corectă?",
+        "en": "Which statement about the NSX Manager cluster VIP (Virtual IP) is correct?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Distribuie cererile API în mod egal între cele trei noduri",
+            "en": "It spreads API requests evenly across the three nodes"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Documentația spune explicit că VIP-ul nu e un load balancer.",
+            "en": "Wrong. The documentation says explicitly that the VIP is not a load balancer."
+          }
+        },
+        {
+          "text": {
+            "ro": "Nodurile pot fi în subrețele diferite fără alt echipament",
+            "en": "The nodes can be in different subnets without other equipment"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Fără load balancer extern, toate nodurile trebuie să fie în aceeași subrețea.",
+            "en": "Wrong. Without an external load balancer, all nodes must be in the same subnet."
+          }
+        },
+        {
+          "text": {
+            "ro": "Failover-ul e instantaneu și sesiunile continuă",
+            "en": "Failover is instant and sessions continue"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Poate dura câteva minute, iar apoi te autentifici din nou.",
+            "en": "Wrong. It can take a few minutes, and then you authenticate again."
+          }
+        },
+        {
+          "text": {
+            "ro": "E deținut de nodul lider și trece pe noul lider când acesta cade",
+            "en": "It is owned by the leader node and moves to the new leader when that fails"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Liderul deține VIP-ul; la căderea lui se alege alt lider, care preia VIP-ul și trimite un ARP gratuit.",
+            "en": "Correct. The leader owns the VIP; when it fails another leader is elected, takes the VIP and sends a gratuitous ARP."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Un client VCF 9.0 vrea NSX pe un site edge mic, cu cât mai puține resurse. Ce opțiune e suportată?",
+        "en": "A VCF 9.0 customer wants NSX on a small edge site with as few resources as possible. Which option is supported?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Un singur NSX Manager (modelul Simple)",
+            "en": "A single NSX Manager (the Simple model)"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Din VCF 9.0 un singur NSX Manager e suportat pentru site-uri mici sau edge; trei noduri rămân necesare pentru disponibilitate maximă.",
+            "en": "Correct. From VCF 9.0 a single NSX Manager is supported for small or edge sites; three nodes are still needed for maximum availability."
+          }
+        },
+        {
+          "text": {
+            "ro": "Două noduri NSX Manager cu VIP",
+            "en": "Two NSX Manager nodes with a VIP"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Modelele sunt Simple (1 nod) și High Availability (3 noduri).",
+            "en": "Wrong. The models are Simple (1 node) and High Availability (3 nodes)."
+          }
+        },
+        {
+          "text": {
+            "ro": "NSX Manager de mărime Small în producție",
+            "en": "A Small NSX Manager in production"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. KB 403604 spune că Small e doar pentru lab și proof of concept.",
+            "en": "Wrong. KB 403604 says Small is for lab and proof of concept only."
+          }
+        },
+        {
+          "text": {
+            "ro": "Fără NSX Manager: hosturile se configurează singure",
+            "en": "No NSX Manager: the hosts configure themselves"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Fără management plane nu ai unde să configurezi rețeaua NSX.",
+            "en": "Wrong. Without a management plane there is nowhere to configure the NSX network."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "Câte hosturi ESX cere cel puțin modelul High Availability cu trei noduri NSX Manager, conform lui William Lam?",
+        "en": "How many ESX hosts does the High Availability model with three NSX Manager nodes need at least, according to William Lam?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "2",
+            "en": "2"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Cu 2 hosturi nu poți ține trei noduri separate.",
+            "en": "Wrong. With 2 hosts you cannot keep three separate nodes."
+          }
+        },
+        {
+          "text": {
+            "ro": "3",
+            "en": "3"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Cu 3 hosturi, upgrade-ul unui host ar lăsa un nod fără loc separat.",
+            "en": "Wrong. With 3 hosts, upgrading one host would leave a node without a separate place."
+          }
+        },
+        {
+          "text": {
+            "ro": "4",
+            "en": "4"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. Fiecare nod stă pe alt host prin anti-afinitate, iar al patrulea host permite upgrade-urile ESX fără să pierzi disponibilitatea NSX.",
+            "en": "Correct. Each node sits on a different host through anti-affinity, and the fourth host allows ESX upgrades without losing NSX availability."
+          }
+        },
+        {
+          "text": {
+            "ro": "6",
+            "en": "6"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. 6 nu e minimul pentru NSX; e de exemplu minimul pentru RAID-6 în vSAN.",
+            "en": "Wrong. 6 is not the NSX minimum; it is for example the minimum for RAID-6 in vSAN."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "În VCF 9, cum se actualizează VIB-urile (vSphere Installation Bundle) NSX de pe hosturi?",
+        "en": "In VCF 9, how are the NSX VIBs (vSphere Installation Bundle) on hosts updated?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Separat, printr-un upgrade de transport nodes din NSX Manager, cu hosturile în mentenanță",
+            "en": "Separately, through a transport node upgrade from NSX Manager, with hosts in maintenance"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Acesta era modelul vechi; în VCF 9 nu mai există pasul separat.",
+            "en": "Wrong. That was the old model; in VCF 9 the separate step is gone."
+          }
+        },
+        {
+          "text": {
+            "ro": "Odată cu imaginea ESX, la upgrade-ul ESX",
+            "en": "Together with the ESX image, at ESX upgrade"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "Corect. KB 436389 spune că VIB-urile NSX se actualizează când se actualizează ESX, iar hosturile nu mai intră în mentenanță la upgrade-ul NSX.",
+            "en": "Correct. KB 436389 says NSX VIBs are updated when ESX is updated, and hosts no longer enter maintenance during the NSX upgrade."
+          }
+        },
+        {
+          "text": {
+            "ro": "Manual, cu esxcli pe fiecare host",
+            "en": "Manually, with esxcli on each host"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Upgrade-urile NSX 9 trec prin instrumentele de lifecycle VCF.",
+            "en": "Wrong. NSX 9 upgrades go through VCF lifecycle tools."
+          }
+        },
+        {
+          "text": {
+            "ro": "Nu se actualizează; rămân la versiunea de la instalare",
+            "en": "They are not updated; they stay at the installed version"
+          },
+          "correct": false,
+          "explanation": {
+            "ro": "Greșit. Rămân la versiunea curentă doar până la următorul upgrade de imagine ESX.",
+            "en": "Wrong. They stay at the current version only until the next ESX image upgrade."
+          }
+        }
+      ]
+    }
+  ]
+}

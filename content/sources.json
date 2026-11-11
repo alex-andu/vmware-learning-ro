@@ -66,7 +66,8 @@
       "03-vsan/03-spbm-ftt",
       "03-vsan/04-eficienta-spatiu",
       "03-vsan/05-stretched",
-      "03-vsan/06-operare"
+      "03-vsan/06-operare",
+      "04-nsx/01-sdn-arhitectura"
     ]
   },
   {
@@ -598,7 +599,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "content/modules.json"
+      "content/modules.json",
+      "04-nsx/01-sdn-arhitectura"
     ]
   },
   {
@@ -4917,6 +4919,171 @@
     "read": true,
     "usedBy": [
       "03-vsan/06-operare"
+    ]
+  },
+  {
+    "id": "S436",
+    "title": "VCF 9.0 NSX Administration: Configure a Virtual IP Address for a Cluster",
+    "url": "https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vcf-9-0-and-later/9-0/advanced-network-management/administration-guide/scale-up-nsx-manager/installing-nsx-manager-cluster-on-vsphere/configure-a-virtual-ip-address-for-a-cluster.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/01-sdn-arhitectura"
+    ]
+  },
+  {
+    "id": "S437",
+    "title": "NSX 4.2 Installation Guide: NSX Manager Installation Requirements",
+    "url": "https://techdocs.broadcom.com/us/en/vmware-cis/nsx/vmware-nsx/4-2/installation-guide/nsx-manager-installation-requirements.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/01-sdn-arhitectura"
+    ]
+  },
+  {
+    "id": "S438",
+    "title": "NSX 4.1 Installation Guide: overview of management, control and data planes (NSX Manager cluster, CCP, LCP)",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.1/installation/GUID-10B1A61D-4DF2-481E-A93E-C694726393F9.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/01-sdn-arhitectura"
+    ]
+  },
+  {
+    "id": "S439",
+    "title": "NSX 4.1 Installation Guide: Key concepts (transport node, transport zone, Edge, segment, Tier-0, Tier-1, TEP)",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.1/installation/GUID-A1BBC650-CCE3-4AC3-A774-92B195183492.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/01-sdn-arhitectura"
+    ]
+  },
+  {
+    "id": "S440",
+    "title": "KB 403604: Changing the form factor of NSX Manager in a VCF environment",
+    "url": "https://knowledge.broadcom.com/external/article/403604/changing-the-form-factor-of-nsx-manager.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/01-sdn-arhitectura"
+    ]
+  },
+  {
+    "id": "S441",
+    "title": "KB 401775: NSX 9.x is only supported as part of a VCF 9.x environment",
+    "url": "https://knowledge.broadcom.com/external/article/401775/nsx-9x-is-only-supported-as-part-of-a-vc.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/01-sdn-arhitectura"
+    ]
+  },
+  {
+    "id": "S442",
+    "title": "KB 436389: VMware Cloud Foundation 9 ESXi host and NSX VIB upgrade consolidation",
+    "url": "https://knowledge.broadcom.com/external/article/436389",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/01-sdn-arhitectura"
+    ]
+  },
+  {
+    "id": "S443",
+    "title": "KB 401492: VMware NSX Load Balancer entitlement changes (VCF 9.0)",
+    "url": "https://knowledge.broadcom.com/external/article/401492/vmware-nsx-load-balancer-entitlement-cha.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/01-sdn-arhitectura"
+    ]
+  },
+  {
+    "id": "S444",
+    "title": "KB 421778: SDDC Manager 9.0.x fails to sync NSX Manager nodes added out of band",
+    "url": "https://knowledge.broadcom.com/external/article/421778/sddc-manager-90x-fails-to-sync-or-detect.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/01-sdn-arhitectura"
+    ]
+  },
+  {
+    "id": "S445",
+    "title": "VMware blog: Modernize networking in VCF 9.0",
+    "url": "https://blogs.vmware.com/cloud-foundation/2025/06/17/modernize-networking-in-vcf-9-0/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/01-sdn-arhitectura"
+    ]
+  },
+  {
+    "id": "S446",
+    "title": "VMware blog: Planning a successful VMware Cloud Foundation 9.0 deployment",
+    "url": "https://blogs.vmware.com/cloud-foundation/2025/07/28/planning-a-successful-vmware-cloud-foundation-9-0-deployment/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/01-sdn-arhitectura"
+    ]
+  },
+  {
+    "id": "S447",
+    "title": "William Lam: Clarifying minimum required ESX hosts for VCF deployments",
+    "url": "https://williamlam.com/2026/06/clarifying-minimum-required-esx-hosts-for-vcf-deployments.html",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/01-sdn-arhitectura"
+    ]
+  },
+  {
+    "id": "S448",
+    "title": "VMware: VMware Cloud Foundation 9.0 General FAQs",
+    "url": "https://www.vmware.com/docs/vmware-cloud-foundation-9-0-general-faqs",
+    "type": "whitepaper",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/01-sdn-arhitectura"
+    ]
+  },
+  {
+    "id": "S449",
+    "title": "StarWind blog: VCF 9 deprecated and removed vSphere and NSX features",
+    "url": "https://www.starwindsoftware.com/blog/vcf9-deprecated-vsphere-nsx/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/01-sdn-arhitectura"
+    ]
+  },
+  {
+    "id": "S450",
+    "title": "Broadcom community (Luca Camarda): VCF Virtual Networking Technical Reference",
+    "url": "https://community.broadcom.com/blogs/luca-camarda/2025/06/23/vcf-virtual-networking-technical-reference",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/01-sdn-arhitectura"
     ]
   }
 ]
