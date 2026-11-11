@@ -67,7 +67,8 @@
       "03-vsan/04-eficienta-spatiu",
       "03-vsan/05-stretched",
       "03-vsan/06-operare",
-      "04-nsx/01-sdn-arhitectura"
+      "04-nsx/01-sdn-arhitectura",
+      "04-nsx/02-transport"
     ]
   },
   {
@@ -600,7 +601,8 @@
     "read": true,
     "usedBy": [
       "content/modules.json",
-      "04-nsx/01-sdn-arhitectura"
+      "04-nsx/01-sdn-arhitectura",
+      "04-nsx/02-transport"
     ]
   },
   {
@@ -4962,7 +4964,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "04-nsx/01-sdn-arhitectura"
+      "04-nsx/01-sdn-arhitectura",
+      "04-nsx/02-transport"
     ]
   },
   {
@@ -5084,6 +5087,160 @@
     "read": true,
     "usedBy": [
       "04-nsx/01-sdn-arhitectura"
+    ]
+  },
+  {
+    "id": "S451",
+    "title": "KB 439410: Best Practices for Default Transport Zones during VCF Deployment",
+    "url": "https://knowledge.broadcom.com/external/article/439410",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/02-transport"
+    ]
+  },
+  {
+    "id": "S452",
+    "title": "KB 440927: Understanding DVS MTU 1700 Configuration with NSX and HCX Deployments",
+    "url": "https://knowledge.broadcom.com/external/article/440927",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/02-transport"
+    ]
+  },
+  {
+    "id": "S453",
+    "title": "KB 440775: NSX-T Geneve BFD Tunnels Down Due to Physical Router MTU Misconfiguration",
+    "url": "https://knowledge.broadcom.com/external/article/440775/nsxt-geneve-bfd-tunnels-down-due-to-phys.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/02-transport"
+    ]
+  },
+  {
+    "id": "S454",
+    "title": "NSX 4.1 Installation Guide: Guidance to Set Maximum Transmission Unit",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.1/installation/GUID-19C1973E-8D20-4302-B3CC-CD610F79D5F6.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/02-transport"
+    ]
+  },
+  {
+    "id": "S455",
+    "title": "KB 455157: Edge to Host Transport Node Overlay Tunnels Down Due to Blocked BFD/Geneve Ports (UDP 3784, 4784, 6081)",
+    "url": "https://knowledge.broadcom.com/external/article/455157",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/02-transport"
+    ]
+  },
+  {
+    "id": "S456",
+    "title": "KB 436531: Missing TEP VMkernel ports on ESXi hosts after importing vCenter environment to VCF 9 and configuring NSX",
+    "url": "https://knowledge.broadcom.com/external/article/436531/missing-tep-vmkernel-ports-on-esxi-hosts.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/02-transport"
+    ]
+  },
+  {
+    "id": "S457",
+    "title": "NSX 4.1 Installation Guide: Transport Node Profiles (prepare vSphere cluster hosts)",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.1/installation/GUID-37BC3CEF-DCC1-4C6F-960D-CFBB31908D1C.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/02-transport"
+    ]
+  },
+  {
+    "id": "S458",
+    "title": "KB 444225: TEPs are not assigned to the ESXi host during a brownfield deployment",
+    "url": "https://knowledge.broadcom.com/external/article/444225",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/02-transport"
+    ]
+  },
+  {
+    "id": "S459",
+    "title": "KB 414651: NSX will not prepare ESX hosts in a VCF environment (vSphere Configuration Profiles cluster)",
+    "url": "https://knowledge.broadcom.com/external/article/414651/nsx-will-not-prepare-esx-hosts-in-a-vcf.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/02-transport"
+    ]
+  },
+  {
+    "id": "S460",
+    "title": "NSX 4.1 Installation Guide: Create an Uplink Profile (teaming policies, transport VLAN, MTU)",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.1/installation/GUID-50FDFDFB-F660-4269-9503-39AE2BBA95B4.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/02-transport"
+    ]
+  },
+  {
+    "id": "S461",
+    "title": "NSX TechZone: Multi-TEP High Availability",
+    "url": "https://nsx.techzone.vmware.com/resource/multi-tep-high-availability",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/02-transport"
+    ]
+  },
+  {
+    "id": "S462",
+    "title": "KB 431712: NSX Host TEP vmk11 Missing and Edge Cluster Creation Fails in VMware Cloud Foundation",
+    "url": "https://knowledge.broadcom.com/external/article/431712/nsx-host-tep-vmk11-missing-and-edge-clus.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/02-transport"
+    ]
+  },
+  {
+    "id": "S463",
+    "title": "KB 379112: Troubleshooting NSX TEP/BFD Tunnels between ESXi hosts and Edges",
+    "url": "https://knowledge.broadcom.com/external/article/379112/troubleshooting-nsx-tepbfd-tunnels-betwe.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/02-transport"
+    ]
+  },
+  {
+    "id": "S464",
+    "title": "KB 454346: NSX overlay ping with DF bit set throws error: frag needed and DF set (MTU 1500)",
+    "url": "https://knowledge.broadcom.com/external/article/454346/nsx-overlay-ping-with-df-bit-set-throws.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/02-transport"
     ]
   }
 ]

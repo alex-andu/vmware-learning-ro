@@ -2016,5 +2016,51 @@
     "term": "Compute manager (NSX)",
     "ro": "Aplicația care gestionează hosturile și VM-urile și pe care NSX o folosește ca sursă de inventar; NSX suportă vCenter.",
     "en": "The application that manages hosts and VMs and that NSX uses as an inventory source; NSX supports vCenter."
+  },
+  {
+    "id": "transport-zone",
+    "term": "Transport zone",
+    "ro": "Colecția de transport nodes care pot vedea un anumit segment; definește până unde se întinde segmentul. Poate fi Overlay sau VLAN.",
+    "en": "The collection of transport nodes that can see a given segment; it defines how far the segment spans. It can be Overlay or VLAN."
+  },
+  {
+    "id": "uplink-profile",
+    "term": "Uplink profile",
+    "ro": "Profilul NSX care definește politica de teaming, uplink-urile active/standby, VLAN-ul de transport pentru TEP și MTU-ul pentru legăturile unui transport node.",
+    "en": "The NSX profile that defines the teaming policy, active/standby uplinks, the TEP transport VLAN and the MTU for a transport node’s links."
+  },
+  {
+    "id": "tnp",
+    "term": "Transport Node Profile",
+    "abbr": "TNP",
+    "expansion": "Transport Node Profile",
+    "ro": "Șablonul NSX aplicat unui cluster vSphere: transport zones, VDS, uplink profile, alocarea IP a TEP-urilor și maparea plăcilor fizice la uplink-uri.",
+    "en": "The NSX template applied to a vSphere cluster: transport zones, VDS, uplink profile, TEP IP assignment and mapping of physical NICs to uplinks."
+  },
+  {
+    "id": "bfd",
+    "term": "Bidirectional Forwarding Detection",
+    "abbr": "BFD",
+    "expansion": "Bidirectional Forwarding Detection",
+    "ro": "Protocol de detecție rapidă a căderilor; NSX îl folosește între TEP-uri ca să știe dacă un tunel e sus.",
+    "en": "A fast failure-detection protocol; NSX runs it between TEPs to know whether a tunnel is up."
+  },
+  {
+    "id": "multi-tep",
+    "term": "Multi-TEP",
+    "ro": "Mai multe TEP-uri pe același transport node (de exemplu vmk10 și vmk11), care cer o politică de teaming bazată pe sursă cu cel puțin două uplink-uri active.",
+    "en": "Several TEPs on the same transport node (for example vmk10 and vmk11), which need a source-based teaming policy with at least two active uplinks."
+  },
+  {
+    "id": "teaming-policy",
+    "term": "Teaming policy (NSX)",
+    "ro": "Regula din uplink profile care decide ce uplink duce traficul: Failover Order, Load Balance Source sau Load Balance Source MAC Address (plus LAG).",
+    "en": "The uplink profile rule that decides which uplink carries traffic: Failover Order, Load Balance Source or Load Balance Source MAC Address (plus LAG)."
+  },
+  {
+    "id": "named-teaming",
+    "term": "Named teaming policy",
+    "ro": "Politică de teaming suplimentară, cu nume, pe care o poți atașa unui segment VLAN ca să-i alegi uplink-ul; segmentele fără ea folosesc politica implicită.",
+    "en": "An additional, named teaming policy you can attach to a VLAN segment to choose its uplink; segments without one use the default policy."
   }
 ]
