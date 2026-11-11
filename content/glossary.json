@@ -2270,5 +2270,47 @@
     "term": "Policy-based VPN",
     "ro": "VPN IPsec în care traficul intră în tunel dacă se potrivește perechii de subrețele locală și de la distanță din sesiune.",
     "en": "An IPsec VPN where traffic enters the tunnel if it matches the session pair of local and remote subnets."
+  },
+  {
+    "id": "micro-segmentation",
+    "term": "Micro-segmentation",
+    "ro": "Modelul în care permiți între workload-uri doar comunicația strict necesară, cu reguli aplicate la fiecare VM, nu doar la marginea rețelei.",
+    "en": "The model where you allow only the strictly necessary communication between workloads, with rules enforced at each VM, not only at the network edge."
+  },
+  {
+    "id": "dfw-category",
+    "term": "DFW category",
+    "ro": "Grupele de politici DFW evaluate de la stânga la dreapta: Ethernet, Emergency, Infrastructure, Environment, Application, apoi regula implicită.",
+    "en": "The DFW policy groups evaluated left to right: Ethernet, Emergency, Infrastructure, Environment, Application, then the default rule."
+  },
+  {
+    "id": "applied-to",
+    "term": "Applied To",
+    "ro": "Câmpul unei politici sau reguli DFW care limitează pe ce workload-uri e programată regula; implicit DFW, adică toate.",
+    "en": "The DFW policy or rule field that limits which workloads the rule is programmed on; the default is DFW, meaning all."
+  },
+  {
+    "id": "exclusion-list",
+    "term": "DFW exclusion list",
+    "ro": "Lista grupurilor scutite de regulile DFW; NSX Manager și Edge-urile sunt excluse automat de sistem.",
+    "en": "The list of groups exempt from DFW rules; NSX Manager and Edges are excluded automatically by the system."
+  },
+  {
+    "id": "nsx-group",
+    "term": "Group (NSX)",
+    "ro": "Obiect NSX folosit ca sursă, destinație sau Applied To; membrii pot fi statici sau dinamici, de exemplu după tag-uri.",
+    "en": "An NSX object used as source, destination or Applied To; members can be static or dynamic, for example by tags."
+  },
+  {
+    "id": "nsx-tag",
+    "term": "Tag (NSX)",
+    "ro": "Etichetă pusă pe VM-uri, segmente sau porturi, folosită ca criteriu de apartenență la grupuri.",
+    "en": "A label placed on VMs, segments or ports, used as a group membership criterion."
+  },
+  {
+    "id": "vdefend",
+    "term": "vDefend Firewall",
+    "ro": "Licența de securitate Broadcom pentru firewall-ul NSX (distribuit și de gateway), separată de licența VCF de bază.",
+    "en": "The Broadcom security license for the NSX firewall (distributed and gateway), separate from the base VCF license."
   }
 ]

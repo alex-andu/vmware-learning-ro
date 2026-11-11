@@ -72,7 +72,8 @@
       "04-nsx/03-segmente",
       "04-nsx/04-edge",
       "04-nsx/05-rutare",
-      "04-nsx/06-servicii"
+      "04-nsx/06-servicii",
+      "04-nsx/07-dfw"
     ]
   },
   {
@@ -610,7 +611,8 @@
       "04-nsx/03-segmente",
       "04-nsx/04-edge",
       "04-nsx/05-rutare",
-      "04-nsx/06-servicii"
+      "04-nsx/06-servicii",
+      "04-nsx/07-dfw"
     ]
   },
   {
@@ -5075,7 +5077,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "04-nsx/01-sdn-arhitectura"
+      "04-nsx/01-sdn-arhitectura",
+      "04-nsx/07-dfw"
     ]
   },
   {
@@ -5866,6 +5869,138 @@
     "read": true,
     "usedBy": [
       "04-nsx/06-servicii"
+    ]
+  },
+  {
+    "id": "S520",
+    "title": "NSX 4.1 Administration Guide: East-West (Distributed Firewall) and North-South (Gateway Firewall) policies and categories",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.1/administration/GUID-CA2E5448-DCB1-4EF2-956D-28C8CDCAA79D.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/07-dfw"
+    ]
+  },
+  {
+    "id": "S521",
+    "title": "NSX 4.2 Security Quick Start: Define security policy (tags, groups, DFW categories, Applied To)",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.2/nsx-security-quick-start/GUID-60921EB6-9514-4295-9325-AFEEAA5B1417.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/07-dfw"
+    ]
+  },
+  {
+    "id": "S522",
+    "title": "NSX 4.1 Administration Guide: Manage a Firewall Exclusion List",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.1/administration/GUID-3B3C278D-4E35-4CE9-A4E2-ED6B1F25ABCE.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/07-dfw"
+    ]
+  },
+  {
+    "id": "S523",
+    "title": "VMware TechZone: Well-Architected Design: Distributed Firewalls Use Cases and Scope",
+    "url": "https://vmc.techzone.vmware.com/resource/well-architected-design-distributed-firewalls-uses-cases-and-scope",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/07-dfw"
+    ]
+  },
+  {
+    "id": "S524",
+    "title": "KB 379438: Troubleshooting Distributed Firewall (DFW)",
+    "url": "https://knowledge.broadcom.com/external/article/379438",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/07-dfw"
+    ]
+  },
+  {
+    "id": "S525",
+    "title": "KB 343357: Distributed Firewall (DFW) packets hitting Default/Lower Rule instead of expected rule",
+    "url": "https://knowledge.broadcom.com/external/article/343357",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/07-dfw"
+    ]
+  },
+  {
+    "id": "S526",
+    "title": "KB 330455: NSX-T DFW rules not getting applied to virtual machines in NSX-T Security Only prepared cluster",
+    "url": "https://knowledge.broadcom.com/external/article/330455/nsxt-dfw-rules-not-getting-applied-to-vi.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/07-dfw"
+    ]
+  },
+  {
+    "id": "S527",
+    "title": "KB 424676: Unable to apply NSX vDefend Firewall license on VCF 9.0",
+    "url": "https://knowledge.broadcom.com/external/article/424676/unable-to-apply-nsx-vdefend-firewall-lic.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/07-dfw"
+    ]
+  },
+  {
+    "id": "S528",
+    "title": "KB 404112: The security license is not applied on NSX",
+    "url": "https://knowledge.broadcom.com/external/article/404112/the-security-license-is-not-applied-on-n.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/07-dfw"
+    ]
+  },
+  {
+    "id": "S529",
+    "title": "KB 426123: VCF/NSX 9.0.x does not allow users to apply DFW policies/rules to NSX Manager VMs",
+    "url": "https://knowledge.broadcom.com/external/article/426123/vcfnsx-90x-does-not-allow-users-to-apply.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/07-dfw"
+    ]
+  },
+  {
+    "id": "S530",
+    "title": "KB 389594: VM Traffic is Intermittently Dropped by DFW for 5 Seconds",
+    "url": "https://knowledge.broadcom.com/external/article/389594/vm-traffic-is-intermittently-dropped-by.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/07-dfw"
+    ]
+  },
+  {
+    "id": "S531",
+    "title": "KB 451106: NSX Distributed Firewall Rules Not Applied to VMs (vDefend license, 9.0.x)",
+    "url": "https://knowledge.broadcom.com/external/article/451106/nsx-distributed-firewall-rules-not-appli.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/07-dfw"
     ]
   }
 ]
