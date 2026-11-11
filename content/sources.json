@@ -74,7 +74,8 @@
       "04-nsx/05-rutare",
       "04-nsx/06-servicii",
       "04-nsx/07-dfw",
-      "04-nsx/08-operare"
+      "04-nsx/08-operare",
+      "04-nsx/09-vcf"
     ]
   },
   {
@@ -402,7 +403,8 @@
     "accessed": "2026-11-10",
     "read": true,
     "usedBy": [
-      "docs/STATE_OF_THE_ART"
+      "docs/STATE_OF_THE_ART",
+      "04-nsx/09-vcf"
     ]
   },
   {
@@ -3869,7 +3871,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "02-vsphere/13-lifecycle"
+      "02-vsphere/13-lifecycle",
+      "04-nsx/09-vcf"
     ]
   },
   {
@@ -5002,7 +5005,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "04-nsx/01-sdn-arhitectura"
+      "04-nsx/01-sdn-arhitectura",
+      "04-nsx/09-vcf"
     ]
   },
   {
@@ -5035,7 +5039,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "04-nsx/01-sdn-arhitectura"
+      "04-nsx/01-sdn-arhitectura",
+      "04-nsx/09-vcf"
     ]
   },
   {
@@ -5057,7 +5062,8 @@
     "accessed": "2026-11-11",
     "read": true,
     "usedBy": [
-      "04-nsx/01-sdn-arhitectura"
+      "04-nsx/01-sdn-arhitectura",
+      "04-nsx/09-vcf"
     ]
   },
   {
@@ -5080,7 +5086,8 @@
     "read": true,
     "usedBy": [
       "04-nsx/01-sdn-arhitectura",
-      "04-nsx/07-dfw"
+      "04-nsx/07-dfw",
+      "04-nsx/09-vcf"
     ]
   },
   {
@@ -6136,6 +6143,105 @@
     "read": true,
     "usedBy": [
       "04-nsx/08-operare"
+    ]
+  },
+  {
+    "id": "S544",
+    "title": "VMware blog: What is new in VMware Cloud Foundation 9.0 (2025-06-17)",
+    "url": "https://blogs.vmware.com/cloud-foundation/2025/06/17/whats-new-in-vmware-cloud-foundation-9-0/",
+    "type": "blog-official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/09-vcf"
+    ]
+  },
+  {
+    "id": "S545",
+    "title": "William Lam: How many VCF instances can a VCF fleet support? (2025-10-03)",
+    "url": "https://williamlam.com/2025/10/how-many-vmware-cloud-foundation-vcf-instances-can-a-vcf-fleet-support.html",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/09-vcf"
+    ]
+  },
+  {
+    "id": "S546",
+    "title": "KB 428433: Fleet Management Lifecycle VCF Management shows a blank pane for a VCF instance",
+    "url": "https://knowledge.broadcom.com/external/article/428433/fleet-management-lifecycle-vcf-manage.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/09-vcf"
+    ]
+  },
+  {
+    "id": "S547",
+    "title": "KB 433436: Upgrade VMware Aria Suite Lifecycle 8.18 to VCF Fleet Manager 9.0",
+    "url": "https://knowledge.broadcom.com/external/article/433436",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/09-vcf"
+    ]
+  },
+  {
+    "id": "S548",
+    "title": "KB 429719: Creating a new VI domain fails during vCenter IP validation (different subnet)",
+    "url": "https://knowledge.broadcom.com/external/article/429719/creating-a-new-vi-domain-fails-during-vc.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/09-vcf"
+    ]
+  },
+  {
+    "id": "S549",
+    "title": "KB 413792: Lifecycle under Fleet Management reports Management Lifecycle is Not Ready",
+    "url": "https://knowledge.broadcom.com/external/article/413792/accessing-lifecycle-option-under-fleet-m.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/09-vcf"
+    ]
+  },
+  {
+    "id": "S550",
+    "title": "KB 419362: Management domain deployment with LACP, network bringup spec requirements",
+    "url": "https://knowledge.broadcom.com/external/article/419362/management-domain-deployment-with-lacp-n.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/09-vcf"
+    ]
+  },
+  {
+    "id": "S551",
+    "title": "KB 443149: VCF 9.x new instance deployment fails at the initial vCenter deployment phase",
+    "url": "https://knowledge.broadcom.com/external/article/443149",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/09-vcf"
+    ]
+  },
+  {
+    "id": "S552",
+    "title": "VMware blog: Modern infrastructure operations with VCF 9.0 (2025-06-17)",
+    "url": "https://blogs.vmware.com/cloud-foundation/2025/06/17/modern-infrastructure-operations-vcf-9-0/",
+    "type": "blog-official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/09-vcf"
     ]
   }
 ]

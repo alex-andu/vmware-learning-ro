@@ -2356,5 +2356,53 @@
     "term": "VCF Operations for Networks",
     "ro": "Produsul de vizibilitate și analiză a fluxurilor de rețea din VCF, fost Aria Operations for Networks și înainte vRealize Network Insight.",
     "en": "The VCF network visibility and flow analytics product, formerly Aria Operations for Networks and before that vRealize Network Insight."
+  },
+  {
+    "id": "vcf-fleet",
+    "term": "VCF fleet",
+    "ro": "Colecția de instanțe VCF ale unei organizații, administrate de o singură VCF Operations și o singură VCF Automation.",
+    "en": "An organization's collection of VCF instances, managed by a single VCF Operations and a single VCF Automation."
+  },
+  {
+    "id": "vcf-instance",
+    "term": "VCF instance",
+    "ro": "O unitate VCF formată dintr-un management domain și, opțional, unul sau mai multe workload domains, cu propriul SDDC Manager.",
+    "en": "A VCF unit made of one management domain and optionally one or more workload domains, with its own SDDC Manager."
+  },
+  {
+    "id": "management-domain",
+    "term": "Management domain",
+    "ro": "Primul domeniu al unei instanțe VCF, un workload domain special care găzduiește componentele de management (vCenter, NSX Manager, SDDC Manager).",
+    "en": "The first domain of a VCF instance, a special workload domain that hosts the management components (vCenter, NSX Manager, SDDC Manager)."
+  },
+  {
+    "id": "workload-domain",
+    "term": "VI workload domain",
+    "ro": "Domeniu VCF pentru aplicații, cu propriul vCenter și un NSX dedicat sau partajat.",
+    "en": "A VCF domain for applications, with its own vCenter and a dedicated or shared NSX."
+  },
+  {
+    "id": "vcf-installer",
+    "term": "VCF Installer",
+    "ro": "Appliance-ul care face instalarea inițială (Day-0) a unei instanțe VCF 9 și înlocuiește Cloud Builder.",
+    "en": "The appliance that does the initial (Day-0) installation of a VCF 9 instance and replaces Cloud Builder."
+  },
+  {
+    "id": "sddc-manager",
+    "term": "SDDC Manager",
+    "ro": "Appliance-ul unei instanțe VCF care face lifecycle pentru componentele de bază (vCenter, ESX, NSX, vSAN) din instanța sa.",
+    "en": "The VCF instance appliance that handles lifecycle for the core components (vCenter, ESX, NSX, vSAN) in its instance."
+  },
+  {
+    "id": "fleet-management",
+    "term": "Fleet management",
+    "ro": "Funcțiile din VCF Operations pentru toată flota: lifecycle, certificate, parole, configurație, licențe; folosește un appliance Fleet Management înregistrat în VCF Operations.",
+    "en": "The fleet-wide functions in VCF Operations: lifecycle, certificates, passwords, configuration, licensing; it uses a Fleet Management appliance registered with VCF Operations."
+  },
+  {
+    "id": "vcf-automation",
+    "term": "VCF Automation",
+    "ro": "Componenta de self-service și infrastructure-as-code din VCF, o singură instalare per flotă; succesoarea Aria Automation.",
+    "en": "The VCF self-service and infrastructure-as-code component, one deployment per fleet; the successor of Aria Automation."
   }
 ]
