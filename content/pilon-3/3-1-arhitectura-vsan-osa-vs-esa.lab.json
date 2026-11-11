@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "id": "pas-1",
+      "title": {
+        "ro": "Adăugarea Discurilor pentru `vSAN` pe cele 3 Host-uri `Nested ESXi`"
+      },
+      "action": {
+        "ro": "1. În **VMware Workstation Pro**, pe fiecare dintre cele 3 mașini virtuale ale serverelor tale **`esxi01`**, **`esxi02`** și **`esxi03`**, intră în **Settings** $\\rightarrow$ apasă pe **`Add...`** $\\rightarrow$ **`Hard Disk`** $\\rightarrow$ alege tipul **`NVMe` (sau `SCSI`)** $\\rightarrow$ *Create a new virtual disk*:\n   * **DisculSuplimentar 1 (Pentru Cache în OSA):** Dimensiune **`20 GB`** (asigură-te că *Allocate all disk space now* este **DEBIFAT**, ca să ocupe `0 MB` pe PC-ul tău!).\n   * **Discul Suplimentar 2 (Pentru Capacity):** Dimensiune **`100 GB`** (tot *Thin / Allocate now debifat*!).\n2. În `vSphere Client` (`https://vcsa01.lab.local/ui`), selectează pe rând fiecare host (`esxi01`, `esxi02`, `esxi03`) $\\rightarrow$ *Configure -> Storage -> Storage Devices* $\\rightarrow$ apasă pe **`Rescan Storage`**.\n   * Verifică în coloana **Drive Type** că ambele discuri noi de $20\\text{ GB}$ și $100\\text{ GB}$ apar ca **`Flash`** (dacă vreunul apare ca `HDD`, bifează-l și apasă pe butonul **`Mark as Flash`** de sus!)."
+      }
+    },
+    {
+      "id": "pas-2",
+      "title": {
+        "ro": "Crearea Porturilor `VMkernel` pentru Traficul `vSAN` (`vmk2`)"
+      },
+      "action": {
+        "ro": "1. Mergi în **Networking View** pe Distributed Switch-ul nostru **`DSwitch-Prod`**, creează un Distributed Port Group nou numit **`dPG-vSAN`**.\n2. Dă click-dreapta pe **`dPG-vSAN`** $\\rightarrow$ **`Add VMkernel Adapters...`**\n3. Selectează toate cele 3 host-uri (**`esxi01`**, **`esxi02`**, **`esxi03`**) $\\rightarrow$ **Next**.\n4. **Configure VMkernel adapter (PASUL CRITIC!):**\n   * La **Available services**, **BIFEAZĂ căsuța `vSAN`**! $\\rightarrow$ **Next**.\n5. **IPv4 settings:** Alege *Use static IPv4 settings* și alocă:\n   * `esxi01.lab.local`: **`192.168.30.51`** / `255.255.255.0`\n   * `esxi02.lab.local`: **`192.168.30.52`** / `255.255.255.0`\n   * `esxi03.lab.local`: **`192.168.30.53`** / `255.255.255.0`\n6. Apasă **Next** $\\rightarrow$ **`Finish`**!"
+      }
+    },
+    {
+      "id": "pas-3",
+      "title": {
+        "ro": "Activarea Clusterului `vSAN` și Crearea `Disk Groups` (`vsanDatastore`)"
+      },
+      "action": {
+        "ro": "1. Mergi în **Hosts and Clusters**, selectează **`Lab-Cluster-01`** $\\rightarrow$ tab-ul **`Configure`** $\\rightarrow$ sub *vSAN*, dă click pe **`Services`** și apasă pe **`Configure vSAN...`**\n2. Alege **`Single site cluster`** (vom păstra modul clasic *OSA* pentru acest prim test, ca să vedem cum se construiesc *Disk Groups*) $\\rightarrow$ **Next**.\n3. **Services:** Lasă opțiunile implicite $\\rightarrow$ **Next**.\n4. **Claim disks (Aici construim Disk Groups!):**\n   * Bifează discurile de **`20 GB`** de pe toate cele 3 host-uri și setează-le ca **`Claim for: Cache tier`**!\n   * Bifează discurile de **`100 GB`** de pe toate cele 3 host-uri și setează-le ca **`Claim for: Capacity tier`**!\n   * *(Observă cum sub tabel vCenter îți calculează automat că din 3 host-uri $\\times 100\\text{ GB Capacity} = \\mathbf{300\\text{ GB}}$ capacitate brută totală, iar cele 3 discuri de $20\\text{ GB Cache}$ adaugă $0\\text{ GB}$ la capacitate!).*\n5. Apasă **Next** $\\rightarrow$ *Fault Domains* (**Next**) $\\rightarrow$ **`Finish`**!\n6. **Admiră rezultatul în tab-ul `Datastores`:**\n   * În 60 de secunde, vCenter a formatat discurile pe toate cele 3 servere și a apărut un singur Datastore partajat de **`300 GB`** numit **`vsanDatastore`**, văzut simultan de `esxi01`, `esxi02` și `esxi03`!"
+      }
+    }
+  ]
+}

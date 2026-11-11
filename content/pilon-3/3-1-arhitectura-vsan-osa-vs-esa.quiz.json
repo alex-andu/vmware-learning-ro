@@ -1,0 +1,179 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Un arhitect proiectează un cluster `vSAN OSA (Original Storage Architecture)` de tip **All-Flash**. Fiecare server ESXi din cluster are 2 *Disk Groups*, iar fiecare *Disk Group* conține câte 1 disc NVMe de $800\\text{ GB}$ în *Cache Tier* și 4 discuri SSD de $3.84\\text{ TB}$ în *Capacity Tier*. Cum este utilizat discul NVMe de $800\\text{ GB}$ din *Cache Tier* în această configurație **All-Flash**?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "$70\\%$ pentru *Read Cache* și $30\\%$ pentru *Write Buffer*."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "$100\\%$ pentru **Write Buffer** (până la limita maximă a algoritmului de $600\\text{ GB}$), iar $0\\%$ pentru *Read Cache*, deoarece într-o configurație All-Flash citirile se efectuează direct de pe SSD-urile din *Capacity Tier*."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B ($100\\%$ pentru *Write Buffer*, până la $600\\text{ GB}$, și $0\\%$ pentru *Read Cache*)**\n\n* *Explicație:* Împărțirea $70\\%$ Read / $30\\%$ Write se aplică **doar în vSAN Hybrid** (unde discurile de capacitate sunt HDD-uri lente). În **vSAN OSA All-Flash**, întregul disc de Cache este dedicat scrierilor ($100\\%$ *Write Buffer*, plafonat logic la $600\\text{ GB}$), iar citirile merg direct pe SSD-urile de capacitate."
+          }
+        },
+        {
+          "text": {
+            "ro": "Toți cei $800\\text{ GB}$ sunt adăugați la capacitatea utilă a Datastore-ului `vsanDatastore`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "$50\\%$ pentru citire și $50\\%$ pentru scriere."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Într-un cluster `vSAN OSA`, un server ESXi are un singur *Disk Group* compus din 1 disc SSD în *Cache Tier* și 6 discuri în *Capacity Tier*. Ce se întâmplă pe acel server ESXi dacă se defectează fizic **unul dintre cele 6 discuri din *Capacity Tier***, comparativ cu situația în care s-ar defecta fizic **unicul disc din *Cache Tier***?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "În ambele situații cade doar discul defect, fără a afecta restul discurilor din grup."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Dacă se defectează un disc din *Capacity Tier*, întregul *Disk Group* devine indisponibil; în schimb, dacă se defectează discul din *Cache Tier*, cele 6 discuri de capacitate continuă să funcționeze fără cache."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "În arhitectura **`vSAN OSA`**, dacă se defectează doar un disc din *Capacity Tier*, celelalte 5 discuri din grup rămân online; însă dacă se defectează unicul disc din **`Cache Tier`**, **întregul *Disk Group* (cu toate cele 6 discuri de capacitate din spatele lui) devine offline**! (Acest comportament a fost eliminat în noua arhitectură `vSAN ESA`)."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: C (Arderea discului de Cache în `OSA` dărâmă întregul *Disk Group*)**\n\n* *Explicație:* În `vSAN OSA`, discul de Cache este poarta de intrare obligatorie pentru întregul *Disk Group*; căderea lui face inaccesibile toate cele până la 7 discuri de capacitate din acel grup (motiv pentru care `vSAN ESA` a trecut la *Storage Pools* unde căderea unui disc NVMe afectează doar acel disc!)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Serverul ESXi intră automat în *Strict Lockdown Mode*."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Care dintre următoarele afirmații descrie corect noua arhitectură **`vSAN ESA` (*Express Storage Architecture*)** introdusă în VMware vSphere 8?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Folosește *Disk Groups* cu discuri magnetice HDD de $7.200\\text{ RPM}$ și o rețea de $1\\text{ Gbps}$."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Necesită instalarea unei mașini virtuale *Virtual Storage Appliance (VSA)* cu $64\\text{ GB RAM}$ pe fiecare host ESXi."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Elimină conceptul de *Disk Groups* în favoarea unui **`Storage Pool` pe un singur nivel (*Single-Tier*)** compus exclusiv din discuri **`NVMe`**, în care toate discurile oferă simultan atât capacitate, cât și performanță, și permite rularea politicilor **`RAID-5 / RAID-6`** la performanța de scriere a unui **`RAID-1`** datorită noului sistem **`vSAN LFS`**."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: C (`Single-Tier NVMe Storage Pool` + `vSAN LFS` + `RAID-5/6` la viteza `RAID-1`)**\n\n* *Explicație:* Acestea sunt inovațiile fundamentale ale arhitecturii `vSAN ESA` din vSphere 8."
+          }
+        },
+        {
+          "text": {
+            "ro": "Necesită obligatoriu activarea *IP Multicast* pe toate switch-urile fizice."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "Un inginer comandă servere noi pentru un cluster `vSAN OSA`. Cum trebuie configurat controllerul fizic de stocare SAS/SATA la care sunt conectate discurile ce vor fi preluate de `vSAN`?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Toate discurile trebuie grupate într-un singur volum *Hardware RAID-5* din BIOS-ul controllerului înainte de instalarea ESXi."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Controllerul trebuie să fie pe lista oficială *vSAN HCL*, să aibă o adâncime a cozii (*Queue Depth*) de minimum `256` și să fie configurat în modul **`Pass-Through` / `HBA` (*JBOD*)**, astfel încât ESXi să aibă control direct și individual asupra fiecărui disc fizic."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (Modul `Pass-Through / HBA` + `Queue Depth >= 256` + prezența pe `vSAN HCL`)**\n\n* *Explicație:* `vSAN` gestionează singur redundanța datelor în software și nu suportă volume *Hardware RAID-5/6* create pe controllerul fizic; discurile nu se formatează cu VMFS, ci cu formatul de obiecte nativ vSAN."
+          }
+        },
+        {
+          "text": {
+            "ro": "Discurile trebuie formatate cu `VMFS-6` înainte de a bifa opțiunea vSAN."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Controllerul trebuie dezactivat din BIOS."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "În momentul în care un administrator activează **`vSAN`** pe un cluster pe care era deja activat serviciul **`vSphere HA`**, ce schimbare automată are loc în privința rețelei folosite de `vSphere HA` pentru trimiterea pachetelor *Network Heartbeats* între *Master* și *Subordinates*?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "`vSphere HA` se dezactivează automat, deoarece este incompatibil cu `vSAN`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Traficul de *Network Heartbeats* al serviciului `vSphere HA` se mută automat de pe rețeaua de *Management* pe **rețeaua dedicată `vSAN` (`vmk`-ul cu serviciul vSAN activat)**!"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (Heartbeats-urile `vSphere HA` se mută automat pe rețeaua `vSAN`)**\n\n* *Explicație:* Într-un cluster `vSAN`, pentru că starea datelor depinde vital de rețeaua de stocare `vSAN`, agentul `fdm` (`vSphere HA`) își mută automat comunicarea de *Heartbeat* pe interfețele VMkernel de `vSAN`! *(De aceea, dacă vrei să modifici setările rețelei vSAN, trebuie mai întâi să dezactivezi temporar `vSphere HA` pe cluster!).*"
+          }
+        },
+        {
+          "text": {
+            "ro": "`vSphere HA` începe să folosească protocolul Fibre Channel."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Nu se schimbă nimic; `vSphere HA` rămâne pe rețeaua de `vMotion`."
+          },
+          "correct": false
+        }
+      ]
+    }
+  ]
+}

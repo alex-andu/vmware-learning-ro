@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "id": "pas-1",
+      "title": {
+        "ro": "Explorarea și Verificarea Conformității cu `vSphere Lifecycle Manager` (`vLCM`)"
+      },
+      "action": {
+        "ro": "1. În `vSphere Client` (`https://vcsa01.lab.local/ui`), selectează clusterul **`Lab-Cluster-01`** $\\rightarrow$ mergi în tab-ul **`Updates`**!\n2. În secțiunea **Image**, vezi structura imaginii declarative a clusterului: **`ESXi Version`** (ex: `8.0.x`).\n3. Apasă pe butonul **`Edit`** (din colțul din dreapta al casetei Image):\n   * Observă cum poți selecta din listă un **`Vendor Add-on`** (pentru servere Dell, HPE, Cisco, Lenovo) și **`Components`** suplimentare!\n4. Apasă pe **`Check Compliance`**: `vLCM` scanează în câteva secunde toate serverele `esxi01` și `esxi02` din cluster și îți afișează dacă toate respectă la virgulă imaginea definită (**`All hosts are compliant`**) sau dacă vreun server are nevoie de remediere (**`Out of compliance`** $\\rightarrow$ caz în care butonul **`Remediate All`** le-ar pune automat pe rând în *Maintenance Mode*, ar evacua mașinile cu `vMotion` și le-ar actualiza!)."
+      }
+    },
+    {
+      "id": "pas-2",
+      "title": {
+        "ro": "Crearea unei Alarme Proactive Customizate în `vCenter Server`"
+      },
+      "action": {
+        "ro": "1. Dă click-dreapta pe Datacenterul **`Lab-DC`** (sau pe `Lab-Cluster-01`) $\\rightarrow$ **`Alarm`** $\\rightarrow$ **`New Alarm Definition...`**\n   * **Alarm Name:** `Lab-Alert-High-VM-CPU`\n   * **Target type:** Alege din listă **`Virtual Machine`** $\\rightarrow$ **Next**.\n2. **Alarm Rule 1 (Trigger):**\n   * **IF:** Alege **`VM CPU Usage`** $\\rightarrow$ operatorul **`is above`** $\\rightarrow$ **`80 %`** for **`5 minutes`**.\n   * **THEN:** Trigger the alarm and show as **`Warning`** (și observă cum poți activa bifa *Send email notifications* sau *Send SNMP traps*) $\\rightarrow$ **Next**.\n3. **Reset rules:** Lasă regula automată de resetare a alarmei la verde (*Normal*) când CPU-ul scade sub prag $\\rightarrow$ **Next** $\\rightarrow$ **Create**!"
+      }
+    },
+    {
+      "id": "pas-3",
+      "title": {
+        "ro": "Configurarea și Rularea unui `Native File-Based Backup` pentru `VCSA` din `VAMI (:5480)`"
+      },
+      "action": {
+        "ro": "1. Deschide în browser interfața de administrare a aparatului vCenter: **`https://vcsa01.lab.local:5480`** și autentifică-te cu userul **`root`**.\n2. În meniul din stânga, dă click pe **`Backup`**.\n   * Dacă ai un folder partajat pe mașina ta Windows (`DC01` pe `192.168.10.2`, de exemplu un share SMB numit `\\\\192.168.10.2\\vcenter-backup`) sau un server Linux cu SSH/SFTP (chiar și un VM mic Linux unde SFTP merge din fabrică pe portul 22!):\n   * Apasă în dreapta-sus pe **`Backup Now`**!\n   * La **Backup location**, scrie: `smb://192.168.10.2/vcenter-backup` (sau pentru Linux SFTP: `sftp://192.168.10.2/root/backup`).\n   * Introdu userul și parola serverului de backup $\\rightarrow$ apasă **`Start`**!\n3. **Ce observi în timp real:** În 2–3 minute, fără ca `vCenter`-ul să se oprească o secundă, `VAMI` exportă și arhivează întreaga bază de date PostgreSQL și configurația `SSO` în folderul tău extern! Acum ești 100% asigurat împotriva oricărei coruperi a vCenter-ului!"
+      }
+    }
+  ]
+}

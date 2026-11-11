@@ -1,0 +1,40 @@
+{
+  "steps": [
+    {
+      "id": "pas-1",
+      "title": {
+        "ro": "Pregătirea Țintei de Stocare Partajată (`iSCSI Target` & `NFS Server`) pe Serverul de Infrastructură (`192.168.10.2`)"
+      },
+      "action": {
+        "ro": "1. Dacă folosești **Windows Server (`dc01.lab.local` – `192.168.10.2`)**:\n   * Din *Server Manager* $\\rightarrow$ *Add Roles and Features* $\\rightarrow$ extinde *File and Storage Services* $\\rightarrow$ *File and iSCSI Services* și bifează: **`iSCSI Target Server`** și **`Server for NFS`** $\\rightarrow$ *Install*.\n   * Mergi în *Server Manager* $\\rightarrow$ *File and Storage Services* $\\rightarrow$ **`iSCSI`** $\\rightarrow$ *To create an iSCSI virtual disk, start the New iSCSI Virtual Disk Wizard*:\n     * Alege partiția locală, numește discul **`SAN-LUN01`**, setează dimensiunea **`50 GB` (`Dynamically expanding` / Thin)**!\n     * La **iSCSI Target**, alege *New iSCSI target*, numește-l **`lab-san-target`** și la **Access Servers** adaugă IP-urile serverelor tale ESXi: **`192.168.10.51`**, **`192.168.10.52`**, **`192.168.10.53`** $\\rightarrow$ *Create*!\n   * Mergi la **`Shares`** $\\rightarrow$ *Tasks -> New Share* $\\rightarrow$ alege **`NFS Share - Quick`** $\\rightarrow$ numește-l **`NFS-Datastore01`**, selectează **`NFSv4.1`**, la *Permissions* adaugă `All Machines` cu **`Read/Write`** și bifează **`Allow root access`**!\n2. *(Alternativă pe Linux dacă folosești o mașină ușoară Linux pe `192.168.10.2`):* Folosești pachetele `targetcli` (pentru iSCSI) și `nfs-kernel-server` (pentru NFS)."
+      }
+    },
+    {
+      "id": "pas-2",
+      "title": {
+        "ro": "Activarea `Software iSCSI Adapter` (`vmhba64`) și Conectarea la SAN"
+      },
+      "action": {
+        "ro": "1. În `vSphere Client` (`https://vcsa01.lab.local/ui`), selectează host-ul **`esxi01.lab.local`** $\\rightarrow$ tab-ul **Configure** $\\rightarrow$ **Storage** $\\rightarrow$ **`Storage Adapters`**.\n2. Apasă pe **`+ Add Software Adapter`** $\\rightarrow$ bifează **`Add software iSCSI adapter`** $\\rightarrow$ **OK**.\n3. Observă că în listă a apărut adaptorul **`vmhba64` (`iSCSI Software Adapter`)**, împreună cu numele său oficial **`IQN`** (ex: `iqn.1998-01.com.vmware:esxi01-...`)!\n4. Selectează `vmhba64` $\\rightarrow$ mergi jos în tab-ul **`Dynamic Discovery`** $\\rightarrow$ apasă pe **`Add...`** și scrie IP-ul serverului tău de stocare: **`192.168.10.2`** (portul `3260`) $\\rightarrow$ **OK**.\n5. Apasă pe butonul de sus **`Rescan Storage`** $\\rightarrow$ **OK**.\n   * *În tab-ul `Devices` de sub `vmhba64` tocmai a apărut discul brut **`LUN 0` de `50 GB`** venit prin rețea de la SAN!*\n6. **Repetă exact aceiași 4 pași (durează 60 de secunde!) și pe host-ul `esxi02.lab.local` (și `esxi03`)!**"
+      }
+    },
+    {
+      "id": "pas-3",
+      "title": {
+        "ro": "Formatarea LUN-ului cu `VMFS-6` și Schimbarea Politicii de Multipathing în `Round Robin`"
+      },
+      "action": {
+        "ro": "1. În `vSphere Client`, dă click-dreapta pe Datacenterul **`Lab-DC`** $\\rightarrow$ **Storage** $\\rightarrow$ **`New Datastore...`**\n2. Alege tipul **`VMFS`** $\\rightarrow$ **Next**.\n3. **Name and device selection:**\n   * **Name:** **`iSCSI-VMFS01`**\n   * Selectează host-ul `esxi01.lab.local` și dă click pe discul de `50 GB` descoperit pe iSCSI $\\rightarrow$ **Next**.\n4. **VMFS version:** Selectează **`VMFS 6`** $\\rightarrow$ **Next**.\n5. **Partition configuration:**\n   * *Truc pentru a testa extinderea live mai târziu:* În loc să aloci toți cei `50 GB` acum, trage de cursor și alocă doar **`30 GB`** pentru Datastore! Apasă **Next** $\\rightarrow$ **Finish**!\n   * *Uită-te în inventarul Storage: Datastore-ul `iSCSI-VMFS01` a apărut automat montat pe **TOATE** serverele tale ESXi simultan!*\n6. **Configurarea Politicii de Multipathing pe `Round Robin`:**\n   * Dă click pe datastore-ul **`iSCSI-VMFS01`** $\\rightarrow$ tab-ul **Configure** $\\rightarrow$ **Connectivity and Multipathing** $\\rightarrow$ selectează `esxi01.lab.local`.\n   * Observă că la *Multipathing Policy* scrie implicit `Most Recently Used (VMware)` sau `Fixed (VMware)`.\n   * Apasă pe **`Edit Multipathing...`** $\\rightarrow$ schimbă politica în **`Round Robin (VMware)`** $\\rightarrow$ **OK**!\n7. **Testarea Extinderii Live a volumului `VMFS-6` (fără downtime!):**\n   * Dă click-dreapta pe **`iSCSI-VMFS01`** $\\rightarrow$ **`Increase Datastore Capacity...`**\n   * Selectează același LUN de `50 GB` $\\rightarrow$ la *Partition Configuration* alege `Use \"Free space 20.00 GB\" to expand the datastore` $\\rightarrow$ **Next** $\\rightarrow$ **Finish**!\n   * Instantaneu, fără să oprești nimic, datastore-ul tău `iSCSI-VMFS01` a crescut de la `30 GB` la **`50 GB`**!"
+      }
+    },
+    {
+      "id": "pas-4",
+      "title": {
+        "ro": "Montarea unui Datastore Partajat `NFS v4.1`"
+      },
+      "action": {
+        "ro": "1. Dă din nou click-dreapta pe **`Lab-DC`** $\\rightarrow$ **Storage** $\\rightarrow$ **`New Datastore...`**\n2. Alege tipul **`NFS`** $\\rightarrow$ **Next** $\\rightarrow$ selectează versiunea **`NFS 4.1`** $\\rightarrow$ **Next**.\n3. **Name and configuration:**\n   * **Datastore name:** **`NAS-NFS01`**\n   * **Folder:** `/NFS-Datastore01`\n   * **Server:** `192.168.10.2` $\\rightarrow$ **Next**.\n4. **Hosts accessibility:** Bifează **TOATE host-urile tale ESXi (`esxi01`, `esxi02`, `esxi03`)** simultan $\\rightarrow$ **Next** $\\rightarrow$ **Finish**!\n   * *Acum ai în laborator atât stocare partajată Block (`iSCSI VMFS-6`), cât și stocare partajată File (`NFS v4.1`), gata pentru a muta mașini virtuale live între servere în Capitolul 2.4!*"
+      }
+    }
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Un administrator VMware a configurat un cluster cu `vSphere DRS` setat pe nivelul de automatizare **`Partially Automated`**. Ce acțiuni va efectua automat `DRS` în această configurație?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Nu va face nimic automat; atât la pornirea mașinilor virtuale, cât și la dezechilibrul clusterului va afișa doar recomandări."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "La pornirea unei mașini virtuale (*Power On*), `DRS` o va plasa automat pe cel mai potrivit host ESXi (*Initial Placement*), dar pentru rebalansarea în mers a clusterului va afișa doar recomandări de `vMotion` fără a le executa automat."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (Plasare automată la *Power On*, dar doar recomandări pentru *Load Balancing*)**\n\n* *Explicație:* În modul *Partially Automated*, `DRS` automatizează doar `Initial Placement` la pornirea mașinilor, lăsând migrările `vMotion` din timpul funcționării sub formă de recomandări manuale."
+          }
+        },
+        {
+          "text": {
+            "ro": "Va executa automat migrări `vMotion` în mers, dar la *Power On* va cere aprobarea administratorului."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Va opri automat serverele ESXi noaptea prin `DPM`."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "O companie rulează două mașini virtuale cu rol de *Active Directory Domain Controller* (`DC-01` și `DC-02`) în același cluster `vSphere DRS`. Pentru a se asigura că defecțiunea fizică a unui singur server ESXi nu va opri ambele Domain Controllere simultan, ce tip de regulă `DRS` trebuie să creeze administratorul?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "O regulă `VM-VM Affinity` (*Keep Virtual Machines Together*)"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "O regulă `VM-VM Anti-Affinity` (*Separate Virtual Machines*)"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (Regulă `VM-VM Anti-Affinity` – *Separate Virtual Machines*)**\n\n* *Explicație:* O regulă *Separate Virtual Machines* garantează că `DRS` va ține cele două mașini virtuale pe două host-uri ESXi fizice distincte."
+          }
+        },
+        {
+          "text": {
+            "ro": "O regulă `VM-Host Should Rule`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Un `Resource Pool` cu *Expandable Reservation* dezactivată"
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Pentru a respecta un contract strict de licențiere software bazat pe nucleele fizice, mașina virtuală `Oracle-Prod-DB` are voie să ruleze **exclusiv** pe serverele `esxi01` și `esxi02` dintr-un cluster de 8 servere ESXi. Chiar și în cazul în care atât `esxi01`, cât și `esxi02` se defectează simultan, mașina virtuală **nu are voie sub nicio formă să fie repornită de `vSphere HA`** pe serverele `esxi03`...`esxi08`. Cum trebuie configurată această restricție?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Se creează un *VM Group* (cu `Oracle-Prod-DB`), un *Host Group* (cu `esxi01` și `esxi02`) și o regulă `VM-Host` de tipul **`Must run on hosts in group`**."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: A (Regulă `VM-Host` de tipul `Must run on hosts in group`)**\n\n* *Explicație:* Regulile **`Must`** sunt obligatorii atât pentru `DRS`, cât și pentru `vSphere HA` și *Power On* manual. Dacă toate host-urile din grupul permis sunt indisponibile, `vSphere HA` **nu** va reporni mașina pe alte host-uri. În schimb, o regulă **`Should`** (B) ar fi fost încălcată de `vSphere HA` în caz de avarie pentru a reporni mașina."
+          }
+        },
+        {
+          "text": {
+            "ro": "Se creează o regulă `VM-Host` de tipul **`Should run on hosts in group`**."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Se setează `Migration Threshold` pe nivelul `1 (Conservative)`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Se activează `Retreat Mode` pe mașinile `vCLS`."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "În `vSphere 7.0` și `vSphere 8.0`, ce se întâmplă dacă un administrator trebuie să pună toate host-urile dintr-un cluster în *Maintenance Mode* și dorește să oprească temporar mașinile virtuale de sistem **`vCLS` (`vSphere Cluster Services`)** fără ca agentul `EAM` (*ESX Agent Manager*) să le recreeze imediat la loc?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Le șterge direct de pe Datastore folosind comanda `rm -rf` în SSH."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Activează **`Retreat Mode`** pentru acel cluster din configurarea *vSphere Cluster Services* (sau din *vCenter Advanced Settings*)."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (Activarea `Retreat Mode` pe cluster)**\n\n* *Explicație:* `Retreat Mode` este mecanismul oficial prin care îi instruiești pe `vCenter` și `EAM` să retragă/șteargă temporar mașinile `vCLS` de pe un cluster pentru operațiuni de mentenanță totală."
+          }
+        },
+        {
+          "text": {
+            "ro": "Dezactivează `vSphere HA` pe cluster."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Le convertește în Template-uri."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "Un administrator creează un `Resource Pool` numit `RP-Dev` cu o rezervare de memorie de **`16 GB RAM`** și **debifează** opțiunea **`Expandable Reservation`**. În interiorul lui `RP-Dev` rulează deja o mașină virtuală care are o rezervare individuală de **`10 GB RAM`**. Ce se va întâmpla când un dezvoltator va încerca să pornească o a doua mașină virtuală în `RP-Dev` care are configurată o rezervare individuală de **`8 GB RAM`**, știind că la nivelul clusterului părinte mai există $128\\text{ GB RAM}$ liberi și nerezervați?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Mașina virtuală va porni normal, împrumutând cei $2\\text{ GB}$ lipsă de la clusterul părinte."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Mașina virtuală **nu va porni** (*Admission Control error*), deoarece suma rezervărilor celor două mașini ($10\\text{ GB} + 8\\text{ GB} = 18\\text{ GB}$) depășește limita de $16\\text{ GB}$ a lui `RP-Dev`, iar cu `Expandable Reservation` dezactivată, `RP-Dev` nu are voie să împrumute resurse de la părinte."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (Mașina nu va porni deoarece `Expandable Reservation` este dezactivată)**\n\n* *Explicație:* Cu `Expandable Reservation` debifată, `RP-Dev` poate oferi copiilor săi rezervări de maximum $16\\text{ GB}$ în total. Cum $10\\text{ GB} + 8\\text{ GB} = 18\\text{ GB} > 16\\text{ GB}$, a doua mașină este respinsă la *Power On*, indiferent cât RAM liber are clusterul părinte."
+          }
+        },
+        {
+          "text": {
+            "ro": "Mașina virtuală va porni, dar primii $2\\text{ GB}$ vor fi scriși direct în fișierul `.vswp`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`vSphere DRS` va șterge automat rezervarea primei mașini virtuale."
+          },
+          "correct": false
+        }
+      ]
+    }
+  ]
+}

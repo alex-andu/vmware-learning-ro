@@ -1,0 +1,179 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Un arhitect VMware proiectează rețeaua pentru un cluster vSphere 8 care folosește un `vSphere Distributed Switch (vDS)`. Echipa de rețelistică fizică refuză să configureze `LACP` sau `EtherChannel` pe switch-urile fizice Top-of-Rack, dar cere ca serverele ESXi să rebalanseze automat traficul mașinilor virtuale între cele două plăci fizice (`vmnic0` și `vmnic1`) ori de câte ori una dintre plăci devine saturată. Ce politică de *Load Balancing* trebuie să aleagă arhitectul pe Port Group-urile din `vDS`?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "`Route based on IP hash`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`Route based on originating virtual port`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`Route based on physical NIC load` (`Load-Based Teaming - LBT`)"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: C (`Route based on physical NIC load` / `LBT`)**\n\n* *Explicație:* `LBT` (disponibil doar pe `vDS`) nu necesită `LACP` sau `EtherChannel` pe switch-urile fizice și mută dinamic fluxurile mașinilor virtuale atunci când utilizarea unui `vmnic` atinge **`75%`** timp de 30 de secunde."
+          }
+        },
+        {
+          "text": {
+            "ro": "`Use explicit failover order`"
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Un administrator configurează politica de *Load Balancing* **`Route based on IP hash`** pe un Port Group care are atașate 3 plăci fizice (`vmnic0`, `vmnic1`, `vmnic2`). Care dintre următoarele combinații de setări este **obligatorie** pentru ca această politică să funcționeze corect?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Toate cele 3 plăci `vmnic` trebuie să fie în starea `Active`, switch-ul fizic trebuie configurat cu *Link Aggregation* (`EtherChannel / Port-Channel`), iar *Network Failure Detection* trebuie setat pe `Link status only`."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: A (Toate `Active` + `EtherChannel/LAG` pe switch-ul fizic + `Link status only`)**\n\n* *Explicație:* Algoritmul `IP hash` cere obligatoriu un canal agregat pe switch-ul fizic, nu suportă adaptoare în starea *Standby* și este incompatibil cu *Beacon Probing*."
+          }
+        },
+        {
+          "text": {
+            "ro": "Două plăci `vmnic` trebuie să fie `Active`, una trebuie să fie `Standby`, iar detecția căderilor trebuie setată pe `Beacon probing`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Switch-urile fizice nu trebuie să aibă nicio configurare specială, iar `Failback` trebuie setat pe `No`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Politica `IP hash` funcționează doar dacă mașina virtuală folosește placa de rețea `E1000e`."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Pe un `vSphere Distributed Switch (vDS)`, ce tip de **Port Binding** trebuie configurat pe Distributed Port Group-ul în care este conectată mașina virtuală **`vCenter Server Appliance (VCSA)`**, astfel încât administratorul să îi poată reconecta placa de rețea direct din interfața unui host ESXi (`VMware Host Client`) în situația în care `VCSA`-ul este oprit și are o problemă de rețea?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "`Static binding`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`Dynamic binding`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`Ephemeral - no binding`"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: C (`Ephemeral - no binding`)**\n\n* *Explicație:* Doar port group-urile cu `Ephemeral binding` permit alocarea/modificarea conexiunii de rețea a unei mașini virtuale direct de pe un host ESXi atunci când `vCenter Server` este indisponibil."
+          }
+        },
+        {
+          "text": {
+            "ro": "`Promiscuous binding`"
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "Care este numărul minim de adaptoare fizice de rețea (`Uplinks / vmnics`) necesar într-un NIC Team pentru ca mecanismul de detecție a avariilor **`Beacon Probing`** să poată identifica fără ambiguitate o cădere a unui singur uplink în amonte (*Upstream Failure*)?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "1 adaptor `vmnic`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "2 adaptoare `vmnic`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "3 adaptoare `vmnic`"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: C (3 adaptoare `vmnic`)**\n\n* *Explicație:* Cu doar 2 adaptoare, dacă pachetul Beacon nu trece între ele, ESXi nu poate ști care dintre cele două căi este cea izolată. Cu **minimum 3 adaptoare `vmnic`**, două vor continua să se audă între ele, izolând prin majoritate (2 vs. 1) adaptorul cu avarie în amonte."
+          }
+        },
+        {
+          "text": {
+            "ro": "4 adaptoare `vmnic`"
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "O companie de hosting găzduiește pe același cluster vSphere 20 de mașini virtuale de tip Web Server care aparțin unor clienți diferiți, dar toate cele 20 de mașini virtuale trebuie să folosească adrese IP din aceeași subrețea publică (`/24`) și același Default Gateway. Din motive de securitate, cele 20 de mașini virtuale **nu au voie să comunice direct între ele la Layer 2**, ci doar cu Default Gateway-ul. Ce funcționalitate a unui `vSphere Distributed Switch (vDS)` rezolvă această cerință fără a irosi subrețele IP separate?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "`Network I/O Control (NIOC)`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`Private VLAN (PVLAN)` de tip **`Isolated`**, cu Default Gateway-ul conectat într-un port **`Promiscuous`**"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (`Private VLAN` de tip `Isolated` + Gateway în `Promiscuous`)**\n\n* *Explicație:* Într-un `PVLAN`, mașinile conectate într-un *Secondary VLAN* de tip **`Isolated`** nu pot comunica niciodată între ele la Layer 2, ci pot trimite pachete exclusiv către portul **`Promiscuous`** (unde se află routerul/firewall-ul)."
+          }
+        },
+        {
+          "text": {
+            "ro": "`Port Mirroring`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Activarea `Promiscuous Mode: Accept` pe Port Group"
+          },
+          "correct": false
+        }
+      ]
+    }
+  ]
+}

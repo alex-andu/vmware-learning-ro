@@ -1,0 +1,22 @@
+{
+  "steps": [
+    {
+      "id": "pas-1",
+      "title": {
+        "ro": "Migrarea Mașinii Virtuale `web01` pe `vsanDatastore` și Inspecția Componentelor + `Witness`"
+      },
+      "action": {
+        "ro": "1. În `vSphere Client` (`https://vcsa01.lab.local/ui`), dă click-dreapta pe mașina virtuală **`web01`** $\\rightarrow$ **`Migrate...`** $\\rightarrow$ alege **`Change storage only` (`Storage vMotion`)** $\\rightarrow$ **Next**.\n2. La **Select storage**:\n   * Selectează **`vsanDatastore`**.\n   * Sus, la **VM Storage Policy**, asigură-te că este selectată politica **`vSAN Default Storage Policy`** (care are setat implicit `FTT = 1, RAID-1 Mirroring`) $\\rightarrow$ **Next** $\\rightarrow$ **`Finish`**!\n3. **Magia Vizuală – Unde a pus `vSAN` bucățile discului și unde a pus `Witness`-ul?**\n   * După ce migrarea s-a terminat, dă click pe mașina virtuală **`web01`** $\\rightarrow$ tab-ul **`Monitor`** $\\rightarrow$ sub *vSAN*, dă click pe **`Physical disk placement`**!\n   * **Privește cu atenție tabelul de pe ecran:**\n     * Vei vedea obiectul **`Hard disk 1`** împărțit în mod **`RAID-1`** în exact 3 rânduri plasate pe cele 3 servere diferite:\n       * **`Component 1`** $\\rightarrow$ plasată pe **`esxi01.lab.local`** (pe discul de $100\\text{ GB}$).\n       * **`Component 2`** $\\rightarrow$ plasată pe **`esxi02.lab.local`** (pe discul de $100\\text{ GB}$).\n       * **`Witness`** $\\rightarrow$ plasat pe **`esxi03.lab.local`**!\n   * Acum ai văzut cu ochii tăi cum `vSAN` a distribuit cele 3 voturi pe cele 3 servere fizice din clusterul tău!"
+      }
+    },
+    {
+      "id": "pas-2",
+      "title": {
+        "ro": "Crearea unei Politici Customizate `SPBM` și Schimbarea ei în Mers (Zero Downtime!)"
+      },
+      "action": {
+        "ro": "1. Apasă pe meniul principal de sus (**`Menu`** $\\equiv$) $\\rightarrow$ **`Policies and Profiles`** $\\rightarrow$ în stânga, selectează **`VM Storage Policies`** și apasă pe **`Create`**.\n2. **Name:** `vSAN-Gold-Stripe2-IOPS5000` $\\rightarrow$ **Next**.\n3. **Policy structure:** Bifează **`Enable rules for \"vSAN\" storage`** $\\rightarrow$ **Next**.\n4. **vSAN rules:**\n   * **Tab-ul Availability:**\n     * **Site disaster tolerance:** `Standard cluster`\n     * **Failures to tolerate:** **`1 failure - RAID-1 (Mirroring)`** *(Observă în dreapta cum vCenter îți afișează în timp real calculatorul de spațiu: un disc de $100\\text{ GB}$ va consuma $200\\text{ GB}$! Schimbă pentru o secundă din dropdown pe `1 failure - RAID-5 (Erasure Coding)` și vezi cum calculatorul din dreapta îți arată instantaneu `133.33 GB`!).*\n   * **Tab-ul Advanced Policy Rules:**\n     * **Number of disk stripes per object:** Schimbă din `1` în **`2`**!\n     * **IOPS limit for object:** Scrie **`5000`**!\n5. Apasă **Next** $\\rightarrow$ observă că `vsanDatastore` apare în lista de **Compatible** $\\rightarrow$ **Next** $\\rightarrow$ **`Finish`**!\n6. **Aplicarea noii politici în mers pe mașina `web01`:**\n   * Mergi înapoi pe mașina **`web01`** $\\rightarrow$ dă click-dreapta pe ea $\\rightarrow$ **`VM Policies`** $\\rightarrow$ **`Edit VM Storage Policies...`**\n   * Schimbă politica din *vSAN Default Storage Policy* în **`vSAN-Gold-Stripe2-IOPS5000`** și apasă **`OK`**!\n   * Revino în `web01 -> Monitor -> vSAN -> Physical disk placement`: vezi cum `vSAN` a reconfigurat în mers structura obiectului în **`RAID-0` sub `RAID-1` (2 Stripes per oglindă)** fără ca mașina virtuală să fi simțit vreo întrerupere!"
+      }
+    }
+  ]
+}

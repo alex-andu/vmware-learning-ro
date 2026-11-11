@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "id": "pas-1",
+      "title": {
+        "ro": "Crearea Clusterului `Lab-Cluster-01` și Activarea `vSphere DRS`"
+      },
+      "action": {
+        "ro": "1. În `vSphere Client` (`https://vcsa01.lab.local/ui`), în vizualizarea **Hosts and Clusters**, dă click-dreapta pe Datacenterul **`Lab-DC`** $\\rightarrow$ **`New Cluster...`**\n   * **Name:** `Lab-Cluster-01`\n   * **BIFEAZĂ** comutatorul **`vSphere DRS`**!\n   * Lasă deocamdată `vSphere HA` și `vSAN` debifate (le vom activa dedicat în Capitolul 2.6 și în Pilonul 3!).\n   * Apasă **Next** $\\rightarrow$ **Finish**.\n2. **Adăugarea Host-urilor în Cluster (Drag & Drop):**\n   * Cu mouse-ul, trage (**Drag and Drop**) serverele **`esxi01.lab.local`**, **`esxi02.lab.local`** (și `esxi03.lab.local` dacă îl ai pornit) în interiorul obiectului **`Lab-Cluster-01`**!\n3. **Observă magia în timp real:**\n   * Uită-te în bara de *Recent Tasks* de jos și în folderul special **`vSphere Cluster Services`** care a apărut în vizualizarea *VMs and Templates*: în 30 de secunde, agentul `EAM` a creat și a pornit automat mașinile **`vCLS`**!\n4. **Verificarea Scorului `VM Happiness` (`DRS Score`):**\n   * Dă click pe **`Lab-Cluster-01`** $\\rightarrow$ tab-ul **`Summary`**: în caseta centrală **`vSphere DRS`**, vezi indicatorul procentual **`Cluster DRS Score`** (ex: `98%`) și graficul cu distribuția fericirii mașinilor virtuale în categorii de la `0-20%` până la `80-100%`!"
+      }
+    },
+    {
+      "id": "pas-2",
+      "title": {
+        "ro": "Configurarea Nivelului de Automatizare și Crearea unei Reguli `Anti-Affinity`"
+      },
+      "action": {
+        "ro": "1. Selectează **`Lab-Cluster-01`** $\\rightarrow$ tab-ul **`Configure`** $\\rightarrow$ sub *Services*, selectează **`vSphere DRS`** și apasă pe **`Edit...`**\n   * Verifică faptul că **Automation Level** este pe **`Fully Automated`**, iar **Migration Threshold** este la mijloc (pe nivelul 3). Apasă **OK**.\n2. Să presupunem că avem două mașini virtuale în cluster: **`web01`** și **`web02`** (poți clona rapid `web01` din șablonul creat în Capitolul 2.4 în `web02`!). Mută-le intenționat pe amândouă pe același server **`esxi01.lab.local`**.\n3. Acum vrem să îi ordonăm lui `DRS` că aceste două servere web **NU au voie să stea niciodată pe același server fizic (`Anti-Affinity`)**:\n   * Pe `Lab-Cluster-01` $\\rightarrow$ tab-ul **`Configure`** $\\rightarrow$ sub *Configuration*, dă click pe **`VM/Host Rules`** $\\rightarrow$ apasă pe **`Add...`**\n   * **Name:** `Anti-Affinity-Web-Servers`\n   * **Enable rule:** Bifată.\n   * **Type:** Alege **`Separate Virtual Machines`**!\n   * Apasă pe **`+ Add...`**, bifează **`web01`** și **`web02`** $\\rightarrow$ **OK** $\\rightarrow$ **OK**!\n4. **Ce se întâmplă în următoarele 60 de secunde (sau imediat dacă apeși pe `Run DRS Now` în *Monitor -> vSphere DRS*)?**\n   * Motorul `DRS` detectează că `web01` și `web02` se află pe același host (`esxi01`), încalcând o regulă obligatorie (`Priority 1 Recommendation`), și **declanșează singur un `vMotion` automat**, mutând `web02` pe `esxi02.lab.local`!"
+      }
+    },
+    {
+      "id": "pas-3",
+      "title": {
+        "ro": "Testarea `Maintenance Mode` (Evacuarea Automată a unui Server Fizic)"
+      },
+      "action": {
+        "ro": "1. Vrem să facem mentenanță pe serverul `esxi02.lab.local` (pe care acum rulează `web02`).\n2. Înainte să dăm *Enter Maintenance Mode*, dezactivează temporar regula `Anti-Affinity-Web-Servers` (ca `web02` să aibă voie să se întoarcă pe `esxi01` dacă ai doar 2 host-uri pornite!).\n3. Dă click-dreapta pe **`esxi02.lab.local`** $\\rightarrow$ **`Maintenance Mode`** $\\rightarrow$ **`Enter Maintenance Mode...`** $\\rightarrow$ apasă **OK**.\n4. **Urmărește în timp real:**\n   * `vCenter` îi cere lui `DRS` să golească `esxi02`.\n   * `DRS` pornește automat un `vMotion` pentru toate mașinile virtuale de pe `esxi02`, le mută fără niciun pachet pierdut pe `esxi01`, iar când `esxi02` are `0` mașini pornite, iconița lui capătă semnul de „lucrări în curs” (**In Maintenance Mode**)! Acum îl poți reporni sau actualiza în siguranță totală! La final, dă click-dreapta pe `esxi02` $\\rightarrow$ **`Exit Maintenance Mode`**."
+      }
+    }
+  ]
+}

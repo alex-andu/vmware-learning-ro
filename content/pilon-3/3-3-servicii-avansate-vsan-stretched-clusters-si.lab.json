@@ -1,0 +1,22 @@
+{
+  "steps": [
+    {
+      "id": "pas-1",
+      "title": {
+        "ro": "Verificarea Clusterului cu `vSAN Skyline Health` și Inspecția `Object Repair Timer`"
+      },
+      "action": {
+        "ro": "1. În `vSphere Client` (`https://vcsa01.lab.local/ui`), selectează **`Lab-Cluster-01`** $\\rightarrow$ tab-ul **`Monitor`** $\\rightarrow$ sub *vSAN*, dă click pe **`Skyline Health`**.\n   * Apasă pe butonul **`Retest`** de sus: urmărește cum `vSAN` testează rețeaua dintre `esxi01`, `esxi02` și `esxi03`, starea discurilor și starea obiectelor (**`Data -> vSAN Object Health: Healthy`**)!\n2. Mergi în **`Lab-Cluster-01`** $\\rightarrow$ tab-ul **`Configure`** $\\rightarrow$ sub *vSAN*, dă click pe **`Services`** $\\rightarrow$ derulează jos la caseta **`Advanced Options`**:\n   * Observă că **`Object Repair Timer`** este setat la **`60 minutes`** (`ClomRepairDelay`), iar **`Automatic Rebalance`** este pe **`Enabled`** (la pragul de `80%`)!"
+      }
+    },
+    {
+      "id": "pas-2",
+      "title": {
+        "ro": "Simularea Opririi unui Server (`Ensure Accessibility`) și Observarea Stării `Absent`"
+      },
+      "action": {
+        "ro": "1. Înainte de test, uită-te încă o dată pe mașina virtuală **`web01`** $\\rightarrow$ *Monitor -> vSAN -> Physical disk placement*: toate cele 3 rânduri (`Component 1` pe `esxi01`, `Component 2` pe `esxi02` și `Witness` pe `esxi03`) sunt verzi (**`Active`**)!\n2. Acum dă click-dreapta pe serverul **`esxi02.lab.local`** $\\rightarrow$ **`Maintenance Mode`** $\\rightarrow$ **`Enter Maintenance Mode...`**\n3. În fereastra care se deschide, uită-te la meniul dropdown **`vSAN data migration`**:\n   * Selectează pentru o secundă **`Full data migration`** și uită-te la raportul de pre-check de jos: îți arată cu semn de exclamare că **NU poate evacua complet datele**, deoarece mai rămân doar 2 servere (`esxi01` și `esxi03`), insuficiente pentru a muta componenta a treia!\n   * Schimbă acum înapoi pe **`Ensure accessibility`** și apasă **`OK`**!\n4. **Uită-te ce s-a întâmplat în 30 de secunde:**\n   * Serverul `esxi02` a intrat în *Maintenance Mode*, iar mașina `web01` (dacă era pe el) a migrat live pe `esxi01` și **merge în continuare fără nicio întrerupere**!\n   * Mergi pe **`web01` -> `Monitor` -> `vSAN` -> `Physical disk placement`**:\n     * Componenta de pe `esxi01` și Witness-ul de pe `esxi03` sunt **`Active`** (2 voturi din 3 = `66.6% > 50%` Quorum!).\n     * Componenta de pe `esxi02` arată acum starea galbenă: **`Absent`**!\n   * Mergi în **`Lab-Cluster-01` -> `Monitor` -> `vSAN` -> `Skyline Health` -> `Data` -> `vSAN Object Health`**: obiectul apare în categoria **`Reduced availability with no rebuild - delay timer`**, așteptând cele 60 de minute!\n5. **Revenirea Online și Resincronizarea Instantanee (`Resync`):**\n   * Dă click-dreapta pe **`esxi02.lab.local`** $\\rightarrow$ **`Maintenance Mode`** $\\rightarrow$ **`Exit Maintenance Mode`**.\n   * În **3 secunde**, componenta de pe `esxi02` trece din `Absent` înapoi în **`Active`**, iar starea de sănătate a obiectelor revine la **`100% Healthy`** fără să fi copiat gigabyți inutili pe rețea!"
+      }
+    }
+  ]
+}

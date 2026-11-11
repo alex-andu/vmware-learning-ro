@@ -1,0 +1,179 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Un administrator VMware dorește să actualizeze simultan atât sistemul de operare `ESXi 8.0`, cât și driverele specifice producătorului și **Firmware-ul fizic** al plăcilor de rețea și al controllerelor de stocare pentru toate serverele dintr-un cluster folosind o imagine unică în **`vSphere Lifecycle Manager (vLCM)`**. Ce componentă suplimentară trebuie integrată în `vCenter Server` pentru a permite actualizarea Firmware-ului hardware?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "`UMDS` (*Update Manager Download Service*)"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Un plugin **`HSM` (*Hardware Support Manager*)** furnizat de producătorul serverului (precum *Dell OpenManage Enterprise Integration* sau *HPE OneView*)"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (Un plugin `HSM` – *Hardware Support Manager*)**\n\n* *Explicație:* Pentru ca `vLCM` să poată aplica pachetul *Firmware and Drivers Add-on* pe componentele fizice ale serverului, el comunică cu un `HSM` înregistrat ca extensie în vCenter."
+          }
+        },
+        {
+          "text": {
+            "ro": "`vSphere Fault Tolerance`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Un server `Syslog` extern"
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Care este ordinea corectă și suportată oficial de VMware pentru actualizarea unei infrastructuri de la versiunea **vSphere 7.0** la versiunea **vSphere 8.0**?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "1. Host-urile ESXi $\\rightarrow$ 2. Virtual Hardware Version $\\rightarrow$ 3. vCenter Server $\\rightarrow$ 4. VMware Tools"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "1. **`vCenter Server (VCSA)`** $\\rightarrow$ 2. **`Host-urile ESXi`** $\\rightarrow$ 3. **`VMware Tools`** $\\rightarrow$ 4. **`Virtual Hardware Version (VM Compatibility)`**"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (`vCenter Server` $\\rightarrow$ `ESXi Hosts` $\\rightarrow$ `VMware Tools` $\\rightarrow$ `Virtual Hardware`)**\n\n* *Explicație:* `vCenter Server` trebuie întotdeauna actualizat **înainte**a host-urilor `ESXi` pe care le administrează, iar `VMware Tools` înainte de ridicarea *Virtual Hardware Version*."
+          }
+        },
+        {
+          "text": {
+            "ro": "1. VMware Tools $\\rightarrow$ 2. Host-urile ESXi $\\rightarrow$ 3. vCenter Server"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Ordinea nu contează, deoarece vCenter 7.0 poate administra nativ host-uri ESXi 8.0."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "În timpul unui backup incremental la nivel de imagine (*Image-Level Backup*) realizat printr-o soluție integrată cu **`VADP` (*vSphere APIs for Data Protection*)**, ce tehnologie nativă din `VMkernel` îi permite soluției de backup să identifice instantaneu doar blocurile de pe disc care au fost modificate de la ultimul backup (folosind fișierul `-ctk.vmdk`), fără a scana întregul fișier `-flat.vmdk`?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "`ATS` (*Atomic Test and Set*)"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "**`CBT` (*Changed Block Tracking*)**"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (`CBT` – *Changed Block Tracking*)**\n\n* *Explicație:* `CBT` ține evidența blocurilor modificate în fișierul `-ctk.vmdk`, permițând API-ului `VADP` (`QueryChangedDiskAreas`) să citească exclusiv blocurile schimbate între două backup-uri."
+          }
+        },
+        {
+          "text": {
+            "ro": "`TPS` (*Transparent Page Sharing*)"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`vSAN ESA`"
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "Care este metoda nativă, recomandată oficial în documentația VMware pentru realizarea backup-ului configurației și al bazei de date PostgreSQL a unui **`vCenter Server Appliance (VCSA 8.0)`**, și ce protocoale de transfer sunt suportate?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Crearea manuală de snapshot-uri zilnice pe mașina `VCSA` și păstrarea lor timp de 60 de zile."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Copierea manuală a fișierului `-flat.vmdk` prin `SCP` în timp ce baza de date scrie pe disc."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Configurarea unui **`File-Based Backup`** direct din interfața **`VAMI` (`:5480`)**, care exportă datele către un server extern prin protocoalele **`HTTPS`, `FTPS`, `FTP`, `SFTP` sau `SMB`**."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: C (`File-Based Backup` din `VAMI :5480` prin `HTTPS / FTPS / FTP / SFTP / SMB`)**\n\n* *Explicație:* Backup-ul nativ bazat pe fișiere din `VAMI` este metoda oficială de protecție a `VCSA`, permițând restaurarea direct din imaginea `.iso` a instalatorului VCSA."
+          }
+        },
+        {
+          "text": {
+            "ro": "Exportarea mașinii virtuale ca șablon `OVA` în fiecare oră."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "Ce face funcționalitatea **`Quick Boot`** din cadrul `vSphere Lifecycle Manager (vLCM)` în timpul remedierii (patching-ului) unui host ESXi?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Actualizează mașina virtuală fără a o muta cu `vMotion`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Atunci când un update de ESXi nu necesită o actualizare de Firmware/BIOS hardware, `Quick Boot` repornește **doar nucleul `VMkernel` al sistemului de operare ESXi**, sărind peste ciclul fizic de reboot al serverului și peste testele hardware `POST / BIOS`, reducând timpul de repornire de la zeci de minute la câteva secunde."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (`Quick Boot` repornește doar `VMkernel`, ocolind inițializarea hardware `BIOS/POST`)**\n\n* *Explicație:* `Quick Boot` economisește minutele lungi de verificare a memoriei și a dispozitivelor PCIe din BIOS atunci când patch-ul vizează doar software-ul ESXi."
+          }
+        },
+        {
+          "text": {
+            "ro": "Dezactivează `vSphere HA` permanent."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Șterge partiția `ESX-OSData`."
+          },
+          "correct": false
+        }
+      ]
+    }
+  ]
+}

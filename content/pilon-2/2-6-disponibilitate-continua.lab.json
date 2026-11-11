@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "id": "pas-1",
+      "title": {
+        "ro": "Activarea `vSphere HA` și Configurarea `Isolation Response` + `VMCP`"
+      },
+      "action": {
+        "ro": "1. În `vSphere Client` (`https://vcsa01.lab.local/ui`), asigură-te că ambele tale servere (`esxi01.lab.local` și `esxi02.lab.local`) sunt montate la cel puțin un **Datastore partajat** (sau chiar două, din Capitolul 2.3!) și că mașina virtuală **`web01`** este stocată pe acest **Datastore partajat**! *(Amintește-ți: `vSphere HA` nu poate reporni o mașină de pe un server mort dacă discul ei se află pe discul local nepartajat al serverului mort!).*\n2. Selectează **`Lab-Cluster-01`** $\\rightarrow$ tab-ul **`Configure`** $\\rightarrow$ sub *Services*, selectează **`vSphere Availability`** și apasă pe **`Edit...`**\n3. Comută butonul **`vSphere HA`** pe **`ON`**!\n4. În meniul din stânga al ferestrei, configurează ca un inginer Senior:\n   * **Failures and responses:**\n     * **Host Failure Response:** `Restart VMs`\n     * **Response for Host Isolation:** Schimbă din *Disabled* în **`Shut Down and Restart VMs`**!\n     * **Datastore with PDL:** Schimbă în **`Power off and restart VMs`** (asta activează automat `VMCP`!).\n     * **Datastore with APD:** Schimbă în **`Power off and restart VMs (Conservative)`**.\n   * **Admission Control:** Setează *Host failures cluster tolerates* pe **`1`** (sau, dacă în laborator ai memorie RAM foarte mică pe host-uri, poți comuta temporar *Admission Control* pe `Disabled` ca să nu îți blocheze pornirea mașinilor).\n5. Apasă pe **`OK`** și urmărește bara *Recent Tasks*: în 30 de secunde, vCenter instalează agentul **`fdm`** pe `esxi01` și `esxi02` și organizează alegerile pentru `Master`!"
+      }
+    },
+    {
+      "id": "pas-2",
+      "title": {
+        "ro": "Verificarea Rolului `Master` vs. `Connected (Subordinate)` și a Folderului `.vSphere-HA`"
+      },
+      "action": {
+        "ro": "1. Cu **`Lab-Cluster-01`** selectat, mergi în tab-ul **`Monitor`** $\\rightarrow$ sub *vSphere HA*, dă click pe **`Summary`**.\n   * **Ce vezi pe ecran:** Îți arată clar care server a câștigat alegerile (**`Master Host: esxi01.lab.local`**), câte mașini virtuale sunt protejate (**`Protected VMs`**) și în tab-ul **`Heartbeat`** vezi exact cele 2 Datastore-uri alese pentru *Datastore Heartbeating*!\n2. Dacă te uiți pe Datastore-ul tău partajat în **Files (Datastore Browser)**, vei vedea că a apărut automat folderul **`.vSphere-HA`**!"
+      }
+    },
+    {
+      "id": "pas-3",
+      "title": {
+        "ro": "Crash-Testul în Timp Real (Simularea Exploziei unui Server Fizic!)"
+      },
+      "action": {
+        "ro": "1. **Verificare de siguranță înainte de test:**\n   * Asigură-te că mașina virtuală a vCenter-ului (**`vcsa01`**) rulează pe **`esxi01.lab.local`**!\n   * Migrează cu `vMotion` mașina de test **`web01`** astfel încât să ruleze pe **`esxi02.lab.local`**!\n   * Verifică în sumary-ul mașinii `web01` că la secțiunea *vSphere HA* scrie: **`vSphere HA Protection: Protected`**!\n2. **Simularea Dezastrului Fizic (Fără oprire curată!):**\n   * Nu da *Shut Down* din vCenter (pentru că o oprire curată ar spune lui HA că ai oprit tu intenționat serverul!).\n   * Mergi direct în **VMware Workstation Pro**, dă click-dreapta pe mașina virtuală a serverului **`esxi02`** $\\rightarrow$ **`Power`** $\\rightarrow$ **`Power Off` (echivalentul smulgerii cablului de curent din priză!)**!\n3. **Cronometrează în `vSphere Client` și într-o fereastră de `ping` către `web01`:**\n   * **Secunda 1 – 15:** `esxi01` (`Master`-ul) nu mai aude *Network Heartbeats* și nici *Datastore Heartbeats* de la `esxi02`. În vCenter apare alarma roșie: **`vSphere HA host status: Host failure`** pe `esxi02`!\n   * **Secunda 16:** Agentul `fdm` de pe `esxi01` preia instantaneu fișierul `web01.vmx` de pe Datastore-ul partajat și **execută automat `Power On` pentru mașina `web01` pe serverul `esxi01.lab.local`**!\n   * **Secunda 45:** Mașina virtuală **`web01` a înviat automat pe `esxi01`** și răspunde din nou la `ping`! Mergi în `Lab-Cluster-01 -> Monitor -> Events` și admiră mesajul oficial: *„vSphere HA restarted virtual machine web01 on host esxi01.lab.local”*!"
+      }
+    }
+  ]
+}

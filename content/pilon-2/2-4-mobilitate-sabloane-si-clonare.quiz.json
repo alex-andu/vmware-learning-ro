@@ -1,0 +1,179 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "În timpul fazei finale de comutare (*Switchover*) a unei migrări live `vSphere vMotion`, cum află switch-ul fizic din Data Center că adresa `MAC` a mașinii virtuale nu se mai află pe portul fizic al serverului ESXi sursă, ci trebuie livrată acum pe portul fizic al serverului ESXi destinație?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "`vCenter Server` se conectează prin SSH la switch-ul fizic și îi rescrie tabela de rutare."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Mașina virtuală își schimbă automat adresa `MAC` și adresa `IP` la sosirea pe host-ul destinație."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Host-ul ESXi destinație trimite pe rețea un pachet **`RARP` (*Reverse ARP* / *Notify Switches*)** în numele adresei `MAC` a mașinii virtuale, determinând switch-ul fizic să își actualizeze instantaneu tabela CAM/MAC."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: C (Host-ul destinație trimite un pachet `RARP` / *Reverse ARP*)**\n\n* *Explicație:* În momentul comutării finale a unui `vMotion`, `VMkernel`-ul de pe host-ul destinație emite un cadru `RARP` cu adresa MAC a mașinii virtuale (dacă politica *Notify Switches* este pe `Yes`), actualizând pe loc tabela de porturi MAC a switch-urilor fizice."
+          }
+        },
+        {
+          "text": {
+            "ro": "Switch-ul fizic află abia după 5 minute, când expiră tabela ARP din router."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Un administrator vrea să activeze funcția **`EVC` (*Enhanced vMotion Compatibility*)** pe un cluster nou care conține 2 servere cu procesoare **Intel Xeon Gold** și 2 servere cu procesoare **AMD EPYC**. Ce se va întâmpla când va încerca să activeze `EVC` pe acest cluster?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "`EVC` va crea o mască universală comună și va permite `vMotion` live între serverele Intel și AMD."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Operațiunea va eșua, deoarece `EVC` și `vMotion` (migrarea cu mașina pornită) nu sunt suportate între procesoare de la producători diferiți (Intel vs. AMD); serverele Intel și AMD trebuie separate în două clustere EVC distincte."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (Operațiunea va eșua; `EVC` nu poate masca diferențele dintre arhitecturile Intel și AMD)**\n\n* *Explicație:* `EVC` maschează doar diferențele de instrucțiuni `CPUID` între generații diferite ale **aceluiași producător de procesoare** (Intel cu Intel, respectiv AMD cu AMD)."
+          }
+        },
+        {
+          "text": {
+            "ro": "`EVC` va opri automat serverele AMD și le va păstra doar ca noduri de stocare."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`vMotion` va funcționa doar dacă este activat *Encrypted vMotion*."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Pe un server ESXi conectat la o rețea dedicată de `vMotion` cu viteza de **`10 Gbps`**, un administrator selectează 12 mașini virtuale și pornește simultan migrarea lor cu `vMotion` (fără *Storage vMotion*) către un al doilea server ESXi. Câte dintre cele 12 mașini virtuale se vor migra activ în paralel în același timp, conform limitelor oficiale vSphere?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Toate cele 12 simultan"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Maximum 2 simultan, iar 10 vor sta în așteptare"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Maximum 4 simultan, iar 8 vor sta în așteptare"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Maximum **8** simultan, iar celelalte 4 vor fi puse în coadă (*Queued*) și vor porni pe măsură ce primele se termină"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: D (Maximum `8` migrări `vMotion` simultane pe rețea de `10 Gbps`)**\n\n* *Explicație:* Limita oficială pe un link de `1 Gbps` este de `4` migrări `vMotion` active simultan, iar pe un link de `10 Gbps+` este de **`8` migrări `vMotion` active simultan** per host (pentru *Storage vMotion* limita este de `2` per host)."
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "Cum gestionează un host `ESXi 8.0` scrierile noi de pe disc efectuate de o mașină virtuală în timp ce aceasta este mutată live de pe un Datastore pe altul prin **`Storage vMotion`**?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Creează un lanț de snapshot-uri `VMFSsparse` pe discul sursă."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Oprește toate scrierile pe disc ale mașinii virtuale pe toată durata copierii celor $500\\text{ GB}$."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Folosește un **`Mirror Driver` (*I/O Mirroring*)** în `VMkernel`, care copiază blocurile într-o singură trecere (*Single-Pass*) și oglindește simultan pe ambele Datastore-uri orice scriere făcută în zonele deja copiate, fără a folosi snapshot-uri."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: C (`Mirror Driver` într-o singură trecere, fără snapshot-uri)**\n\n* *Explicație:* Începând cu vSphere 5.0+, `Storage vMotion` nu mai creează snapshot-uri temporare, ci folosește un *Mirror Driver* în `VMkernel` care dublează în timp real scrierile pentru blocurile deja copiate."
+          }
+        },
+        {
+          "text": {
+            "ro": "Trimite blocurile modificate prin baza de date PostgreSQL a lui `vCenter Server`."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "O companie deține două centre de date independente (fiecare cu propriul său `vCenter Server` și propriul domeniu `SSO` separat, **fără** *Enhanced Linked Mode*) și dorește să sincronizeze automat șabloanele de mașini virtuale și imaginile `.iso` de la centrul principal către centrul secundar. Ce funcționalitate vSphere rezolvă această cerință nativ?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "O **`Content Library`** locală cu opțiunea *Publishing* activată în primul vCenter și o **`Subscribed Content Library`** în al doilea vCenter."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: A (`Published Content Library` + `Subscribed Content Library`)**\n\n* *Explicație:* `Content Libraries` sincronizează șabloanele și imaginile `.iso` direct prin HTTPS (Port 443) între oricâte instanțe `vCenter Server`, chiar și atunci când acestea nu sunt unite prin *Enhanced Linked Mode*."
+          }
+        },
+        {
+          "text": {
+            "ro": "Un `vSphere Distributed Switch` partajat între cele două vCenter-e."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Activarea `Per-VM EVC` pe șabloane."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Funcția `vSphere Fault Tolerance`."
+          },
+          "correct": false
+        }
+      ]
+    }
+  ]
+}

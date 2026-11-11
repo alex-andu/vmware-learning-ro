@@ -1,0 +1,179 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Un administrator VMware dorește să configureze multipathing nativ și echilibrarea încărcării pe mai multe adrese IP (*Session Trunking*) pentru un datastore de tip **NFS**, precum și autentificare securizată bazată pe **Kerberos**, fără a fi nevoit să configureze agregarea legăturilor (`LACP / EtherChannel`) pe switch-urile fizice. Ce opțiune trebuie să aleagă la crearea datastore-ului?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "`NFS v3` cu `iSCSI Port Binding`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`NFS v4.1`"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (`NFS v4.1`)**\n\n* *Explicație:* Doar `NFS v4.1` include suport nativ în protocol pentru *Session Trunking* (multipathing peste mai multe conexiuni/IP-uri fără LACP) și autentificare *Kerberos*."
+          }
+        },
+        {
+          "text": {
+            "ro": "`VMFS-6` peste `NFS v3`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`Raw Device Mapping (RDM)` în mod virtual"
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "În arhitectura de multipathing `PSA (Pluggable Storage Architecture)` din VMware ESXi, care este sub-modulul din `NMP (Native Multipathing Plugin)` responsabil pentru recunoașterea tipului specific de matrice hardware SAN (cum ar fi *Active-Active* sau *ALUA*), monitorizarea stării fizice a căilor și activarea căilor de rezervă în caz de avarie hardware?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "`PSP (Path Selection Plugin)`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`SATP (Storage Array Type Plugin)`"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (`SATP - Storage Array Type Plugin`)**\n\n* *Explicație:* În interiorul `NMP`, **`SATP`** se ocupă de partea specifică hardware-ului matricei SAN (monitorizarea stării căilor și failover-ul controllerelor ALUA), în timp ce **`PSP`** (A) se ocupă de alegerea căii pentru fiecare pachet I/O (*Fixed, MRU, Round Robin*)."
+          }
+        },
+        {
+          "text": {
+            "ro": "`SIOC (Storage I/O Control)`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`VASA (vSphere APIs for Storage Awareness)`"
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Un inginer pregătește două mașini virtuale pentru a configura funcționalitatea de disponibilitate continuă **vSphere Fault Tolerance (`SMP-FT`)** (sau un cluster partajat *Windows Server Failover Clustering*). Ce format de aprovizionare a discurilor virtuale (`.vmdk`) este cerut în mod tradițional și oferă cea mai bună performanță la prima scriere (*First Write*), deoarece alocă tot spațiul și scrie zerouri pe toate blocurile încă din momentul creării discului?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "`Thin Provision`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`Thick Provision Lazy Zeroed`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`Thick Provision Eager Zeroed`"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: C (`Thick Provision Eager Zeroed`)**\n\n* *Explicație:* Discurile *Thick Provision Eager Zeroed* au spațiul complet rezervat și zerorizat la creare, eliminând latența de alocare și *On-Demand Zeroing* în timpul execuției."
+          }
+        },
+        {
+          "text": {
+            "ro": "`SEsparse`"
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "Un administrator are un datastore vechi formatat cu **`VMFS-5`** pe care rulează 15 mașini virtuale de producție și dorește să treacă la sistemul de fișiere **`VMFS-6`** pentru a beneficia de recuperarea automată a spațiului liber (*Automatic UNMAP*). Cum poate realiza această tranziție fără downtime pentru mașinile virtuale?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Dă click-dreapta pe datastore și apasă pe butonul *Upgrade to VMFS-6* în timp ce mașinile virtuale rulează."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Deoarece nu este suportat upgrade-ul direct (*in-place*) de la `VMFS-5` la `VMFS-6`, administratorul trebuie să creeze un datastore nou formatat cu `VMFS-6` și să migreze live mașinile virtuale cu `Storage vMotion`."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (Crearea unui datastore `VMFS-6` nou și migrarea cu `Storage vMotion`)**\n\n* *Explicație:* Din cauza schimbării structurii interne de metadate la blocuri `4K`, VMware nu permite conversia directă (*in-place*) din `VMFS-5` în `VMFS-6`; migrarea prin `Storage vMotion` pe un volum nou este procedura oficială."
+          }
+        },
+        {
+          "text": {
+            "ro": "Schimbă politica de multipathing din `MRU` în `Round Robin`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Montează același LUN simultan ca `NFS v4.1`."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "Care dintre următoarele afirmații descrie o regulă obligatorie atunci când se configurează **`iSCSI Port Binding`** pe adaptorul *Software iSCSI* în ESXi?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Toate porturile `VMkernel (vmk)` legate prin Port Binding trebuie să se afle în aceeași subrețea IP (același Broadcast Domain cu ținta iSCSI), iar fiecare port `vmk` trebuie asociat cu **exact un singur adaptor fizic `vmnic` în starea `Active` și zero adaptoare în starea `Standby`**."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: A (Același subnet IP + mapare 1-la-1 cu un singur `vmnic` Active și zero `Standby`)**\n\n* *Explicație:* Conform **VMware KB 2045040**, `Port Binding` cere ca fiecare port `vmk` să fie legat exclusiv de un singur `vmnic` activ (celelalte fiind trecute pe *Unused*), iar toate porturile să fie în același subnet IP cu SAN-ul."
+          }
+        },
+        {
+          "text": {
+            "ro": "Fiecare port `VMkernel (vmk)` trebuie să aibă cel puțin două adaptoare `vmnic` în starea `Active` și unul în `Standby`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`iSCSI Port Binding` se folosește doar atunci când inițiatorul și ținta iSCSI se află în subrețele IP diferite rutate printr-un router Layer 3."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`iSCSI Port Binding` este utilizat pentru montarea datastore-urilor `NFS v3`."
+          },
+          "correct": false
+        }
+      ]
+    }
+  ]
+}

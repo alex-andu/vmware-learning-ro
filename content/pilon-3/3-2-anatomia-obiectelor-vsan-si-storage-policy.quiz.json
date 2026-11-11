@@ -1,0 +1,179 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Un administrator aplică o politică de stocare `vSAN` configurată cu **`FTT = 1`** și **`Failure Tolerance Method = RAID-1 (Mirroring)`** asupra unui disc virtual (`.vmdk`) cu dimensiunea de **`80 GB`**. Care este numărul minim de servere ESXi necesare în cluster și cât spațiu brut va consuma acest disc pe `vsanDatastore` (presupunând *Thick / 100% utilizare*)?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Minimum 2 servere ESXi; consumă $80\\text{ GB}$."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Minimum **3 servere ESXi** ($2n+1$); consumă **`160 GB`** ($2.0\\times$)."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (Minimum `3` servere ESXi; consumă `160 GB`)**\n\n* *Explicație:* Pentru `FTT = 1` cu `RAID-1`, formula host-urilor este $2n + 1 = 2(1) + 1 = \\mathbf{3\\text{ host-uri}}$ (Host 1 ține copia A de $80\\text{ GB}$, Host 2 ține copia B de $80\\text{ GB}$, iar Host 3 ține componenta `Witness`), consumul total fiind $80\\text{ GB} \\times 2 = \\mathbf{160\\text{ GB}}$."
+          }
+        },
+        {
+          "text": {
+            "ro": "Minimum 4 servere ESXi; consumă $106.6\\text{ GB}$ ($1.33\\times$)."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Minimum 6 servere ESXi; consumă $240\\text{ GB}$ ($3.0\\times$)."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "O companie deține un cluster `vSAN All-Flash` compus din **6 servere ESXi** și dorește să creeze o politică de stocare pentru o bază de date critică de **`200 GB`**, astfel încât baza de date să rămână online fără pierderi de date chiar și dacă **2 servere ESXi întregi se defectează simultan (`FTT = 2`)**, dar cu un consum cât mai mic de spațiu pe disc. Ce metodă `FTM` trebuie aleasă și cât spațiu brut va ocupa discul de $200\\text{ GB}$?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "`FTT = 2` cu **`RAID-1 (Mirroring)`**, care va ocupa $600\\text{ GB}$ ($3.0\\times$)."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`FTT = 2` cu **`RAID-6 (Erasure Coding)`**, care necesită minimum 6 host-uri și va ocupa doar **`300 GB`** ($1.5\\times$)."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (`FTT = 2` cu `RAID-6`, ocupând doar `300 GB`)**\n\n* *Explicație:* Pe 6 servere All-Flash, `RAID-6` ($4\\text{ date} + 2\\text{ parități}$) oferă toleranță la 2 căderi simultane cu un overhead de doar $50\\%$ ($1.5\\times \\Rightarrow 200\\text{ GB} \\times 1.5 = \\mathbf{300\\text{ GB}}$), față de `RAID-1 FTT=2` care ar fi consumat $600\\text{ GB}$ ($3.0\\times$)."
+          }
+        },
+        {
+          "text": {
+            "ro": "`FTT = 1` cu `RAID-5`, care va ocupa $266\\text{ GB}$."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`FTT = 0`, care va ocupa $200\\text{ GB}$."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Care este rolul unei componente **`Witness`** în arhitectura `vSAN OSA` și câte date efective ale mașinii virtuale sunt stocate în interiorul ei?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Stochează o a treia copie completă a întregului disc `.vmdk` pentru backup."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Nu stochează **niciun bit de date ale mașinii virtuale** (ocupă doar $\\sim 2\\text{ MB}$ de metadate), rolul său fiind exclusiv acela de a servi drept vot de departajare (*Tie-breaker / Quorum Vote*) atunci când apare o partiționare a rețelei (*Split-Brain*) între host-urile care dețin replicile de date."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (Conține doar $\\sim 2\\text{ MB}$ metadate și oferă votul de departajare pentru Quorum `> 50%`)**\n\n* *Explicație:* Componenta `Witness` nu conține date ale utilizatorului, ci doar metadate pentru a decide majoritatea voturilor (`> 50%`) în caz de izolare a unui host."
+          }
+        },
+        {
+          "text": {
+            "ro": "Stochează fișierul de swap `.vswp` al mașinii virtuale."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Înlocuiește `vCenter Server` când acesta este oprit."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "În arhitectura clasică `vSAN OSA`, care este dimensiunea maximă a unei singure **Componente (`Component`)** pe disc înainte ca `vSAN` să împartă automat un Obiect mare în mai multe componente concatenate?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "$64\\text{ GB}$"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "**`255 GB`**"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (`255 GB`)**\n\n* *Explicație:* Orice obiect mai mare de `255 GB` în `vSAN OSA` este împărțit automat în mai multe componente de maximum `255 GB` fiecare."
+          }
+        },
+        {
+          "text": {
+            "ro": "$2\\text{ TB}$"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "$62\\text{ TB}$"
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "Cum diferă cerința numărului minim de servere ESXi pentru politica **`FTT = 1 cu RAID-5 (Erasure Coding)`** între arhitectura clasică **`vSAN OSA`** și noua arhitectură **`vSAN ESA`** din vSphere 8?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Nu există nicio diferență; ambele cer minimum 6 servere ESXi."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "În **`vSAN OSA`**, `RAID-5` folosește exclusiv schema fixă `3+1` și necesită **minimum `4` servere ESXi**; în schimb, în **`vSAN ESA`**, regula adaptivă permite activarea `RAID-5` chiar și pe un cluster de **doar `3` servere ESXi** (folosind schema `2+1`, cu $1.5\\times$ consum de spațiu), iar pe clustere de `6+` servere utilizează schema `4+1` (cu doar $1.25\\times$ consum de spațiu)."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (`OSA` cere minim `4` host-uri pentru `3+1`; `ESA` permite `RAID-5` pe `3` host-uri prin schema `2+1` și pe `6+` host-uri prin schema `4+1`)**\n\n* *Explicație:* *Adaptive RAID-5* este una dintre cele mai importante inovații din `vSAN ESA` (vSphere 8), permițând clienților cu doar 3 servere să se bucure de economia de spațiu a `RAID-5`."
+          }
+        },
+        {
+          "text": {
+            "ro": "`vSAN ESA` nu suportă `RAID-5`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`vSAN OSA` poate face `RAID-5` pe 2 servere fără Witness."
+          },
+          "correct": false
+        }
+      ]
+    }
+  ]
+}

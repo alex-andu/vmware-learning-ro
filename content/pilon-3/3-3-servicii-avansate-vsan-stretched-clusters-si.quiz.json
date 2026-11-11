@@ -1,0 +1,179 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Un server ESXi dintr-un cluster `vSAN` de 5 noduri se repornește neplanificat din cauza unei pene scurte de curent în rack. În ce stare marchează `vSAN` componentele de stocare aflate pe discurile acelui server și după cât timp va începe `vSAN` să reconstruiască acele componente pe celelalte 4 servere din cluster dacă serverul nu revine online (conform setărilor implicite)?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Le marchează ca `Degraded` și începe reconstrucția imediat (în `0 secunde`)."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Le marchează ca **`Absent`** și așteaptă **`60 de minute`** (`ClomRepairDelay`) înainte de a începe reconstrucția pe alte host-uri, pentru a evita traficul masiv de resincronizare în cazul în care serverul doar își dă reboot și revine rapid online."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (`Absent` + timer de așteptare de `60 de minute`)**\n\n* *Explicație:* Când un host întreg devine indisponibil (sau un disc dispare fără cod de eroare permanentă), componentele sunt marcate ca **`Absent`**, iar `vSAN` așteaptă **`60 de minute`** (`ClomRepairDelay`) înainte de a reconstrui datele. Doar când un disc raportează o eroare fizică permanentă irecuperabilă componentele sunt marcate ca **`Degraded`**, iar reconstrucția începe imediat (`0 minute`)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Șterge imediat toate mașinile virtuale de pe acel server."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Așteaptă 24 de ore înainte de a lua vreo măsură."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Un administrator administrează un cluster `vSAN` format din **exact 3 servere ESXi** (`esxi01`, `esxi02`, `esxi03`). Toate mașinile virtuale folosesc politica de stocare `FTT = 1, RAID-1 (Mirroring)`. Administratorul trebuie să pună serverul `esxi01` în *Maintenance Mode* timp de 20 de minute pentru a înlocui un ventilator defect, păstrând toate mașinile virtuale pornite și accesibile. Ce opțiune de migrare a datelor `vSAN` trebuie să selecteze?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "`Full data migration`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "**`Ensure accessibility`**"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (`Ensure accessibility`)**\n\n* *Explicație:* Pe un cluster de doar 3 host-uri cu `FTT=1`, opțiunea `Full data migration` (A) va eșua deoarece nu există un al 4-lea host pe care să fie mutate componentele evacuate. `Ensure accessibility` permite intrarea rapidă în *Maintenance Mode*, mașinile continuând să ruleze pe baza copiei rămase pe al doilea host și a Witness-ului de pe al treilea host."
+          }
+        },
+        {
+          "text": {
+            "ro": "`No data migration`"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`Retreat Mode`"
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Care este diferența tehnică dintre **`vSAN Data-in-Transit Encryption`** și **`vSAN Data-at-Rest Encryption`** în ceea ce privește cerința unui furnizor de chei criptografice (*Key Provider / KMS*)?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Ambele necesită obligatoriu un server KMS extern conectat prin protocolul KMIP."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Niciuna nu necesită un Key Provider."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "**`Data-at-Rest Encryption`** (criptarea datelor pe discurile SSD/NVMe) necesită obligatoriu configurarea unui *Key Provider* (fie un server `KMS` extern, fie `vSphere Native Key Provider`); în schimb, **`Data-in-Transit Encryption`** (criptarea traficului vSAN pe rețea între host-uri) **NU necesită un Key Provider**, generându-și și rotindu-și automat cheile intern."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: C (`Data-at-Rest` necesită `KMS / Native Key Provider`; `Data-in-Transit` nu necesită `KMS`)**\n\n* *Explicație:* Aceasta este diferența arhitecturală esențială dintre cele două tipuri de criptare din `vSAN`."
+          }
+        },
+        {
+          "text": {
+            "ro": "`Data-in-Transit Encryption` funcționează doar pe rețele Fibre Channel."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "O bancă implementează un **`vSAN Stretched Cluster`** între două centre de date aflate în două părți diferite ale aceluiași oraș (*Preferred Site* și *Secondary Site*), plus un *Witness Host* într-o a treia locație. Care este latența maximă dus-întors (**`RTT` – *Round-Trip Time***) suportată oficial pe legătura de rețea dintre cele două site-uri de date (*Preferred Site* $\\leftrightarrow$ *Secondary Site*)?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Maximum **`5 milisecunde` (`5 ms RTT`)**"
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: A (Maximum `5 ms RTT` între cele două site-uri de date)**\n\n* *Explicație:* Între *Preferred Site* și *Secondary Site* replicarea este sincronă, necesitând $\\le 5\\text{ ms RTT}$; în schimb, între site-urile de date și *Witness Site* latența poate fi de până la $100 - 200\\text{ ms RTT}$."
+          }
+        },
+        {
+          "text": {
+            "ro": "Maximum `50 milisecunde` (`50 ms RTT`)"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Maximum `150 milisecunde` (`150 ms RTT`)"
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Maximum `200 milisecunde` (`200 ms RTT`)"
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "Un inginer are un cluster `vSAN OSA` de **8 servere ESXi** montate fizic în **4 dulapuri metalice (`Racks`)** diferite (câte 2 servere în fiecare dulap). Pentru a se asigura că oprirea completă a curentului într-un întreg dulap metalic nu va afecta funcționarea mașinilor virtuale configurate cu `FTT = 1 (RAID-1)` sau `FTT = 1 (RAID-5)`, ce funcționalitate `vSAN` trebuie să configureze?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Să împartă clusterul în 4 clustere vCenter separate."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Să creeze **4 `vSAN Fault Domains`** (câte un *Fault Domain* pentru fiecare dulap fizic, conținând cele 2 servere din acel dulap), determinând astfel `vSAN` să distribuie componentele și Witness-ul în dulapuri fizice diferite."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (Crearea a 4 `vSAN Fault Domains`, câte unul per rack)**\n\n* *Explicație:* `Fault Domains` instruiesc `vSAN` să trateze un întreg dulap ca pe o singură unitate de avarie, plasând fiecare copie/paritate într-un dulap fizic diferit."
+          }
+        },
+        {
+          "text": {
+            "ro": "Să activeze `Deduplication and Compression`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Să mărească `Stripe Width` la 8."
+          },
+          "correct": false
+        }
+      ]
+    }
+  ]
+}

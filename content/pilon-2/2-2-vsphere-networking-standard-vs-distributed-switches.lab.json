@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "id": "pas-1",
+      "title": {
+        "ro": "Verificarea că Serverul `esxi01` are 2 Plăci de Rețea (`vmnic0` și `vmnic1`)"
+      },
+      "action": {
+        "ro": "1. În VMware Workstation Pro, dă click-dreapta pe mașina virtuală a serverului tău **`esxi01`** $\\rightarrow$ **Settings**.\n2. Dacă are o singură placă *Network Adapter*, apasă pe **Add...** $\\rightarrow$ **Network Adapter** $\\rightarrow$ conectează-o tot la **`Custom: VMnet2 (Host-only)`** și apasă **OK**.\n3. În `vSphere Client` (`https://vcsa01.lab.local/ui`), dă click pe host-ul **`esxi01.lab.local`** $\\rightarrow$ tab-ul **Configure** $\\rightarrow$ **Networking** $\\rightarrow$ **Physical adapters** (dacă nu apare încă `vmnic1`, dă un scurt *Reboot* la `esxi01` sau fă pasul înainte de pornire). Acum vezi clar două plăci de $10\\text{ Gbps}$: **`vmnic0`** și **`vmnic1`**!"
+      }
+    },
+    {
+      "id": "pas-2",
+      "title": {
+        "ro": "Crearea unui `vSphere Distributed Switch` (`vDS`) și a Port Group-urilor"
+      },
+      "action": {
+        "ro": "1. În `vSphere Client`, schimbă sus pe a patra iconiță din inventar: **Networking View** (iconița cu globul pământesc/rețea).\n2. Dă click-dreapta pe Datacenterul **`Lab-DC`** $\\rightarrow$ **Distributed Switch** $\\rightarrow$ **`New Distributed Switch...`**\n   * **Name:** `DSwitch-Prod` $\\rightarrow$ **Next**.\n   * **Version:** `Distributed Switch: 8.0.0` $\\rightarrow$ **Next**.\n   * **Configure settings:**\n     * **Number of uplinks:** `2` (`Uplink 1` și `Uplink 2`).\n     * **Network I/O Control:** `Enabled`.\n     * **Default port group:** Bifează *Create a default port group* și numește-l **`dPG-Management-Ephemeral`** $\\rightarrow$ **Next** $\\rightarrow$ **Finish**!\n3. **Configurarea Port Group-ului de Management pe `Ephemeral` (Best Practice-ul învățat azi!):**\n   * Extinde `DSwitch-Prod`, dă click-dreapta pe **`dPG-Management-Ephemeral`** $\\rightarrow$ **`Edit Settings...`**\n   * La **General** $\\rightarrow$ schimbă **`Port binding`** din *Static binding* în **`Ephemeral - no binding`**!\n   * Mergi la **Security** (necesar pentru că suntem într-un Nested Lab!) $\\rightarrow$ schimbă **Promiscuous mode** pe **`Accept`**, **MAC address changes** pe **`Accept`** și **Forged transmits** pe **`Accept`**.\n   * Mergi la **Teaming and failover** $\\rightarrow$ schimbă **Load balancing** în **`Route based on physical NIC load`** (`LBT`)! Apasă **OK**.\n4. **Crearea unui al doilea Port Group (pentru `vMotion`):**\n   * Dă click-dreapta pe `DSwitch-Prod` $\\rightarrow$ **Distributed Port Group** $\\rightarrow$ **`New Distributed Port Group...`**\n   * Numește-l **`dPG-vMotion`**, lasă *Static binding* și apasă **Next** $\\rightarrow$ **Finish**."
+      }
+    },
+    {
+      "id": "pas-3",
+      "title": {
+        "ro": "Magia Migrării Zero-Downtime de pe `vSS` (`vSwitch0`) pe `vDS` (`DSwitch-Prod`)"
+      },
+      "action": {
+        "ro": "1. Deschide un Command Prompt pe PC-ul tău și pornește un ping continuu către serverul ESXi și către vCenter:\n   ```cmd\n   ping 192.168.10.51 -t\n   ```\n2. În `vSphere Client`, dă click-dreapta pe **`DSwitch-Prod`** $\\rightarrow$ **`Add and Manage Hosts...`**\n3. Selectează prima opțiune: **`Add hosts`** $\\rightarrow$ **Next**.\n4. Apasă pe **`+ New hosts...`**, bifează **`esxi01.lab.local`** (și `esxi02`, `esxi03` dacă le-ai instalat deja) $\\rightarrow$ **OK** $\\rightarrow$ **Next**.\n5. **Manage physical adapters (Mutăm cablurile fizice!):**\n   * Selectează **`vmnic0`** $\\rightarrow$ din meniul dropdown din dreapta lui alege **`Uplink 1`**.\n   * Selectează **`vmnic1`** $\\rightarrow$ alege **`Uplink 2`** $\\rightarrow$ **Next**.\n6. **Manage VMkernel adapters (Mutăm `vmk0` în același timp!):**\n   * Selectează **`vmk0` (Management Network)** $\\rightarrow$ în dreapta lui, la *Assign port group*, alege **`dPG-Management-Ephemeral`**!\n   * *(Observă cum analizatorul de impact din dreapta îți arată o bifă verde: **„No impact”**!)*. Apasă **Next**.\n7. **Migrate VM networking (Mutăm și mașinile virtuale `vcsa01` și `web01` simultan!):**\n   * Bifează **`Migrate virtual machine networking`**.\n   * La `vcsa01` și `web01`, selectează ca destinație **`dPG-Management-Ephemeral`** $\\rightarrow$ **Next** $\\rightarrow$ **`Finish`**!\n8. **Uită-te la fereastra ta de `ping 192.168.10.51 -t`:**\n   * **NICI MĂCAR UN SINGUR PACHET PIERDUT!** Întregul server `esxi01`, împreună cu `vmk0`, `vCenter`-ul și mașinile virtuale, a fost mutat în mers de pe vechiul switch standard `vSwitch0` pe noul `vSphere Distributed Switch`! Acum poți merge pe `esxi01` $\\rightarrow$ *Configure -> Virtual Switches* și poți șterge vechiul `vSwitch0` rămas gol!"
+      }
+    }
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": {
+        "ro": "Într-un cluster nou de 4 servere ESXi pe care tocmai a fost activat serviciul `vSphere HA`, cum este ales unicul server cu rolul de **`Master Host`** în timpul procesului de alegeri (*Election Process*)?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Este ales întotdeauna serverul care are cea mai mare cantitate de memorie RAM fizică liberă."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Este ales serverul care are acces la cel mai mare număr de Datastore-uri montate, iar în caz de egalitate, departajarea se face după cel mai mare `MOID` (*Managed Object ID*) comparat lexical (de exemplu, `host-9` câștigă în fața lui `host-25`)."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (Cel mai mare număr de Datastore-uri montate, apoi departajare după `MOID` lexical)**\n\n* *Explicație:* Acesta este algoritmul oficial al agentului `fdm` la alegerile *Master Election*: câștigă host-ul conectat la cele mai multe Datastore-uri, iar la egalitate câștigă cel cu `MOID`-ul mai mare în ordine lexicală ASCII (`host-9` > `host-25`)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Este ales întotdeauna serverul pe care rulează mașina virtuală `vCenter Server Appliance (VCSA)`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Toate cele 4 servere devin simultan *Master Hosts* în mod Active-Active."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "question": {
+        "ro": "Ce face un `Master Host` într-un cluster `vSphere HA` atunci când nu mai primește `Network Heartbeats` de la un `Subordinate Host` timp de 15 secunde, înainte de a declara acel host ca fiind căzut (*Failed*) și de a-i reporni mașinile virtuale?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Îi dă restart imediat prin `iDRAC / iLO` folosind protocolul IPMI."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Verifică dacă acel `Subordinate Host` încă își actualizează fișierele de **`Datastore Heartbeat`** (în folderul `.vSphere-HA` de pe Datastore-urile partajate) și încearcă să îi dea `icmp ping`, pentru a diferenția un server mort (*Failed*) de un server doar izolat de rețea (*Isolated / Partitioned*)."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (Verifică `Datastore Heartbeats` în `.vSphere-HA` și dă `ping`)**\n\n* *Explicație:* Verificarea *Datastore Heartbeats* este mecanismul esențial prin care `Master`-ul evită repornirea în dublură (*Split-Brain*) a mașinilor virtuale care încă rulează pe un host viu căruia i-a căzut doar rețeaua de management."
+          }
+        },
+        {
+          "text": {
+            "ro": "Șterge fișierele `.vswp` ale tuturor mașinilor virtuale de pe acel host."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Cere permisiunea administratorului printr-un pop-up în `vSphere Client`."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": {
+        "ro": "Un server ESXi dintr-un cluster `vSphere HA` își pierde complet conexiunea la rețeaua de management (nu mai aude niciun alt host ESXi din cluster și nu primește răspuns la `ping` nici de la Default Gateway / *Isolation Address*), dar conexiunea sa Fibre Channel către SAN este intactă. Ce acțiune va lua acest server asupra mașinilor virtuale care rulează pe el, dacă clusterul folosește setarea **implicită din fabrică (`Default`)** pentru **`Response for Host Isolation`**?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Le va opri brutal (*Power Off*) imediat."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Le va opri curat prin VMware Tools (*Shut Down*)."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Le va lăsa **pornite (`Disabled` / Leave Powered On)**, deoarece valoarea implicită pentru *Host Isolation Response* este `Disabled`."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: C (Le lasă pornite – `Disabled` este valoarea implicită)**\n\n* *Explicație:* Din fabrică, `Response for Host Isolation` este setat pe **`Disabled`** (mașinile rămân pornite, pentru cazul în care traficul lor de producție circulă pe alte plăci fizice `vmnic` decât placa de management)."
+          }
+        },
+        {
+          "text": {
+            "ro": "Le va pune în starea *Suspended*."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": {
+        "ro": "Un administrator activează **`VMCP` (*Virtual Machine Component Protection*)** în cadrul setărilor `vSphere HA`. Care este diferența dintre o avarie de stocare de tip **`PDL` (*Permanent Device Loss*)** și una de tip **`APD` (*All Paths Down*)**?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "`PDL` apare doar pe stocare `NFS`, în timp ce `APD` apare doar pe stocare `iSCSI`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "În `PDL`, matricea de stocare SAN comunică un cod oficial *SCSI Sense Code* care confirmă că LUN-ul nu mai este accesibil permanent, permițând oprirea și repornirea imediată a mașinilor; în `APD`, căile au căzut fără niciun cod de răspuns, iar ESXi tratează situația ca fiind tranzitorie, așteptând mai întâi expirarea timer-ului de `140 de secunde` (*APD Timeout*)."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (`PDL` primește cod SCSI Sense permanent; `APD` nu primește niciun răspuns și așteaptă `140s` *APD Timeout*)**\n\n* *Explicație:* Prezența codului *SCSI Sense* diferențiază `PDL` de `APD`."
+          }
+        },
+        {
+          "text": {
+            "ro": "În `APD`, mașinile virtuale sunt migrate cu `vMotion` fără downtime."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "`PDL` șterge automat fișierele `-flat.vmdk` de pe disc."
+          },
+          "correct": false
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": {
+        "ro": "Un arhitect trebuie să configureze protecție cu **Zero Downtime (`RTO = 0`) și Zero Data Loss (`RPO = 0`)** pentru o aplicație critică ce rulează pe o mașină virtuală cu **`4 vCPU`** și **`32 GB RAM`**, folosind funcția nativă **`vSphere Fault Tolerance (SMP-FT)`**. Care dintre următoarele afirmații este adevărată după activarea `Fault Tolerance` pe această mașină virtuală?"
+      },
+      "options": [
+        {
+          "text": {
+            "ro": "Mașina virtuală poate fi scalată ulterior în mers (*Hot-Add*) până la `64 vCPU`."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Se creează o a doua mașină virtuală vie în oglindă (`Secondary VM`) pe un alt host ESXi (cu propriul ei set de fișiere `.vmdk`), sincronizată continuu prin *Fast Checkpointing* pe o rețea de minimum `10 Gbps`, memoria RAM este rezervată 100%, iar crearea de snapshot-uri manuale pe această mașină este blocată."
+          },
+          "correct": true,
+          "explanation": {
+            "ro": "**Răspuns corect: B (`Secondary VM` vie în oglindă, `Fast Checkpointing`, maxim `8 vCPU`, `100%` RAM Reservation, fără Snapshot-uri)**\n\n* *Explicație:* `SMP-FT` menține o mașină `Secondary VM` activă în timp real (limitată la maximum `8 vCPU` și `128 GB RAM`), îi rezervă integral memoria și nu permite snapshot-uri clasice pe mașina protejată."
+          }
+        },
+        {
+          "text": {
+            "ro": "Mașina `Secondary VM` rămâne oprită (*Powered Off*) până în momentul în care cade primul server."
+          },
+          "correct": false
+        },
+        {
+          "text": {
+            "ro": "Funcția `SMP-FT` nu necesită `vCenter Server` pentru a fi configurată."
+          },
+          "correct": false
+        }
+      ]
+    }
+  ]
+}

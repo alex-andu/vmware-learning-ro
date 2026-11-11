@@ -1,0 +1,31 @@
+{
+  "steps": [
+    {
+      "id": "pas-1",
+      "title": {
+        "ro": "Configurarea Porturilor VMkernel pentru `vMotion` (`vmk1`) pe `esxi01` și `esxi02`"
+      },
+      "action": {
+        "ro": "1. În `vSphere Client` (`https://vcsa01.lab.local/ui`), asigură-te că atât `esxi01.lab.local`, cât și `esxi02.lab.local` sunt adăugate în `vCenter` și atașate la Distributed Switch-ul nostru **`DSwitch-Prod`** (creat în Capitolul 2.2).\n2. Mergi în **Networking View**, dă click-dreapta pe Distributed Port Group-ul **`dPG-vMotion`** $\\rightarrow$ **`Add VMkernel Adapters...`**\n3. Bifează ambele host-uri (**`esxi01.lab.local`** și **`esxi02.lab.local`**) $\\rightarrow$ **Next**.\n4. **Configure VMkernel adapter:**\n   * **TCP/IP stack:** Alege **`vMotion`** (folosim stiva TCP/IP dedicată pentru vMotion, ca în mediile enterprise!) $\\rightarrow$ **Next**.\n5. **IPv4 settings:** Selectează *Use static IPv4 settings* și setează în tabel:\n   * Pentru **`esxi01.lab.local`**: IP **`192.168.20.51`** | Subnet Mask **`255.255.255.0`**\n   * Pentru **`esxi02.lab.local`**: IP **`192.168.20.52`** | Subnet Mask **`255.255.255.0`**\n6. Apasă **Next** $\\rightarrow$ **`Finish`**! *(În 3 secunde ai configurat `vmk1` pentru vMotion pe ambele servere dintr-o singură fereastră!).*\n\n* **Testul de Validare în CLI (Cum testează un Senior dacă rețeaua de `vMotion` chiar comunică pe stiva dedicată):**\n  Conectează-te prin `SSH` pe `esxi01` și dă `vmkping` către IP-ul de vMotion al lui `esxi02` specificând stiva `--netstack=vmotion`:\n  ```bash\n  vmkping ++netstack=vmotion 192.168.20.52\n  ```\n  Dacă primești `0% packet loss`, autostrada ta de `vMotion` este 100% funcțională!"
+      }
+    },
+    {
+      "id": "pas-2",
+      "title": {
+        "ro": "Testul Suprem – Migrarea Live (`vMotion`) cu `0` Pachete Pierdute!"
+      },
+      "action": {
+        "ro": "1. Pornește mașina virtuală **`web01`** (care se află acum pe `esxi01.lab.local`) și deschide un `ping` continuu către IP-ul ei (sau urmărește consola ei).\n2. Înainte de migrare, dă click-dreapta pe `web01` $\\rightarrow$ **Edit Settings** și asigură-te că la **CD/DVD drive 1** căsuța **Connected** este **DEBIFATĂ**!\n3. Dă click-dreapta pe **`web01`** $\\rightarrow$ **`Migrate...`**\n   * Dacă `web01` se află deja pe un Datastore partajat (din Capitolul 2.3), alege **`Change compute resource only`** (*vMotion clasic*).\n   * Dacă `web01` se află încă pe discul local intern al lui `esxi01`, alege opțiunea a treia: **`Change both compute resource and storage`** (*Shared-Nothing vMotion*!), care îți permite să o muți live pe discul local al lui `esxi02` chiar și fără SAN!\n4. Selectează ca destinație serverul **`esxi02.lab.local`** $\\rightarrow$ selectează Datastore-ul / Rețeaua $\\rightarrow$ **Next** $\\rightarrow$ **`Finish`**!\n5. **Urmărește bara de progres și fereastra de `ping`:**\n   * Mașina virtuală `web01` s-a teleportat în mers de pe `esxi01` pe `esxi02` fără să se oprească și fără să piardă niciun pachet!"
+      }
+    },
+    {
+      "id": "pas-3",
+      "title": {
+        "ro": "Crearea unei `Content Library` și a unui Șablon cu Versionare"
+      },
+      "action": {
+        "ro": "1. În `vSphere Client`, apasă pe meniul din stânga-sus (**`Menu` $\\equiv$**) $\\rightarrow$ **`Content Libraries`**.\n2. Apasă pe **`Create`** $\\rightarrow$ **Name:** `Lab-Gold-Library` $\\rightarrow$ **Next**.\n3. Selectează **`Local content library`** (opțional poți bifa *Enable publishing* ca să vezi cum generează URL-ul de abonare!) $\\rightarrow$ **Next** $\\rightarrow$ alege un Datastore $\\rightarrow$ **Finish**.\n4. Revino în inventarul de mașini virtuale, dă click-dreapta pe mașina **`web01`** $\\rightarrow$ **`Clone`** $\\rightarrow$ **`Clone to Template in Library...`**\n   * Alege tipul **`VM Template`** (pentru a avea suport de *Versioning Check-In / Check-Out*!), selectează `Lab-Gold-Library`, numește șablonul `Web-Gold-Template` și apasă **OK**!\n5. Mergi înapoi în **`Content Libraries`** $\\rightarrow$ `Lab-Gold-Library` $\\rightarrow$ tab-ul **`Templates` -> `VM Templates`** $\\rightarrow$ dă click pe `Web-Gold-Template`: observă butoanele profesionale **`Check Out VM to Edit`** și **`New VM from This Template`**!"
+      }
+    }
+  ]
+}
