@@ -2114,5 +2114,53 @@
     "term": "NSX distributed port group",
     "ro": "Felul în care un segment NSX apare în vCenter pe un VDS: un port group cu backing NSX, definit din NSX, nu din vCenter.",
     "en": "How an NSX segment shows up in vCenter on a VDS: a port group with NSX backing, defined from NSX, not from vCenter."
+  },
+  {
+    "id": "edge-node",
+    "term": "NSX Edge node",
+    "ro": "Appliance-ul NSX (VM sau bare metal) care rulează serviciile centralizate: rutarea nord-sud spre rețeaua fizică, NAT, load balancer, VPN, firewall de gateway.",
+    "en": "The NSX appliance (VM or bare metal) that runs centralized services: north-south routing to the physical network, NAT, load balancer, VPN, gateway firewall."
+  },
+  {
+    "id": "edge-cluster",
+    "term": "NSX Edge cluster",
+    "ro": "Grup de Edge nodes de același tip care asigură redundanța serviciilor; un Edge aparține unui singur cluster, iar un cluster are cel mult 10 noduri.",
+    "en": "A group of Edge nodes of the same type that provides service redundancy; an Edge belongs to one cluster, and a cluster has at most 10 nodes."
+  },
+  {
+    "id": "service-router",
+    "term": "Service Router",
+    "abbr": "SR",
+    "expansion": "Service Router",
+    "ro": "Componenta unui gateway Tier-0 sau Tier-1 care rulează pe Edge nodes și duce serviciile centralizate (uplink-uri, NAT, firewall de gateway).",
+    "en": "The part of a Tier-0 or Tier-1 gateway that runs on Edge nodes and carries centralized services (uplinks, NAT, gateway firewall)."
+  },
+  {
+    "id": "distributed-router",
+    "term": "Distributed Router",
+    "abbr": "DR",
+    "expansion": "Distributed Router",
+    "ro": "Componenta unui gateway care rulează distribuit pe fiecare transport node și rutează local traficul est-vest.",
+    "en": "The part of a gateway that runs distributed on every transport node and routes east-west traffic locally."
+  },
+  {
+    "id": "dpdk",
+    "term": "Data Plane Development Kit",
+    "abbr": "DPDK",
+    "expansion": "Data Plane Development Kit",
+    "ro": "Bibliotecile de procesare rapidă a pachetelor folosite de data plane-ul Edge; cer CPU cu AES-NI și pagini mari de 1 GB.",
+    "en": "The fast packet-processing libraries used by the Edge data plane; they need a CPU with AES-NI and 1 GB huge pages."
+  },
+  {
+    "id": "edge-failure-domain",
+    "term": "Failure domain (Edge)",
+    "ro": "Grupare logică a Edge nodes dintr-un cluster (de exemplu pe rack) ca instanțele active și standby ale unui gateway să ajungă în grupuri diferite.",
+    "en": "A logical grouping of Edge nodes in a cluster (for example per rack) so that the active and standby instances of a gateway land in different groups."
+  },
+  {
+    "id": "edge-cluster-profile",
+    "term": "Edge cluster profile",
+    "ro": "Profilul care setează parametrii BFD între Edge-uri și pragul Stand By Relocation pentru un Edge cluster.",
+    "en": "The profile that sets BFD parameters between Edges and the Stand By Relocation threshold for an Edge cluster."
   }
 ]

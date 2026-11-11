@@ -69,7 +69,8 @@
       "03-vsan/06-operare",
       "04-nsx/01-sdn-arhitectura",
       "04-nsx/02-transport",
-      "04-nsx/03-segmente"
+      "04-nsx/03-segmente",
+      "04-nsx/04-edge"
     ]
   },
   {
@@ -604,7 +605,8 @@
       "content/modules.json",
       "04-nsx/01-sdn-arhitectura",
       "04-nsx/02-transport",
-      "04-nsx/03-segmente"
+      "04-nsx/03-segmente",
+      "04-nsx/04-edge"
     ]
   },
   {
@@ -4968,7 +4970,8 @@
     "usedBy": [
       "04-nsx/01-sdn-arhitectura",
       "04-nsx/02-transport",
-      "04-nsx/03-segmente"
+      "04-nsx/03-segmente",
+      "04-nsx/04-edge"
     ]
   },
   {
@@ -5201,7 +5204,8 @@
     "read": true,
     "usedBy": [
       "04-nsx/02-transport",
-      "04-nsx/03-segmente"
+      "04-nsx/03-segmente",
+      "04-nsx/04-edge"
     ]
   },
   {
@@ -5422,6 +5426,171 @@
     "read": true,
     "usedBy": [
       "04-nsx/03-segmente"
+    ]
+  },
+  {
+    "id": "S481",
+    "title": "NSX 4.2 Installation Guide: NSX Edge VM System Requirements (form factors, CPU)",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.2/installation/GUID-22F87CA8-01A9-4F2E-B7DB-9350CA60EA4E.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/04-edge"
+    ]
+  },
+  {
+    "id": "S482",
+    "title": "VMware Cloud Foundation blog: VPC Centralized Network Connectivity with Guided Edge Deployment (VCF 9.0)",
+    "url": "https://blogs.vmware.com/cloud-foundation/2025/06/25/vpc-centralized-network-connectivity-with-guided-edge-deployment/",
+    "type": "blog",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/04-edge"
+    ]
+  },
+  {
+    "id": "S483",
+    "title": "NSX 4.0 Installation Guide: Create an NSX Edge Cluster",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.0/installation/GUID-898099FC-4ED2-4553-809D-B81B494B67E7.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/04-edge"
+    ]
+  },
+  {
+    "id": "S484",
+    "title": "NSX 4.2 Installation Guide: Create an NSX Edge Cluster Profile",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.2/installation/GUID-32EACF9C-AF1F-4C0C-AE55-F0974EF0F703.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/04-edge"
+    ]
+  },
+  {
+    "id": "S485",
+    "title": "NSX 4.1 Administration Guide: Configuring Failure Domains for NSX Edge Clusters",
+    "url": "https://docs.vmware.com/en/VMware-NSX/4.1/administration/GUID-FABBBD3C-0928-4E7B-BC30-F04070A76517.html",
+    "type": "official",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/04-edge"
+    ]
+  },
+  {
+    "id": "S486",
+    "title": "KB 411593: Service Router Limit Per Edge Exceeded",
+    "url": "https://knowledge.broadcom.com/external/article/411593/service-router-limit-per-edge-exceeded.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/04-edge"
+    ]
+  },
+  {
+    "id": "S487",
+    "title": "KB 317168: NSX Edge TEP networking options",
+    "url": "https://knowledge.broadcom.com/external/article/317168/nsx-edge-tep-networking-options.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/04-edge"
+    ]
+  },
+  {
+    "id": "S488",
+    "title": "KB 388345: NSX Edge Tunnels down in a collapsed cluster",
+    "url": "https://knowledge.broadcom.com/external/article/388345/nsx-edge-tunnels-down-in-a-collapsed-clu.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/04-edge"
+    ]
+  },
+  {
+    "id": "S489",
+    "title": "KB 440094: BFD tunnels not forming between edge TEPs and Host TEPs",
+    "url": "https://knowledge.broadcom.com/external/article/440094/bfd-tunnels-not-forming-between-edge-tep.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/04-edge"
+    ]
+  },
+  {
+    "id": "S490",
+    "title": "KB 312196: VMware Cloud Foundation NSX-T Edge Node Virtual Machine Resizing Tool",
+    "url": "https://knowledge.broadcom.com/external/article/312196/vmware-cloud-foundation-nsxt-edge-node-v.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/04-edge"
+    ]
+  },
+  {
+    "id": "S491",
+    "title": "KB 383091: Resize NSX Edge Node",
+    "url": "https://knowledge.broadcom.com/external/article/383091/resize-nsx-edge-node.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/04-edge"
+    ]
+  },
+  {
+    "id": "S492",
+    "title": "KB 434339: NSX Edge HA Status DOWN due to missing VLAN tagging on TOR switchports",
+    "url": "https://knowledge.broadcom.com/external/article/434339/nsx-edge-ha-status-down-due-to-missing-v.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/04-edge"
+    ]
+  },
+  {
+    "id": "S493",
+    "title": "KB 444931: Deploying an NSX Edge cluster from SDDC Manager fails BGP route validation",
+    "url": "https://knowledge.broadcom.com/external/article/444931/deploying-an-nsx-edge-cluster-from-sddc.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/04-edge"
+    ]
+  },
+  {
+    "id": "S494",
+    "title": "KB 443802: VCF Upgrade Fails with edge.cluster.precheck.failed Due to BGP Session Issues on NSX Gateway Edge nodes",
+    "url": "https://knowledge.broadcom.com/external/article/443802/vcf-upgrade-fails-with-edgeclusterpreche.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/04-edge"
+    ]
+  },
+  {
+    "id": "S495",
+    "title": "KB 441953: VCF NSX Edge Profile-Based Core Allocation - Configuration Guide",
+    "url": "https://knowledge.broadcom.com/external/article/441953/vcf-nsx-edge-profilebased-core-allocatio.html",
+    "type": "kb",
+    "accessed": "2026-11-11",
+    "read": true,
+    "usedBy": [
+      "04-nsx/04-edge"
     ]
   }
 ]
